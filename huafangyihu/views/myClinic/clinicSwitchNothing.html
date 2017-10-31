@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta http-equiv="pragma" content="no-cache" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+<link rel="stylesheet" type="text/css" href="../../css/clinicSwitchNothing.css"/>
+<!--<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css" />-->
+
+
+<title>切换诊所</title>
+</head>
+
+<body>
+	<header>
+		<a id="goBack" class="goback" href="javascript:history.back();">
+			<img src="../../images/backtrack.png" alt="" />
+			<span id="goBackText">返回</span>
+		</a>
+		<h1 id="theme">切换诊所</h1>
+	</header>
+  <div>
+    <div class="clear"></div>
+    <div class="no-clinic">
+    	<div class="no-clinic-bg">
+        	<img src="../../images/onlineSearchNothing-bg.png" alt="">
+        	<p>您暂无关注诊所 T^T</p>
+        </div>
+
+        <div class="clear"></div>
+        <div class="recommend-clinic">
+        <div class="recommend-clinic-title">
+              <p>推荐诊所</p>
+                <a href="../organization/organization.html">
+                <img src="../../images/more.png" alt="">
+                <span>我周边的诊所</span></a>
+            </div>
+        	<ul class="recommend-clinic-ul" id="hospital">
+
+            </ul>
+        </div>
+        <div class="clear"></div>
+
+    </div>
+  </div>
+</body>
+<!--关注-->
+	<div id="shareMain">
+		<div id="shareMain-second">
+			<div data-id="" class="shareMain-address">
+				<a href="javascript:;"><img src="../../images/clinic-fllow-home_.png" /></a>
+				<span>进入诊所</span>
+			</div>
+			<div data-id="" class="shareMain-address addAttent">
+				<a href="javascript:;"><img src="../../images/fllow_none.png" /></a>
+				<span>关注</span>
+			</div>
+			<div data-id="" class="shareMain-address  cancelAttent" style="display: none;">
+				<a href="javascript:;"><img src="../../images/fllow_ing.png" alt="" /></a>
+				<span>取消关注</span>
+			</div>
+			<div data-id="" class="shareMain-address" id="share1">
+				<a href="javascript:;"><img src="../../images/follow_share.png" />
+				<span>分享</span>
+        </a>
+			</div>
+
+		</div>
+		<div id="shareMain-close">取消</div>
+	</div>
+    <!--分享-->
+    <div id="shareMain1">
+        <div id="shareMain-first1">分享给好友,好医护要让更多人知道</div>
+        <div id="shareMain-second1" class="clearfix">
+            <div class="shareMain-address1">
+                <a href=""><img src="../../images/share1.png" /></a>
+                <span>朋友圈</span>
+            </div>
+            <div class="shareMain-address1">
+                <a href=""><img src="../../images/share2.png" /></a>
+                <span>新浪微博</span>
+            </div>
+            <div class="shareMain-address1">
+                <a href=""><img src="../../images/share3.png" /></a>
+                <span>手机QQ</span>
+            </div>
+            <div class="shareMain-address1">
+                <a href=""><img src="../../images/share4.png" /></a>
+                <span>微信好友</span>
+            </div>
+            <div class="shareMain-address1" style="clear:both;">
+                <a href=""><img src="../../images/share5.png" /></a>
+                <span>QQ空间</span>
+            </div>
+        </div>
+        <div id="shareMain-close1">关 闭</div>
+    </div>
+    
+<div id="shareMainPosition">
+	<img id="shareImg" src="../../images/shareImg.png" alt="" />
+</div>
+	<!--蒙版层-->
+	<div id="modal" style="display: none;position: absolute;top: 0;z-index: 1;opacity: 0.5;">
+      <div class="modal-cancel" style="width:100%;"></div>
+    </div>
+<!--蒙版层-->
+<div id="modal1" style="display: none;position: absolute;top: 0;z-index: 1;opacity: 0.5;">
+    <div class="modal-cancel" style="width:100%;"></div>
+</div>
+
+<script src="../../resource/js/jquery-2.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../resource/js/common.js" type="text/javascript" charset="utf-8"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js" type="text/javascript" charset="utf-8"></script>
+<!--<script src="../../resource/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>-->
+<script src="../../resource/js/clinicSwitchNothing.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../resource/js/bottomMenu.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../resource/js/share.js" type="text/javascript" charset="utf-8"></script>
+</html>

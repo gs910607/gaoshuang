@@ -1,0 +1,266 @@
+@charset "utf-8";
+@font-face {
+  font-family: 'wingdings 3';   /*字体名称*/
+  src: url('../font/Hiragino Sans GB W3.otf');       /*字体源文件*/
+}
+/*设置自适应文字大小*/
+@media only screen and (min-width: 320px) {
+html {
+	font-size: 10px !important;
+}
+}
+
+@media only screen and (min-width: 360px) {
+html {
+	font-size: 11.25px !important;
+}
+}
+
+@media only screen and (min-width: 400px) {
+html {
+	font-size: 12.5px !important;
+}
+}
+
+@media only screen and (min-width: 480px) {
+html {
+	font-size: 15px !important;
+}
+}
+
+@media only screen and (min-width: 640px) {
+html {
+	font-size: 20px !important;
+}
+}
+/* CSS Document */
+html, body {
+	margin: 0;
+	padding: 0;
+	background-color: #F2F2F2;
+	/*font-family: "wingdings 3";*/
+}
+ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+a {
+	text-decoration: none;
+	color: inherit;
+}
+.myinfowrapper {
+	background: #fff;
+}
+.reservation-information {
+	width: 100%;
+	background-color: #FFF;
+	color: #666;
+	position: relative;
+}
+.reservation-information-detail {
+	border-top: 1px solid #e5e5e5;
+	border-bottom: 1px solid #e5e5e5;
+	padding: 0.5rem 1rem 0 1rem;
+}
+.appointment-details {
+	margin-bottom: .5rem;
+	color: #000;
+}
+.appointment-details span {
+	display: inline-block;
+	color: #666;
+	text-indent: 1em;
+}
+.appointment-details span.appointment-time {
+	color: #ec9c00;
+}
+.appointment-details {
+	font-size: .8rem;
+}
+.reminder-message {
+	margin-left: 1rem;
+	margin-right: 1rem;
+	color: #c33;
+	text-align: left;
+	line-height: 2rem;
+	word-break: break-all;
+}
+.reminder-message {
+	font-size: .7rem;
+}
+.patient-information {
+	width: 100%;
+	background-color: #FFF;
+	color: #666;
+	position: relative;
+	margin-top: 1rem;
+}
+.patient-details {
+	font-size: .8rem;
+}
+.patient-details {
+	color: #000;
+}
+.patient-information-details {
+	padding: 1rem;
+	border-bottom: 1px solid #e5e5e5;
+	font-size: 1.36rem;
+}
+.attending-person {
+	color: #999;
+	font-size: 1.36rem;
+	float: right;
+	text-align: right;
+	border: none;
+}
+.attending-person span {
+	vertical-align: middle;
+}
+.attending-person img {
+	width: .6rem;
+	height: .8rem;
+	vertical-align: middle;
+}
+.sex {
+	display: inline-block;
+	float: right;
+	margin-right: 1rem;
+}
+.woman {
+	display: inline-block;
+	margin-right: .3rem;
+	color:#999;
+  vertical-align: middle;
+}
+.man {
+	display: inline-block;
+	margin-right: .3rem;
+	margin-left: 1rem;
+	color:#999;
+}
+.sex img {
+	width: 1.7rem;
+	height: 1.7rem;
+	margin-left: .3rem;
+	vertical-align:middle;
+}
+.age {
+	display: inline-block;
+	float: right;
+	color: #999;
+	margin-right: 1rem;
+	border: none;
+	text-align: right;
+  font-size: 1.36rem;
+}
+.telephone-number {
+	display: inline-block;
+	float: right;
+	color: #999;
+	margin-right: 1rem;
+}
+.submit-button {
+	width: 100%;
+	text-align: center;
+	position: fixed;
+	bottom: 0;
+	color: #fff;
+}
+.submit-button {
+	font-size: 1.52rem;
+}
+.submit-button-a {
+	display: inline-block;
+	width: 100%;
+	background: #ec9c00;
+	padding: 1rem 0;
+}
+.recognition-cancel {
+	color: #EC9C00;
+}
+
+.statuslabel {
+	padding: 1rem;
+}
+.labeltitle {
+	font-size: 1.36rem;
+	font-weight: normal;
+	margin: 0 0 .8rem;
+}
+.relawrapper {
+	position: relative;
+	width: 100%;
+	height: 20rem;
+	overflow: hidden;
+}
+.absosport {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.contents {
+	float: left;
+	width: 100%;
+}
+.contents .item {
+	float: left;
+	width: 33.33%;
+	text-align: center;
+	margin-bottom: 1rem;
+}
+.contents .item span {
+	display: block;
+	width: 90%;
+	margin: 0 auto;
+	padding: .5rem 0;
+	font-size: 1.12rem;
+	border: 1px solid #cccccc;
+	border-radius: 5px;
+}
+.contents .item span.curselect {
+	background: #ec9c00;
+	border-color: #cc8800;
+	color: #fff;
+}
+.eachcircle {
+	position: absolute;
+	bottom: 1rem;
+	left: 50%;
+	width: 10rem;
+	margin-left: -5rem;
+	text-align: center;
+}
+.eachcircle > a {
+	display: inline-block;
+	width: .6rem;
+	height: .6rem;
+	border-radius: .3rem;
+	/*float: left;*/
+	margin: 0 .2rem;
+	background: #dedede;
+	transition: all .1s;
+}
+.eachcircle > a.current {
+	background: #ec9c00;
+	width: 1rem;
+	transition: all .1s;
+}
+.labellength {
+	position: absolute;
+	bottom: 1rem;
+	left: 0rem;
+	font-size: 1.12rem;
+}
+.labellength > span {
+	color: #ec9c00;
+}
+
+input.error,
+input.error {
+	color: red;
+	border: 1px solid red;
+}
+input.error::-webkit-input-placeholder {
+	color: red;
+}

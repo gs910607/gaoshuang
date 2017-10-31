@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta http-equiv="pragma" content="no-cache" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="format-detection" content="telephone=no, email=no" />
+		<title>我的诊所</title>
+		<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+		<link href="../../css/reset.css" rel="stylesheet">
+		<link href="../../css/clinicIndex.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../../css/styles.css" />
+		<!--<link rel="stylesheet" type="text/css" href="../../css/sm.min.css"/>-->
+		<script src="../../resource/js/jquery-2.1.1.min.js"></script>
+		<script src="../../resource/js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../resource/js/bottomMenu.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.bar {
+				z-index: 10;
+			}
+
+			.sliderCarousel {
+				width: 100%;
+				height: 100%;
+			}
+
+			.recommendDoctor-list {
+				position: relative;
+				width: 100%;
+				height: 7rem;
+			}
+
+			.recommendDoctor-chat {
+				position: absolute;
+				bottom: 0;
+				right: 1.5rem;
+				width: 2rem;
+			}
+
+			.model {
+				display: none;
+			}
+
+			.article {
+				display: none;
+			}
+			.address{
+				border-bottom: 0rem;
+			}
+		</style>
+		<script type="text/javascript">
+
+		</script>
+	</head>
+
+	<body style="overflow-y: scroll;">
+		<div class="banner" style="width: 100%; overflow: hidden;">
+
+			<div class="slider" style="width:100%; height: 160px; position: relative; overflow: hidden; margin: 0px auto; display: block;">
+				<ul class="sliderCarousel clearfix">
+					<!--<li>
+						<a class="slider_a" href="" target="_blank"><img id="first-bg" src="" onerror="src='../../images/default-img750300.png'" alt="" /></a>
+					</li>-->
+
+					<!--<li>
+					<a class="slider_a" href="" target="_blank"><img onerror="src='../../images/default-img750300.png'" src="../../images/clinic-bg.png" alt="" /></a>
+				</li>
+				<li>
+					<a class="slider_a" href="" target="_blank"><img onerror="src='../../images/default-img750300.png'" src="../../images/clinic-bg.png" alt="" /></a>
+				</li>
+				<li>
+					<a class="slider_a" href="" target="_blank"><img onerror="src='../../images/default-img750300.png'" src="../../images/clinic-bg.png" alt="" /></a>
+				</li>-->
+				</ul>
+			</div>
+			<div class="switch-clinic">
+				<!--<a href="clinicSwitch.html">-->
+				<a href='javascript:;'>
+					<p>切换诊所</p>
+
+					<span><img onerror="src='../../images/default-img.png7070'" src="../../images/more_.png" alt="" /></span></a>
+			</div>
+
+		</div>
+		<span class="return"><a href="javascript:;"><img src="../../images/return.png" alt="返回" /></a></span>
+		<div class="clinic-name">
+			<div class="clinic-title">
+				<h6 class="hospitalName">闲林山水居西医诊所</h6>
+			</div>
+			<div class="clinic-star">
+				<img onerror="src='../../images/default-img.png7070'" class="clinic-img" src="../../images/star2.png" alt="" />
+				<img onerror="src='../../images/default-img.png7070'" class="clinic-img" src="../../images/star2.png" alt="" />
+				<img onerror="src='../../images/default-img.png7070'" class="clinic-img" src="../../images/star2.png" alt="" />
+				<img onerror="src='../../images/default-img.png7070'" class="clinic-img" src="../../images/star2.png" alt="" />
+				<img onerror="src='../../images/default-img.png7070'" class="clinic-img" src="../../images/star2.png" alt="" />
+				<span class="clinic-number">0分</span>
+			</div>
+			<div class="follow">
+				<a href="javascript:;"><img onerror="src='../../images/default-img.png7070'" src="../../images/follow.png" alt=""></a>
+			</div>
+			<div class="add-follow" style="display:none;">
+				<a href="javascript:;"><img onerror="src='../../images/default-img.png7070'" src="../../images/add-follow.png" alt=""></a>
+			</div>
+		</div>
+		<div class="address">
+			<span>余杭区余杭街道狮山路558号</span>
+			<span class="address-address">
+          <!--<span id="dial" class="address-img"><a href="javascript:;"><img onerror="src='../../images/default-img.png7070'" src="../../images/phone.png" alt=""></a></span>
+			<span class="address-line">|</span>-->
+			<span id="location" class="address-img"><a href="javascript:;"><img onerror="src='../../images/default-img.png7070'" src="../../images/map.png" alt=""></a></span>
+			</span>
+		</div>
+		<div class="clear"></div>
+
+		<div class="function-model">
+			<div id="onLine-consult" class="model">
+				<div class="model-img">
+					<img onerror="src='../../images/default-img.png7070'" src="../../images/information.png" alt="">
+				</div>
+				<div class="model-text">
+					<h6>在线咨询</h6>
+
+				</div>
+			</div>
+			<div id="appointDoctor" class="model">
+				<a href="javascript:;">
+					<div class="model-img">
+						<img onerror="src='../../images/default-img.png7070'" src="../../images/outpatient.png" alt="">
+					</div>
+
+					<div class="model-text">
+						<h6>预约就诊</h6>
+
+					</div>
+				</a>
+			</div>
+			<div class="model" id="dropIn">
+				<a href='javascript:;'>
+					<div class="model-img">
+						<img onerror="src='../../images/default-img.png7070'" src="../../images/clinic-function_5.png" alt="">
+					</div>
+					<div class="model-text">
+						<h6>预约上门</h6>
+
+					</div>
+				</a>
+			</div>
+			<div class="model" id="specificSupport">
+				<a href="javascript:;">
+					<div class="model-img">
+						<img onerror="src='../../images/default-img.png7070'" src="../../images/clinic-function_6.png" alt="">
+					</div>
+					<div class="model-text">
+						<h6>专项服务</h6>
+
+					</div>
+				</a>
+			</div>
+			<div class="model" id="buyMedicine">
+				<a id="sendHome" href="javascript:;">
+					<div class="model-img">
+						<img onerror="src='../../images/default-img.png7070'" src="../../images/pharmacy.png" alt="">
+					</div>
+					<div class="model-text">
+						<h6>药店买药</h6>
+
+					</div>
+				</a>
+			</div>
+			<div class="model" id="healthPro">
+				<a href="javascript:;">
+					<div class="model-img">
+						<img onerror="src='../../images/default-img.png7070'" src="../../images/health.png" alt="">
+					</div>
+
+					<div class="model-text">
+						<h6>健康产品</h6>
+
+					</div>
+				</a>
+			</div>
+			<div class="model" id="clinicIntroduction">
+				<a href="javascript:;">
+					<div class="model-img">
+						<img onerror="src='../../images/default-img.png7070'" src="../../images/clinic-function_7.png" alt="">
+					</div>
+					<div class="model-text">
+						<h6>诊所介绍</h6>
+
+					</div>
+				</a>
+			</div>
+
+			<div class="model" id="telephone1">
+				<a href="javascript:;">
+					<div class="model-img">
+						<img onerror="src='../../images/default-img.png7070'" src="../../images/clinic-function_8.png" alt="">
+					</div>
+					<div class="model-text">
+						<h6>一键电话</h6>
+
+					</div>
+				</a>
+			</div>
+		</div>
+
+		<div class="article">
+			<div class="article-header">
+				<span class="article-title-left">诊所动态</span>
+
+			</div>
+			<ul class="article-list">
+				<!--<li class="article-list-li"><a href="dynamicArticle.html">
+						<img onerror="src='../../images/default-img.png7070'" class="article-list-li-img" src="../../images/recommendation.png" />
+						<span class="article-list-li-span">3种行之有效的方法锻炼你的背肌，你学会了吗？</span></a></li>-->
+			</ul>
+		</div>
+		<div class="health-clinic" style="display: none;">
+			<div class="article-header">
+				<span class="article-title-left">全部医护</span>
+				<!--<a href="clinicWholeDoctor.html">-->
+				<!--<span class="article-title-right">-->
+				<!--&lt;!&ndash;<span>全部医护</span>&ndash;&gt;-->
+				<!--&lt;!&ndash;<img onerror="src='../../images/default-img.png7070'" src="../../images/more.png" />&ndash;&gt;-->
+				<!--</span>-->
+				<!--</a>-->
+			</div>
+			<div class="doctor-switch">
+
+				<ul class="health-ul">
+
+					<!--<li class="health-ul-li"><div class="recommendDoctor-list">
+						<img class="health-ul-li-img" src="../../images/health-clinic_1.png"  />
+						<img class="recommendDoctor-chat" class="" src="../../images/health-clinic_news.png"/></div>
+						<div class="health-ul-li-div"><span class="health-ul-li-name">许国庆</span></div></li>-->
+
+				</ul>
+			</div>
+		</div>
+		<div class="clear"></div>
+		<div id="recommend">
+			<div class="article-header">
+				<span class="article-title-left">热门推荐</span>
+
+			</div>
+			<ul class="recommend-list">
+				<!--<li class="recommend-list-li"><img  class="recommend-img" src="../../images/baby.png" />
+                        <div class="recommend-text"><h6>新生儿黄疸护理</h6> <p>护士上门，黄疸护理</p>
+                        	<div class="discount"><span class="discount-price">80元/次</span>
+                        	<img src="../../images/discount_identification.png" alt=""></div>
+                        <span class="original-price">门店价：150元/次</span></div></li><div class="clear"></div>-->
+
+				<!--<li class="recommend-list-li">
+						<img onerror="src='../../images/default-img.png7070'" class="recommend-img" src="../../images/baby.png" />
+                        <div class="recommend-text"><h6>新生儿黄疸护理</h6> <p>护士上门，黄疸护理</p>
+                        <img onerror="src='../../images/default-img.png7070'" src="../../images/baby-button.png" alt="">
+                        <span>门店价：150元/次</span></div></li><div class="clear"></div>-->
+
+			</ul>
+		</div>
+
+		<div class="evaluate">
+			<div class="article-header">
+				<span id="levauateVoListlength" class="article-title-left">用户评价(33)</span>
+				<a id="moreEvaluate">
+					<span class="article-title-right">
+					<span id="checkMoreEvaluate">查看更多评论</span>
+					<img onerror="src='../../images/default-img.png7070'" src="../../images/more.png" />
+					</span>
+				</a>
+			</div>
+			<p id="MoreEvaluateNone" style="font-size: 1.2rem; text-align: center; margin-top: 3rem; color: #999999; display: none;">诊所还未收到任何评价T^T</p>
+			<ul class="evaluate-ul">
+				<!--<li class="evaluate-ul-li">
+						<img onerror="src='../../images/default-img.png7070'" class="evaluate-ul-li-img" src="../../images/account.png" />
+						<div class="evaluate-ul-li-div">
+							<span class="evaluate-ul-li-name">笑话</span>
+						</div>
+
+						<span class="evaluate-ul-li-time">2017年9月9日 12:10:00</span>
+						<div class="evaluateNumber">
+							<img onerror="src='../../images/default-img.png7070'" class="evaluateNumber-img" src="../../images/star2.png" alt="" />
+							<img onerror="src='../../images/default-img.png7070'" class="evaluateNumber-img" src="../../images/star2.png" alt="" />
+							<img onerror="src='../../images/default-img.png7070'" class="evaluateNumber-img" src="../../images/star2.png" alt="" />
+							<img onerror="src='../../images/default-img.png7070'" class="evaluateNumber-img" src="../../images/star2.png" alt="" />
+							<img onerror="src='../../images/default-img.png7070'" class="evaluateNumber-img" src="../../images/star2.png" alt="" />
+							<span class="evaluateNumber-number">0分</span>
+						</div>
+						<div class="evaluate-content">
+							<span class="evaluate-content-span">1</span>
+
+						</div>
+					</li>-->
+
+			</ul>
+		</div>
+
+		<!--底部导航-->
+		<footer class="indexFooter">
+			<nav class="bar bar-tab clearfix">
+				<a class="tab-item-a" href="../main/index.html" ">
+	                <div class="indicon ">
+	                    <img src="../../images/index-color.png " />
+	                </div>
+	                <div class="tab-label "">首页</div>
+				</a>
+				<a class="tab-item-a" href="../organization/organization.html">
+					<div class="indicon">
+						<img src="../../images/organizationWhite.png" />
+					</div>
+					<div class="tab-label">诊所目录</div>
+				</a>
+				<a id="myClinicClinicIndex" class="tab-item-a" href="javascript:;">
+					<div class="indicon">
+						<img src="../../images/myclinic_active.png" />
+					</div>
+					<div id="myhospital" class="tab-label active">我的诊所</div>
+				</a>
+				<a class="tab-item-a" href="../msg/messageindex.html">
+					<div class="indicon">
+						<img src="../organization/imgs/news-white.png" />
+					</div>
+					<div class="tab-label">消息</div>
+				</a>
+				<a class="tab-item-a" href="../mine/mineIndex.html">
+					<div class="indicon">
+						<img id="main-img" src="../organization/imgs/mine-white.png" />
+					</div>
+					<div id="mine-span" class="tab-label">我的</div>
+				</a>
+			</nav>
+		</footer>
+
+		<!-- 打电话 -->
+		<div id="phoneShade" class="shade">
+			<div class="modelAffirm">
+				<div class="promptContent">
+					<h4>咨询华方客服</h4>
+					<p>您确定要拨打400-900-1515吗?</p>
+				</div>
+				<div class="promptBtn clearfix">
+					<a href="javascript:;" class="cancelBtn">取消</a>
+					<a href="tel:400-900-1515" class="sureBtn">确认</a>
+				</div>
+			</div>
+		</div>
+
+		<!--蒙版层-->
+		<div id="modal" style="display: none;position: absolute;top: 0;z-index: 99999;opacity: 0.5;"></div>
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=3kuyg6SrGTgmTe4ZAOYpKciZzEH9PArY"></script>
+		<script src="../../resource/js/jquery-2.1.1.min.js"></script>
+		<script src="../../resource/js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../resource/js/share.js" type="text/javascript" charset="utf-8"></script>
+		<script src="inc/clinicIndex2.js" type="text/javascript" charset="utf-8"></script>
+		<!--<script src="inc/index.js"></script>-->
+		<!--<script src="../organization/js/zepto.min.js" type="text/javascript" charset="utf-8"></script>-->
+
+		<script src="../../resource/js/yxMobileSlider.js" type="text/javascript" charset="utf-8"></script>
+
+	</body>
+
+</html>
+<script type="text/javascript">
+	$(".slider").yxMobileSlider({
+		width: 640,
+		height: 320,
+		during: 3000
+	})
+</script>

@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta http-equiv="pragma" content="no-cache" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+<link rel="stylesheet" type="text/css" href="../../css/bloodTestNews.css" />
+
+<title class="outpatientTheme">蓝牙血糖仪</title>
+</head>
+
+<body>
+  <header>
+    <a id="goBack" class="goback" href="../main/index.html">
+      <img src="../../images/backtrack.png" alt="" />
+      <span id="goBackText">返回</span>
+    </a>
+    <h1 id="theme">蓝牙血糖仪</h1>
+  </header>
+  <div>
+    <div class="patient-information">
+      <div class="patient-details">
+      	<ul>
+      		<li class="patient-information-details">收货人<a id="choicePerson" class="attending-person" href="javascript:;"><span id="userName"> </span><img src="../../images/more.png" alt="" /></a></li>
+            <li class="patient-information-details">联系方式<input id="phone" class="telephone-number" type="number" placeholder="请输入手机号" /></li>
+            <li class="patient-information-details">收货地址<a id="choiceAddress" class="attending-person" href="javascript:;"><span id="serviceaddress"></span><img src="../../images/more.png" alt="" /></a></li>
+      		<li class="patient-information-details">商品提供<a id="hospitalname" class="age" href="javascript:;"></a></li>
+            <li class="patient-information-details">商品费用<a class="age" href="javascript:;"><span id="server_price"></span>元一次</a></li>
+
+      	</ul>
+      </div>
+      <div class="patient-message">
+        <textarea  rows="4" maxlength="100" placeholder="留言：描述您当前的症状及想获得的帮助"></textarea>
+      </div>
+    </div>
+    <div class="submit-button"><a class="submit-button-a" href="javascript:;">确认购买</a></div>
+  </div>
+</body>
+<script src="../../resource/js/jquery-2.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../resource/js/jquery.validate.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../resource/js/common.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../resource/js/bloodTestNews.js" type="text/javascript" charset="utf-8"></script>
+</html>

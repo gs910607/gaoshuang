@@ -1,0 +1,346 @@
+
+@charset "utf-8";
+@font-face {
+	font-family: 'wingdings 3';   /*字体名称*/
+	src: url('../font/Hiragino Sans GB W3.otf');       /*字体源文件*/
+}
+
+@media only screen and (min-width: 320px) {
+html {
+	font-size: 10px !important;
+}
+}
+
+@media only screen and (min-width: 360px) {
+html {
+	font-size: 11.25px !important;
+}
+}
+
+@media only screen and (min-width: 400px) {
+html {
+	font-size: 12.5px !important;
+}
+}
+
+@media only screen and (min-width: 480px) {
+html {
+	font-size: 15px !important;
+}
+}
+
+@media only screen and (min-width: 640px) {
+html {
+	font-size: 20px !important;
+}
+}
+/* CSS Document */
+html, body {
+	margin: 0;
+	padding: 0;
+	background-color: #FFF;
+	/*font-family: "wingdings 3";*/
+}
+ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+a {
+	text-decoration: none;
+	color: inherit;
+}
+h1,h2,h3,h4,h5,h6,p {
+	margin: 0;
+	padding: 0;
+	font-weight:normal;
+}
+.clear{
+	clear:both;
+}
+.basic_information{
+	background:#fff;
+	padding:1.5rem 1rem;
+}
+.basic_information_portrait{
+	float: left;
+	width:30%;
+}
+.basic_information_portrait img{
+	width:100%;
+	height:auto;
+	border-radius:50%;
+}
+.basic_information_text{
+	/*margin-top: -30%;*/
+    margin-left: 35%;
+    line-height: 3rem;
+}
+.basic_information_text_h6{
+	font-size:1.5rem;
+	color:#000;
+	font-weight:normal;
+}
+.basic_information_text_p{
+	color:#999;
+	font-size:1.2rem;
+}
+.basic_information_text_p_sex{
+	margin-right:1rem;
+}
+.basic_information_text_tel{
+	color:#666;
+	font-size:1.1rem;
+}
+.clinic_introduce_title{
+	height:3rem;
+
+}
+.clinic_introduce_title_li{
+	width:50%;
+	height:3rem;
+	line-height:3rem;
+	box-sizing:border-box;
+	float:left;
+	text-align:center;
+	font-size:1.5rem;
+	border-bottom:.1rem solid #dfdfdf;
+}
+.clinic_introduce_content{
+	margin:1rem;
+
+}
+
+.br{
+	border-right:.1rem solid #dfdfdf;
+}
+.current{
+	color:#ec9c00;
+	border-bottom:.2rem solid #ec9c00;
+}
+.medication_record{
+
+}
+.medication_record_li{
+	margin:0 1rem;
+}
+.medication_record_li_title{
+	height:3rem;
+	line-height:3rem;
+}
+.medication_record_li_title_h6{
+	font-size:1.4rem;
+	color:#000;
+
+}
+.medication_record_li_title_span{
+	float:right;
+	font-size:1.3rem;
+	color:#999;
+	margin-top:-3rem;
+}
+.usage_dosage{
+	background:#f5f5f5;
+	height:5rem;
+	padding:0 1rem;
+}
+.usage_dosage_li{
+	float:left;
+	width:33.3%;
+	height:2.5rem;
+	line-height:2.5rem;
+	border-bottom:.2rem solid #fff;
+	text-align:center;
+	font-size:1.1rem;
+	color:#000;
+}
+.listl{
+	text-align:left;
+}
+.listr{
+	text-align:right;
+
+}
+.instructions{
+
+}
+.instructions_p{
+	color:#666;
+	font-size:1.2rem;
+	line-height:1.8rem;
+}
+.instructions_p_span{
+	display:block;
+	margin-left:6rem;
+	margin-top:-1.8rem;
+
+}
+
+/*弹窗*/
+
+#animationTipBox .lose .icon_box {
+	transform: translate(-0.05rem, -0.05rem);
+}
+
+#animationTipBox .okoButton {
+	transform: translateY(0.3rem);
+}
+
+.success .line_long {
+	right: 0;
+	top: 35px;
+}
+
+.success .line_short {
+	left: 12px;
+	top: 44px;
+}
+
+footer {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 99999;
+	/*height: 50px;*/
+}
+/*轮播下面*/
+.clinic-name{
+	margin: 1rem;
+}
+.clinic-title{
+	font-size:1.3rem;
+}
+.clinic-title-h6{
+	display:inline;
+}
+.clinic-title-p{
+	display:inline;
+	float:right;
+}
+.drug-original-price{
+	font-size:.8rem;
+	color:#ccc;
+	text-decoration:line-through;
+}
+.drug-new-price{
+	font-size:1.3rem;
+	color:#ec9c00;
+
+}
+.drug-prompt-information{
+	font-size:1rem;
+	color:#999;
+	line-height:2rem;
+}
+.drug-instruction{
+	font-size:1.2rem;
+	color:#666;
+	border-bottom:1px solid #dfdfdf;
+	padding:1rem 0;
+}
+.drug-instruction-h6{
+	display:inline;
+	font-size:1.2rem;
+}
+.drug-instruction-p{
+	margin-top:-1.2rem;
+	margin-left:7rem;
+	font-size:1.2rem;
+	line-height:1.5rem;
+}
+
+.clinic-number {
+/*font-size: .8rem;*/
+color: #FFCB66;
+margin-top: .1rem;
+}
+.clinic-img {
+	width: 1rem;
+	margin-bottom:.2rem;
+	vertical-align:middle;
+	margin-right:.2rem;
+}
+
+.clinic-text-introduction{
+	border-top:1rem solid #f2f2f2;
+}
+.clinic-introduce{
+}
+.clinic-introduce-h6{
+	text-align:center;
+	font-size:1.5rem;
+	line-height:3rem;
+	color:#000;
+	border-bottom:1px solid #dfdfdf;
+
+}
+.clinic-introduce-p{
+	font-size:1rem;
+	color:#333;
+	text-indent:2rem;
+	line-height:1.5rem;
+	margin-bottom:2rem;
+}
+.clinic-environmental-span{
+	display:block;
+	margin:1rem;
+}
+.clinic-environmental-img{
+	width:100%;
+	height:auto;
+}
+
+
+/*拨打*/
+#dialMain {
+	display: none;
+	/*position: absolute;*/
+	position: fixed;
+	top: 30%;
+	left: 10%;
+	width: 80%;
+	border-radius: 1rem;
+	z-index: 1000;
+	text-align: center;
+	background-color: #FFFFFF;
+}
+#dialMain-first h4 {
+	color: #000;
+	font-size: 1rem;
+	text-align: center;
+	margin: 1rem 0 .5rem 0;
+}
+#dialMain-first p {
+	color: #999;
+	font-size: .6rem;
+	text-align: center;
+	margin-bottom: 1rem;
+}
+#dialMain-second {
+	border-top: 1px solid #f2f2f2;
+}
+.dialMain-address {
+	float: left;
+	width: 50%;
+	padding-top: .5rem;
+	padding-bottom: .5rem;
+	color: #ec9c00;
+}
+.dialMain-address img {
+	width: 3rem;
+}
+.dialMain-address span {
+	display: inline-block;
+	margin-top: .5rem;
+	font-size: .6rem;
+	width: 100%;
+}
+#dialMain-close {
+	float: left;
+	width: 49%;
+	padding-top: .5rem;
+	padding-bottom: .5rem;
+	border-right: 1px solid #f2f2f2;
+	color: #000;
+}

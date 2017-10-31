@@ -1,0 +1,376 @@
+
+		@charset "utf-8";
+@font-face {
+	font-family: 'wingdings 3';   /*字体名称*/
+	src: url('../font/Hiragino Sans GB W3.otf');       /*字体源文件*/
+}
+
+@media only screen and (min-width: 320px) {
+html {
+	font-size: 10px !important;
+}
+}
+
+@media only screen and (min-width: 360px) {
+html {
+	font-size: 11.25px !important;
+}
+}
+
+@media only screen and (min-width: 400px) {
+html {
+	font-size: 12.5px !important;
+}
+}
+
+@media only screen and (min-width: 480px) {
+html {
+	font-size: 15px !important;
+}
+}
+
+@media only screen and (min-width: 640px) {
+html {
+	font-size: 20px !important;
+}
+}
+/* CSS Document */
+html, body {
+	margin: 0;
+	padding: 0;
+	background-color: #FFF;
+	/*font-family: "wingdings 3";*/
+}
+ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+a {
+	text-decoration: none;
+	color: inherit;
+}
+h1,h2,h3,h4,h5,h6,p {
+	margin: 0;
+	padding: 0;
+}
+.clear{
+	clear:both;
+}
+
+.switch-clinic{
+
+	    top: 1rem;
+		right:0;
+    background: rgba(0,0,0,0.3);
+    color: #fff;
+    /* margin-top: -3rem; */
+    z-index: 9999;
+    border: 1px solid #fff;
+	border-top-left-radius:2rem;
+	border-bottom-left-radius:2rem;
+    position: absolute;
+}
+.switch-clinic p{
+	margin:.5rem 1.5rem .5rem .5rem;
+}
+.switch-clinic span{
+
+}
+.switch-clinic span img{
+	width: .6rem;
+    height: .8rem;
+    float: right;
+    margin-top: -1.5rem;
+    margin-left: .5rem;
+	margin-right:.5rem;
+	}
+.return{
+	display:inline-block;
+	position:absolute;
+	top:0;
+	width:2rem;
+	margin:1.5rem 0 0 1rem;
+}
+.return img{
+	width:100%;
+	height:auto;
+}
+/*新增*/
+/*底部导航*/
+nav {
+				height: 50px !important;
+				/*position: relative;*/
+			}
+
+			.tab-item-a {
+				float: left;
+				/*padding-left: 12px;*/
+				display: inline-block;
+				width: 20%;
+				height: 100%;
+				text-align: center;
+			}
+
+			.tab-item-a-img {
+				float: left;
+				margin-top: 10px;
+				margin-left: 35%;
+				width: 20px;
+				height: 20px;
+			}
+
+			.tab-label-span {
+				text-align: center;
+				width: 100%;
+				font-size: 12px;
+			}
+
+			.tab-label-span {
+				float: left;
+			}
+			/*弹窗*/
+
+			#animationTipBox .lose .icon_box {
+				transform: translate(-0.05rem, -0.05rem);
+			}
+
+			#animationTipBox .okoButton {
+				transform: translateY(0.3rem);
+			}
+
+			.success .line_long {
+				right: 0;
+				top: 35px;
+			}
+
+			.success .line_short {
+				left: 12px;
+				top: 44px;
+			}
+
+			footer {
+				position: fixed;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				z-index: 99999;
+				/*height: 50px;*/
+			}
+			/*轮播下面*/
+		.clinic-name{
+			margin: 1.5rem;
+		}
+		.clinic-title{
+			/*font-size:1.5rem;*/
+		}
+		.clinic-title h6{
+			font-size:1.25rem;
+			display:inline;
+		}
+		.clinic-title span{
+			display:inline;
+			color:#ec9c00;
+			border:1px solid #ec9c00;
+			border-radius:.3rem;
+			padding:.1rem .3rem;
+			font-size:1.25rem;
+		}
+		.clinic-number {
+	/*font-size: .8rem;*/
+	color: #FFCB66;
+	margin-top: .1rem;
+}
+.clinic-img {
+	width: 1.2rem;
+	margin-bottom:.2rem;
+	vertical-align:middle;
+	margin-right:.2rem;
+}
+.follow{
+	float:right;
+}
+.follow img{
+	width:8rem;
+	margin-top:-4rem;
+}
+
+
+.address {
+	color: #000;
+	text-align: left;
+	line-height: 2rem;
+	word-break: break-all;
+	padding: .5rem;
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+	border-top:1px solid #e5e5e5;
+	font-size: 1.1rem;
+}
+.address span{
+	display: inline-block;
+	padding-left:1rem;
+	max-width: 66%;
+}
+.address-img {
+	float: right;
+	display: inline-block;
+	width: 1.2rem;
+}
+#dial{
+	margin-right:1rem;
+}
+.address-img a img {
+	width: 1.2rem;
+	vertical-align: middle;
+}
+.address-line {
+	float: right;
+	display: inline-block;
+	margin: 0 1rem;
+	color: #929292;
+}
+
+.clinic-text-introduction{
+	border-top:1rem solid #f2f2f2;
+}
+.clinic-introduce{
+	margin:2rem 1rem;
+}
+.clinic-introduce-h6{
+	text-align:center;
+	font-size:1.2rem;
+	line-height:2rem;
+	color:#000;
+
+}
+.clinic-introduce-p{
+	font-size:1rem;
+	color:#333;
+	text-indent:2rem;
+	line-height:1.5rem;
+	margin-bottom:2rem;
+}
+.clinic-environmental-span{
+	display:block;
+	margin:1rem;
+}
+.clinic-environmental-img{
+	width:100%;
+	height:12rem;
+}
+
+.service-contnet{
+	width:100%;
+	}
+.service-contnet h4{
+	font-size:1rem;
+	text-align:center;
+	padding:1.5rem 0;
+
+}
+.testing{
+	width:100%;
+	background:#fff;
+	margin-bottom:2rem;
+}
+.testing-img{
+	display:block;
+	float:left;
+	margin-left:1rem;
+}
+.testing-img img{
+	width:4rem;
+}
+.testing-text{
+	display:block;
+	margin:0 1rem 0 6rem;
+}
+.testing-text h5{
+	font-size:1rem;
+	line-height:1.5rem;
+	color:#000;
+
+}
+.testing-text p{
+	font-size:1rem;
+	line-height:1.5rem;
+	color:#666;
+}
+.clinic-environmental p{
+	text-align:center;
+}
+
+.contact-clinic{
+	margin:1rem;
+}
+.contact-clinic a{
+	display:block;
+	background:#ec9c00;
+	padding:1rem 0;
+	text-align:center;
+	font-size:1.5rem;
+	border-radius:.5rem;
+	color:#fff;
+}
+.focus{
+	text-align:center;
+}
+/*拨打*/
+#dialMain {
+	display: none;
+	/*position: absolute;*/
+	position: fixed;
+	top: 30%;
+	left: 10%;
+	width: 80%;
+	border-radius: 1rem;
+	z-index: 1000;
+	text-align: center;
+	background-color: #FFFFFF;
+}
+#dialMain-first h4 {
+	color: #000;
+	font-size: 1.3rem;
+	text-align: center;
+	margin: 1rem 0 .5rem 0;
+}
+#dialMain-first p {
+	color: #999;
+	/*font-size: .6rem;*/
+	text-align: center;
+	margin-bottom: 1rem;
+}
+#dialMain-second {
+	border-top: 1px solid #f2f2f2;
+}
+.dialMain-address {
+	font-size: 1.3rem;
+	float: left;
+	width: 50%;
+/*	padding-top: .5rem;
+	padding-bottom: .5rem;*/
+	color: #ec9c00;
+}
+.dialMain-address > a {
+	display: block;
+	padding: .5rem 0;
+}
+.dialMain-address img {
+	width: 3rem;
+}
+.dialMain-address span {
+	display: inline-block;
+	margin-top: .5rem;
+	font-size: .6rem;
+	width: 100%;
+}
+#dialMain-close {
+	float: left;
+	width: 49%;
+	border-right: 1px solid #f2f2f2;
+	color: #000;
+}
+.clinic-star{
+	margin-top: .5rem;
+}

@@ -1,0 +1,56 @@
+<div>
+	<style>
+		.form-group{
+			padding:15px;
+		}
+	</style>
+	<breadcrumb>
+	<item>系统管理</item>
+	<item>用户管理</item>
+	<item>用户信息</item>
+</breadcrumb>
+<buttonbar>
+	<btn display="查询" key="search"></btn>
+	<btn display="导出" key="output"></btn>
+	<btn display="保存" key="save"></btn>
+	<btn display="关闭" key="delete"></btn>
+</buttonbar>
+<panel type="success" style="margin-bottom:0;">
+	<phead>用户信息</phead>
+	<pbody>
+		<div>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>参数</th>
+						<th>参数值</th>
+					</tr>
+				</thead>
+				<tbody ng-repeat="param in params">
+					<tr>
+						<td>{{param}}</td>
+						<td><input name="test" class="form-control" type="text" ng-trim="false" ng-model="$parent.conf[$index]"/></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</pbody>
+</panel>
+<panel type="success" >
+	<phead>用户信息</phead>
+	<pbody>
+		<gtgrid ListCode="data" PageChange="event.LoadData()" PageData='Page' select index>
+			<column display="仓库编号" key="wareHouseNo"></column>
+			<column display="仓库名称" key="wareHouseName"></column>
+			<column display="仓库类型" key="wareHouseType"></column>
+			<column display="地址" key="wareHouseAdd"></column>
+			<column display="联系人" key="wareHouseContact"></column>
+			<column display="联系人电话" key="contactMobile"></column>
+			<column display="状态" key="wareHouseStatus"></column>
+			<operate>
+				<btn display="修改" key="edit"></btn>
+			</operate>
+		</gtgrid>
+	</pbody>
+</panel>
+</div>

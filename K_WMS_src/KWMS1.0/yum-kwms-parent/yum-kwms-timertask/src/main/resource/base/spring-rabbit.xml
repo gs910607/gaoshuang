@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context
+	    http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	    http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util-4.0.xsd
+		http://www.springframework.org/schema/rabbit
+		http://www.springframework.org/schema/rabbit/spring-rabbit-1.5.xsd ">               
+
+	<!-- Conntection Config Begin -->
+	<rabbit:connection-factory id="connectionFactory"
+				host="${rabbit.connection.host}"
+				port="${rabbit.connection.port}"
+				username="${rabbit.connection.username}"
+				password="${rabbit.connection.password}"/> 
+
+	<rabbit:template id="amqpTemplate" connection-factory="connectionFactory"/>
+	
+	<bean class="com.hoperun.emp.rabbit.sender.RabbitBizSender"></bean>
+
+	<rabbit:admin connection-factory="connectionFactory"/>
+	
+	<!-- 订单审核数据异步处理配置 begin -->
+	<rabbit:queue name="${rabbit.point.orderaudit.queuekey}" auto-delete="false" durable="true"/>  
+	<rabbit:direct-exchange name="${rabbit.point.orderaudit.exchange}">
+		<rabbit:bindings>  
+	        <rabbit:binding queue="${rabbit.point.orderaudit.queuekey}" key="${rabbit.point.orderaudit.queuekey}"/>  
+	    </rabbit:bindings>  
+	</rabbit:direct-exchange>
+	<rabbit:listener-container concurrency="${rabbit.listener.concurrency}" prefetch="${rabbit.listener.prefetch}" connection-factory="connectionFactory">
+		<rabbit:listener ref="pointSyncOrderAuditListerner" method="handleMessage" queue-names="${rabbit.point.orderaudit.queuekey}"/>
+	</rabbit:listener-container>
+	
+	<bean id = "pointSyncOrderAuditListerner" class="com.rd.yum.point.ws.listener.PointSyncOrderAuditListerner">
+		<property name="listenMethod" value="execute"/>
+	</bean>
+	<!-- 订单审核数据异步处理配置 end -->
+	
+	<!-- 订单审核数据异步处理配置 begin -->
+	<rabbit:queue name="${rabbit.point.errortrans.queuekey}" auto-delete="false" durable="true"/>  
+	<rabbit:direct-exchange name="${rabbit.point.errortrans.exchange}">
+		<rabbit:bindings>  
+	        <rabbit:binding queue="${rabbit.point.errortrans.queuekey}" key="${rabbit.point.errortrans.queuekey}"/>  
+	    </rabbit:bindings>  
+	</rabbit:direct-exchange>
+	<rabbit:listener-container concurrency="${rabbit.listener.concurrency}" prefetch="${rabbit.listener.prefetch}" connection-factory="connectionFactory">
+		<rabbit:listener ref="pointTransErrorSaveListerner" method="handleMessage" queue-names="${rabbit.point.errortrans.queuekey}"/>
+	</rabbit:listener-container>
+	
+	<bean id = "pointTransErrorSaveListerner" class="com.rd.yum.point.ws.listener.PointTransErrorSaveListerner">
+		<property name="listenMethod" value="execute"/>
+	</bean>
+	<!-- 订单审核数据异步处理配置 end -->
+	
+	
+	<!--积分映射信息异步处理配置 begin -->
+	<rabbit:queue name="${rabbit.point.transfer.queuekey}" auto-delete="false" durable="true"/>  
+	<rabbit:direct-exchange name="${rabbit.point.transfer.exchange}">
+		<rabbit:bindings>  
+	        <rabbit:binding queue="${rabbit.point.transfer.queuekey}" key="${rabbit.point.transfer.queuekey}"/>  
+	    </rabbit:bindings>  
+	</rabbit:direct-exchange>
+	<rabbit:listener-container concurrency="${rabbit.listener.concurrency}" prefetch="${rabbit.listener.prefetch}" connection-factory="connectionFactory">
+		<rabbit:listener ref="pointTransferInfoListerner" method="handleMessage" queue-names="${rabbit.point.transfer.queuekey}"/>
+	</rabbit:listener-container>
+	
+	<bean id = "pointTransferInfoListerner" class="com.rd.yum.point.ws.listener.PointTransferInfoListerner">
+		<property name="listenMethod" value="execute"/>
+	</bean>
+</beans>

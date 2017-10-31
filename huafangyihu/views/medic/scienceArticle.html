@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta http-equiv="pragma" content="no-cache" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<!--<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css" />-->
+<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+<link rel="stylesheet" type="text/css" href="../../css/scienceArticle.css" />
+<title>科普文章</title>
+</head>
+
+<body>
+<header>
+  <a id="goBack" class="goback" href="article.html">
+    <img src="../../images/backtrack.png" alt="" />
+    <span id="goBackText">返回</span>
+  </a>
+  <h1 id="theme">科普文章</h1>
+</header>
+  <div>
+  	<div class="synopsis">
+      <div class="synopsis-person" id="synopsis-person"><img  src="" alt=""/></div>
+      <div class="synopsis-text">
+	    <div class="doctor" id="doctorName">
+        	<span class="doctor-name" id="doctor-name"></span>
+          <span class="doctor-star">
+            <ul class="evaluate-ul">
+    					<li class="evaluate-ul-li">
+    						<div class="evaluateNumber" id="evaluateNumber">
+    							<img class="evaluateScore-img-star" src="../../images/star2.png" alt="" />
+    							<img class="evaluateScore-img-star" src="../../images/star2.png" alt="" />
+    							<img class="evaluateScore-img-star" src="../../images/star2.png" alt="" />
+    							<img class="evaluateScore-img-star" src="../../images/star2.png" alt="" />
+    							<img class="evaluateScore-img-star" src="../../images/star2.png" alt="" />
+    							<span class="evaluateNumber-number"><span id="evaluateNumber-number"></span>分</span>
+    						</div>
+    					</li>
+            </ul>
+          </span>
+        <div class="clear"></div>
+        <div class="doctor-introduce">
+  				<span class="doctor-main" id="doctor-main"></span>
+  				<span class="doctor-major" id="doctor_title"></span>
+          <span class="doctor-major"><span id="doctor_time"></span>年</span>
+		    </div>
+      </div>
+	</div>
+    <div class="synopsis-icon">
+    	<img  src="../../images/clinic-orange.png" />
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="article">
+    <div class="article-part1" id="article-part1">
+    	<p></p>
+        <div class="article-part1-function-button">
+        	<ul>
+        		<li class="function-button-read">阅读：<span  id="function-button-read">3645</span></li>
+        		<li class="function-button-thumbs-up" style="margin-right:2rem;">点赞：<span id="function-button-thumbs-up">159</span></li>
+        		<li class="function-button-time"><span id="function-button-time"></span></li>
+        	</ul>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-part2" id="article-part2">
+        <img src="" alt="" />
+        <p></p>
+    </div>
+  </div>
+  <div class="clear"></div>
+<!-- 点赞收藏model -->
+  <div id="model_likecollect" style="display:none;"></div>
+
+  <div class="footer">
+  	<div class="footer-function-template">
+    	<span class="footer-function-img"><img src="../../images/news-square.png" alt="" /></span>
+        <span class="footer-function-text">咨询</span>
+    </div>
+    <div class="footer-function-template">
+    	<span class="footer-function-img"><img src="../../images/yuyue.png" alt="" /></span>
+        <span class="footer-function-text">预约</span>
+    </div>
+    <div class="footer-function-template" id="click_like">
+    	<span class="footer-function-img"><img src="../../images/zan-gray.png" alt="" /></span>
+        <span class="footer-function-text">点赞</span>
+    </div>
+    <div class="footer-function-template" id="click_collect">
+    	<span class="footer-function-img"><img src="../../images/collection.png" alt="" /></span>
+        <span class="footer-function-text">收藏</span>
+    </div>
+    <div id="share" class="footer-function-template">
+    	<span class="footer-function-img"><img src="../../images/share.png" alt="" /></span>
+        <span class="footer-function-text">分享</span>
+    </div>
+  </div>
+  </div>
+</body>
+	<!--分享-->
+	<div id="shareMain">
+		<div id="shareMain-first">分享给好友,好医护要让更多人知道</div>
+		<div id="shareMain-second">
+			<div class="shareMain-address">
+				<a href=""><img src="../../images/share1.png" /></a>
+				<span>朋友圈</span>
+			</div>
+			<div class="shareMain-address">
+				<a href=""><img src="../../images/share2.png" /></a>
+				<span>新浪微博</span>
+			</div>
+			<div class="shareMain-address">
+				<a href=""><img src="../../images/share3.png" /></a>
+				<span>手机QQ</span>
+			</div>
+			<div class="shareMain-address">
+				<a href=""><img src="../../images/share4.png" /></a>
+				<span>微信好友</span>
+			</div>
+            <div class="clear"></div>
+			<div class="shareMain-address">
+				<a href=""><img src="../../images/share5.png" /></a>
+				<span>QQ空间</span>
+			</div>
+		</div>
+		<div id="shareMain-close">关 闭</div>
+	</div>
+
+	<!--蒙版层-->
+	<div id="modal" style="display: none;position: absolute;top: 0;z-index: 1;opacity: 0.5;">
+    	<div class="modal-cancel" style="width:100%;"></div>
+    </div>
+
+<script src="../../resource/js/jquery-2.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../resource/js/common.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../resource/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../resource/js/scienceArticle.js" type="text/javascript" charset="utf-8"></script>
+
+</html>

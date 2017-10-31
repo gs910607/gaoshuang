@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>选择诊所</title>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/choiceClinic.css"/>
+    <style type="text/css">
+        nav {
+            height: 50px !important;
+            /*position: relative;*/
+        }
+
+        .tab-item-a {
+            float: left;
+            /*padding-left: 12px;*/
+            display: inline-block;
+            width: 20%;
+            height: 100%;
+            text-align: center;
+        }
+
+        .tab-item-a-img {
+            float: left;
+            margin-top: 10px;
+            margin-left: 35%;
+            width: 20px;
+            height: 20px;
+        }
+
+        .tab-label-span {
+            text-align: center;
+            width: 100%;
+            font-size: 12px;
+        }
+
+        .tab-label-span {
+            float: left;
+        }
+
+        /*弹窗*/
+
+        #animationTipBox .lose .icon_box {
+            transform: translate(-0.05rem, -0.05rem);
+        }
+
+        #animationTipBox .okoButton {
+            transform: translateY(0.3rem);
+        }
+
+        .success .line_long {
+            right: 0;
+            top: 35px;
+        }
+
+        .success .line_short {
+            left: 12px;
+            top: 44px;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 99999;
+            /*height: 50px;*/
+        }
+    </style>
+</head>
+
+<body>
+<header>
+	<a id="goBack" class="goback" href="javascript:;">
+		<img src="../../images/backtrack.png" alt="" />
+		<span id="goBackText">返回</span>
+	</a>
+	<h1 id="theme">选择诊所</h1>
+</header>
+<div class="page" id="page-ptr">
+    <!--标签栏-->
+    <div class="content">
+        <div class="buttons-tab">
+            <a href="javascript:;" id="tab1-a" class="tab-link active button">
+                <span id="tab-button-span1" class="tab-button">区域</span>
+                <span id="tab1-span" class="tab tab-icon"><img id="tab-img1" class="tab-img" src="imgs/arrows1.png"/></span>
+            </a>
+            <a href="javascript:;" id="tab1-a-fold" class="tab-link active button" style="display: none;">
+                <span id="tab-button-span1-up1" class="tab-button">区域</span>
+                <span id="tab1-span" class="tab tab-icon"><img id="tab-img1" class="tab-img" src="imgs/arrows2.png"/></span>
+            </a>
+            <a href="javascript:;" id="tab2-a" class="tab-link button">
+                <span id="tab-button-span2" class="tab-button">品牌</span>
+                <span id="tab2-span" class="tab tab-icon"><img id="tab-img2" class="tab-img" src="imgs/arrows1.png"/></span>
+            </a>
+            <a href="javascript:;" id="tab2-a-fold" class="tab-link button" style="display: none;">
+                <span id="tab-button-span2-up2" class="tab-button">品牌</span>
+                <span id="tab2-span" class="tab tab-icon"><img id="tab-img2" class="tab-img" src="imgs/arrows2.png"/></span>
+            </a>
+            <a href="javascript:;" id="tab3-a" class="tab-link button">
+                <span id="tab-button-span3" class="tab-button">综合排序</span>
+                <span id="tab3-span" class="tab tab-icon"><img id="tab-img3" class="tab-img" src="imgs/arrows1.png"/></span>
+            </a>
+            <a href="javascript:;" id="tab3-a-fold" class="tab-link button" style="display: none;">
+                <span id="tab-button-span3-up3" class="tab-button">综合排序</span>
+                <span id="tab3-span" class="tab tab-icon"><img id="tab-img3" class="tab-img" src="imgs/arrows2.png"/></span>
+            </a>
+        </div>
+        <!--下拉菜单遮盖层-->
+        <div class="content-block" style="display: none;">
+
+            <div class="tabs">
+
+                <div id="tab1" class="tab">
+                    <div>
+                        <ul id="tab1-ul-list1" class="type-name-ul">
+
+                        </ul>
+                    </div>
+                </div>
+                <div id="tab2" class="tab">
+                    <div>
+                        <ul id="tab2-ul-list2" class="type-name-ul">
+
+                        </ul>
+                    </div>
+                </div>
+                <div id="tab3" class="tab">
+                    <div>
+                        <ul id="tab3-ul-list3" class="type-name-ul">
+                            <!-- <li style="display: none;"><span class="type-name-ul-type">全部类型</span></li> -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="coverLayer">
+
+    </div>
+
+    <div class="list-block">
+        <ul class="list-container">
+            <!-- <li class="list-container-li" data-id="'+ obj.id +'" data-serviceItemId="'+ obj.serviceItemId +'" data-rate="'+ obj.rate +'" data-name="'+ obj.name +'" data-serviceName="'+ obj.serviceName +'">
+                <a href="../medic/bloodTestNews.html">
+                <div class="div-content">
+                <div class="div-content-introduce">
+                <div class="fixation-img">
+                <img class="div-img" src="">
+                </div>
+                <h3 class="div-content-name">'+ obj.name +'<span class="brand_'+ obj.typeId +'">'+ typeName +'</span></h3>
+                <span class="distance">距我'+ obj.distance +'km</span>
+                <div class="grade">
+                gradeImg()
+                <span class="goal">'+ goal +'分</span>
+                </div>
+                <div class="content-address">'+ obj.traffic +'</div>
+                </div>
+                <div class="div-content-function">
+                <div class="function-title">
+                <h6 class="function-title-h6">'+ obj.serviceName +'</h6>
+                <p class="function-title-p">已预约'+ obj.hosUseTimes +'次</p>
+                </div>
+                <div class="function-price">
+                <h6 class="function-price-h6">'+ obj.rate +'<span>元/次</span></h6>
+                <p class="function-price-p">'+ obj.oldRate +'<span>元/次</span></p>
+                </div>
+                <span class="function-button" data-id="'+ obj.id +'" href="../medic/bloodTestNews.html">预约</span>
+                </div>
+                </div>
+                </a>
+            </li> -->
+        </ul>
+    </div>
+
+    <div id="bottom">
+        <div class="no-content" style="margin: 1rem 0;text-align: center;">
+            <span class="nomore" style="display:none;color:#999;">~ 没有更多内容啦 ~</span>
+            <div class="loading" style="display:none;"><img src="../../images/loading.gif" alt="" style="width:2rem;"></div>
+        </div>
+    </div>
+</div>
+</body>
+
+<script src="../../resource/js/jquery-2.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../resource/js/common.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../resource/js/choiceClinic.js" type="text/javascript" charset="utf-8"></script>
+
+</html>

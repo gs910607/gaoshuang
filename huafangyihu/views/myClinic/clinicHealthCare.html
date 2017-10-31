@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta http-equiv="pragma" content="no-cache" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<!--<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css" />-->
+<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+<link rel="stylesheet" type="text/css" href="../../css/clinicHealthCare.css" />
+<title>门诊预约</title>
+<script type="text/javascript">
+	//如果未登录则跳至登录页
+	if(!JSON.parse(localStorage.getItem("user"))) {
+		sessionStorage.setItem("noLogin", location.href.split("PP2.0/views")[1]); //登录时接收，登陆后跳回此页面
+		location.href = "../login/login.html";
+	}
+</script>
+</head>
+<style type="text/css">
+	.synopsis-img{
+		height: 5rem;
+		margin-bottom: 1rem;
+		border-radius: 50%;
+	}
+</style>
+<body>
+<header>
+	<a id="goBack" class="goback" href="javascript:historyBack();">
+		<img src="../../images/backtrack.png" alt="" />
+		<span id="goBackText">返回</span>
+	</a>
+	<h1 id="theme">门诊预约</h1>
+</header>
+
+<div id="content_wrapper">
+	<div class="composing">
+		<ul  class="composing-ul">
+		</ul>
+	</div>
+</div>
+<div class="" style="width: 100%;height: 3rem;"></div>
+
+<!-- 联系医护弹窗 -->
+<div class="model_phone_shade">
+	<div class="model_phone">
+		<div class="model_tip">
+			<h3>是否联系医护王小强</h3>
+			<p>00000000000</p>
+		</div>
+		<div class="model_btn clearfix">
+			<a class="pull-left" href="javascript:;">取消</a>
+			<a class="confirm pull-left" href="tel:00000000000">确认</a>
+		</div>
+	</div>
+</div>
+
+</body>
+<script src="../../resource/js/jquery-2.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../resource/js/common.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../resource/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../resource/js/clinicHealthCare.js" type="text/javascript" charset="utf-8"></script>
+</html>

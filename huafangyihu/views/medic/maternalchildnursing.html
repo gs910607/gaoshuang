@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>特色预约</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta http-equiv="pragma" content="no-cache" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/featurereserve.css" />
+</head>
+<body>
+	<header>
+		<a id="goBack" class="goback" href="javascript:historyBack();">
+			<img src="../../images/backtrack.png" alt="" />
+			<span id="goBackText">返回</span>
+		</a>
+		<h1 id="theme">特色预约</h1>
+		<a class="share" href="javascript:;"><span id="share"><i></i></span></a>
+	</header>
+	<div class="relaWrap">
+		<div class="absoWrap clearfix">
+			<section class="fr_main moveEach pull-left">
+				<div class="fr_container clearfix">
+					<div class="fr_left pull-left">
+						<ul class="fr_list" id="fr_list">
+							<li data-id1="2" data-id2="0">
+								<a href="javascript:;"  >
+									<div class="iconbox"><img class="icon1" src="../../images/l-icon-1.png" alt=""></div>
+									<div class="icondes">全部预约</div>
+								</a>
+							</li>
+						</ul>
+					</div>
+					<div class="fr_right pull-right">
+						<div class="fr_rightPos">
+						</div>
+					</div>
+				</div>
+			</section>
+			<div id="main" class="moveEach pull-left">
+				<div class="title">
+					<ul id="articleListAll" class="articleList-ul clearfix">
+						<li data-id1="2" data-id2="0" picactive">
+							<a href="javascript:;">
+								<div class="icondes">全部预约</div>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div id="titleContentAll" class="titleContent">
+					<!-- <ul id="titleContentAll" class="titleContent-all">
+
+					</ul> -->
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="footer" id="footer">
+    	<ul>
+    		<li class="online-footer" data-id="Home_service_class" id="Home_service_class"><a href="javascript:;">预约上门</a></li>
+    		<li class="online-footer" data-id="Booking_to_shop" id="Booking_to_shop" ><a href="javascript:;">预约到店</a></li>
+    		<li class="online-footer"><a href="javascript:;" style="color:#ccc">预约医护</a></li>
+    	</ul>
+    </div>
+	<script src="../../resource/js/jquery-2.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../resource/js/common.js" type="text/javascript" charset="utf-8"></script>
+	<!--<script src="../../resource/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>-->
+	<script src="../../resource/js/featurereserve.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+	   init3('Home_service_class','c1ec9c270c794ffa94fdc8a5fed9e4f9');
+	</script>
+</body>
+</html>

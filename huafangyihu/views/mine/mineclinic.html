@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta http-equiv="pragma" content="no-cache" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/mineclinic.css" />
+		<title>我的诊所</title>
+	</head>
+
+	<body>
+		<header>
+			<a id="goBack" class="goback" href="javascript:historyBack();">
+				<img src="../../images/backtrack.png" alt="" />
+				<span id="goBackText">返回</span>
+			</a>
+			<h1 id="theme">我的诊所</h1>
+		</header>
+		<div>
+
+			<div class="list-block container" style="width:100%;transform:translate(0,-3rem)">
+				<div id="pull-loading" style="height:3rem; line-height:3rem; text-align:center; width:100%;">
+					<img id="imgLoading" style="width: 2rem;" src="../../images/loading.gif" />
+				</div>
+
+				<div class="recommend-clinic">
+					<ul class="clickAllList">
+
+						<!--<li class="cliniclist">
+                	<div class="cliniclist_picture">
+                        <img src="../../images/shop_2.png" alt="">
+                        <div class="cliniclist_picture_text">
+                            <span class="cliniclist_picture_text_span">自营诊所</span>
+                        </div>
+                    </div>
+                    <div class="cliniclist_text">
+                    	<h6 class="cliniclist_text_title">闲林山水居西医诊所</h6>
+                        <p class="cliniclist_text_address">余杭区余杭街道狮山路558号</p>
+                        <div class="cliniclist_text_prompt">
+                        	<ul>
+                        		<li class="cliniclist_text_prompt_ul_li cliniclist_text_prompt_healthcare">
+                                	<p class="cliniclist_text_prompt_healthcare_p">医护<span class="cliniclist_text_prompt_healthcare_p_span">4</span>人</p>
+                                </li>
+                        		<li class="cliniclist_text_prompt_ul_li cliniclist_text_prompt_reception">
+                                	<p class="cliniclist_text_prompt_reception_p">接诊<span class="cliniclist_text_prompt_reception_p_span">6</span>单</p>
+                                </li>
+                        		<li class="cliniclist_text_prompt_ul_li cliniclist_text_prompt_distance">
+                                	<p class="cliniclist_text_prompt_distance_p">距我<span class="cliniclist_text_prompt_distance_p_span">1.6</span>km</p>
+                                </li>
+                        	</ul>
+                        </div>
+                    </div>
+                </li>-->
+
+					</ul>
+
+				</div>
+				<!--加载-->
+				<div class="ajaxLoadMore">
+		 			 <div class="noMore">~ 没有更多内容啦 ~</div>
+		 			 <div class="ajaxLoading"><img src="../../images/loading.gif" alt=""></div>
+		 	 </div>
+			</div>
+		</div>
+	</body>
+	<script src="../../resource/js/jquery-2.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../resource/js/common.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../resource/js/pullRefresh.js" type="text/javascript" charset="utf-8"></script>
+	<script src="inc/mineclinic.js" type="text/javascript" charset="utf-8"></script>
+
+</html>

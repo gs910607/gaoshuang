@@ -1,0 +1,935 @@
+@font-face {
+	font-family: 'wingdings 3';
+	/*字体名称*/
+	src: url('../font/Hiragino Sans GB W3.otf');
+	/*字体源文件*/
+}
+html{
+	font-weight: lighter;
+}
+.fix {
+	*zoom: 1;
+}
+
+.fix:after {
+	display: block;
+	content: ".";
+	height: 0;
+	clear: both;
+	overflow: hidden;
+	visibility: hidden;
+}
+
+input:focus {
+	border: 0;
+	outline-offset: 0;
+}
+.clearfix::before,
+.clearfix::after {
+	content: '';
+	display: table;
+}
+.clearfix::after {
+	clear: both;
+}
+.img-responsive {
+	display: block;
+	width: 100%;
+	height: 100%;
+	border: none;
+	vertical-align: middle;
+}
+
+.show {
+	display: block !important;
+}
+
+.hide {
+	display: none !important;
+}
+
+.void {
+	width: 0 !important;
+	height: 0 !important;
+	overflow: hidden !important;
+	margin: 0 !important;
+}
+
+.inline {
+	display: inline !important;
+}
+
+body {
+	background: #f2f2f2;
+	/*font-family: "wingdings 3";*/
+	max-width: 640px;
+	margin: 0 auto;
+	position: relative;
+}
+
+.mt-30rem {
+	margin-top: .3rem;
+}
+
+.mt-60rem {
+	margin-top: .6rem;
+}
+
+.mt-64rem {
+	margin-top: .64rem;
+}
+
+.mt-96rem {
+	margin-top: .96rem;
+}
+
+.mt-120rem {
+	margin-top: 1.2rem;
+}
+
+.mt-128rem {
+	margin-top: 1.28rem;
+}
+
+.mt-160rem {
+	margin-top: 1.6rem;
+}
+
+a.underLine {
+	text-decoration: underline;
+	color: #ec9c00;
+}
+
+
+/*首页*/
+
+
+/*城市*/
+
+#cityPage {
+	position: absolute;
+	top: 0;
+	left: 0;
+	/*    bottom: 0;*/
+	right: 0;
+	background: #f2f2f2;
+	z-index: 10;
+	overflow-y: auto;
+	color: #000;
+	display: block;
+}
+
+.city-header {
+	height: .7rem;
+	line-height: .7rem;
+	text-align: center;
+	position: relative;
+	background: #fff;
+	font-size: .28rem;
+	font-weight: bold;
+}
+
+.goBack {
+	width: .75rem;
+	position: absolute;
+	top: 0;
+	left: .3rem;
+	margin-top: .1rem;
+}
+
+.city-history-wrapper {
+	/*height: 1.3rem;*/
+	max-height: 2.6rem;
+	display: none;
+}
+
+.city-horn {
+	font-size: .3rem;
+	padding-left: .3rem;
+}
+
+.city-sec-wrapper {
+	/*height: .7rem;*/
+}
+
+.city-sec {
+	width: 27%;
+	height: .7rem;
+	background: white;
+	border-radius: .1rem;
+	font-size: .3rem;
+	text-align: center;
+	line-height: .7rem;
+	float: left;
+	margin-left: .3rem;
+	margin-top: .3rem
+}
+
+.city-hot-wrapper {
+	clear: both;
+	display: none;
+}
+
+.city-list {}
+
+.Initial {
+	font-size: .3rem;
+	padding-left: .3rem;
+}
+
+.city-name {
+	background: #fff;
+	height: .7rem;
+	line-height: .7rem;
+	border-bottom: 1px solid #dfdfdf;
+	font-size: .3rem;
+	padding-left: .3rem;
+}
+
+.city-name:first-child {
+	margin-top: .3rem;
+}
+
+.city-name:last-child {
+	border: none;
+}
+
+
+/*header*/
+
+.indexHeader {
+	height: .7rem;
+	position: relative;
+	text-align: center;
+	color: #000;
+	font-size: .284rem;
+	line-height: .7rem;
+	font-weight: 700;
+	background: white;
+}
+
+.indexMenu {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	left: .25rem;
+	font-size: .26rem;
+	color: #ec9c00;
+	font-weight: normal;
+}
+
+.indexCaret {
+	display: inline-block;
+	border-left: .07rem solid transparent;
+	border-right: .07rem solid transparent;
+	border-top: .1rem solid #ec9c00;
+	border-bottom: .1rem solid transparent;
+	transform: translateY(.04rem);
+}
+
+
+/*banner*/
+
+.banner {
+	/*height: 2.53rem;*/
+	position: relative;
+	overflow: hidden;
+}
+
+.bannerScroll {
+	position: absolute;
+	height: 100%;
+	width: 100vw;
+}
+
+.bannerItem {
+	width: 100vw;
+	max-width: 640px;
+	height: 100%;
+	display: none;
+	opacity: 0;
+	transition: all .8s;
+}
+
+.bannerItem.active {
+	display: block;
+	opacity: 1;
+}
+
+.banner-btns {
+	height: 1.1rem;
+	position: absolute;
+	bottom: .1rem;
+	left: 0;
+	right: 0;
+	text-align: center;
+}
+
+.banner-btn {
+	display: inline-block;
+	width: .12rem;
+	height: .12rem;
+	border-radius: 50%;
+	background: #f8dba6;
+}
+
+.banner-btn.active {
+	width: .24rem;
+	border-radius: .12rem;
+	background: #ec9c00;
+}
+
+.secs {
+	height: 2.53rem;
+	display: flex;
+}
+
+.secs a {
+	display: block;
+}
+
+.secs-find {
+	flex: 343;
+	background: red;
+}
+
+.secs-find-bg {
+	height: 100%;
+}
+
+.secs-service {
+	flex: 407;
+	background: green;
+}
+
+.secs-service-free {
+	height: 50%;
+	border-bottom: 1px;
+}
+
+.indexList {
+	margin-top: 1px;
+	height: 4.1rem;
+	background: white;
+}
+
+.indexListUl {
+	height: 48%;
+	display: block;
+	overflow: hidden;
+}
+
+.indexItem {
+	display: block;
+	width: 25%;
+	float: left;
+}
+
+.indexItem a {
+	display: block;
+	width: .9rem;
+	height: .93rem;
+	margin: .3rem auto 0;
+}
+.indexListUl:first-child .indexItem a {
+	width: 1rem;
+	height: 1rem;
+}
+.indexListUl:last-child .indexItem a {
+	width: 1rem;
+	height: 1rem;
+}
+.indexItem span {
+	width: 110%;
+	display: block;
+	margin-top: .2rem;
+	font-size: .26rem;
+	text-align: center;
+	color: #333;
+}
+
+.indexItemName {
+	width: 1rem;
+}
+
+.indexSec {
+	margin-top: .2rem;
+	background: white;
+}
+
+.secTitle {
+	height: .7rem;
+	line-height: .7rem;
+	padding: 0 .25rem;
+	font-size: .3rem;
+	border-bottom: 1px solid #dfdfdf;
+}
+.secTitle > span {
+	float: left;
+}
+.secTitle > a {
+	float: right;
+	font-size: .25rem;
+	color: #999;
+}
+.secTitle > a > img {
+	margin-top: -3px;
+	height: .25rem;
+}
+.nothing {
+	height: 1.48rem;
+	line-height: 1.48rem;
+	font-size: .3rem;
+	color: #999;
+	text-align: center;
+	border-bottom: 1px solid #dfdfdf;
+}
+
+.sec-info {
+	/*height: 2.9rem;*/
+	/*border-bottom: 1px solid #dfdfdf;*/
+	position: relative;
+	background: #fff;
+}
+
+.recommend {
+	width: 1.6rem;
+	height: .9rem;
+	position: absolute;
+	z-index: 1;
+}
+
+.sec-info-link {
+	display: block;
+	width: 90%;
+	height: 100%;
+	margin: 0 auto;
+}
+
+#recommend-doctor {
+	position: relative;
+}
+
+.recommend-doc {
+	z-index: 1;
+	/*float: left;*/
+	position: absolute;
+	width: 1.6rem;
+	height: .9rem;
+	/*position: absolute;
+    left: 0;
+    top: 0;*/
+}
+
+.sec-info-wrapper {
+	padding-top: .3rem;
+	overflow: hidden;
+	height: 2.1rem;
+
+}
+.sec-info-shop {
+	float: left;
+	position: relative;
+	width: 1.8rem;
+	height: 1.35rem;
+	overflow: hidden;
+	border-radius: 6px;
+}
+.sec_shop_tit {
+	position: absolute;
+	width: 100%;
+	height: .3rem;
+	bottom: 0;
+	font-size: .2rem;
+	text-align: center;
+	line-height: .3rem;
+	background: rgba(0,0,0,.4);
+	color: #fff;
+}
+.sec-info-company {
+	padding-left: 2.2rem;
+	position: relative;
+}
+.sec-info-company_bot {
+	position: relative;
+	padding-left: 1.8rem;
+}
+.distance {
+	font-size: .200rem;
+	color: #999;
+	position: absolute;
+	right: 0;
+	top: .14rem;
+}
+
+.company-title {
+	font-size: .284rem;
+	color: #000;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	padding-right: 1.2rem;
+	font-weight: lighter;
+}
+
+.star-point {
+	overflow: hidden;
+	margin-top: .15rem;
+}
+.star-point i {
+	float: left;
+	width: .22rem;
+	height: .22rem;
+	margin: .02rem;
+	font-size: 0;
+}
+
+.star-point i img {
+	width: 100%;
+	height: 100%;
+}
+
+.score {
+	float: left;
+	font-size: .22rem;
+	color: #fab732;
+	margin-left: 0.05rem;
+	/*margin-top: .02rem;*/
+	vertical-align: middle;
+}
+
+.address {
+	font-size: .217rem;
+	color: #666;
+	margin-top: .2rem;
+	-webkit-line-clamp: 2;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	word-break: break-all;
+}
+
+.goodAt {
+	font-size: .2rem;
+	color: #666;
+	margin-top: .2rem;
+}
+
+.blood-service {
+	height: .8rem;
+	line-height: .8rem;
+	display: block;
+}
+
+.blood-service-title {
+	font-size: .3rem;
+	color: #333;
+	float: left;
+	max-width: 2rem;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+#indexSec-hospital .recommendList {
+
+}
+.recommendList{
+		border-bottom: 1px solid #dfdfdf;
+}
+.docList{
+		border-bottom: 1px solid #dfdfdf;
+}
+.recommendList:last-child .sec-info-wrapper {
+	border: none;
+}
+.docList:last-child .sec-info {
+	border: none;
+}
+.blood-service-price {
+	text-align: right;
+}
+
+.purchase {
+	font-size: .24rem;
+	color: #ccc;
+	float: right;
+	text-decoration: line-through;
+	margin-right: .1rem;
+}
+
+.nowPrice {
+	font-size: .3rem;
+	color: #ec9c00;
+	float: right;
+}
+
+.indexSec.Sec2 .sec-info {
+	height: 2.1rem;
+}
+
+.indexSec.Sec2 .sec-info-wrapper {
+	border-bottom: 0;
+}
+
+.sec-info-avatar {
+	width: 1.5rem;
+	height: 1.5rem;
+	float: left;
+	overflow: hidden;
+	border-radius: 50%;
+}
+
+.doctor-info {
+	font-size: .22rem;
+	color: #666;
+	margin-top: .2rem;
+}
+
+.star-point2 {
+	position: absolute;
+	right: 0;
+}
+
+.star-point2 .score {
+	color: #fab732;
+}
+
+.star-point i.star2 {
+	/*    background: url(../images/star2.png) center center no-repeat;
+    background-size: .24rem .24rem;*/
+}
+
+.no-content {
+	color: #ccc;
+	font-size: .26rem;
+	text-align: center;
+	height: .84rem;
+	line-height: .84rem;
+	margin-bottom: 1rem;
+}
+
+
+/*登录页*/
+
+.loginForm {
+	padding-top: 1rem;
+}
+
+.input-wrapper {
+	display: block;
+	height: 1rem;
+	background: #fff;
+	line-height: 1rem;
+	font-size: .34rem;
+	padding-left: 1.6rem;
+	position: relative;
+}
+
+.input-wrapper label {
+	position: absolute;
+	left: .3rem;
+	color: #000;
+	box-sizing: border-box;
+}
+
+.input-wrapper input {
+	border: 0;
+	width: 100%;
+	padding-left: .3rem;
+	box-sizing: border-box;
+}
+
+.loginBtn {
+	display: block;
+	width: 90%;
+	height: 1rem;
+	margin: 0 auto;
+	border: 0;
+	border-radius: .1rem;
+	background: rgb(236, 156, 0);
+	color: white;
+	font-size: .38rem;
+	text-align: center;
+}
+
+.no-bg {
+	padding: 0;
+	background: transparent;
+}
+
+.link-wrapper {}
+
+.links {
+	width: 90%;
+	margin: 0 auto;
+	display: flex;
+}
+
+.links a {
+	flex: 1;
+	text-align: center;
+	color: #ec9c00;
+	font-size: .34rem;
+}
+
+.links a:first-child {
+	border-right: 1px solid #ec9c00;
+}
+
+.login-tooltip {
+	color: white;
+	background: #000;
+	font-size: .24rem;
+	text-align: center;
+	width: 3.6rem;
+	height: .6rem;
+	line-height: .6rem;
+	margin-left: auto;
+	margin-right: auto;
+	border-radius: .1rem;
+}
+
+.reqWrap {
+	height: 100%;
+}
+
+.input-wrapper .reqInput {
+	width: 50%;
+	display: inline-block;
+}
+
+.getReq {
+	border: 0;
+	background: #fff;
+	width: 48%;
+	height: 100%;
+	display: inline-block;
+	border-left: 1px solid #dfdfdf;
+	font-size: .34rem;
+	color: #ccc;
+	text-align: center;
+	outline: none;
+}
+
+.speak-req {
+	color: #ec9c00;
+	font-size: .26rem;
+	height: .82rem;
+	line-height: .82rem;
+	padding-left: .3rem;
+}
+
+.go-register,
+.go-login {
+	color: #ec9c00;
+	font-size: .3rem;
+	text-align: center;
+}
+
+.sendReq {
+	width: 46%;
+	display: inline-block;
+	border-left: 1px solid #dfdfdf;
+	font-size: .34rem;
+	text-align: center;
+	color: #999;
+}
+
+.modal {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(121, 121, 121, .7);
+	z-index: 9999;
+}
+
+.login-dialog {
+	width: 4.06rem;
+	height: 3.02rem;
+	background: white;
+	border-radius: .4rem;
+	position: absolute;
+	top: 2.92rem;
+	left: 50%;
+	margin-left: -2.03rem;
+}
+
+.login-dialog-icon {
+	width: 1.52rem;
+	height: 1.52rem;
+	border-radius: 50%;
+	margin: .3rem auto 0;
+}
+
+.login-dialog-word {
+	font-size: .34rem;
+	text-align: center;
+	margin-top: .2rem;
+}
+
+.login-dialog-text {
+	color: #999;
+	font-size: .24rem;
+	text-align: center;
+	margin-top: .05rem
+}
+
+.login-dialog-error .login-dialog-word {
+	color: #cc3333;
+}
+
+.login-dialog-tick .login-dialog-word {
+	color: #1dcc92;
+}
+
+.hasRead-wrap {
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+	display: flex;
+}
+
+.hasRead-icon {
+	flex: 0 0 .34rem;
+	height: .34rem;
+	border-radius: 50%;
+}
+
+.hasRead-word {
+	color: #000;
+	font-size: .26rem;
+	flex: 1;
+	padding-left: .1rem;
+}
+
+.protocol {
+	color: #ec9c00;
+}
+
+
+/*footer*/
+.indexFooter {
+	position: fixed;
+	bottom: 0;
+	z-index:99;
+	width: 100%;
+	background: #f1f1f1;
+	border-top: 1px solid #c1c1c1;
+}
+.tab-item-a {
+	display: block;
+	float: left;
+	width: 20%;
+	text-align: center;
+	padding: .1rem 0;
+}
+.indicon {
+	font-size: 0;
+}
+.indicon > img {
+	vertical-align: middle;
+	height: .33rem;
+}
+.tab-label {
+	font-size: .17rem;
+	line-height: 1;
+	color: #959595;
+	margin-top: .1rem;
+}
+.tab-label.active {
+ 	color: #ec9c00;
+}
+
+/*弹窗*/
+
+#animationTipBox .lose .icon_box {
+	transform: translate(-0.05rem, -0.05rem);
+}
+
+#animationTipBox .okoButton {
+	transform: translateY(0.3rem);
+}
+
+.success .line_long {
+	right: 0;
+	top: 35px;
+}
+
+.success .line_short {
+	left: 12px;
+	top: 44px;
+}
+
+#doctorHead-photo {
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+}
+
+/*alert*/
+#alertDiv {
+	font-size: .3rem;
+}
+
+/*拨打客服*/
+#model_phone {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0,0,0,0.5);
+	z-index: 1030;
+	display: none;
+}
+.phone_content {
+	width: 80%;
+	margin-left: 10%;
+	border-radius: 10px;
+	text-align: center;
+	background: #fff;
+	position: absolute;
+	z-index: 1040;
+	top: 30%;
+}
+.phone_scribe {
+	padding: .1rem 0;
+	border-bottom: 1px solid #ccc;
+}
+.phone_scribe h4 {
+	font-size: .25rem;
+	padding: .1rem 0;
+}
+.phone_scribe p {
+	padding: .1rem 0;
+	font-size: .2rem;
+	color: #999;
+}
+a.phone_btn {
+	display: block;
+	float: left;
+	width: 50%;
+	border-left: 1px solid #ccc;
+	box-sizing: border-box;
+	font-size: .3rem;
+	padding: .1rem 0;
+	color: #000;
+}
+a.phone_btn:first-child {
+	border: none;
+}
+a.phone_sure {
+	color: #ec9c00;
+}
+
+.error {
+	color: red;
+}
+input.error {
+	border: 1px solid red;
+}
+input.error::-webkit-input-placeholder {
+	color: red;
+}

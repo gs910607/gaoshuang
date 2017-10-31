@@ -1,0 +1,129 @@
+@charset "utf-8";
+@font-face {
+	font-family: 'wingdings 3';
+	/*字体名称*/
+	src: url('../font/Hiragino Sans GB W3.otf');
+	/*字体源文件*/
+}
+
+@media only screen and (min-width: 320px) {
+	html {
+		font-size: 10px !important;
+	}
+}
+
+@media only screen and (min-width: 360px) {
+	html {
+		font-size: 11.25px !important;
+	}
+}
+
+@media only screen and (min-width: 400px) {
+	html {
+		font-size: 12.5px !important;
+	}
+}
+
+@media only screen and (min-width: 480px) {
+	html {
+		font-size: 15px !important;
+	}
+}
+
+@media only screen and (min-width: 640px) {
+	html {
+		font-size: 20px !important;
+	}
+}
+
+
+/* CSS Document */
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+	background-color: white;
+	/*font-family: "wingdings 3";*/
+
+}
+
+ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+p {
+	margin: 0;
+	padding: 0;
+}
+.clear {
+	clear: both;
+}
+.doctor {
+	padding: 2rem 1rem;
+	padding-left: 3rem;
+}
+
+.doctor_head {
+	float: left;
+	width: 8rem;
+	height: 8rem;
+	border-radius: 50%;
+}
+
+.doctor_message {
+	display: block;
+	/*vertical-align: top;*/
+	padding-left: 10rem;
+}
+
+.doctor_name {
+	font-size: 2rem;
+}
+
+.doctor_position {
+	/*margin-bottom: .5rem;*/
+	/*margin-top: .5rem;*/
+	font-size: 1.5rem;
+	color: #929292;
+}
+
+
+.doctor_address {
+	color: #929292;
+	font-size: 1.5rem;
+	display: inline-block;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	word-break: break-all;
+	overflow: hidden;
+}
+hr{
+   width: 80%;
+	height:1px;
+	border:none;
+	border-top:1px solid #D0D0CF;
+}
+.code_message{
+	text-align: center;
+	padding-top: 2rem;
+}
+.my_code{
+	width: 20rem;
+	height: 20rem;
+
+}
+.code_hint{
+	text-align: center;
+	color: #929292;
+	padding-top: 1rem;
+	font-size: 1.5rem;
+}

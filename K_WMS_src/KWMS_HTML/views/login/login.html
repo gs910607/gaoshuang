@@ -1,0 +1,19 @@
+<div class="container w-xxl w-auto-xs" ng-init="app.settings.container = false;">
+    <a href class="navbar-brand block m-t">{{app.name}}</a>
+    <div class="m-b-lg">
+        <form name="form" class="form-validation">
+            <div class="text-danger wrapper text-center" ng-show="authError">
+                {{authError}}
+            </div>
+            <div class="list-group list-group-sm">
+                <div class="list-group-item">
+                    <input type="text" placeholder="用户名" class="form-control no-border" ng-model="model.Name" required>
+                </div>
+                <div class="list-group-item">
+                    <input type="password" placeholder="密码" class="form-control no-border" ng-model="model.password" required>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-lg btn-primary btn-block" ng-click="event.Login();" data-loading-text="登录中..." ng-disabled='form.$invalid'>登 录</button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,395 @@
+@charset "utf-8";
+@font-face {
+	font-family: 'wingdings 3';   /*字体名称*/
+	src: url('../font/Hiragino Sans GB W3.otf');       /*字体源文件*/
+}
+
+@media only screen and (min-width: 320px) {
+html {
+	font-size: 10px !important;
+}
+}
+
+@media only screen and (min-width: 360px) {
+html {
+	font-size: 11.25px !important;
+}
+}
+
+@media only screen and (min-width: 400px) {
+html {
+	font-size: 12.5px !important;
+}
+}
+
+@media only screen and (min-width: 480px) {
+html {
+	font-size: 15px !important;
+}
+}
+
+@media only screen and (min-width: 640px) {
+html {
+	font-size: 20px !important;
+}
+}
+/* CSS Document */
+html, body {
+	margin: 0;
+	padding: 0;
+	background-color: #F2F2F2;
+	/*font-family: "wingdings 3";*/
+}
+ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+a {
+	text-decoration: none;
+	color: inherit;
+}
+h4, p {
+	margin: 0;
+	padding: 0;
+}
+.hidden {
+	display: none;
+}
+
+.reservation-information {
+	width: 100%;
+	background-color: #FFF;
+	color: #666;
+	position: relative;
+}
+.reservation-information-detail {
+	border-top: 1px solid #e5e5e5;
+	border-bottom: 1px solid #e5e5e5;
+	padding: 0.5rem 1rem;
+	background: #ec9b00;
+}
+.appointment-details {
+	padding: .5rem 0;
+	color: #fff;
+}
+.appointment-details span {
+	display: inline-block;
+	color: #fff;
+}
+.appointment-details span:first-child {
+	padding-left: 1rem;
+}
+.appointment-details span.appointment-time {
+	color: #ec9c00;
+}
+.appointment-details {
+	font-size: 1.2rem;
+}
+.address {
+	color: #ec9b00;
+	text-align: left;
+	word-break: break-all;
+	padding: 1rem 2rem;
+	font-size: 1.2rem;
+	background: #ffe8bc;
+}
+.address_tit {
+	vertical-align: middle;
+}
+.address_text {
+	display: inline-block;
+	width: calc(100% - 8rem);
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	vertical-align: middle;
+}
+.address-img {
+	float: right;
+	display: inline-block;
+	width: 1.2rem;
+}
+.address-img a img {
+	width: 1.2rem;
+	vertical-align: middle;
+}
+.address-line {
+	float: right;
+	display: inline-block;
+	margin: 0 1rem;
+	color: #929292;
+}
+.order-information {
+	width: 100%;
+	background-color: #FFF;
+	color: #666;
+	position: relative;
+}
+.ticketWrapper {
+	display: none;
+}
+.order-information-detail {
+	border-top: 1px solid #e5e5e5;
+	border-bottom: 1px solid #e5e5e5;
+	padding: 0.5rem 1rem;
+	margin-top: 1rem;
+	position: relative;
+}
+.order-information-detail .qrCode {
+	position: absolute;
+	right: 1rem;
+	bottom: 1rem;
+}
+.order-information-detail .qrCode > img {
+	vertical-align: middle;
+	width: 4.5rem;
+	height: 4.5rme;
+}
+.order-details {
+	padding: .5rem 0;
+	color: #000;
+}
+.order-details > span:first-child {
+	color: #000;
+}
+.order-details span.ticketTip,
+.order-details span.littleTip {
+	font-size: 1rem;
+	color: #999999;
+}
+.order-details span.ticket {
+	color: #000;
+	font-size: 1.3rem;
+	font-weight: bold;
+	letter-spacing: 1px;
+}
+.attendanceStatus {
+	color: #ec9b00!important;
+}
+.order-details span {
+	display: inline-block;
+	color: #666;
+}
+.order-details span:first-child {
+	padding-left: 1rem;
+}
+.order-details {
+	font-size: 1.2rem;
+}
+.order-details span.wait-doctor {
+	color: #ec9c00;
+}
+.order-details span.doctor-doing {
+	color: #66cc33;
+}
+.order-details span.doctor-not {
+	color: #c33;
+}
+.order-details span.doctor-over {
+	color: #999;
+}
+.patient-information {
+	width: 100%;
+	background-color: #FFF;
+	color: #666;
+	position: relative;
+	margin-top: 1rem;
+}
+.patient-details {
+	font-size: .8rem;
+}
+.patient-details {
+	color: #000;
+}
+.patient {
+	margin-left: .8rem;
+}
+.patient-information-details {
+	padding: 1rem;
+	line-height: 1rem;
+	border-bottom: 1px solid #e5e5e5;
+}
+.patient-information-details {
+	font-size: .8rem;
+}
+.attending-person {
+	display: inline-block;
+	float: right;
+	color: #999;
+}
+.attending-person img {
+	width: .6rem;
+	height: .8rem;
+	float: right;
+	margin-top: .15rem;
+	margin-left: .5rem;
+}
+.patient-message {
+	background-color: #FFF;
+	color: #666;
+	position: relative;
+	margin: 0 1rem;
+}
+.patient-message textarea {
+	width: 100%;
+	background: #f2f2f2;
+	border: none;
+	resize: none;
+	border-radius: .5rem;
+	color: #999;
+	padding: 1rem;
+	margin: 5% 0;
+	box-sizing: border-box;
+	line-height: 1rem;
+}
+.submit-button {
+	margin: 0 1rem;
+	text-align: center;
+	color: #ec9c00;
+	margin-top: 8rem;
+	font-size: 1.52rem;
+}
+
+.submit-button-a {
+	display: block;
+	background: #fff;
+	padding: 1rem 0;
+	margin-bottom: 1rem;
+	border-radius: .5rem;
+	border: 1px solid #ec9c00;
+}
+.goevaluate {
+	background: #ec9c00;
+	color: #fff;
+}
+.recognition-cancel {
+	color: #EC9C00;
+}
+/*弹出框 取消 拨打*/
+/*取消*/
+#orderMain {
+	display: none;
+	/*position: absolute;*/
+	position: fixed;
+	top: 30%;
+	left: 10%;
+	width: 80%;
+	border-radius: 1rem;
+	z-index: 1000;
+	text-align: center;
+	background-color: #FFFFFF;
+}
+#orderMain-first h4 {
+	color: #000;
+	font-size: 1.4rem;
+	text-align: center;
+	margin: 1rem 0;
+}
+#orderMain-first p {
+	color: #999;
+	font-size: 1rem;
+	text-align: center;
+	margin-bottom: 1rem;
+}
+#orderMain-second {
+	border-top: 1px solid #f2f2f2;
+}
+.orderMain-address {
+	float: left;
+	width: 50%;
+	color: #ec9c00;
+}
+.orderMain-address a {
+	display: block;
+	padding: 1rem 0;
+}
+.orderMain-address img {
+	width: 3rem;
+}
+.orderMain-address span {
+	display: inline-block;
+	margin-top: .5rem;
+	font-size: .6rem;
+	width: 100%;
+}
+#orderMain-close {
+	float: left;
+	width: 49%;
+	border-right: 1px solid #f2f2f2;
+	color: #000;
+}
+/*拨打*/
+#dialMain {
+	display: none;
+	/*position: absolute;*/
+	position: fixed;
+	top: 30%;
+	left: 10%;
+	width: 80%;
+	border-radius: 1rem;
+	z-index: 1000;
+	text-align: center;
+	background-color: #FFFFFF;
+}
+#dialMain-first h4 {
+	color: #000;
+	font-size: 1.4rem;
+	text-align: center;
+	margin: 1rem 0;
+}
+#dialMain-first p {
+	color: #999;
+	font-size: 1rem;
+	text-align: center;
+	margin-bottom: 1rem;
+}
+#dialMain-second {
+	border-top: 1px solid #f2f2f2;
+}
+.dialMain-address {
+	float: left;
+	width: 50%;
+	color: #ec9c00;
+	font-size: 1.2rem;
+}
+.dialMain-address > a {
+	display: block;
+	padding: 1rem 0;
+}
+.dialMain-address img {
+	width: 3rem;
+}
+.dialMain-address span {
+	display: inline-block;
+	margin-top: .5rem;
+	font-size: .6rem;
+	width: 100%;
+}
+#dialMain-close {
+	float: left;
+	width: 49%;
+	border-right: 1px solid #f2f2f2;
+	color: #000;
+}
+
+
+.picWrapper {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0,0,0,0.5);
+	z-index: 1030;
+}
+.picWrapper > img {
+	vertical-align: middle;
+	width: 100%;
+	max-height: 100%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}

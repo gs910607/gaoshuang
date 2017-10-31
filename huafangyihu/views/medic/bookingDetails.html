@@ -1,0 +1,150 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta http-equiv="pragma" content="no-cache" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<!--<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css" />-->
+<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+<link rel="stylesheet" type="text/css" href="../../css/bookingDetails.css" />
+
+<title>订单详情</title>
+</head>
+
+<body>
+  <header>
+    <a id="goBack" class="goback" href="javascript:history.back();">
+      <img src="../../images/backtrack.png" alt="" />
+      <span id="goBackText">返回</span>
+    </a>
+    <h1 id="theme">订单详情</h1>
+  </header>
+  <div class="wrapper">
+    <div class="reservation-information">
+    	<div class="reservation-information-detail">
+        	<ul>
+        		<li id="serviceName_tit" class="appointment-details"><span class="serviceName_tit">服务类型：</span><span class="serviceName"></span></li>
+        		<li id="price_tit" class="appointment-details"><span class="price_tit">服务费用：</span><span class="price"></span></li>
+        		<li id="patient_tit" class="appointment-details"><span class="patient_tit"></span><span class="patient"></span></li>
+            <li id="timer_tit" class="appointment-details"><span class="timer_tit">预约时间：</span><span class="timer"></span></li>
+            <li id="phone_tit" class="appointment-details"><span class="phone_tit">联系方式：</span><span class="phone"></span></li>
+        		<li id="address_tit" class="appointment-details"><span class="address_tit">服务地址：</span><span class="address_text"></span></li>
+        	</ul>
+        </div>
+        <div  class="address">
+          <span class="hospital_name">闲林山水居诊所</span>
+          <span id="dial" class="address-img"><a href="javascript:;"><img src="../../images/phone.png" alt=""></a></span>
+          <span class="address-line">|</span>
+          <span id="toMap" class="address-img"><a href="javascript:;"><img src="../../images/map.png" alt=""></a></span>
+        </div>
+    </div>
+    <div id="ticketWrapper" class="order-information" style="display:none;">
+    	<div class="order-information-detail">
+        <div style="border-bottom:1px solid #f2f2f2;padding:.5rem 0 .8rem;" id="" class="order-details"><span class="ticketStatusTit">预约券码：</span><span class="ticketStatus indent"></span></div>
+      	<ul style="padding:.5rem 0;">
+          <li id="" class="order-details"><span class="ticketTit">券码：</span><span class="ticket indent"></span></li>
+          <li id="" class="order-details"><span class="littleTip">小提示：</span><span class="ticketTip indent">记下或拍下券码，向商家出示即可消费</span></li>
+      	</ul>
+        <div class="qrCode">
+          <img src="../../images/ticket-code.png" alt="">
+        </div>
+      </div>
+    </div>
+    <div class="order-information">
+    	<div class="order-information-detail">
+        	<ul>
+        		<li id="attendanceStatus_tit" class="order-details"><span class="attendanceStatus_tit">订单状态：</span><span class="attendanceStatus indent"></span></li>
+            <li id="orderNumber_tit" class="order-details"><span class="orderNumber_tit">订单编号：</span><span class="orderNumber indent"></span></li>
+            <li id="payMoney_tit" class="order-details"><span class="payMoney_tit"></span><span class="payMoney indent"></span></li>
+        		<li id="payType_tit" class="order-details"><span class="payType_tit">支付方式：</span><span class="payType indent"></span></li>
+        		<li id="createTime_tit" class="order-details"><span class="createTime_tit">创建时间：</span><span class="createTime indent"></span></li>
+        		<li id="endTime_tit" class="order-details hidden"><span class="endTime_tit">取消时间：</span><span class="endTime indent"></span></li>
+        	</ul>
+        </div>
+    </div>
+    <div class="patient-information">
+      <div class="patient-message">
+        <textarea id="leaveWord" rows="4" placeholder="描述您想获得的帮助"></textarea>
+      </div>
+    </div>
+    <div class="submit-button">
+      <a id="cancelOrder" class="submit-button-a" href="javascript:;">取消订单</a>
+      <a id="evaluate" class="submit-button-a goevaluate" href="javascript:;">去评价</a>
+      <a id="confirmReceipt" class="submit-button-a goevaluate" href="javascript:;">确认收货</a>
+    </div>
+  </div>
+</body>
+<!--取消订单-->
+	<div id="orderMain">
+		<div id="orderMain-first">
+        	<h4>取消订单</h4>
+            <p>您确认要取消订单吗？</p>
+        </div>
+		<div id="orderMain-second">
+			<div id="orderMain-close" class="orderMain-address">
+				<a href="javascript:;">取消</a>
+			</div>
+			<div class="orderMain-address">
+				<a id="cancelSure" href="javascript:;">确认</a>
+			</div>
+
+		</div>
+	<!--	<div id="orderMain-close">关 闭</div>-->
+	</div>
+    <div id="dialMain">
+		<div id="dialMain-first">
+    	<h4>拨号</h4>
+      <p>您确认要拨打000000000吗？</p>
+    </div>
+		<div id="dialMain-second">
+			<div id="dialMain-close" class="dialMain-address">
+				<a href="javascript:;">取消</a>
+			</div>
+			<div class="dialMain-address">
+				<a id="telephone" href="javascript:;">确认</a>
+			</div>
+		</div>
+	</div>
+
+  <!-- 确认取消订单 -->
+  <div id="cancelOrderModel" class="shade">
+    <div class="modelAffirm">
+      <div class="promptContent">
+        <h4>取消订单</h4>
+        <p>您确定要取消订单吗?</p>
+      </div>
+      <div class="promptBtn clearfix">
+        <a href="javascript:;" class="cancelBtn">取消</a>
+        <a href="javascript:;" class="sureBtn">确认</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 确认收货 -->
+  <div id="sureAccept" class="shade">
+    <div class="modelAffirm">
+      <div class="promptContent">
+        <h4>确认收货</h4>
+        <p>是否确认收货?</p>
+      </div>
+      <div class="promptBtn clearfix">
+        <a href="javascript:;" class="cancelBtn">取消</a>
+        <a href="javascript:;" class="sureBtn">确认</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="picWrapper">
+    <img src="" alt="">
+  </div>
+
+	<!--蒙版层-->
+	<div id="modal" style="display: none;position: absolute;top: 0;z-index: 1;opacity: 0.5;"></div>
+
+<script src="../../resource/js/jquery-2.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../resource/js/common.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../resource/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../resource/js/bookingDetails.js" type="text/javascript" charset="utf-8"></script>
+</html>

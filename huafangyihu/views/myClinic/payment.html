@@ -1,0 +1,196 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta http-equiv="pragma" content="no-cache">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css" />-->
+		<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/payment.css" />
+
+		<title>付款</title>
+	</head>
+
+	<body>
+		<header>
+			<a id="goBack" class="goback" href="../main/index.html">
+				<img src="../../images/backtrack.png" alt="" />
+				<span id="goBackText">返回</span>
+			</a>
+			<h1 id="theme">付款</h1>
+		</header>
+		<div>
+			<div class="reservation-information">
+				<div class="reservation-information-detail">
+					<ul>
+						<li class="appointment-details clearfix"><label>服务类型：</label><span class="type-blood"></span></li>
+						<li class="appointment-details clearfix"><label>服务费用：</label><span class="cost-price"> </span></li>
+						<!--<li class="appointment-details clearfix"><label>服务医护：</label><span class="service-doctor"> </span></li>-->
+						<li class="appointment-details clearfix"><label>受诊人：</label><span class="patient"></span></li>
+						<li class="appointment-details clearfix"><label>预约时间：</label><span class="date"> </li>
+            <li id="serviceAddress" class="appointment-details clearfix"><label>服务地址：</label><p class="service-address"></p></li>
+        	</ul>
+        </div>
+
+
+    </div>
+	<div class="payment">
+        	<ul>
+        		<li>
+                	<div class="payment-div clearfix">
+            			<p class="payment-div-p">需要付款</p>
+                		<div class="payment-div-price">
+                        	<p class="event-discount"></p>
+                            <p class="payment-amount">￥<span class="payment-amount-span"></span></p>
+				</div>
+			</div>
+			</li>
+			<li>
+				<!--<div class="payment-div clearfix">
+					<p class="payment-div-p" style="padding-top:.3rem;">使用账户余额（共￥<span class="payment-div-p-span"></span>元）</p>
+					<div class="payment-div-price">
+						<form method="post">
+							<button class="mwui-switch-btn"><span change="" class="off"></span><input type="hidden" name="show_icon" value="0" /></button>
+						</form>
+					</div>
+				</div>-->
+			</li>
+			<li>
+				<div class="payment-div clearfix checkstand">
+					<p class="payment-div-p">使用现金券</p>
+					<div class="payment-div-price">
+						<a class="wechat-payment" href="javaScript:;">
+							<span class="discount_coupon">暂无现金券</span>	
+							<span class="arrow-right"><img src="../../images/more.png" alt="" /></span></a>
+					</div>
+				</div>
+			</li>
+			</ul>
+		</div>
+		<div class="pay">
+        	<div class="pay-money">
+            	<p class="payment-money">￥</p>
+                <p class="discount-money"> </p>
+            </div>
+            <a id="prompt" class="confirm-payment" href="javascript:;">确认支付</a>
+        </div>
+		</div>
+	</body>
+	<!--提示信息-->
+	<div id="promptMain" style="display:none;">
+		<div id="promptMain-first">
+			<img src="../../images/dialog-tick.png" alt="">
+			<h6>提交成功！</h6>
+			<p><span id="timeout">2</span>秒后跳转详情...</p>
+		</div>
+	</div>
+	<div id="returnMain" style="display:none;">
+		<div id="returnMain-first">
+			<img src="../../images/dialog-error.png" alt="">
+			<h6>提交超时，请重新咨询</h6>
+			<p><span>2</span>秒后返回...</p>
+		</div>
+	</div>
+
+	<!--蒙版层-->
+	<div id="mask" style="display: none;position: absolute;top: 0;z-index: 1;opacity: 0.5;"></div>
+
+	<script src="../../resource/js/jquery-2.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../resource/js/common.js" type="text/javascript" charset="utf-8"></script>
+	<!--<script src="../../resource/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>-->
+	<script src="inc/payment.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" charset="utf-8">
+		// var serviceaddressContent =  unescape(GetQueryStr("serviceaddressContent"))
+		// var hospitalName = sessionStorage.getItem("hospitalName");
+		function getparameter() {
+			var url = location.search; //获取url中"?"符后的字串
+			var o = new Object();
+			if(url.indexOf("?") != -1) {
+				var str = url.substr(1);
+				strs = str.split("&");
+				for(var i = 0; i < strs.length; i++) {
+					o[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+				}
+			}
+			return o;
+		}
+		//服务地址
+		// var serviceaddress = unescape(GetQueryStr("serviceaddress"));
+		// var serviceaddressContent =unescape(GetQueryStr("serviceaddressContent"))
+		// if(!serviceaddress){
+		// 	$(".service-address").text(serviceaddressContent)
+		// }else{
+		// 	  $(".service-address").text(serviceaddress);
+		// }
+
+		var cOrderNo;
+        var urlId1 = GetQueryStr("id1")
+		var o = getparameter();
+		if(o['id1'] == 3) {
+			$("#serviceAddress").remove();
+		}
+		var params = {
+			orderNo: o['orderNo'],
+			token: JSON.parse(localStorage.getItem("user")).token
+		};
+		console.log(params)
+		//订单渲染
+		$.ajax({
+			type: 'GET',
+			url: config.appserver_url + "/doctorNurse/queryNoPayInfo.json",
+			data: params,
+			contentType: 'application/json',
+			dataType: 'json',
+			success: function(response) {
+				console.log(response.data)
+              if(response.data =='该订单不存在'){
+               alert(response.data)
+               setTimeout(function(){
+//             	history.back();
+               },2000)
+              }
+
+				//			token丢失
+				tokenLose(response.status);
+				var o = response.data;
+//				cOrderNo = response.data.cOrderNo;
+				$(".service-address").text(o.address)
+				$(".type-blood").text(o.serviceItemName);
+				$(".cost-price").text(o.orderPrice + "元/次");
+				$(".service-doctor").text(o.hosName);
+				$(".patient").text(o.serPeoName + "/" + o.serPeoSex + "/" + o.younth + "岁/" + o.serPeoMobile);
+				var arr = [];
+			    arr = o.serviceTime.split(".");
+				$(".date").text(arr[0]);
+				// var serviceaddressContent = unescape(sessionStorage.getItem("serviceaddressContent"));
+
+				$(".payment-div-p-span").text();
+				$(".payment-amount-span").text(o.orderPrice);
+				$(".payment-money").text("￥" + o.orderPrice);
+				$(".pay").on("click", function() {
+					var orderNo = GetQueryStr("orderNo");
+					var acOrderNo = GetQueryStr("cOrderNo");
+					if(acOrderNo) {
+						cOrderNo = acOrderNo;
+					} else {
+						//接口获取cOrderNo订单号；
+						cOrderNo = response.data.cOrderNo
+					}
+					console.log(cOrderNo)
+					//	var payMoney = $(".payment-amount-ssubmit-buttonpan").text()
+					//	console.log(payMoney)
+					var payMoney = $(".payment-amount-span").text();
+					console.log(payMoney)
+						window.location.href = "../payment/checkstand.html?orderNo=" + orderNo + "&payMoney=" + payMoney + "&cOrderNo=" + cOrderNo + "&id1=" + urlId1;
+				})
+			},
+			error: function() {
+				alert("服务繁忙，请稍后再试！")
+			}
+		})
+	</script>
+
+</html>

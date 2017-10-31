@@ -1,0 +1,254 @@
+@font-face {
+	font-family: 'wingdings 3';
+	/*字体名称*/
+	src: url('../font/Hiragino Sans GB W3.otf');
+	/*字体源文件*/
+}
+
+
+/*设置自适应文字大小*/
+
+@media only screen and (min-width: 320px) {
+	html {
+		font-size: 10px !important;
+	}
+}
+
+@media only screen and (min-width: 360px) {
+	html {
+		font-size: 11.25px !important;
+	}
+}
+
+@media only screen and (min-width: 400px) {
+	html {
+		font-size: 12.5px !important;
+	}
+}
+
+@media only screen and (min-width: 480px) {
+	html {
+		font-size: 15px !important;
+	}
+}
+
+@media only screen and (min-width: 640px) {
+	html {
+		font-size: 20px !important;
+	}
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+	background-color: #F2F2F2;
+	/*font-family: "wingdings 3";*/
+}
+
+ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+h4,
+p {
+	margin: 0;
+	padding: 0;
+}
+
+.clearfix::before,
+.clearfix::after {
+	content: '';
+	display: table;
+}
+.clearfix::after {
+	clear: both;
+}
+
+#share {
+	position: absolute;
+	right: 1rem;
+	font-size: 1.4rem;
+	line-height: 3rem;
+	font-weight: lighter;
+	color: #ec9c00;
+}
+
+.articleList {
+	position: relative;
+	z-index: 1;
+	list-style-type: none;
+	width: 100%;
+	height: 3.8rem;
+	margin: 0;
+	padding: 0;
+	/*不换行*/
+	white-space: nowrap;
+	overflow: hidden;
+	overflow-x: scroll;
+    background-color: white;
+}
+
+.articleList-li-left {
+	margin-left: -.5rem;
+}
+
+.articleList-li {
+	padding: 0 1rem;
+	display: inline-block;
+	text-align: center;
+	height: 100%;
+	font-size: 1.4rem;
+	line-height: 3.5rem;
+	background-color: white;
+	margin-top: .2rem;
+}
+
+#article-all {
+	border-bottom: .5rem solid #ec9c00;
+	color: #ec9c00;
+	margin: 0 auto;
+}
+
+#articleParticulars-ul {
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
+	background-color: white;
+	margin-top: .5rem;
+}
+
+.articleParticulars-li {
+	padding: 1rem;
+	padding-bottom: .5rem;
+	border-bottom: .7rem solid #F2F2F2;
+}
+
+.articleParticulars-img {
+	float: left;
+	width: 6.5rem;
+	height: 4.5rem;
+	margin-bottom: .5rem;
+	border-radius: .3rem;
+}
+
+.articleParticulars-li h4 {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	font-size: 1.2rem;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	font-weight: bolder;
+}
+
+.articleParticulars-title {
+	padding-left: 7.2rem;
+}
+
+.articleParticulars-li section {
+	width: 100%;
+	word-break: break-word;
+	font-size: 1rem;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+.articleParticulars-li-list {
+	border-bottom: .1rem solid #DFDFDF;
+}
+
+.creatTime {
+	padding-top: .5rem;
+	font-size: 1rem;
+	color: #CCCCCC;
+}
+.creatTime-span {
+	vertical-align: middle;
+	font-size: 1rem;
+}
+.creatTime img {
+	width: 1rem;
+	vertical-align:middle;
+	/*margin-top:-.2rem;*/
+}
+.creatTime img.publishTime{
+	width: 1.1rem;
+	margin-right:.3rem;
+}
+.creatTime img.eye{
+	width: 1.5rem;
+	margin-right:.3rem;
+}
+.creatTime img.admire-img{
+	width: 1.2rem;
+	margin-right:.3rem;
+	/*margin-top:-.4rem;*/
+}
+.creatTime-span {}
+
+.admire {
+	float: right;
+}
+.examine {
+	vertical-align: middle;
+	margin-right: .5rem;
+}
+.appreciate-affirm {
+	vertical-align: middle;
+}
+.appreciate-cancel {
+	color: #EC9B01;
+	/*float: right;*/
+}
+
+.recognition-affirm {
+	/*float: right;*/
+}
+
+.recognition-cancel {
+	color: #EC9C00;
+	float: right;
+}
+
+.recommended-articles {
+	padding: .5rem 1rem 1rem;
+	background: #fff7e5;
+	margin-top: .5rem;
+	position:relative;
+	z-index: 1;
+}
+
+.recommended-articles span {
+	display: inline-block;
+	color: #ec9c00;
+	border: 1px solid #ec9c00;
+	font-size: 1.2rem;
+	border-radius: .3rem;
+	padding: .1rem .5rem;
+	margin-right: .5rem;
+}
+
+.recommended-articles p {
+	color: #ec9c00;
+	font-size: 1.1rem;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+    margin-top: -1.7rem;
+    margin-left: 4rem;
+}

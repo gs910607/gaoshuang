@@ -1,0 +1,128 @@
+@charset "utf-8";
+
+.clearfix::before,
+.clearfix::after {
+	display: table;
+	content: '';
+}
+.clearfix::after {
+	clear: both;
+}
+.pull-left {
+	float: left;
+}
+.pull-right {
+	float: right;
+}
+/*头部*/
+header {
+  height: 3rem;
+	line-height: 3rem;
+	overflow: hidden;
+	box-sizing: border-box;
+	background: #fff;
+	position: relative;
+	z-index: 99;
+	text-align: center;
+	border-bottom: 1px solid #dfdfdf;
+}
+header a.goback {
+	position: absolute;
+	left: 1rem;
+	text-decoration: none;
+	font-size: 0;
+}
+header a.goback > img {
+	height: 1.7rem;
+	vertical-align: middle;
+	margin-right: .2rem;
+}
+header a.goback > span {
+	font-size: 1.36rem;
+	color: #ec9c00;
+	vertical-align: middle;
+}
+header #theme {
+	padding: 0;
+	margin: 0;
+	font-size: 1.44rem;
+	line-height: 3rem;
+	font-weight: bold;
+	display: inline-block;
+}
+
+/*ajax加载更多动画*/
+.ajaxLoadMore {
+	padding: 1rem 0;
+	text-align: center;
+}
+.ajaxLoadMore .noMore {
+	color: #dfdfdf;
+	font-size: 1.4rem;
+	display: none;
+}
+.ajaxLoadMore .ajaxLoading {
+	font-size: 0;
+	display: none;
+}
+.ajaxLoadMore .ajaxLoading > img {
+	vertical-align: middle;
+	width: 2rem;
+}
+
+/*打电话*/
+.shade {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 1030;
+	background: rgba(0,0,0,0.5);
+}
+.modelAffirm {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 1040;
+	background: #fff;
+	border-radius: 10px;
+	width: 80%;
+	text-align: center;
+}
+.promptContent {
+	padding: .7rem 0 1rem;
+}
+.promptContent > h4 {
+	font-size: 1.5rem;
+	color: #000;
+	font-weight: normal;
+	margin: 0;
+	padding: .5rem 0;
+}
+.promptContent > p {
+	font-size: 1.2rem;
+	color: #656565;
+	margin: 0;
+	padding: .5rem 0;
+}
+.promptBtn {
+	border-top: 1px solid #ccc;
+}
+.promptBtn > a {
+	float: left;
+	width: 50%;
+	padding: .8rem 0;
+	text-decoration: none;
+	box-sizing: border-box;
+	font-size: 1.5rem;
+	color: #000;
+}
+.promptBtn a.cancelBtn {
+	border-right: 1px solid #ccc;
+}
+.promptBtn a.sureBtn {
+	color: #ee9a03;
+}

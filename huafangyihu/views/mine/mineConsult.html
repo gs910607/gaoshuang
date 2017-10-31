@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta http-equiv="pragma" content="no-cache" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="format-detection" content="telephone=no, email=no" />
+	<title>我的咨询</title>
+	<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+	<link href="../../css/mineConsult.css" rel="stylesheet">
+</head>
+
+<body>
+	<header>
+		<a id="goBack" class="goback" href="javascript:historyBack();">
+			<img src="../../images/backtrack.png" alt="" />
+			<span id="goBackText">返回</span>
+		</a>
+		<h1 id="theme">我的咨询</h1>
+	</header>
+	<div class="titleTop">
+		<div class="titleTop-list" data-status="1">
+			<span class="titleTop-list-state default-status">咨询中</span>
+			</div>
+		<div class="titleTop-list" data-status="2">
+			<span class="titleTop-list-state">待回复</span>
+			</div>
+		<div class="titleTop-list" data-status="3">
+			<span class="titleTop-list-state">已完成</span>
+			</div>
+		<div class="titleTop-list" data-status="4">
+			<span class="titleTop-list-state">待评价</span>
+			</div>
+	</div>
+
+  <!--咨询状态-->
+  <div class="counsel">
+  	<ul class="counselAll">
+  		<!-- <li class="counselAll-list">
+  			<div class="counselAll-list-title">
+  			<span class="indentContent">
+  				<div class="indentNumber">
+  					<span>订单编号：</span>
+  					<span>2132132131231</span>
+  				</div>
+  				<div class="indentTime">
+  					<span>创建时间：</span>
+  					<span>2132132131231</span>
+  				</div>
+  			</span>
+  			<span class="consult-state">
+  				<span>咨询中</span>
+  			</span>
+  			</div>
+  			<div class="inquiry">
+  				<img class="askImg" src="../../images/ask.png"/>
+
+  				<div class="inquiry-questioning">
+  					<span class="inquiry-questioning-title details">湾度假区泡豇豆号较为群殴ID放弃哦好我就覅为契机佛全家福可亲可敬</span>
+  					<span class="inquiry-questioning-content details">湾度假区泡豇豆号较为群殴ID放弃哦好我就覅偶请叫我好激情网号偶发击破为契机佛全家福可亲可敬</span>
+  				</span>
+  			</div>
+  			</div>
+  			<div class="doctor-message">
+  				<span class="doctor-message-content">
+  				<span>张三 /</span>
+  				<span>主任医生 /</span>
+  				<span>内科</span>
+  				</span>
+  				<span id="await-evaluate" style="display: none;">
+  					去评价
+  				</span>
+  			</div>
+  		</li> -->
+
+  	</ul>
+		<div class="ajaxLoadMore">
+        <div class="noMore">~ 没有更多内容啦 ~</div>
+        <div class="ajaxLoading"><img src="../../images/loading.gif" alt=""></div>
+    </div>
+  </div>
+<script src="../../resource/js/jquery-2.1.1.min.js"></script>
+<script src="../../resource/js/common.js" type="text/javascript" charset="utf-8"></script>
+<script src="inc/mineConsult.js" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>

@@ -1,0 +1,165 @@
+@charset "utf-8";
+/* CSS Document */
+@font-face {
+	font-family: 'wingdings 3';   /*字体名称*/
+	src: url('../font/Hiragino Sans GB W3.otf');       /*字体源文件*/
+}
+
+@media only screen and (min-width: 320px) {
+html {
+	font-size: 10px !important;
+}
+}
+
+@media only screen and (min-width: 360px) {
+html {
+	font-size: 11.25px !important;
+}
+}
+
+@media only screen and (min-width: 400px) {
+html {
+	font-size: 12.5px !important;
+}
+}
+
+@media only screen and (min-width: 480px) {
+html {
+	font-size: 15px !important;
+}
+}
+
+@media only screen and (min-width: 640px) {
+html {
+	font-size: 20px !important;
+}
+}
+* {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+html, body {
+	margin: 0;
+	padding: 0;
+	background-color: #fff;
+	/*font-family: "wingdings 3";*/
+}
+ul {
+	list-style-type: none;
+}
+.clear{
+	clear: both;
+}
+ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+a {
+	text-decoration: none;
+	color: inherit;
+}
+p,h1,h2,h3,h4,h5,h6{
+	margin:0;
+	padding:0;
+}
+.other-news{
+	padding-bottom:3rem;
+	background:#fff;
+}
+.another-doctor{
+	background-color:#fff;
+	margin:5rem 0;
+	text-align:center;
+}
+.another-doctor img{
+	width:10rem;
+}
+.another-doctor p{
+	font-size:1rem;
+	color:#666;
+	line-height:3rem;
+	margin-left:1rem;
+}
+.consultation{
+	background:#fff;
+}
+.consultation-text{
+	margin:0 2rem;
+	border-bottom:1px dashed #e5e5e5;
+}
+.none-border{
+	border:none;
+}
+.consultation-text h6{
+	color:#000;
+	padding:1rem 0 1rem 0;
+}
+.consultation-text p{
+	color:#999;
+}
+.consultation-img{
+	float:right;
+	margin-top:-3.5rem;
+	margin-right:2rem;
+	vertical-align:middle;
+}
+.consultation-img img{
+	width:2.5rem;
+	vertical-align:middle;
+}
+
+
+/*拨打*/
+#dialMain {
+	display: none;
+	/*position: absolute;*/
+	position: fixed;
+	top: 30%;
+	left: 10%;
+	width: 80%;
+	border-radius: 1rem;
+	z-index: 1000;
+	text-align: center;
+	background-color: #FFFFFF;
+}
+#dialMain-first h4 {
+	color: #000;
+	font-size: 1rem;
+	text-align: center;
+	margin: 1rem 0 .5rem 0;
+}
+#dialMain-first p {
+	color: #999;
+	font-size: .6rem;
+	text-align: center;
+	margin-bottom: 1rem;
+}
+#dialMain-second {
+	border-top: 1px solid #f2f2f2;
+}
+.dialMain-address {
+	float: left;
+	width: 50%;
+	padding-top: .5rem;
+	padding-bottom: .5rem;
+	color: #ec9c00;
+}
+.dialMain-address img {
+	width: 3rem;
+}
+.dialMain-address span {
+	display: inline-block;
+	margin-top: .5rem;
+	font-size: .6rem;
+	width: 100%;
+}
+#dialMain-close {
+	float: left;
+	width: 49%;
+	padding-top: .5rem;
+	padding-bottom: .5rem;
+	border-right: 1px solid #f2f2f2;
+	color: #000;
+}

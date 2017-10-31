@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE xml>
+<configuration scan="false" scanPeriod="60 seconds" debug="false">
+	<property resource="emplog.properties" />
+	<!-- <consolePlugin /> -->
+	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+		<filter class="ch.qos.logback.core.filter.EvaluatorFilter">
+			<evaluator>
+				<matcher>
+					<Name>odd</Name>
+					<regex>statement [13579]</regex>
+				</matcher>
+
+				<expression>odd.matches(logger)</expression>
+			</evaluator>
+			<OnMismatch>NEUTRAL</OnMismatch>
+			<OnMatch>DENY</OnMatch>
+		</filter>
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %msg [%logger{80}]  %n
+			</pattern>
+			<charset>utf-8</charset>
+		</encoder> 
+	</appender>
+	<appender name="logstash" class="ch.qos.logback.core.ConsoleAppender">
+		<filter class="ch.qos.logback.core.filter.EvaluatorFilter">
+			<evaluator>
+				<matcher>
+					<Name>odd</Name>
+					<regex>statement [13579]</regex>
+				</matcher>
+
+				<expression>odd.matches(logger)</expression>
+			</evaluator>
+			<OnMismatch>NEUTRAL</OnMismatch>
+			<OnMatch>DENY</OnMatch>
+		</filter>
+		<encoder>
+			<pattern>&lt;%date&gt; [%thread] %-5level %logger{80} - %msg%n
+			</pattern>
+			<!-- charset>GBK</charset> -->
+		</encoder>
+		<!-- <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+			<providers>
+				<pattern>
+					<pattern>
+						{	"fwinsky":"%X{fwinsky}",
+							"tags": ["errorlog"],
+							"project": "${project}",
+							"timestamp": "%date{\"yyyy-MM-dd' 'HH:mm:ss,SSS' 'Z\"}",
+							"log_level": "%level",
+							"thread": "%thread",
+							"class_name": "%class",
+							"line_number": "%line",
+							"message": "%message",
+							"stack_trace": "%exception{5}"
+						}
+					</pattern>
+				</pattern>
+			</providers>
+			<charset>utf-8</charset>
+		</encoder> -->
+	</appender>
+	<appender name="file"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${filename}</fileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>&lt;%date&gt; [%thread] %-5level %logger{80} - %msg%n
+			</pattern>
+			<!-- charset>GBK</charset> -->
+		</encoder>
+	</appender>
+	<!-- 异步输出 -->
+	<appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+		<!-- 不丢失日志.默认的,如果队列的80%已满,则会丢弃TRACT、DEBUG、INFO级别的日志 -->
+		<discardingThreshold>0</discardingThreshold>
+		<!-- 更改默认的队列的深度,该值会影响性能.默认值为256 -->
+		<queueSize>512</queueSize>
+		<!-- 添加附加的appender,最多只能添加一个 -->
+		<appender-ref ref="file" />
+	</appender>
+
+	<root level="trace">
+		<appender-ref ref="stdout" />
+		<appender-ref ref="ASYNC" />
+	</root>
+	
+	<logger name="org.apache.commons.httpclient">
+		<level value="info" />
+	</logger>
+	
+	<logger name="httpclient.wire">
+		<level value="info" />
+	</logger>
+
+	<logger name="org.springframework">
+		<level value="info" />
+	</logger>
+
+	<logger name="com.google.code.yanf4j.core">
+		<level value="info" />
+	</logger>
+
+	<logger name="net.rubyeye.xmemcached">
+		<level value="info" />
+	</logger>
+
+	<logger name="java.sql">
+		<level value="debug" />
+	</logger>
+
+	<logger name="org.apache.ibatis">
+		<level value="debug" />
+	</logger>
+
+	<logger name="org.mybatis.spring">
+		<level value="debug" />
+	</logger>
+
+	<logger name="org.apache.ibatis.jdbc.ScriptRunner">
+	</logger>
+
+	<logger name="java.sql.PreparedStatement">
+	</logger>
+
+	<logger name="java.sql.Connection">
+	</logger>
+
+	<logger name="java.sql.Statement">
+	</logger>
+
+	<logger name="java.sql.ResultSet">
+		<level value="TRACE"></level>
+	</logger>
+</configuration>

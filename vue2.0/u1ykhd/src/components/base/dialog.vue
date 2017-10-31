@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     closeMyself () {
-      this.$emit('on-close')
+      this.$emit('on-close','121212')
     }
   }
 }

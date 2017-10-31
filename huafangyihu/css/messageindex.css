@@ -1,0 +1,166 @@
+
+		@charset "utf-8";
+@font-face {
+	font-family: 'wingdings 3';   /*字体名称*/
+	src: url('../font/Hiragino Sans GB W3.otf');       /*字体源文件*/
+}
+
+@media only screen and (min-width: 320px) {
+html {
+	font-size: 10px !important;
+}
+}
+
+@media only screen and (min-width: 360px) {
+html {
+	font-size: 11.25px !important;
+}
+}
+
+@media only screen and (min-width: 400px) {
+html {
+	font-size: 12.5px !important;
+}
+}
+
+@media only screen and (min-width: 480px) {
+html {
+	font-size: 15px !important;
+}
+}
+
+@media only screen and (min-width: 640px) {
+html {
+	font-size: 20px !important;
+}
+}
+/* CSS Document */
+html, body {
+	margin: 0;
+	padding: 0;
+	background-color: #f2f2f2;
+	/*font-family: "wingdings 3";*/
+}
+ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+a {
+	text-decoration: none;
+	color: inherit;
+}
+h1,h2,h3,h4,h5,h6,p {
+	margin: 0;
+	padding: 0;
+}
+.clear{
+	clear:both;
+}
+.message-list{
+	background:#fff;
+}
+.message-list-li{
+	border-bottom:1px solid #dfdfdf;
+}
+.message-list-li-a{
+	display:block;
+	padding:1rem;
+	overflow: hidden;
+}
+.message-list-head-portrait{
+	width:5rem;
+	height:5rem;
+	float: left;
+	border-radius:4rem;
+	background:#b3b3b3;
+}
+.head-portrait-icon{
+	line-height: 5rem;
+	text-align:center;
+}
+.head-portrait-icon img{
+	width:2.5rem;
+	height:2.5rem;
+	vertical-align: middle;
+	font-size: 0;
+}
+.message-reminder{
+	width:1.5rem;
+	height:1.5rem;
+	border-radius:1rem;
+	background:#f33;
+	margin-top:-6rem;
+	margin-left:4.5rem;
+}
+.message-reminder-number{
+	display:block;
+	font-size:1rem;
+	color:#fff;
+	text-align:center;
+	line-height:1.5rem;
+}
+.message-list-text{
+	padding-left: 6rem;
+	position: relative;
+}
+.message-list-text-h6{
+	font-size:1.36rem;
+	font-weight:normal;
+	line-height:3rem;
+}
+.message-list-text-p{
+	width:20rem;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+	overflow:hidden;
+	font-size:1.1rem;
+	color:#666;
+}
+.message-list-time{
+	float:right;
+	margin-top:-4.2rem;
+}
+.message-list-time-span{
+	font-size:1rem;
+	color:#999;
+}
+.head-portrait-orange{
+	background:#ffb266;
+	float: left;
+}
+.head-portrait-white{
+	background:#fff;
+}
+
+/*footer*/
+.indexFooter {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #f1f1f1;
+    border-top: 1px solid #c1c1c1;
+}
+.tab-item-a {
+    display: block;
+    float: left;
+    width: 20%;
+    text-align: center;
+    padding: .4rem 0;
+}
+.indicon {
+    font-size: 0;
+}
+.indicon > img {
+    vertical-align: middle;
+    height: 1.8rem;
+}
+.tab-label {
+    font-size: .88rem;
+    line-height: 1;
+    color: #959595;
+    margin-top: .4rem;
+}
+.tab-label.active {
+    color: #ec9c00;
+}

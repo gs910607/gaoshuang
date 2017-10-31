@@ -1,0 +1,345 @@
+@charset "utf-8";
+@font-face {
+	font-family: 'wingdings 3';
+	/*字体名称*/
+	src: url('../font/Hiragino Sans GB W3.otf');
+	/*字体源文件*/
+}
+
+@media only screen and (min-width: 320px) {
+	html {
+		font-size: 10px !important;
+	}
+}
+
+@media only screen and (min-width: 360px) {
+	html {
+		font-size: 11.25px !important;
+	}
+}
+
+@media only screen and (min-width: 400px) {
+	html {
+		font-size: 12.5px !important;
+	}
+}
+
+@media only screen and (min-width: 480px) {
+	html {
+		font-size: 15px !important;
+	}
+}
+
+@media only screen and (min-width: 640px) {
+	html {
+		font-size: 20px !important;
+	}
+}
+
+
+/* CSS Document */
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+	background-color: #F2F2F2;
+	/*font-family: "wingdings 3";*/
+}
+
+ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+h4,
+p {
+	margin: 0;
+	padding: 0;
+}
+
+.reservation-information {
+	width: 100%;
+	background-color: #FFF;
+	color: #666;
+}
+
+.reservation-information-detail {
+	border-top: 1px solid #e5e5e5;
+	padding: 0.5rem 1rem 1rem;
+}
+
+.appointment-details {
+	margin-top: .5rem;
+	color: #000;
+}
+
+.appointment-details span {
+	display: inline-block;
+	color: #666;
+}
+
+.type-blood,
+.cost-price,
+.service-doctor,
+.date {
+	margin-left: 1rem;
+}
+.appointment-details span.type-blood {
+	color: #000;
+}
+.patient {
+	margin-left: 2rem;
+}
+
+.appointment-details p.service-address {
+	margin-left: 7rem;
+	color: #666;
+	word-break: break-all;
+}
+
+.appointment-details label {
+	float: left;
+}
+
+.appointment-details span.appointment-time {
+	color: #ec9c00;
+}
+
+.appointment-details {
+	font-size: 1.2rem;
+}
+
+.address {
+	margin-left: 1rem;
+	margin-right: 1rem;
+	color: #000;
+	text-align: left;
+	line-height: 2rem;
+	word-break: break-all;
+}
+
+.address {
+	font-size: .8rem;
+}
+
+.address-img {
+	float: right;
+	display: inline-block;
+	width: 1.2rem;
+}
+
+.address-img a img {
+	width: 1.2rem;
+	vertical-align: middle;
+}
+
+.address-line {
+	float: right;
+	display: inline-block;
+	margin: 0 1rem;
+	color: #929292;
+}
+
+.payment {
+	margin-top: 1rem;
+	background: #fff;
+}
+
+.payment-div {
+	padding: .7rem 0;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+.payment-div-p {
+	float: left;
+	color: #000;
+	font-size: 1.3rem;
+	margin-left: 1rem;
+}
+
+.payment-div-price {
+	float: right;
+	margin-right: 1rem;
+}
+
+.event-discount {
+	font-size: 1rem;
+	color: #999;
+	margin-right: 3rem;
+}
+
+.payment-amount {
+	display: inline;
+	float: right;
+	color: #000;
+	font-size: 1.3rem;
+}
+
+.mwui-switch-btn {
+	width: 4rem;
+	display: block;
+	padding: 1px;
+	background: #ec9c00;
+	overflow: hidden;
+	border: 1px solid #fff;
+	border-radius: 2rem;
+	cursor: pointer;
+	outline: none;
+}
+
+.mwui-switch-btn span {
+	width: 1.3rem;
+	height: 1.3rem;
+	padding: 4px 5px 2px 5px;
+	display: block;
+	background: #fff;
+	border-radius: 1rem;
+	float: left;
+	color: #3B75FD;
+	text-align: center;
+}
+
+.mwui-switch-btn:hover span {
+	background: #fff;
+}
+
+.mwui-switch-btn span.off {
+	float: right;
+}
+
+input[type='submit'] {
+	padding: 5px 10px;
+	cursor: pointer;
+}
+
+.wechat-payment {
+	color: #000;
+	font-size: 1.3rem;
+}
+
+.arrow-right {
+	width: .9rem;
+	height: .8rem;
+	float: right;
+	margin-top: .15rem;
+	margin-left: .5rem;
+}
+
+.arrow-right img {
+	width: 100%;
+	height: auto;
+}
+
+.pay {
+	position: fixed;
+	bottom: 0;
+	background: #fff;
+	width: 100%;
+	height: 4rem;
+}
+
+.pay-money {}
+
+.payment-money {
+	font-size: 1.4rem;
+	color: #ec9c00;
+	line-height: 4rem;
+	padding-left: 1rem;
+}
+
+.discount-money {
+	display: inline;
+	float: left;
+	font-size: 1rem;
+	color: #999;
+	margin-top: -2rem;
+	margin-left: 4rem;
+}
+
+.confirm-payment {
+	float: right;
+	font-size: 1.5rem;
+	background: #ec9c00;
+	color: #fff;
+	line-height: 4rem;
+	padding: 0 2rem;
+	margin-top: -4rem;
+}
+
+
+/*弹出框*/
+
+
+/*提示信息*/
+
+#promptMain {
+	display: none;
+	/*position: absolute;*/
+	position: fixed;
+	top: 30%;
+	z-index: 1000;
+	text-align: center;
+	width: 60%;
+	border-radius: 1rem;
+	margin: 0 20%;
+	background-color: #FFFFFF;
+}
+
+#promptMain-first {
+	color: #9A9A9A;
+	font-size: .6rem;
+	padding: 1rem;
+}
+
+#promptMain-first img {
+	width: 10rem;
+	margin-right: .5rem;
+}
+
+#promptMain-first h6 {
+	font-size: 1.5rem;
+	color: #1dcc92;
+}
+
+
+/*报错返回*/
+
+#returnMain {
+	display: none;
+	/*position: absolute;*/
+	position: fixed;
+	top: 30%;
+	z-index: 1000;
+	text-align: center;
+	width: 60%;
+	border-radius: 1rem;
+	margin: 0 20%;
+	background-color: #FFFFFF;
+}
+
+#returnMain-first {
+	color: #9A9A9A;
+	font-size: .6rem;
+	padding: 1rem;
+}
+
+#returnMain-first img {
+	width: 10rem;
+	margin-right: .5rem;
+}
+
+#returnMain-first h6 {
+	color: #c33;
+	font-size: 1.5rem;
+}
+
+.discount_coupon {
+	color: #EC8483;
+}

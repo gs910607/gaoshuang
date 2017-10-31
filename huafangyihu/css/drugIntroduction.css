@@ -1,0 +1,556 @@
+			
+		@charset "utf-8";
+@font-face {
+	font-family: 'wingdings 3';   /*字体名称*/
+	src: url('../font/Hiragino Sans GB W3.otf');       /*字体源文件*/
+}
+
+@media only screen and (min-width: 320px) {
+html {
+	font-size: 10px !important;
+}
+}
+
+@media only screen and (min-width: 360px) {
+html {
+	font-size: 11.25px !important;
+}
+}
+
+@media only screen and (min-width: 400px) {
+html {
+	font-size: 12.5px !important;
+}
+}
+
+@media only screen and (min-width: 480px) {
+html {
+	font-size: 15px !important;
+}
+}
+
+@media only screen and (min-width: 640px) {
+html {
+	font-size: 20px !important;
+}
+}
+/* CSS Document */
+html, body {
+	margin: 0;
+	padding: 0;
+	background-color: #FFF;
+	/*font-family: "wingdings 3";*/
+}
+ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+a {
+	text-decoration: none;
+	color: inherit;
+}
+h1,h2,h3,h4,h5,h6,p {
+	margin: 0;
+	padding: 0;
+	font-weight:normal;
+}
+.clear{
+	clear:both;
+}
+
+
+header {
+	text-align: center;
+	background-color: #FFFFFF;
+	height: 3rem;
+	border-bottom:1px solid #e5e5e5;
+}
+
+#goBack {
+	float: left;
+	margin-top: .8rem;
+}
+#goBack img {
+	margin-left: 1.2rem;
+	width: 1rem;
+	height: 1.2rem;
+	float: left;
+	margin-top: .15rem;
+}
+#goBackText {
+	color: #EC9E07;
+	font-size: 1rem;
+	float:right;
+}
+#Theme {
+	display: inline-block;
+	font-size: 1.3rem;
+	font-weight: 700;
+	margin-left: -13%;
+	line-height: 3rem;
+}
+
+
+
+.switch-clinic{
+
+	    top: 1rem;
+		right:0;
+    background: rgba(0,0,0,0.3);
+    color: #fff;
+    /* margin-top: -3rem; */
+    z-index: 9999;
+    border: 1px solid #fff;
+	border-top-left-radius:2rem;
+	border-bottom-left-radius:2rem;
+    position: absolute;
+}
+.switch-clinic p{
+	margin:.5rem 1.5rem .5rem .5rem;
+}
+.switch-clinic span{
+	
+}
+.switch-clinic span img{
+	width: .6rem;
+    height: .8rem;
+    float: right;
+    margin-top: -1.5rem;
+    margin-left: .5rem;
+	margin-right:.5rem;
+	}
+.return{
+	display:inline-block;
+	position:absolute;
+	top:0;
+	width:2rem;
+	margin:1.5rem 0 0 1rem;
+}
+.return img{
+	width:100%;
+	height:auto;
+}
+/*新增*/
+/*底部导航*/
+nav {
+				height: 50px !important;
+				/*position: relative;*/
+			}
+			
+			.tab-item-a {
+				float: left;
+				/*padding-left: 12px;*/
+				display: inline-block;
+				width: 20%;
+				height: 100%;
+				text-align: center;
+			}
+			
+			.tab-item-a-img {
+				float: left;
+				margin-top: 10px;
+				margin-left: 35%;
+				width: 20px;
+				height: 20px;
+			}
+			
+			.tab-label-span {
+				text-align: center;
+				width: 100%;
+				font-size: 12px;
+			}
+			
+			.tab-label-span {
+				float: left;
+			}
+			/*弹窗*/
+			
+			#animationTipBox .lose .icon_box {
+				transform: translate(-0.05rem, -0.05rem);
+			}
+			
+			#animationTipBox .okoButton {
+				transform: translateY(0.3rem);
+			}
+			
+			.success .line_long {
+				right: 0;
+				top: 35px;
+			}
+			
+			.success .line_short {
+				left: 12px;
+				top: 44px;
+			}
+			
+			footer {
+				position: fixed;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				z-index: 99999;
+				/*height: 50px;*/
+			}
+			/*轮播下面*/
+		.clinic-name{
+			margin: 1rem;
+		}
+		.clinic-title{
+			font-size:1.3rem;
+		}
+		.clinic-title-h6{
+			font-size:1.5rem;
+			display:inline;
+		}
+		.clinic-title-p{
+			display:inline;
+			float:right;
+		}
+		.drug-original-price{
+			font-size:1.2rem;
+			color:#ccc;
+			text-decoration:line-through;
+		}
+		.drug-new-price{
+			font-size:1.3rem;
+			color:#ec9c00;
+			
+		}
+		.drug-prompt-information{
+			font-size:1.1rem;
+			color:#999;
+			line-height:2rem;
+		}
+		.drug-instruction{
+			font-size:1.2rem;
+			color:#666666;
+			border-bottom:1px solid #dfdfdf;
+			padding:1rem 0;
+		}
+		.drug-instruction-h6{
+			font-size:1.2rem;
+			
+			display:inline;
+		}
+		.drug-instruction-p{
+			margin-top:-1.2rem;
+			margin-left:6rem;
+			font-size:1.2rem;
+			line-height:1.5rem;
+		}
+	
+		.clinic-number {
+	/*font-size: .8rem;*/
+	color: #FFCB66;
+	margin-top: .1rem;
+}
+.clinic-img {
+	width: 1rem;
+	margin-bottom:.2rem;
+	vertical-align:middle;
+	margin-right:.2rem;
+}
+.follow{
+	float:right;
+}
+.follow img{
+	width:8rem;	
+	margin-top:-4rem;
+}
+			
+			
+.address {
+	color: #000;
+	text-align: left;
+	line-height: 2rem;
+	word-break: break-all;
+	border-top:1px solid #e5e5e5;
+}
+.address {
+	font-size: .8rem;
+}
+.address span{
+	margin-left:1rem;
+}
+.address-img {
+	float: right;
+	display: inline-block;
+	width: 1.2rem;
+}
+#dial{
+	margin-right:1rem;
+}
+.address-img a img {
+	width: 1.2rem;
+	vertical-align: middle;
+}
+.address-line {
+	float: right;
+	display: inline-block;
+	margin: 0 1rem;
+	color: #929292;
+}
+
+.clinic-text-introduction{
+	border-top:1rem solid #f2f2f2;
+}
+.clinic-introduce{
+	margin:1rem 1rem;
+}
+.clinic-introduce-h6{
+	text-align:center;
+	font-size:1.5rem;
+	line-height:3rem;
+	color:#000;
+	border-bottom:1px solid #dfdfdf;
+	
+}
+.clinic-introduce-p{
+	font-size:1rem;
+	color:#333;
+	text-indent:2rem;
+	line-height:1.5rem;
+	margin-bottom:2rem;
+}
+.clinic-environmental-span{
+	display:block;
+	margin:1rem; 
+}
+.clinic-environmental-img{
+	width:100%;
+	height:auto;
+}
+
+.service-contnet{
+	width:100%;
+	}
+.service-contnet h4{
+	font-size:1rem;
+	text-align:center;
+	padding:1.5rem 0;
+	
+}
+.testing{
+	width:100%;
+	background:#fff;
+	margin-bottom:2rem;
+}
+.testing-img{
+	display:block;
+	float:left;
+	margin-left:1rem;
+}
+.testing-img img{
+	width:4rem;
+}
+.testing-text{
+	display:block;
+	margin:0 1rem 0 6rem;
+}
+.testing-text h5{
+	font-size:1rem;
+	line-height:1.5rem;
+	color:#000;
+	
+}
+.testing-text p{
+	font-size:.8rem;
+	line-height:1.5rem;
+	color:#666;
+}
+.clinic-environmental p{
+	text-align:center;
+}
+
+.contact-clinic{
+	width: 100%;
+    background: #f5f5f5;
+    padding: 1rem 0;
+    height: 6rem;
+}
+.contact-clinic a{
+	float:left;
+	display:block;
+	width:44%;
+	background:#ec9c00;
+	padding:1rem 0;
+	text-align:center;
+	font-size:1.5rem;
+	border-radius:.5rem;
+	color:#fff;
+}
+.consultingClinic{
+	margin:0 2% 0 4%;
+}
+.buy-now{
+	margin:0 4% 0 2%;
+}
+.focus{
+	text-align:center;	
+}
+.contnet{
+	width:100%;
+	background:#fff;
+	margin-top:1rem;
+}
+.service-contnet{
+	width:100%;
+	}
+.service-contnet h4{
+	font-size:1.4rem;
+	text-align:center;
+	padding:1.5rem 0;
+	
+}
+.testing{
+	width:100%;
+	background:#fff;
+	margin-bottom:1rem;
+}
+.testing-img{
+	display:block;
+	float:left;
+	margin-left:1rem;
+}
+.testing-img img{
+	width:4rem;
+}
+.testing-text{
+	display:block;
+	margin:0 1rem 0 6rem;
+}
+.testing-text h5{
+	font-size:1rem;
+	line-height:1.5rem;
+	color:#000;
+	
+}
+.testing-text p{
+	font-size:.8rem;
+	line-height:1.5rem;
+	color:#666;
+}
+.service-process{
+	width:100%;
+	text-align:center;
+	margin-bottom:2rem;
+	}
+.service-process h4{
+	font-size:1.4rem;
+	text-align:center;
+	padding:1.5rem 0;
+	
+}
+.step{
+	display:inline-block;
+}
+.step p{
+	margin-top:.5rem;
+}
+
+.step-img img{
+	width:6rem;
+}
+.process-one{
+	
+	float:left;
+	margin-left:1rem;
+}
+.process-two{
+}
+.process-three{
+
+	float:right;
+	margin-right:1rem;
+}
+.common-problem{
+	width:100%;
+	text-align:left;
+	padding-bottom:2rem;
+}
+.common-problem h4{
+	font-size:1.4rem;
+	text-align:center;
+	padding:1.5rem 0;
+}
+.question{
+	font-size:1rem;
+	margin:0 1rem 1rem;
+}
+.question h6{
+	color:#000;	
+}
+.question p{
+	color:#999;
+	line-height:1.5rem;
+}
+.submit-button {
+	width: 100%;
+	text-align: center;
+	position: absolute;
+	color: #fff;
+}
+.submit-button {
+	font-size: 1.5rem;
+}
+.submit-button-a {
+	display: inline-block;
+	width: 100%;
+	background: #ec9c00;
+	padding: 1rem 0;
+}
+
+/*拨打*/
+#dialMain {
+	display: none;
+	/*position: absolute;*/
+	position: fixed;
+	top: 30%;
+	left: 10%;
+	width: 80%;
+	border-radius: 1rem;
+	z-index: 1000;
+	text-align: center;
+	background-color: #FFFFFF;
+}
+#dialMain-first h4 {
+	color: #000;
+	font-size: 1.3rem;
+	text-align: center;
+	margin: 1rem 0 .5rem 0;
+}
+#dialMain-first p {
+	color: #999;
+	font-size: 1.1rem;
+	text-align: center;
+	margin-bottom: 1rem;
+}
+#dialMain-second {
+	border-top: 1px solid #f2f2f2;
+}
+.dialMain-address {
+	float: left;
+	width: 50%;
+	font-size: 1.3rem;
+	padding-top: .5rem;
+	padding-bottom: .5rem;
+	color: #ec9c00;
+}
+.dialMain-address img {
+	width: 3rem;
+}
+.dialMain-address span {
+	display: inline-block;
+	margin-top: .5rem;
+	font-size: .6rem;
+	width: 100%;
+}
+#dialMain-close {
+	float: left;
+	width: 49%;
+	padding-top: .5rem;
+	padding-bottom: .5rem;
+	border-right: 1px solid #f2f2f2;
+	color: #000;
+}

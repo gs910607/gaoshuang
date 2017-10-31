@@ -1,0 +1,203 @@
+.orderServe {
+	color: #000000;
+}
+
+@font-face {
+	font-family: 'wingdings 3';
+	/*字体名称*/
+	src: url('../font/Hiragino Sans GB W3.otf');
+}
+
+
+/*自适应*/
+
+@media only screen and (min-width: 320px) {
+	html {
+		font-size: 10px !important;
+	}
+}
+
+@media only screen and (min-width: 360px) {
+	html {
+		font-size: 11.25px !important;
+	}
+	.evaluateNumber-img {
+		width: 1.1rem !important;
+	}
+}
+
+@media only screen and (min-width: 400px) {
+	html {
+		font-size: 12.5px !important;
+	}
+	.evaluateNumber-img {
+		width: 1.2rem !important;
+	}
+	#goBack img {
+		margin-top: -.02rem !important;
+	}
+
+}
+
+@media only screen and (min-width: 480px) {
+	html {
+		font-size: 15px !important;
+	}
+}
+
+@media only screen and (min-width: 640px) {
+	html {
+		font-size: 20px !important;
+	}
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+	background-color: #F2F2F2;
+	/*font-family: "wingdings 3";*/
+}
+
+.evaluateScore {
+	text-align: center;
+	width: 100%;
+	height: 7rem;
+	background-color: white;
+	margin-top: 3.2rem;
+}
+
+.evaluateScore-module {
+	float: left;
+}
+
+#evaluateScore-grade {
+	width: 40%;
+	height: 100%;
+}
+
+#evaluateScore-img {
+	float: right;
+	width: 59.6%;
+	height: 100%;
+	margin-top: 5%;
+}
+
+#halving-line {
+	width: .1rem;
+	height: 60%;
+	background-color: #DFDFDF;
+	margin-top: 5%;
+}
+
+.gradeMagnify-father {
+	margin-top: 10%;
+}
+
+.gradeMagnify {
+	font-size: 2.5rem;
+	color: #FAB631;
+}
+
+#frequency {
+	font-size: 1rem;
+	color: #666666;
+}
+
+.evaluateScore-img-star {
+	width: 2rem;
+}
+
+.evaluate-number {
+	margin-top: .7rem;
+	font-size: 1rem;
+	color: #666666;
+}
+
+.userEvaluate {
+	margin-top: 1rem;
+	background-color: white;
+}
+
+.userEvaluat-title {
+	padding: 1rem;
+	font-size: 1.4rem;
+	padding-left: 1.3rem;
+	border-bottom: .1rem solid #DFDFDF;
+}
+
+.evaluate-ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+.evaluate-ul-li {
+	padding: 1rem;
+	padding-left: 1.3rem;
+	border-bottom: .1rem solid #DFDFDF;
+}
+
+.evaluate-ul-li-img {
+	border-radius: 50%;
+	width: 3rem;
+	height: 3rem;
+	float: left;
+}
+
+.evaluate-ul-li-name {
+	float: left;
+	font-size: .9rem;
+	color: #4E4E4E;
+	margin-left: .7rem;
+}
+
+.evaluate-ul-li-div {
+	width: 100%;
+	height: 1.5rem;
+}
+
+.evaluate-ul-li-time {
+	color: #9D9D9D;
+	font-size: .9rem;
+	padding-left: .8rem;
+}
+
+.evaluateNumber-img {
+	width: 1rem;
+}
+
+.evaluateNumber {
+	float: right;
+	margin-top: -.8rem;
+	margin-right: .5rem;
+	vertical-align: middle;
+}
+
+.evaluateNumber-number {
+	/*font-size: .8rem;*/
+	margin-left: .3rem;
+	color: #FFCB66;
+	float: right;
+	margin-top: -.1rem;
+}
+
+.evaluate-content {
+	margin-top: .7rem;
+}
+
+#evaluateId {
+	color: #FFCC66;
+}
+
+.evaluate-content-span {
+	/*font-size: 1.3rem;*/
+	margin-left: .3rem;
+	word-break: break-word;
+}
+
+#footer {
+	text-align: center;
+	margin-top: 1.5rem;
+	color: #D5D5D5;
+}

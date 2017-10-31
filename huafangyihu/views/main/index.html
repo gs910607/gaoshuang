@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta http-equiv="Expires" content="0">
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="Cache-control" content="no-cache">
+		<meta http-equiv="Cache" content="no-cache">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="format-detection" content="telephone=no, email=no" />
+		<title>居家e护s</title>
+		<link href="../../css/reset.css" rel="stylesheet">
+		<link href="../../css/style.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="../../css/styles.css" />
+		<style type="text/css">
+			.bar {
+				z-index: 999;
+			}
+
+			.sliderCarousel {
+				width: 100%;
+				height: 100%;
+			}
+		</style>
+		<script type="text/javascript">
+			//如果未登录则跳至登录页
+			if(!JSON.parse(localStorage.getItem("user"))) {
+				sessionStorage.setItem("noLogin", location.href.split("PP2.0/views")[1]); //登录时接收，登陆后跳回此页面
+				location.href = "../login/login.html";
+			}
+		</script>
+	</head>
+
+	<body style="overflow-y: scroll; position: relative;">
+		<!--预加载-->
+		<div class="concealData" style="background-color: white; display: block; z-index: 999; position: fixed; top: 0;left:0;right:0;bottom:0;">
+			<div style="display:table; width:100%; height:100%;">
+				<div style="text-align:center; display:table-cell; vertical-align:middle;">
+					<img src="../../images/load.gif" alt="" width="200" />
+				</div>
+			</div>
+		</div>
+
+		<div id="index-first">
+			<div id="index">
+				<header class="indexHeader">
+					居家e护s
+					<!--<a href="javascript:;">-->
+					<section class="indexMenu">
+						<span class="indexMenuText">杭州</span>
+						<em class="indexCaret"></em>
+					</section>
+					<!--</a>-->
+				</header>
+				<!-- 轮播图 -->
+				<!-- <div class="banner">
+					<div class="slider" style="width: 320px; height: 160px; position: relative; overflow: hidden; margin: 0px auto; display: block;">
+						<ul class="sliderCarousel clearfix">
+						</ul>
+					</div>
+				</div> -->
+				<!-- <div class="secs">
+					<section class="secs-find">
+						<a href="javascript:;" class="secs-find-bg" id="secs-find-bg">
+							<img src="../../images/sec-left.png" class="img-responsive">
+						</a>
+					</section>
+					<section class="secs-service">
+						<a href="javascript:historyForward('../myClinic/clinicWholeDoctor.html');" class="secs-service-free">
+							<img src="../../images/sec-right-top.png" class="img-responsive">
+						</a>
+						<a href="javascript:historyForward('../medic/homecare.html');" class="secs-service-come">
+							<img src="../../images/sec-right-bottom.png" class="img-responsive">
+						</a>
+					</section>
+				</div> -->
+				<div class="indexList">
+					<ul class="indexListUl">
+						<li class="indexItem">
+							<a href="javascript:historyForward('../organization/organization.html');">
+								<img src="../../images/index-icon1.png" class="img-responsive">
+								<span class="indexItemName">诊所看病</span>
+							</a>
+						</li>
+						<li class="indexItem">
+							<a href="javascript:historyForward('../myClinic/clinicWholeDoctor.html');">
+								<img src="../../images/index-icon2.png" class="img-responsive">
+								<span class="indexItemName">在线咨询</span>
+							</a>
+						</li>
+						<li class="indexItem">
+							<!--<a href="javascript:;">-->
+							 <a href="javascript:historyForward('../medic/homecare.html');"> 
+								<img src="../../images/index-icon3.png" class="img-responsive">
+								<span class="indexItemName">医护上门 </span>
+							</a>
+						</li>
+						<li class="indexItem" style="opacity: 0.5;">
+							<a href="javascript:;">
+								<img src="../../images/index-icon4.png" class="img-responsive">
+								<span class="indexItemName">我的病历</span>
+							</a>
+						</li>
+					</ul>
+					<ul class="indexListUl">
+						<li class="indexItem" style="opacity: 0.5;">
+							<a href="javascript:;">
+								<img src="../../images/index-icon5.png" class="img-responsive">
+								<span class="indexItemName">药店买药</span>
+							</a>
+						</li>
+						<li class="indexItem">
+							<a id="service_phone" href="javascript:;">
+								<img src="../../images/index-icon6.png" class="img-responsive">
+								<span class="indexItemName">一键服务</span>
+							</a>
+						</li>
+						<li class="indexItem" style="opacity: 0.5;">
+							<a href="javascript:;">
+								<img src="../../images/index-icon7.png" class="img-responsive">
+								<span class="indexItemName">检查报告</span>
+							</a>
+						</li>
+						<li class="indexItem" style="opacity: 0.5;">
+							<a href="javascript:;">
+								<img src="../../images/index-icon8.png" class="img-responsive">
+								<span class="indexItemName">自我检测</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div id="nearbyClinic" class="indexSec">
+					<div class="secTitle">
+						<span>附近诊所</span>
+						<a href="../organization/organization.html?nearby=1">更多&nbsp;<img src="../../images/next.png"/></a>
+					</div>
+					<div id="nearbyClinic_none" class="nothing" style="display: none;">附近未找到诊所 T^T</div>
+					<!--推荐医院-->
+					<div id="nearbyClinic_info" class="sec-info">
+					</div>
+
+				</div>
+				<div id="indexSec-hospital" class="indexSec">
+					<div class="secTitle">
+						<span>我的诊所</span>
+						<a href="javascript:historyForward('../mine/mineclinic.html');">更多&nbsp;<img src="../../images/next.png"/></a>
+					</div>
+					<div id="attentionClinic" class="nothing" style="display: none;">您暂无关注诊所 T^T</div>
+					<!--推荐医院-->
+					<div id="attentionC-info" class="sec-info">
+
+						<!--推荐-->
+						<!--<div class="recommend"><img src="../../images/recommend.png" class="img-responsive"></div>
+						<a href="javascript:;" class="sec-info-link">
+							<div class="sec-info-wrapper">
+								<div class="sec-info-shop">
+									<img id="recommendHospital-img" src="../../images/shop.png" class="img-responsive data-picUrl">
+									<div class="sec_shop_tit">自营诊所</div>
+								</div>
+								<div class="sec-info-company">
+									<div class="distance"></div>
+									<div class="company-title data-name">瑞尔口腔</div>
+									<div id="hospitalGoal" class="star-point">
+										<i><img src="../../images/star2.png"/></i>
+										<i><img src="../../images/star2.png"/></i>
+										<i><img src="../../images/star2.png"/></i>
+										<i><img src="../../images/star2.png"/></i>
+										<i><img src="../../images/star2.png"/></i>
+										<span class="score data-evaluationScore"></span></div>
+									<div class="address data-address">西湖区江南大道143号江南星座2幢2单元 3-4层(政府对面)</div>
+								</div>
+							</div>
+							<div class="blood-service">
+								<div class="blood-service-title"> 血脂检测服务</div>
+								<div class="blood-service-price"><span class="nowPrice"><span
+                                class="data-rate">198</span>元/次</span>
+									<span class="purchase"> (原价<span class="data-oldRete">999</span>元) </span>
+								</div>
+							</div>
+						</a>-->
+					</div>
+
+				</div>
+
+				<!--关注的医护-->
+				<div class="indexSec Sec2">
+					<div class="secTitle">
+						<span>我的医护</span>
+						<a href="javascript:historyForward('../mine/mineMedic.html');">更多&nbsp;<img src="../../images/next.png"/></a>
+					</div>
+					<div id="attentionDoctor" class="nothing" style="display: none;">您暂无关注医护 T^T</div>
+					<!--推荐医生-->
+					<div id="recommend-doctor">
+						<!--<div class="recommend-doc"><img src="../../images/recommend.png" class="img-responsive"></div>
+						<a href="javascript:;" class="sec-info-link">
+							<div class="sec-info">
+
+								<div class="sec-info-wrapper">
+									<div class="sec-info-avatar"><img id="doctorHead-photo" src="../../images/avatar.png" class="img-responsive"></div>
+									<div class="sec-info-company_bot">
+										<div class="star-point star-point2" id="doctorScore">
+											<i class="star2"><img src="../../images/star2.png"/></i>
+											<i class="star2"><img src="../../images/star2.png"/></i>
+											<i class="star2"><img src="../../images/star2.png"/></i>
+											<i class="star2"><img src="../../images/star2.png"/></i>
+											<i class="star2"><img src="../../images/star2.png"/></i>
+											<span class="score"><span class="data-evaluationScore2"></span>分</span>
+										</div>
+										<div class="company-title data-userId"></div>
+										<div class="doctor-info"><span class="data-title"></span><span>&#x3000;</span><span class="data-ke"></span></div>
+										<div class="goodAt data-diseaseLabel">
+										</div>
+									</div>
+								</div>
+							</div>
+						</a>-->
+					</div>
+
+				</div>
+			</div>
+			<div class="no-content" style="margin-bottom: 1rem;">
+				~ 没有更多内容啦 ~
+			</div>
+
+			<!--底部导航-->
+			<footer class="indexFooter">
+				<nav class="bar bar-tab clearfix">
+					<a class="tab-item-a" href="javascript:;">
+						<div class="indicon">
+							<img src="../../images/indexYellow.png" />
+						</div>
+						<div class="tab-label active">首页</div>
+					</a>
+					<a class="tab-item-a" id="organization" href="javascript:;">
+						<div class="indicon">
+							<img src="../../images/organizationWhite.png" />
+						</div>
+						<div class="tab-label">诊所目录</div>
+					</a>
+					<a class="tab-item-a" id="myClinicClinicIndex"  href="javascript:;">
+						<div class="indicon">
+							<img src="../organization/imgs/clinic-white.png" />
+						</div>
+						<div id="myhospital" class="tab-label">我的诊所</div>
+					</a>
+					<a class="tab-item-a" href="../msg/messageindex.html">
+						<div class="indicon">
+							<img src="../organization/imgs/news-white.png" />
+						</div>
+						<div class="tab-label">消息</div>
+					</a>
+					<a class="tab-item-a" href="../mine/mineIndex.html">
+						<div class="indicon">
+							<img id="main-img" src="../organization/imgs/mine-white.png" />
+						</div>
+						<div id="mine-span" class="tab-label">我的</div>
+					</a>
+				</nav>
+			</footer>
+		</div>
+
+		</div>
+
+		<div id="model_phone">
+			<div class="phone_content">
+				<div class="phone_scribe">
+					<h4>咨询华方客服</h4>
+					<p>您确认要拨打400-900-1515吗？</p>
+				</div>
+				<div class="phone_yesorno">
+					<a href="javascript:;" class="phone_btn">取消</a>
+					<a href="tel:400-900-1515" class="phone_btn phone_sure">确定</a>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=3kuyg6SrGTgmTe4ZAOYpKciZzEH9PArY"></script>
+	<script src="../../resource/js/htmlFont.js"></script>
+	<script src="../../resource/js/jquery-2.1.1.min.js"></script>
+	<script src="../../resource/js/common.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../resource/js/validate_h5.js" type="text/javascript" charset="utf-8"></script>
+	<script src="inc/index.js" type="text/javascript" charset="utf-8"></script>
+	<!-- <script src="../../resource/js/yxMobileSlider.js" type="text/javascript" charset="utf-8"></script> -->
+	<script src="../../resource/js/bottomMenu.js" type="text/javascript" charset="utf-8"></script>
+
+</html>
+<!-- <script type="text/javascript">
+	$(".slider").yxMobileSlider({
+		width: 640,
+		height: 320,
+		during: 3000
+	})
+</script> -->

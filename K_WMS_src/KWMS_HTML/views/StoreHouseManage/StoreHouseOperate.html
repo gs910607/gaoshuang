@@ -1,0 +1,20 @@
+<Panel gtform Dialog>
+    <phead>人员信息</phead>
+    <pbody>
+        <form name="form">
+            <RowTextBox ngmodel="model.wareHouseNo" Label="仓库编号" Required></RowTextBox>
+            <RowTextBox ngmodel="model.wareHouseName" Label="仓库名称" Required></RowTextBox>
+            <RowTextBox ngmodel="model.wareHouseType" Label="仓库类型" Required></RowTextBox>
+            <RowTextBox ngmodel="model.wareHouseAdd" Label="地址" Required></RowTextBox>
+            <RowTextBox ngmodel="model.wareHouseContact" Label="联系人" Required></RowTextBox>
+            <RowTextBox ngmodel="model.contactMobile" Label="联系人电话" Required></RowTextBox>
+            <RowTextBox ngmodel="model.wareHouseStatus" Label="状态" Required></RowTextBox>
+        </form>
+    </pbody>
+    <pfoot>
+        <ButtonBar>
+            <btn type="Submit" key="OK" display="确定"></btn>
+            <btn key="Close" display="取消"></btn>
+        </ButtonBar>
+    </pfoot>
+</Panel>

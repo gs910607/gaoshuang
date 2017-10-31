@@ -1,0 +1,51 @@
+@charset "utf-8";
+div,
+input {
+	margin: 0;
+	padding: 0;
+	-webkit-text-size-adjust: none
+}
+.slider_a img {
+	border: 0
+}
+.slider_a{
+	outline-style: none;
+	color: #535353;
+	text-decoration: none
+}
+
+.slider_a:hover {
+	color: #D40000;
+	text-decoration: none
+}
+
+.slider {
+	display: none
+}
+/*用于获取更加体验*/
+.focus span {
+	width: 10px;
+	height: 10px;
+	margin-right: 10px;
+	border-radius: 50%;
+	background: #ccc;
+	opacity: 0.5;
+	font-size: 0
+}
+.focus {
+	text-align: center;
+}
+.focus div{
+	
+	/*width: 90px !important;*/
+/*	margin: 0 auto;*/
+}
+.focus span.current {
+	background: #EC9B01;
+}
+
+.current{
+	width: 15px !important;
+	border-radius: 15px !important;
+	opacity: 1 !important;
+}

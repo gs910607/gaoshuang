@@ -1,0 +1,193 @@
+@charset "utf-8";
+/* CSS Document */
+@font-face {
+	font-family: 'wingdings 3';   /*字体名称*/
+	src: url('../font/Hiragino Sans GB W3.otf');       /*字体源文件*/
+}
+
+@media only screen and (min-width: 320px) {
+html {
+	font-size: 10px !important;
+}
+}
+
+@media only screen and (min-width: 360px) {
+html {
+	font-size: 11.25px !important;
+}
+}
+
+@media only screen and (min-width: 400px) {
+html {
+	font-size: 12.5px !important;
+}
+}
+
+@media only screen and (min-width: 480px) {
+html {
+	font-size: 15px !important;
+}
+}
+
+@media only screen and (min-width: 640px) {
+html {
+	font-size: 20px !important;
+}
+}
+* {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+html, body {
+	margin: 0;
+	padding: 0;
+	background-color: #fff;
+	/*font-family: "wingdings 3";*/
+}
+ul {
+	list-style-type: none;
+}
+.clear{
+	clear: both;
+}
+ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+a {
+	text-decoration: none;
+	color: inherit;
+}
+p,h1,h2,h3,h4,h5,h6{
+	margin:0;
+	padding:0;
+}
+.recommend-clinic{
+
+}
+.cliniclist{
+	overflow: hidden;
+	position:relative;
+	/*padding: 1rem;*/
+	padding: 1.2rem 1rem;
+	border-bottom:.1rem solid #dfdfdf;
+}
+.cliniclist_picture{
+	float: left;
+	position: relative;
+	width:8.8rem;
+	height: 6.6rem;
+	border-radius: 5px;
+	overflow: hidden;
+}
+.cliniclist_picture img{
+	width:100%;
+	height: 100%;
+	vertical-align: middle;
+}
+.cliniclist_picture_text{
+	position: absolute;
+	bottom: 0;
+	background: rgba(0,0,0,0.5);
+	width: 100%;
+	border-bottom-left-radius: .5rem;
+	border-bottom-right-radius: .5rem;
+	color: #fff;
+	text-align: center;
+	font-size: 1.2rem;
+}
+
+.cliniclist_text{
+	margin-left:10rem;
+	height: 6.6rem;
+	position: relative;
+}
+.cliniclist_text_title{
+	font-size: 1.36rem;
+    color: #000;
+    font-weight: lighter;
+    margin-right: 4%;
+}
+.cliniclist_text_address{
+	font-size: 1.04rem;
+  color: #666;
+  margin-top: .3rem;
+	-webkit-line-clamp: 2;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+.cliniclist_text_prompt{
+	width:100%;
+	position: absolute;
+	bottom: 0;
+	font-size: 1.04rem;
+}
+.cliniclist_text_prompt > ul {
+	display: table;
+	width: 100%;
+}
+.cliniclist_text_prompt_ul_li{
+	display: table-cell;
+	color:#999;
+	font-size:0.96rem;
+}
+.cliniclist_text_prompt_reception{
+	/*margin-left: 6%;*/
+	/*display: inline-block;*/
+	/*margin: 0 auto;*/
+}
+.cliniclist_text_prompt_distance{
+	/*float:right;*/
+}
+/*分享*/
+#shareMain {
+		display: none;
+		/*position: absolute;*/
+		position: fixed;
+		bottom: 0;
+		z-index: 1000;
+		width:100%;
+		text-align: center;
+		background-color: #FFFFFF;
+	}
+
+	#shareMain-first {
+		color: #9A9A9A;
+		font-size: .1rem;
+		padding: 1rem;
+	}
+
+	.shareMain-address {
+		float: left;
+		width: 33.3%;
+		margin-bottom: .5rem;
+		margin-top:2rem;
+	}
+
+	.shareMain-address img {
+		width: 3rem;
+	}
+
+	.shareMain-address span {
+		display: inline-block;
+		margin-top: .5rem;
+		font-size: .6rem;
+		width: 100%;
+	}
+
+	#shareMain-close {
+		width: 100%;
+		padding: .7rem;
+		float: left;
+		background-color: #fff;
+		color: #000;
+		font-size: 1.5rem;
+		border-top:1px solid #dfdfdf;
+	}
+
+#bottom{
+	margin-top: 1rem;
+}

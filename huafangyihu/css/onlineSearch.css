@@ -1,0 +1,334 @@
+@charset "utf-8";
+html{
+	font-size: 10px;
+}
+/* CSS Document */
+@font-face {
+	font-family: 'wingdings 3';   /*字体名称*/
+	src: url('../font/Hiragino Sans GB W3.otf');       /*字体源文件*/
+}
+
+@media only screen and (min-width: 320px) {
+html {
+	font-size: 10px !important;
+}
+}
+
+@media only screen and (min-width: 360px) {
+html {
+	font-size: 11.25px !important;
+}
+}
+
+@media only screen and (min-width: 400px) {
+html {
+	font-size: 12.5px !important;
+}
+}
+
+@media only screen and (min-width: 480px) {
+html {
+	font-size: 15px !important;
+}
+}
+
+@media only screen and (min-width: 640px) {
+html {
+	font-size: 20px !important;
+}
+}
+* {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+html, body {
+	margin: 0;
+	padding: 0;
+	background-color: #F2F2F2;
+	/*font-family: "wingdings 3";*/
+}
+ul {
+	list-style-type: none;
+}
+.clear{
+	clear: both;
+}
+ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+a {
+	text-decoration: none;
+	color: inherit;
+}
+p,h1,h2,h3,h4,h5,h6{
+	margin:0;
+	padding:0;
+}
+.synopsis {
+	width: 100%;
+	/*height: 120px;*/
+	background-color: #FFF;
+	color: #666;
+	border-top: 1px solid #e5e5e5;
+	position: relative;
+}
+
+.synopsis-img {
+	float: left;
+	width: 5rem;
+	height: 5rem;
+	border-radius: 50%;
+	margin-left: 1rem;
+	margin-top: 1rem;
+}
+.synopsis-img:first-child{
+		margin-top: 0rem;
+}
+.synopsis-text {
+	margin-left: 7rem;
+	margin-top: 1rem;
+	margin-right: 1rem;
+}
+/*.synopsis-text {
+	font-size: .8rem;
+}*/
+.doctor {
+	margin-bottom: .8rem;
+
+}
+#doctorName {
+	/*font-size: 1rem;*/
+	color: #000;
+}
+#doctorName>span:first-child{
+	font-size: 1.36rem;
+}
+.evaluate-ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+.evaluate-ul-li {
+	margin-top: -.4rem;
+}
+.evaluate-ul-li-img {
+	width: 2.5rem;
+	float: left;
+}
+.evaluate-ul-li-name {
+	float: left;
+	font-size: .8rem;
+	color: #4E4E4E;
+	margin-left: .5rem;
+	margin-top: .3rem;/*width: 90%;*/
+}
+.evaluate-ul-li-div {
+	width: 100%;
+	height: 1.5rem;
+}
+.evaluate-ul-li-time {
+	color: #9D9D9D;
+	font-size: .7rem;
+	padding-left: .5rem;
+}
+.evaluateNumber-img {
+	width: 1rem;
+}
+.evaluateNumber {
+	float: right;
+	margin-top: -.8rem;
+	margin-right: .5rem;
+}
+.evaluateNumber-number {
+	/*font-size: .8rem;*/
+	color: #FFCB66;
+	float: right;
+	margin-top: -.05rem;
+	margin-left: .3rem;
+}
+.doctor-specialty {
+	width: 100%;
+	float: left;
+	color: #666666;
+	/*padding-top: .5rem;*/
+	margin-bottom: 1rem;
+	word-break: break-all;
+	font-size: 1.06rem;
+}
+.doctor-main{
+	font-size: 1.06rem;
+	color: #989898;
+}
+.doctor-major{
+    font-size: 1.06rem;
+	color: #989898;
+}
+.consulting-method{
+	background:#fff;
+}
+.consulting-model{
+	background:#fff;
+	border-top:1px solid #e5e5e5;
+}
+.telephone {
+	border-bottom: 1rem solid #F2F2F2;
+}
+.cousulting-method-img{
+	float:left;
+	width:4rem;
+}
+.cousulting-method-img img{
+	width:3.5rem;
+	margin:1rem 1rem 1rem 2rem;
+}
+.cousulting-method-text{
+
+	color:#000;
+
+}
+.cousulting-method-text h6{
+	font-size:1.28rem;
+	color:#000;
+	margin-left:7rem;
+	margin-top:1rem;
+}
+.cousulting-method-text span{
+	float:right;
+	margin-top:-1.5rem;
+	margin-right:1rem;
+	/*font-size:.6rem;*/
+	color:#ec9c00;
+}
+.cousulting-method-text p{
+	font-size:1.04rem;
+	color:#999;
+	padding:.5rem 0 1rem 7rem;
+}
+ .cousulting-method-text span .price{
+	float:right;
+	margin-top:-1.5rem;
+	margin-right:1rem;
+	/*font-size:.6rem;*/
+	color:#999;
+}
+.price i{
+	color:#ec9c00;
+	font-style:inherit;
+}
+.other-news{
+	padding-bottom:5rem;
+	background:#fff;
+}
+.another-doctor{
+	background:#fff;
+	border-bottom:1px solid #e5e5e5;
+}
+.another-doctor p{
+	font-size:1.2rem;
+	color:#666;
+	line-height:3rem;
+	margin-left:1rem;
+}
+.consultation{
+	background:#fff;
+}
+.consultation-text{
+
+	margin:0 2rem;
+	border-bottom:1px dashed #e5e5e5;
+}
+.none-border{
+	border:none;
+}
+.consultation-text h6{
+	color:#000;
+	font-size: 1.2rem;
+	padding:1rem 0 1rem 0;
+    padding-bottom: .5rem;
+}
+.consultation-text p{
+	color:#999;
+	margin-bottom: 1rem;
+}
+.consultation-img{
+	float:right;
+	margin-top:-3.5rem;
+	margin-right:2rem;
+	vertical-align:middle;
+}
+.consultation-img img{
+	width:2.5rem;
+	vertical-align:middle;
+}
+
+/*拨打*/
+#dialMain {
+	display: none;
+	/*position: absolute;*/
+	position: fixed;
+	top: 30%;
+	left: 10%;
+	width: 80%;
+	border-radius: 1rem;
+	z-index: 1000;
+	text-align: center;
+	background-color: #FFFFFF;
+}
+#dialMain-first h4 {
+	color: #000;
+	font-size: 1.4rem;
+	text-align: center;
+	margin: 1rem 0 .5rem 0;
+}
+#dialMain-first p {
+	color: #999;
+	font-size: 1.2rem;
+	text-align: center;
+	margin-bottom: 1rem;
+}
+#dialMain-second {
+	border-top: 1px solid #f2f2f2;
+}
+.dialMain-address {
+	float: left;
+	width: 50%;
+	color: #ec9c00;
+}
+.dialMain-address img {
+	width: 3rem;
+}
+.dialMain-address span {
+	display: inline-block;
+	margin-top: .5rem;
+	font-size: .6rem;
+	width: 100%;
+}
+.dialMain-address a{
+	font-size: 1.3rem;
+	padding: .5rem 0;
+	display: block;
+}
+#dialMain-close {
+	float: left;
+	width: 49%;
+	border-right: 1px solid #f2f2f2;
+	color: #000;
+}
+.synopsis-all{
+	width: 50%;
+	margin: 0 auto;
+	margin-left: 25%;
+	margin-top: 5rem;
+
+}
+.none-doctor{
+	display: block;
+	text-align: center;
+	font-size: 1.5rem;
+	padding: .5rem;
+	padding-bottom: 1rem;
+	color: #999999;
+}

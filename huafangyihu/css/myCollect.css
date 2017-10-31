@@ -1,0 +1,206 @@
+@charset "utf-8";
+@font-face {
+  font-family: 'wingdings 3';   /*字体名称*/
+  src: url('../font/Hiragino Sans GB W3.otf');       /*字体源文件*/
+}
+
+
+/*自适应*/
+
+@media only screen and (min-width: 320px) {
+	html {
+		font-size: 10px !important;
+	}
+}
+
+@media only screen and (min-width: 360px) {
+	html {
+		font-size: 11.25px !important;
+	}
+}
+
+@media only screen and (min-width: 400px) {
+	html {
+		font-size: 12.5px !important;
+	}
+	#goBack img {
+		margin-top: .1rem !important;
+	}
+}
+
+@media only screen and (min-width: 480px) {
+	html {
+		font-size: 15px !important;
+	}
+}
+
+@media only screen and (min-width: 640px) {
+	html {
+		font-size: 20px !important;
+	}
+}
+html,body,div,p,ul,li,h3 {
+	margin: 0;
+	padding: 0;
+}
+
+	html,
+	body {
+		margin: 0;
+		padding: 0;
+		background-color: #F2F2F2;
+		/*font-family: "wingdings 3";*/
+	}
+	.clearfix::before,
+  .clearfix::after {
+    content: '';
+    display: table;
+  }
+  .clearfix::after {
+    clear: both;
+  }
+    .articleList{
+    	list-style-type: none;
+    	width: 100%;
+    	height: 3.8rem;
+    	margin: 0;
+    	padding: 0;
+    	/*不换行*/
+        white-space: nowrap;
+        overflow: hidden;
+        overflow-x: scroll;
+
+    }
+    #articleListAll{
+       	list-style-type: none;
+    	width: 100%;
+    	height: 3.8rem;
+    	margin: 0;
+    	padding: 0;
+    	/*不换行*/
+        white-space: nowrap;
+        overflow: hidden;
+        overflow-x: scroll;
+       }
+    .articleList-li-left{
+    	/*float: left;*/
+    	margin-left: -.4rem;
+    	border-bottom: .2rem solid white !important;
+    }
+    .articleList-li{
+    	/*float: left;*/
+    	display: inline-block;
+    	width: 5.6rem;
+    	text-align: center;
+    	/*height: 3.5rem;*/
+    	height: 100%;
+    	font-size: 1rem;
+    	line-height: 3.5rem;
+    	background-color: white;
+    	margin-top: .2rem;
+    }
+    #article-all{
+     	border-bottom: .2rem solid  #EC9B01;
+     	width: 80%;
+     	color: #EC9B01 ;
+     	margin: 0 auto;
+     }
+     #articleParticulars-ul{
+     	padding: 0;
+     	margin: 0;
+     	list-style-type: none;
+     	background-color: white;
+     	margin-top: .5rem;
+     }
+     .articleParticulars-li{
+
+     	padding: 1rem;
+     	padding-bottom: .5rem;
+      border-bottom: .7rem solid #F2F2F2;
+     }
+     .articleParticulars-img{
+      float: left;
+     	width: 6.5rem;
+     	margin-bottom: .5rem;
+     	border-radius: .3rem;
+     }
+      .articleParticulars-li h4{
+      	margin: 0;
+      	padding: 0;
+      	width: 100%;
+      	font-size: 1.2rem;
+        overflow: hidden;
+  		text-overflow: ellipsis;
+  		display: -webkit-box;
+  		-webkit-line-clamp: 1;
+  		-webkit-box-orient: vertical;
+      	font-weight: bolder;
+
+      }
+      .articleParticulars-title{
+        padding-left: 7.5rem;
+      }
+      .articleParticulars-li section{
+      	width: 100%;
+      	word-break: break-word;
+      	font-size: 1rem;
+      }
+      .articleParticulars-li-list{
+      	border-bottom: .1rem solid  #DFDFDF;
+      }
+      .creatTime {
+        padding-top: .5rem;
+        font-size: 1rem;
+        color: #CCCCCC;
+      }
+      .creatTime-span {
+        vertical-align: middle;
+        font-size: 1rem;
+      }
+      .creatTime img {
+        width: 1rem;
+        vertical-align:middle;
+        /*margin-top:-.2rem;*/
+      }
+      .creatTime img.publishTime{
+        width: 1.1rem;
+        margin-right:.3rem;
+      }
+      .creatTime img.eye{
+        width: 1.5rem;
+        margin-right:.3rem;
+      }
+      .creatTime img.admire-img{
+        width: 1.2rem;
+        margin-right:.3rem;
+        /*margin-top:-.4rem;*/
+      }
+      .admire{
+
+      	float: right;
+      }
+      .admire-img{
+      	margin-bottom: .5rem !important;
+      	/*margin-right: .3rem;*/
+      }
+       .examine{
+       	margin-right: .5rem;
+       	/*margin-left: .3rem;*/
+       }
+       .appreciate{
+       	float: right;
+       }
+       .appreciate-cancel{
+       	color: #EC9B01;
+       	/*float: right;*/
+       }
+       .recognition-affirm{
+       	float: right;
+       }
+       .recognition-cancel{
+       	color: #EC9C00;
+       	float: right;
+       }
+       .admire-eye{
+       	margin-right: -.2rem !important;
+       }

@@ -1,0 +1,277 @@
+@charset "utf-8";
+@font-face {
+	font-family: 'wingdings 3';
+	/*字体名称*/
+	src: url('../font/Hiragino Sans GB W3.otf');
+	/*字体源文件*/
+}
+
+html,
+body,
+div,
+p,
+ul,
+li,
+h3 {
+	margin: 0;
+	padding: 0;
+}
+ul,li{
+	list-style-type:none;
+}
+a,
+a:hover {
+	text-decoration: none;
+}
+/*自适应*/
+
+@media only screen and (min-width: 320px) {
+	html {
+		font-size: 10px !important;
+	}
+}
+
+@media only screen and (min-width: 360px) {
+	html {
+		font-size: 11.25px !important;
+	}
+}
+
+@media only screen and (min-width: 400px) {
+	html {
+		font-size: 12.5px !important;
+	}
+	#goBack img {
+		margin-top: .1rem !important;
+	}
+}
+
+@media only screen and (min-width: 480px) {
+	html {
+		font-size: 15px !important;
+	}
+}
+
+@media only screen and (min-width: 640px) {
+	html {
+		font-size: 20px !important;
+	}
+}
+
+html,
+body {
+	height: 100%;
+	background-color: #fff;
+}
+
+header {
+	position: fixed;
+	width: 100%;
+	box-sizing: border-box;
+	top: 0;
+	z-index: 100;
+}
+.share {
+	position: absolute;
+	right: 1rem;
+	font-weight: lighter;
+	color: #EC9E07;
+	box-sizing: border-box;
+}
+#share>i {
+	display: inline-block;
+	vertical-align: middle;
+	width: 1.4rem;
+	height: 1.4rem;
+	background: url("../images/fr_menu.png") no-repeat center center;
+	background-size: cover;
+}
+.title {
+	margin-top: 3rem;
+}
+
+#articleListAll {
+	border-top: 1px solid #e5e5e5;
+	background: #fff;
+	list-style-type: none;
+	width: 100%;
+	height: 3.8rem;
+	margin: 0;
+	padding: 0;
+	/*不换行*/
+	white-space: nowrap;
+	overflow-y: hidden;
+	overflow-x: scroll;
+	border-bottom: 1rem solid #f2f2f2;
+}
+
+.articleList-li-left {
+	/*float: left;*/
+	margin-left: -.4rem;
+	border-bottom: .2rem solid white !important;
+}
+
+.articleList-li {
+	/*float: left;*/
+	display: inline-block;
+	width: 5.6rem;
+	text-align: center;
+	/*height: 3.5rem;*/
+	height: 100%;
+	font-size: 1rem;
+	line-height: 3.5rem;
+	background-color: white;
+	margin-top: .2rem;
+}
+
+.articleList-li.picactive .articleList-li-div{
+	border-bottom: .3rem solid #EC9B01;
+	width: 80%;
+	color: #EC9B01;
+	margin: 0 auto;
+}
+
+.titleContent-all {
+	overflow:hidden;
+	list-style-type: none;
+}
+
+.titleContent-list {
+	float: left;
+	width: 49%;
+	margin-top: .5rem;
+	background-color: white;
+}
+/*选取奇数行*/
+
+.titleContent-list:nth-child(2n-1) {
+	margin-right: 2%;
+}
+
+.titleContent-list-img {
+	width: 100%;
+}
+
+.discountPrice {
+	padding: .7rem;
+	padding-bottom: .5rem;
+	font-size: 1.3rem;
+}
+
+.discountPrice-before {
+	text-decoration: line-through;
+	font-size: 1rem;
+	color: #CCCCCC;
+}
+
+			.drug-specification{
+				color:#999;
+				font-size:1rem;
+			}
+.discountPrice-before-sans {
+	color: #CCCCCC;
+}
+
+.orderPeople {
+	float: right;
+}
+
+.discountPrice-after {
+	color: #EC9B01;
+}
+
+.orderPeople {
+	font-size: 1rem;
+	color: #999999;
+}
+
+.discountItem,
+.discountTitle {
+	padding: .7rem;
+	padding-top: 0;
+	padding-bottom: .5rem;
+}
+.discountTitle {
+	color: #000;
+}
+.discountItem {
+	padding-bottom: 1rem;
+	font-size: 1rem;
+	color: #989898;
+}
+
+.fr_main .fr_list>li>a.picactive {
+	box-shadow: 1px 0 0 #fff;
+	background: #fff;
+}
+
+
+
+.footer{
+	position:fixed;
+	bottom:0;
+	background:#fff;
+	width:100%;
+	border-top:1px solid #e5e5e5;
+}
+.online-footer{
+	box-sizing: border-box;
+	width:33.3%;
+	text-align:center;
+	float:left;
+	border-right:1px solid #e5e5e5;
+}
+.online-footer:last-child {
+	border-right: 0;
+}
+.online-footer a{
+	display: block;
+	width: 100%;
+	height: 100%;
+	font-size:1.2rem;
+	color:#000;
+	line-height:4rem;
+}
+.footer-hover{
+	border-top:.2rem solid #ec9c00;
+	background:url(../images/arrow-orange.png)85% 50% no-repeat;
+	background-size:8% 10%;
+}
+.footer-hover a{
+	color:#ec9c00;
+}
+.drug-details{
+	background:#fff;
+	position:relative;
+	border-bottom:1px solid #dfdfdf;
+
+}
+.drug-details-img{
+	width:30%;
+	margin:4%;
+}
+.drug-details-img img{
+	width:100%;
+	height:auto;
+}
+.drug-details-text{
+	float:left;
+	margin-top: -34%;
+    margin-left: 38%;
+}
+.drug-name{
+	color:#000;
+	font-size:1.3rem;
+
+}
+.drug-specification{
+	color:#999;
+	font-size:1rem;
+	line-height:2rem;
+}
+.drug-price{
+	position:absolute;
+	bottom:1rem;
+	font-size:1.2rem;
+	color:#ec9c00;
+}

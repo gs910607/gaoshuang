@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta http-equiv="Expires" content="0">
+        <meta http-equiv="Pragma" content="no-cache">
+        <meta http-equiv="Cache-control" content="no-cache">
+        <meta http-equiv="Cache" content="no-cache">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+		<meta name="format-detection" content="telephone=no, email=no" />
+		<title>我的</title>
+		<link href="../../css/mineIndex.css" rel="stylesheet">
+	</head>
+
+	<body>
+		<div class="my-content">
+        	<div class="my-header">
+            	<div class="my-header-essential-information">
+                	<div class="essential-information-head-portrait">
+                    	<a id="logox" class="essential-information-head-portrait-a" href="javascript:;">
+                        	<img id="bgl" src="../../images/photo-icon-orange.png" alt="">
+                        </a>
+                    </div>
+                    <article class="htmleaf-container">
+                        <div class="croptitlewrap clearfix">
+                            <div class="cropback">
+                                <a href="javascript:;"><img src="../../images/backtrack.png" alt=""><span>相册</span></a>
+                            </div>
+                            <div class="croptitle">裁剪图片</div>
+                        </div>
+                        <div id="clipArea"></div>
+                        <div class="foot-use">
+                            <div class="uploader1 blue" style="display:none;">
+                                <input type="button" name="file" class="button" value="打开">
+                                <form id="upPic" enctype="multipart/form-data" action="" method="post">
+                                    <input id="file" type="file" name="files" accept="image/*" capture="">
+                                    <input id="userId" type="hidden" name="userId">
+                                    <input id="x" type="hidden" name="x">
+                                    <input id="y" type="hidden" name="y">
+                                    <input id="width" type="hidden" name="width">
+                                    <!-- <input id="submit" type="submit"> -->
+                                </form>
+                                <input id="file_head" type="hidden" accept="image/*" />
+                            </div>
+                            <button id="clipBtn">保存</button>
+                        </div>
+                        <div id="view"></div>
+                    </article>
+
+                    <div class="essential-information-name">
+                    	<p class="essential-information-name-p"></p>
+                        <div class="perfect-essential-information">
+                        	<a class="perfect-essential-information-a" href="javascript:;">完善个人信息&gt;</a>
+                        </div>
+                        <div class="my-purse">
+                        	<a class="my-purse-a" href="javascript:;">
+                            	<img src="../../images/purse-orange.png" alt="">
+                                <span class="my-purse-a-span"></span><span class="" style="font-size: 1.04rem; vertical-align: middle;">元</span>
+                            </a>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="my-function-model">
+                	<ul>
+                		<li class="my-consultation my-function-li myadvisory">
+                        	<a class="my-consultation-a my-function-li-a" href="javascript:historyForward('../mine/mineConsult.html');">
+                            	<span class="my-consultation-number my-function-li-a-span"></span>
+                                <p class="my-consultation-p my-function-li-a-p">我的咨询</p>
+                            </a>
+                            <img class="function-line" src="../../images/line.png" alt="">
+                        </li>
+                        <li class="my-appointment my-function-li mysubscribe">
+                        	<a class="my-appointment-a my-function-li-a" href="appointmentdoor.html">
+                            	<span class="my-appointment-number my-function-li-a-span"></span>
+                                <p class="my-appointment-p my-function-li-a-p">我的预约</p>
+                            </a>
+                            <img class="function-line" src="../../images/line.png" alt="">
+                        </li>
+                        <li class="my-clinic my-function-li myclinic">
+                        	<a class="my-clinic-a my-function-li-a" href="javascript:;">
+                            	<span class="my-clinic-number my-function-li-a-span"></span>
+                                <p class="my-clinic-p my-function-li-a-p">我的诊所</p>
+                            </a>
+                            <img class="function-line" src="../../images/line.png" alt="">
+                        </li>
+                        <li class="my-health-care my-function-li mymedic">
+                        	<a class="my-health-care-a my-function-li-a" href="javascript:;">
+                            	<span class="my-health-care-number my-function-li-a-span"></span>
+                                <p class="my-health-care-p my-function-li-a-p">我的医护</p>
+                            </a>
+                        </li>
+                	</ul>
+                </div>
+            </div>
+
+            <div class="health-records">
+            	<a href="javascript:historyForward('../mine/mineRecord.html');">
+            	<span class=" function-model-icon img-health-records-icon"><img src="../../images/my-li-1.png" alt=""></span>
+                <p class="function-model-name health-records-name">健康档案</p>
+                <span class="img-next"><img src="../../images/next.png" alt=""></span>
+                </a>
+            </div>
+
+            <div class="function-data-model">
+            	<ul>
+            		<li class="attending-person">
+                    	<a id="diagnosis" href="javascript:;">
+                    	<span class="function-model-icon img-attending-person-icon"><img src="../../images/my-li-2.png" alt=""></span>
+                		<p class="function-model-name attending-person-name">受诊人</p>
+                		<span class="img-next"><img src="../../images/next.png" alt=""></span>
+                        </a>
+                    </li>
+                    <div class="clear"></div>
+            		<li class="common-address">
+                    	<a href="javascript:;">
+                    	<span class="function-model-icon img-common-address-icon"><img src="../../images/my-li-3.png" alt=""></span>
+                		<p class="function-model-name common-address-name moveUp">常用地址</p>
+                		<span class="img-next"><img src="../../images/next.png" alt=""></span>
+                        </a>
+                    </li>
+                    <div class="clear"></div>
+            		<li class="contact-customer-service">
+                    	<span class="function-model-icon img-contact-customer-service-icon"><img src="../../images/my-li-4.png" alt=""></span>
+                		<p class="function-model-name contact-customer-service-name moveUp">联系客服</p>
+
+                		<span class="img-next"><img src="../../images/next.png" alt=""></span>
+                        <span class="contact-customer-service-tel">400-900-1515</span>
+                    </li>
+            	</ul>
+            </div>
+
+            <div class="set-up">
+            	<a href="mineSetting.html">
+            	<span class="function-model-icon img-set-up-icon"><img src="../../images/my-li-5.png" alt=""></span>
+                <p class="function-model-name set-up-name">设置</p>
+                <span class="img-next"><img src="../../images/next.png" alt=""></span>
+                <!--设置的消息提示-->
+                <!--<span class="remind-name">1</span>-->
+                </a>
+            </div>
+        </div>
+
+		<!--底部导航-->
+        <footer class="indexFooter">
+            <nav class="bar bar-tab clearfix">
+                <a class="tab-item-a" href="../main/index.html"">
+                    <div class="indicon">
+                        <img src="../../images/index-color.png" />
+                    </div>
+                    <div class="tab-label"">首页</div>
+                </a>
+                <a class="tab-item-a" href="../organization/organization.html">
+                    <div class="indicon">
+                        <img src="../../images/organizationWhite.png" />
+                    </div>
+                    <div class="tab-label">诊所目录</div>
+                </a>
+                <a id="myClinicClinicIndex" class="tab-item-a" href="javascript:;">
+                    <div class="indicon">
+                        <img src="../organization/imgs/clinic-white.png" />
+                    </div>
+                    <div id="myhospital" class="tab-label">我的诊所</div>
+                </a>
+                <a class="tab-item-a" href="../msg/messageindex.html">
+                    <div class="indicon">
+                        <img src="../organization/imgs/news-white.png" />
+                    </div>
+                    <div class="tab-label">消息</div>
+                </a>
+                <a class="tab-item-a" href="javascript:;">
+                    <div class="indicon">
+                        <img id="main-img" src="../../images/mine-orange.png" />
+                    </div>
+                    <div id="mine-span" class="tab-label active">我的</div>
+                </a>
+            </nav>
+        </footer>
+
+        <div id="modal" style="display: none;position: absolute;top: 0;z-index: 1030;opacity: 0.5;">
+            <div class="modal-cancel" style="width:100%;"></div>
+        </div>
+
+	   <!--上传图片-->
+        <div id="uploadMain">
+            <div id="uploadMain-first"><img src="../../images/upload-picture-icon.png" alt="">您上传的照片只有解答问题的医生可见</div>
+            <div id="uploadMain-second">
+                <div id="photograph" class="uploadMain-address"><a href="javascript:;"><img src="../../images/photo-icon.png" alt="">拍照</a></div>
+                <div id="photoalbum" class="uploadMain-address"><a href="javascript:;"><img src="../../images/picture-icon.png" alt="">从相册中上传</a></div>
+            </div>
+
+            <div id="uploadMain-close">取消</div>
+        </div>
+
+				<!-- 打电话 -->
+				<div id="phoneShade" class="shade">
+					<div class="modelAffirm">
+						<div class="promptContent">
+							<h4>咨询华方客服</h4>
+							<p>您确定要拨打400-900-1515吗?</p>
+						</div>
+						<div class="promptBtn clearfix">
+							<a href="javascript:;" class="cancelBtn">取消</a>
+							<a href="tel:400-900-1515" class="sureBtn">确认</a>
+						</div>
+					</div>
+				</div>
+
+<script src="../../resource/js/jquery-2.1.1.min.js"></script>
+<script src="../../resource/js/jquery.form.js"></script>
+<script src="../../resource/js/iscroll-zoom.js"></script>
+<script src="../../resource/js/hammer.js"></script>
+<script src="../../resource/js/jquery.photoClip.js"></script>
+<script src="../../resource/js/common.js" type="text/javascript" charset="utf-8"></script>
+<script src="inc/mineIndex.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../resource/js/bottomMenu.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    var obUrl = ''
+		// var imgsource;
+    //document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+    $("#clipArea").photoClip({
+        width: 150,
+        height: 150,
+        file: "#file",
+        view: "#view",
+        ok: "#clipBtn",
+        loadStart: function() {
+            // console.log("照片读取中");
+        },
+        loadComplete: function() {
+            // console.log("照片读取完成");
+        },
+        clipFinish: function(dataURL) {
+            // console.log(dataURL);
+					// imgsource = dataURL;
+
+        }
+    });
+</script>
+<script>
+$(function(){
+	function convertImgToBase64(url, callback, outputFormat){
+	  var canvas = document.createElement('CANVAS'),
+	    ctx = canvas.getContext('2d'),
+	    img = new Image;
+	  img.crossOrigin = 'Anonymous';
+	  img.onload = function(){
+	    canvas.height = img.height;
+	    canvas.width = img.width;
+	    ctx.drawImage(img,0,0);
+	    var dataURL = canvas.toDataURL(outputFormat || 'image/png');
+	    callback.call(this, dataURL);
+	    canvas = null; 
+	  };
+	  img.src = url;
+	}
+ 
+ 
+	convertImgToBase64('http://f11.baidu.com/it/u=1881127108,2835159953&fm=76', function(base64Img){
+	  // Base64DataURL
+	  console.log(base64Img)
+	});
+    userId = JSON.parse(localStorage.getItem("user")).userId;
+	$("#photograph").on("click", function() {
+		$("#file").attr("capture", "camera").click();
+	});
+	$("#photoalbum, .cropback").on("click", function() {
+		$("#file").removeAttr("capture").click();
+	});
+    $("#clipBtn").click(function(){
+        $("#logox").empty();
+        var matrixs = $(".photo-clip-moveLayer").css("transform");
+        var scale = matrixs.substring("7").split(",")[3];  //图片缩放比例
+        var x = - matrixs.substring("7").split(",")[4] / scale;  //截取区域距图片左边的距离
+        var y = - parseFloat(matrixs.substring("7").split(",")[5]) / scale;  //截取区域距图片上边的距离
+        var width = 150 / scale;  //截取区域边长
+        // console.log(imgsource)
+
+//      $("#upPic").attr("action", config.appserver_url + '/personal/avatarUpload.json');
+//      $("#userId").val(userId);
+//      $("#x").val(parseInt(x));
+//      $("#y").val(parseInt(y));
+//      $("#width").val(parseInt(width));
+
+//   	$("#upPic").ajaxForm().submit();
+		var params = {
+			base64: imgsource.replace("data:image/jpeg;base64," , ""),
+			userId: userId
+		}
+		console.log(params)
+		$.ajax({
+			type: 'POST',
+			url: config.appserver_url + '/personal/avatarUploadByBase64.json',
+			data: params,
+			dataType: 'json',
+			// contentType: 'application/json',
+			success: function(response) {
+				console.log(response)
+				tokenLose(response.status)
+				$('#logox').append('<img id="newPic" src="' + response.data.filePath + '" align="absmiddle" style="width:100%;height:100%;">');
+				$(".htmleaf-container").hide();
+			},
+			error: function() {
+				alert("服务繁忙，请稍后再试！")
+			},
+			beforeSend: function() {
+				ajaxLoading.show();
+			},
+			complete: function() {
+				ajaxLoading.hide();
+			}
+		});
+
+    });
+    $(".cropback").on("click", function() {
+        $(".htmleaf-container").hide();
+    });
+	$("#file").on("change", function() {
+        setImagePreview();
+    });
+});
+</script>
+<script type="text/javascript">
+$(function(){
+    jQuery.divselect = function(divselectid,inputselectid) {
+        var inputselect = $(inputselectid);
+        $(divselectid+" small").click(function(){
+            $("#divselect ul").toggle();
+            $(".mask").show();
+        });
+        $(divselectid+" ul li a").click(function(){
+            var txt = $(this).text();
+            $(divselectid+" small").html(txt);
+            var value = $(this).attr("selectid");
+            inputselect.val(value);
+            $(divselectid+" ul").hide();
+            $(".mask").hide();
+            $("#divselect small").css("color","#333")
+        });
+    };
+    $.divselect("#divselect","#inputselect");
+});
+</script>
+<script type="text/javascript">
+$(function(){
+    jQuery.divselectx = function(divselectxid,inputselectxid) {
+        var inputselectx = $(inputselectxid);
+        $(divselectxid+" small").click(function(){
+            $("#divselectx ul").toggle();
+            $(".mask").show();
+        });
+        $(divselectxid+" ul li a").click(function(){
+            var txt = $(this).text();
+            $(divselectxid+" small").html(txt);
+            var value = $(this).attr("selectidx");
+            inputselectx.val(value);
+            $(divselectxid+" ul").hide();
+            $(".mask").hide();
+            $("#divselectx small").css("color","#333")
+        });
+    };
+    $.divselectx("#divselectx","#inputselectx");
+});
+</script>
+<script type="text/javascript">
+$(function(){
+    jQuery.divselecty = function(divselectyid,inputselectyid) {
+        var inputselecty = $(inputselectyid);
+        $(divselectyid+" small").click(function(){
+            $("#divselecty ul").toggle();
+            $(".mask").show();
+        });
+        $(divselectyid+" ul li a").click(function(){
+            var txt = $(this).text();
+            $(divselectyid+" small").html(txt);
+            var value = $(this).attr("selectyid");
+            inputselecty.val(value);
+            $(divselectyid+" ul").hide();
+            $(".mask").hide();
+            $("#divselecty small").css("color","#333")
+        });
+    };
+    $.divselecty("#divselecty","#inputselecty");
+});
+</script>
+<script type="text/javascript">
+$(function(){
+   $(".mask").click(function(){
+       $(".mask").hide();
+       $(".all").hide();
+   })
+    $(".right input").blur(function () {
+        if ($.trim($(this).val()) == '') {
+            $(this).addClass("place").html();
+        }
+        else {
+            $(this).removeClass("place");
+        }
+    })
+});
+</script>
+<script>
+$("#file").change(function(){
+    var objUrl = getObjectURL(this.files[0]) ;
+     obUrl = objUrl;
+    console.log("objUrl = "+objUrl) ;
+    if (objUrl) {
+        $("#img0").attr("src", objUrl).show();
+    }
+    else{
+        $("#img0").hide();
+    }
+}) ;
+function qd(){
+   var objUrl = getObjectURL(this.files[0]) ;
+   obUrl = objUrl;
+   console.log("objUrl = "+objUrl) ;
+   if (objUrl) {
+       $("#img0").attr("src", objUrl).show();
+   }
+   else{
+       $("#img0").hide();
+   }
+}
+function getObjectURL(file) {
+    var url = null ;
+    if (window.createObjectURL!=undefined) { // basic
+        url = window.createObjectURL(file) ;
+    } else if (window.URL!=undefined) { // mozilla(firefox)
+        //url = window.URL.createObjectURL(file) ;
+    } else if (window.webkitURL!=undefined) { // webkit or chrome
+        url = window.webkitURL.createObjectURL(file) ;
+    }
+    return url ;
+}
+</script>
+<script type="text/javascript">
+var subUrl = "";
+$(function (){
+    $(".file-3").bind('change',function(){
+        subUrl = $(this).val()
+        $(".yulan").show();
+        $(".file-3").val("");
+    });
+
+    $(".file-3").each(function(){
+        if($(this).val()==""){
+            $(this).parents(".uploader").find(".filename").val("营业执照");
+        }
+    });
+$(".btn-3").click(function(){
+$("#img-1").attr("src", obUrl);
+$(".yulan").hide();
+$(".file-3").parents(".uploader").find(".filename").val(subUrl);
+})
+    $(".btn-2").click(function(){
+        $(".yulan").hide();
+    })
+
+});
+</script>
+<script type="text/javascript">
+function setImagePreview() {
+    $(".htmleaf-container").show();
+    var preview, img_txt, localImag, file_head = document.getElementById("file_head"),
+            picture = file_head.value;
+    if (!picture.match(/.jpg|.gif|.png|.bmp/i)) return console.log(1),
+            !1;
+    if (preview = document.getElementById("preview"), file_head.files && file_head.files[0]) preview.style.display = "block",
+            preview.style.width = "63px",
+            preview.style.height = "63px",
+            preview.src = window.navigator.userAgent.indexOf("Chrome") >= 1 || window.navigator.userAgent.indexOf("Safari") >= 1 ? window.webkitURL.createObjectURL(file_head.files[0]) : window.URL.createObjectURL(file_head.files[0]);
+    else {
+        file_head.select(),
+                file_head.blur(),
+                img_txt = document.selection.createRange().text,
+                localImag = document.getElementById("localImag"),
+                localImag.style.width = "63px",
+                localImag.style.height = "63px";
+        try {
+            localImag.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)",
+                    localImag.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = img_txt
+        } catch(f) {
+            return alert("您上传的图片格式不正确，请重新选择！"),
+                    !1
+        }
+        preview.style.display = "none",
+                document.selection.empty()
+    }
+    return document.getElementById("DivUp").style.display = "block",
+            !0
+};
+
+</script>
+
+</body>
+
+</html>

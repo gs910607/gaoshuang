@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta http-equiv="pragma" content="no-cache" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<!--<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css" />-->
+<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+<link rel="stylesheet" type="text/css" href="../../css/reservationInformation.css" />
+
+<title>预约信息</title>
+</head>
+
+<body>
+  <header>
+    <a id="goBack" class="goback" href="javascript:;">
+      <img src="../../images/backtrack.png" alt="" />
+      <span id="goBackText">返回</span>
+    </a>
+    <h1 id="theme">预约信息</h1>
+  </header>
+
+  <div>
+    <div class="reservation-information">
+    	<div class="reservation-information-detail">
+        	<ul>
+        		<li class="appointment-details">服务类型：<span>预约挂号</span></li>
+        		<li class="appointment-details">就诊机构：<span class="hospitalName">闲林山水居诊所</span></li>
+        		<li class="appointment-details">看诊医生：<span class="realName">刘继芬</span></li>
+        		<li class="appointment-details">预约时间：<span class="appointment-time">2017年3月17日&nbsp;周五&nbsp;上午</span></li>
+        	</ul>
+        </div>
+        <div class="reminder-message">
+          <span>*预约挂号由机构自行收费，平台不收取任何额外费用</span>
+        </div>
+    </div>
+    <div class="patient-information">
+      <div class="patient-details">
+      	<ul>
+      		<li class="patient-information-details">受诊人<span class="redstar">*</span><a class="attending-person" href="javascript:;"><span>请选择受诊人</span><img src="../../images/more.png" alt="" /></a></li>
+      		<li class="patient-information-details">身份证<input class="identity" type="text" placeholder="请输入身份证号"></li>
+      		<li class="patient-information-details">手机号<span class="redstar">*</span><input class="telephone-number" href="javascript:;" placeholder="请输入手机号" /></li>
+      	</ul>
+      </div>
+      <div class="patient-message">
+        <textarea  rows="4"   onfocus="if(value=='121212'){value=''}"
+    onblur="if (value ==''){value='121212'}">121212</textarea>
+      </div>
+    </div>
+    <div class="submit-button"><a class="submit-button-a" href="javascript:;">确认挂号</a></div>
+  </div>
+</body>
+<script src="../../resource/js/jquery-2.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../resource/js/common.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../resource/js/reservationInformation.js" type="text/javascript" charset="utf-8"></script>
+</html>

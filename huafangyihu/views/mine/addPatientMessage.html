@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta http-equiv="pragma" content="no-cache" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+		<link rel="stylesheet" href="../../css/addPatientMessage.css" />
+
+		<title class="outpatientTheme">添加受诊人</title>
+	</head>
+
+	<body>
+		<header>
+			<a id="goBack" class="goback" href="javascript:;">
+				<img src="../../images/backtrack.png" alt="" />
+				<span id="goBackText">返回</span>
+			</a>
+			<h1 id="theme" class="outpatientTheme">添加受诊人</h1>
+		</header>
+		<div class="myinfowrapper">
+			<div class="patient-information">
+				<div class="patient-details">
+					<ul>
+						<li id="name" class="patient-information-details">姓名<span class="attending-person"><input type="text" placeholder="请输入您的姓名" maxlength="10"></span></li>
+						<li class="patient-information-details">性别
+							<span id="male" class="sex recognition-affirm"><span class="man recognition-affirm sex-person">男</span><img class="sex-img" src="../../images/off.png" alt="" /></span>
+							<span id="female" class="sex recognition-affirm"><span class="woman recognition-affirm sex-person">女</span><img class="sex-img" src="../../images/off.png" alt="" /></span>
+						</li>
+						<li id="birthday" class="patient-information-details">出生日期<input type="date" class="age" placeholder="请选择出生日期" required></li>
+
+						<li id="phone" class="patient-information-details">
+							联系手机
+							<span class="attending-person" href="javascript:;">
+      			  <input type="text" class="phone-number" maxlength="11" placeholder="请输入手机号码,方便医生联系"/>
+            </span>
+							<!--<span>请输入您的姓名</span>-->
+							<!--<img src="../../images/more.png" alt="" />-->
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="submit-button">
+				<a class="submit-button-a" href="javascript:;">保存</a>
+			</div>
+		</div>
+	</body>
+	<script src="../../resource/js/jquery-2.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../resource/js/touch.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../resource/js/common.js" type="text/javascript" charset="utf-8"></script>
+	<script src="inc/addPatientMessage.js" type="text/javascript" charset="utf-8"></script>
+
+</html>

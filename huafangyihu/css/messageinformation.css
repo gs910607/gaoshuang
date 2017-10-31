@@ -1,0 +1,133 @@
+@charset "utf-8";
+@font-face {
+  font-family: 'wingdings 3';   /*字体名称*/
+  src: url('../font/Hiragino Sans GB W3.otf');       /*字体源文件*/
+}
+/*设置自适应文字大小*/
+@media only screen and (min-width: 320px) {
+html {
+	font-size: 10px !important;
+}
+}
+
+@media only screen and (min-width: 360px) {
+html {
+	font-size: 11.25px !important;
+}
+}
+
+@media only screen and (min-width: 400px) {
+html {
+	font-size: 12.5px !important;
+}
+}
+
+@media only screen and (min-width: 480px) {
+html {
+	font-size: 15px !important;
+}
+}
+
+@media only screen and (min-width: 640px) {
+html {
+	font-size: 20px !important;
+}
+}
+/* CSS Document */
+html, body {
+	margin: 0;
+	padding: 0;
+	background-color: #F2F2F2;
+	/*font-family: "wingdings 3";*/
+}
+ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+a {
+	text-decoration: none;
+	color: inherit;
+}
+h1,h2,h3,h4,h5,h6,p{
+	margin:0;
+	padding:0;
+}
+.message_list {
+	background: #fff;
+}
+#msgList {
+	list-style: none;
+}
+.msg_each {
+	background: #fff;
+	padding: 0 .8rem;
+}
+.msg_each > a {
+	display: block;
+	border-bottom: 1px solid #ccc;
+	padding: .8rem 0;
+}
+
+.each_header {
+	width: 4rem;
+	height: 4rem;
+	border-radius: 50%;
+	overflow: hidden;
+}
+.each_header > img {
+	vertical-align: middle;
+	width: 100%;
+	height: 100%;
+	border: none;
+}
+.each_content {
+	padding-left: 5rem;
+}
+.nameandtime {
+	overflow: hidden;
+}
+.nameandtime .name {
+	font-size: 1.4rem;
+	color: #333;
+}
+.nameandtime .times {
+	font-size: 1rem;
+	color: #999;
+}
+.return_content {
+	margin-top: .5rem;
+	color: #999;
+	font-size: 1.2rem;
+}
+/*footer*/
+.indexFooter {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #EFEFEF;
+    border-top: 1px solid #c1c1c1;
+}
+.tab-item-a {
+    display: block;
+    float: left;
+    width: 20%;
+    text-align: center;
+    padding: .4rem 0;
+}
+.indicon {
+    font-size: 0;
+}
+.indicon > img {
+    vertical-align: middle;
+    height: 1.8rem;
+}
+.tab-label {
+    font-size: .9rem;
+    line-height: 1;
+    color: #959595;
+    margin-top: .4rem;
+}
+.tab-label.active {
+    color: #ec9c00;
+}

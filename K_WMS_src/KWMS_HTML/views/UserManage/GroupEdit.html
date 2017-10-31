@@ -1,0 +1,11 @@
+<Panel gtform Dialog>
+	<Phead>节点操作</Phead>
+	<Pbody>
+		<RowTextBox colspan='2' Label="节点名称" ngmodel="model.Name"></RowTextBox>
+		<RowTextBox colspan='2' Label="排序" ngmodel="model.OrderIndex"></RowTextBox>
+		<RowTextBox colspan='2' Label="父节点" ngmodel="model.GroupName" ngdisabled="true" ng-show="Operation === 'Add'"></RowTextBox>
+	</Pbody>
+	<Pfoot>
+		<ButtonBar Float="right"></ButtonBar>
+	</Pfoot>
+</Panel>
