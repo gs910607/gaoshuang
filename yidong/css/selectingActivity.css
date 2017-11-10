@@ -1,0 +1,50 @@
+@charset "utf-8";
+
+.container {
+	width: 1000px;
+}
+.contMain {
+	padding:50px 18px;
+}
+.presonList li {
+	width: 11.11%;
+	text-align: center;
+	background: #fff;
+	padding: 10px;
+	float: left;
+}
+.presonList li a {
+	display: block;
+	cursor: default;
+	border: 1px solid #ff6600;
+	padding: 5px;
+	color: #000;
+	text-align: left;
+	overflow: hidden;
+}
+.presonList .name {
+	font-size: 12px;
+}
+.progressBar {
+	width: 100%;
+	height: 10px;
+	overflow: hidden;
+}
+.progressBar span {
+	display: inline-block;
+	height: 100%;
+	background: #FFAD00;
+	vertical-align: top;
+}
+.presonList .picWrap {
+	width: 100%;
+	height: 82px;
+	margin-top: 3px;
+} 
+.presonList .poll {
+	font-size: 12px;
+}
+.presonList .picWrap > img {
+	width: 100%;
+	height: 100%;
+}

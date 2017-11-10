@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../css/pager.css">
+    <link rel="stylesheet" type="text/css" href="../../css/main.css">
+    <link rel="stylesheet" type="text/css" href="../../css/viewNeighborhood.css">
+	<title>查看接访</title>
+	<style type="text/css">
+		html,
+		body {
+			height: 100%;
+		}
+		.infoPubLisrWrapper {
+			height: 100%;
+			padding-bottom: 75px;
+		}
+		header {
+			position: fixed;
+			width: 100%;
+			top: 0;
+			z-index: 1000;
+		}
+		footer {
+			position: fixed;
+			width: 100%;
+			bottom: 0;
+			z-index: 1000;
+		}
+		.contentWrap {
+			height: 100%;
+			padding: 60px 0;
+			margin: 0;
+			overflow: auto;
+		}
+	</style>
+</head>
+<body>
+	<div class="viewMediationWrapper wrapper">
+		<header>
+			<h1 class="pull-left"><a href="viewNeighborhood.html"><img src="../../images/shipinjiefang.png"></a></h1>
+			<div  class="fabuBtn pull-right">
+				<a href="aNeighborhood.html">发起接访</a>
+			</div>
+		</header>
+		<section class="contentWrap">
+			<div class="container">
+				<div class="content">
+					<div class="iconTitle">查看接访</div>
+					<div class="formWrap">
+						<form class="form-inline">
+							<div class="form-group">
+								<label for="mediatePer">信访人姓名:</label>
+								<input type="text" class="form-control" id="mediatePer">
+							</div>
+							<div class="form-group">
+								<label for="department">信访编号:</label>
+								<input type="text" class="form-control" id="department">
+							</div>
+							<div class="form-group">
+								<label for="area">办理方式:</label>
+								<input type="text" class="form-control" id="area">
+							</div>
+							<div class="form-group">
+								<label for="time">查询码状态:</label>
+								<input type="text" class="form-control" id="time">
+							</div>
+							<a href="javascript:;" style="padding-top:6px;padding-bottom:6px;" class="btn btn-primary">搜索</a>
+						</form>
+					</div>
+					<div class="infoList">
+						<table class="table table-bordered table-hover">
+							<thead>
+								<tr>
+									<td>信访号</td>
+									<td>信访时间</td>
+									<td>信访人姓名</td>
+									<td>信访渠道</td>
+									<td>信访目的</td>
+									<td>信访方式</td>
+									<td>问题归集地</td>
+									<td>问题类型</td>
+									<td>办理方式</td>
+									<td>状态</td>
+									<td>查询状态</td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>15512342143</td>
+									<td>2017-07-05</td>
+									<td>杨飞鸣</td>
+									<td>省系统录入</td>
+									<td>求决</td>
+									<td>来访</td>
+									<td>江苏省淮安市</td>
+									<td width="100"><p style="width:100px;">其他_历史</p></td>
+									<td>转送</td>
+									<td>待分拣</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>15512342143</td>
+									<td>2017-07-05</td>
+									<td>杨飞鸣</td>
+									<td>省系统录入</td>
+									<td>求决</td>
+									<td>来访</td>
+									<td>江苏省淮安市</td>
+									<td width="100"><p style="width:100px;">劳动和社会劳动和社会劳动和社会</td>
+									<td>转送</td>
+									<td>待分拣</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>15512342143</td>
+									<td>2017-07-05</td>
+									<td>杨飞鸣</td>
+									<td>省系统录入</td>
+									<td>求决</td>
+									<td>来访</td>
+									<td>江苏省淮安市</td>
+									<td width="100"><p style="width:100px;">劳动和社会</td>
+									<td>转送</td>
+									<td>待分拣</td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="paging">
+						<ul class="pagination" id="page2">
+						</ul>
+						<div class="pageJump">
+							<span>跳转到</span>
+							<input type="text"/>
+							<span>页</span>
+							<button type="button" class="button">确定</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<footer></footer>
+	</div>
+	<script type="text/javascript" src="../../scripts/jQuery v2.1.1.min.js"></script>
+	<script type="text/javascript" src="../../scripts/pager.js"></script>
+	<script type="text/javascript" src="../../scripts/common.js"></script>
+	<script type="text/javascript" src="../../scripts/viewNeighborhood.js"></script>
+</body>
+</html>

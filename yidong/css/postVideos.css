@@ -1,0 +1,40 @@
+@charset "utf-8";
+
+.container {
+	width: 845px;
+}
+.formWrap {
+	padding: 82px 40px 30px;
+}
+textarea.messageContent {
+	width: 100%;
+	height: 100px;
+	resize: none;
+}
+.videoListWrap {
+	display: none;
+	margin-top: 30px;
+}
+.videoName {
+	width: 350px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	text-align: left;
+}
+.videoName > img {
+	float: left;
+	margin-right: 10px;
+} 
+.table > tbody > tr > td,
+.table > tbody > tr > th, 
+.table > tfoot > tr > td, 
+.table > tfoot > tr > th, 
+.table > thead > tr > td, 
+.table > thead > tr > th {
+	text-align: center;
+	vertical-align: middle;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}

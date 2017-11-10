@@ -1,0 +1,109 @@
+ <!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../css/main.css">
+    <link rel="stylesheet" type="text/css" href="../../css/postVideos.css">
+	<title>发布视频</title>
+	<style type="text/css">
+		html,
+		body {
+			height: 100%;
+		}
+		.infoPubLisrWrapper {
+			height: 100%;
+			padding-bottom: 75px;
+		}
+		header {
+			position: fixed;
+			width: 100%;
+			top: 0;
+			z-index: 1000;
+		}
+		footer {
+			position: fixed;
+			width: 100%;
+			bottom: 0;
+			z-index: 1000;
+		}
+		.contentWrap {
+			height: 100%;
+			padding: 60px 0;
+			margin: 0;
+			overflow: auto;
+		}
+	</style>
+</head>
+<body>
+	<div class="infoPubWrapper wrapper">
+		<header><h1><a href="videoTraining.html"><img src="../../images/shipinpeixun.png"></a></h1></header>
+		<section class="contentWrap">
+			<div class="container">
+				<div class="content">
+					<div class="iconTitle">发布视频</div>
+					<form id="html5Form" action="javascript:;" class="form-horizontal">
+						<div class="formWrap">
+							<div class="form-group">
+								<label for="messageDigest" class="formLabel control-label">视频分类:</label>
+								<div class="formInput">
+									<select id="messageDigest" class="form-control" required>
+										<option value="0">政法大讲堂</option>
+										<option value="1">政法大讲堂2</option>
+										<option value="2">政法大讲堂3</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="messageHeader" class="formLabel control-label">信息标题:</label>
+								<div class="formInput">
+									<input type="text" class="form-control" id="messageHeader" placeholder="清江浦区召开法学会成立" required maxlength="50">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="messageContent" class="formLabel control-label">视频简介:</label>
+								<div class="formInput">
+									<textarea id="messageContent" class="messageContent form-control"></textarea>
+								</div>
+							</div>
+							<div class="form-group text-right" style="margin-top: 20px;">
+								<a id="addVideo" class="btn btn-primary">添加视频</a>
+								<input id="selectFile" style="display:none;" type="file" name="" accept="video/mp4">
+							</div>
+							<div class="videoListWrap">
+								 <table class="table">
+								 	<thead>
+								 		<tr>
+								 			<td style="text-align:left;" width="350">视频</td>
+								 			<td>大小</td>
+								 			<td>状态</td>
+								 		</tr>
+								 	</thead>
+								 	<tbody id="videoList">
+								 		
+								 	</tbody>
+								 </table>
+							</div>
+						</div>
+						<div class="btnWrap">
+							<button type="submit" class="btn btn-primary">确认发布</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</section>
+		<footer></footer>
+	</div>
+
+	<script src="../../scripts/jQuery v2.1.1.min.js"></script>
+	<script type="text/javascript" src="../../scripts/jquery.placeholder.min.js"></script>
+	<script type="text/javascript">
+		$(function(){ $('input, textarea').placeholder(); });
+	</script>
+	<script type="text/javascript" src="../../scripts/jquery-html5Validate-min.js"></script>
+	<script type="text/javascript" src="../../scripts/common.js"></script>
+	<script type="text/javascript" src="../../scripts/postVideos.js"></script>
+</body>
+</html>

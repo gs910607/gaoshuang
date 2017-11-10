@@ -1,0 +1,205 @@
+@charset "utf-8";
+
+html,
+body,
+div,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+ol,
+li,
+a,
+span,
+em,
+i,
+b,
+strong,
+header,
+nav,
+article,
+aside,
+section,
+footer {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+body {
+	font-family: 'Microsoft Yahei';
+}
+.btnWrap {
+	padding: 18px 0;
+	text-align: center;
+	width: 100%;
+	background: #f8f8f8;
+	border-top: 1px solid #dcdcdc;
+}
+.btn {
+	padding: 10px 30px;
+	background: #53679c;
+	color: #fff;
+}
+.clearfix::after,
+.clearfix::before {
+	display: table;
+	content: '';
+}
+.clearfix::after {
+	clear: both;
+}
+.pull-left {
+	float: left;
+}
+.pull-right {
+	float: right;
+}
+img {
+	vertical-align: middle;
+	border: none;
+}
+li {
+	list-style: none;
+}
+a {
+	color: #000;
+	text-decoration: none!important;
+}
+a:hover {
+	color: #fe6700;
+}
+.wrapper {
+	width: 100%;
+	position: relative;
+	overflow: hidden;
+	min-width: 1200PX;
+	background: url("../images/body-bg.jpg") no-repeat center top / 100% 100%;
+}
+.container {
+	width: 1200px;
+	margin: 0 auto;
+	padding: 0;
+}
+.contentWrap {
+	padding-bottom: 28px;
+}
+header {
+	height: 80px;
+	min-width: 1200px;
+	background: url("../images/header-bg.jpg") no-repeat center top / 100% 100%;
+}
+header h1 {
+	height: 80px;
+	line-height: 80px;
+	display: inline-block;
+	padding-left: 33px;
+	font-size: 0;
+}
+.fabuBtn {
+	height: 80px;
+	line-height: 80px;
+	padding-right: 20px;
+}
+.fabuBtn > a {
+	padding: 10px 30px;
+	font-size: 14px;
+	color: #fff!important;
+	background: url("../images/btn-fabu.png") no-repeat center center /100% 100%;
+	border-radius: 5px;
+}
+footer {
+	min-width: 1200px;
+	height: 50px;
+	background: url("../images/footer-bg.jpg") no-repeat center top / 100% 100%;
+}
+.formLabel {
+	width: 100px;
+	float: left;
+}
+.formInput {
+	position: relative;
+	margin-left: 120px;
+}
+.iconTitle {
+	width: 199px;
+	height: 59px;
+	background: url("../images/littleTittle.png") no-repeat center center / 100% 100%;
+	position: absolute;
+	left: -1px;
+	top: -10px;
+	font-size: 20px;
+	color: #fff;
+	text-align: center;
+	line-height: 59px;
+}
+.content {
+	width:  100%;
+	border: 1px solid #ababab;
+	margin-top: 46px;
+	background: #fff;
+	position: relative;
+}
+.checkbox,
+.checkbox label,
+.checkbox input {
+	cursor: pointer;
+}
+.checkbox label {
+	display: inline;
+}
+.checkbox {
+	padding: 0!important;
+	line-height: 24px;
+	display: inline;
+}
+.form-control[disabled], 
+.form-control[readonly], 
+fieldset[disabled] .form-control {
+	background: #fff;
+}
+.Validform_checktip {
+	position: absolute;
+	top: -30px;
+	left: 0;
+	padding: 5px 10px;
+	background: red;
+	color: #fff;
+	display: none;
+	border-radius: 5px;
+}
+.Validform_checktip::after {
+	content: '';
+	position: absolute;
+	bottom: -16px;
+	left: 10px;
+	border: 8px solid #fff;
+	border-top-color: red;
+}
+.Validform_wrong {
+	display: block;
+}
+.Validform_right {
+	display: none;
+}
+.dropdown-menu {
+	padding: 0;
+}
+.glyphicon-arrow-left::before {
+	content: '《';
+}
+.glyphicon-arrow-right::before {
+	content: '》';
+}
+input.error {
+	border: 1px solid red;
+	color: red;
+}
+a.error {
+	color: red;
+	border: 1px solid red;
+	background: #fff;
+}
