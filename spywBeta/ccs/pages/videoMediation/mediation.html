@@ -1,0 +1,420 @@
+ <!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../css/main.css">
+    <link rel="stylesheet" type="text/css" href="../../css/aMediation.css">
+	<title>发起调解</title>
+	<style type="text/css">
+		html,
+		body,
+		.wrapper {
+			width: 100%;
+			height: 100%;
+		}
+		header {
+			position: fixed;
+			width: 100%;
+			top: 0;
+			z-index: 1000;
+		}
+		footer {
+			position: fixed;
+			width: 100%;
+			bottom: 0;
+			z-index: 1000;
+		}
+		.contentWrap {
+			padding: 80px 0 80px;
+		}
+	</style>
+</head>
+<body>
+	<div class="infoPubWrapper wrapper">
+		<header>
+			<h1><a href="mediationNav.html"><img src="../../images/shipintiaojie.png"></a></h1>
+			<div class="loginWrapper pull-right">
+				<span class="welcome">欢迎登录</span>
+				<span class="userName"></span>
+				<div class="userInfo">
+					<img src="../../images/user-icon.png">
+					<div class="dropWrap">
+						<ul>
+							<li><a id="adminLink" href="javascript:;">用户管理</a></li>
+							<li><a href="javascript:;">修改密码</a></li>
+							<li id="logout"><a href="javascript:;">退出</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</header>
+		<section class="contentWrap">
+			<div class="goBack"><a href="javascript:history.back();"><img src="../../images/goback-icon.png"></a></div>
+			<div class="container">
+				<div class="content">
+					<div class="iconTitle">发起调解</div>
+					<form id="html5Form" action="../../mediate/addMediate.do"  method="post" class="form-horizontal">
+						<div class="formWrap">
+							<fieldset id="partiesWrapper">
+								<legend>纠纷当事人信息</legend>
+								<div class="personList">
+									<ul id="partiesList" class="clearfix">
+									
+									</ul>
+								</div>
+								<div class="inlineGroup clearfix">
+									<div class="form-group">
+										<label for="partiesName" class="formLabel control-label"><sup>*</sup>姓名:</label>
+										<div class="formInput">
+											<input type="text" class="form-control"  id="partiesName" maxlength="10">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="partiesPhone" class="formLabel control-label"><sup>*</sup>手机号:</label>
+										<div class="formInput">
+											<input type="text" class="form-control"  id="partiesPhone">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="partiesAddress" class="formLabel control-label"><sup>*</sup>地址:</label>
+										<div class="formInput">
+											<input type="text" class="form-control"  id="partiesAddress">
+										</div>
+									</div>
+								</div>
+								<div id="partiesMediaArea" class="inlineGroup clearfix">
+									<div class="form-group">
+										<label class="formLabel control-label"><sup>*</sup>所在调解地点:</label>
+										<div class="formInput input-group">
+											<select id="district" class="form-control" id="district">
+												<option value="">请选择</option>
+											</select>
+											<div class="input-group-addon">区/县</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="formLabel control-label text-center"></label>
+										<div class="formInput input-group">
+											<select id="county" class="form-control" id="county">
+												<option value="">请选择</option>
+											</select>
+											<div class="input-group-addon">乡/镇</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="formLabel control-label text-center"></label>
+										<div class="formInput input-group">
+											<select id="village" class="form-control" id="village">
+												<option value="">请选择</option>
+											</select>
+											<div class="input-group-addon">村</div>
+										</div>
+									</div>
+								</div>
+								<div class="inlineGroup clearfix">
+									<div class="form-group">
+										<label for="partiesIdNumber" class="formLabel control-label"><sup>*</sup>身份证号:</label>
+										<div class="formInput">
+											<input type="text" class="form-control"  id="partiesIdNumber">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="partiesUnit" class="formLabel control-label"><sup>*</sup>单位名称:</label>
+										<div class="formInput">
+											<input type="text" class="form-control"  id="partiesUnit">
+										</div>
+									</div>
+								</div>
+								<div class="groupBtnWrap text-right">
+									<a id="addPartiesBtn" href="javascript:;" class="btn btn-primary">添加当事人</a>
+								</div>
+							</fieldset>
+							<fieldset id="mediateWrapper">
+								<legend>调解人信息</legend>
+								<div class="personList">
+									<ul id="mediateList" class="clearfix">
+										<li>张三<i>x</i></li>
+									</ul>
+								</div>
+								<div class="inlineGroup clearfix">
+									<div class="form-group">
+										<label for="mediateName" class="formLabel control-label"><sup>*</sup>调解人姓名:</label>
+										<div class="formInput">
+											<input type="text" class="form-control" id="mediateName" maxlength="10">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="mediatePid" class="formLabel control-label"><sup>*</sup>证件类型:</label>
+										<div class="formInput">
+											<select id="mediatePid" class="form-control">
+												<option value="">请选择</option>
+												<option value="身份证" selected>身份证</option>
+												<option value="护照">护照</option>
+												<option value="其他">其他</option>
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="mediatePidNumber" class="formLabel control-label"><sup>*</sup>证件号码:</label>
+										<div class="formInput">
+											<input type="text" class="form-control" id="mediatePidNumber">
+										</div>
+									</div>
+								</div>
+								<div id="mediatorArea" class="inlineGroup clearfix">
+									<div class="form-group">
+										<label class="formLabel control-label"><sup>*</sup>所在调解地:</label>
+										<div class="formInput input-group">
+											<select id="district" class="form-control" id="district">
+												<option value="">请选择</option>
+											</select>
+											<div class="input-group-addon">区/县</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="formLabel control-label text-center"></label>
+										<div class="formInput input-group">
+											<select id="county" class="form-control" id="county">
+												<option value="">请选择</option>
+											</select>
+											<div class="input-group-addon">乡/镇</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="formLabel control-label text-center"></label>
+										<div class="formInput input-group">
+											<select id="village" class="form-control" id="village">
+												<option value="">请选择</option>
+											</select>
+											<div class="input-group-addon">村</div>
+										</div>
+									</div>
+								</div>
+								<div class="inlineGroup clearfix">
+									<div class="form-group">
+										<label for="mediateCompleteAdd" class="formLabel control-label">详细地址:</label>
+										<div class="formInput">
+											<input type="text" class="form-control"  id="mediateCompleteAdd">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="mediateTelephone" class="formLabel control-label">固定电话:</label>
+										<div class="formInput">
+											<input type="text" class="form-control"  id="mediateTelephone">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="mediateCellphone" class="formLabel control-label"><sup>*</sup>手机号码:</label>
+										<div class="formInput">
+											<input type="text" class="form-control"  id="mediateCellphone">
+										</div>
+									</div>
+								</div>
+								<div class="groupBtnWrap text-right">
+									<a id="addMediateBtn" href="javascript:;" class="btn btn-primary">添加调解人</a>
+								</div>
+							</fieldset>
+							<div class="inlineGroup clearfix">
+								<div class="form-group">
+									<label for="mediateRegisUnit" class="formLabel control-label"><sup>*</sup>登记单位:</label>
+									<div class="formInput">
+										<input type="text" class="form-control"  id="mediateRegisUnit" required>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="mediateRegisName" class="formLabel control-label"><sup>*</sup>登记人:</label>
+									<div class="formInput">
+										<input type="text" class="form-control"  id="mediateRegisName" required>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="mediateRegisBranch" class="formLabel control-label"><sup>*</sup>登记部门:</label>
+									<div class="formInput">
+										<input type="text" class="form-control"  id="mediateRegisBranch" required>
+									</div>
+								</div>
+							</div>
+							<div class="inlineGroup clearfix">
+								<div class="form-group">
+									<label for="mediateNumber" class="formLabel control-label">调解人数:</label>
+									<div class="formInput">
+										<input type="text" class="form-control"  id="mediateNumber">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="mediateDate" class="formLabel control-label"><sup>*</sup>调解日期:</label>
+									<div class="formInput">
+										<input type="text" class="form-control" onclick="WdatePicker()" id="mediateDate" readonly required>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="mediateRegisDate" class="formLabel control-label"><sup>*</sup>登记日期:</label>
+									<div class="formInput">
+										<input type="text" class="form-control" onclick="WdatePicker()" id="mediateRegisDate" readonly required>
+									</div>
+								</div>
+							</div>
+							<div class="inlineGroup clearfix">
+								<div class="form-group">
+									<label for="startTime" class="formLabel control-label"><sup>*</sup>会议开始时间:</label>
+									<div class="formInput">
+										<input type="text" onclick="WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm:ss'})" class="form-control" id="startTime" readonly required>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="duration" class="formLabel control-label">会议时长:</label>
+									<div class="formInput">
+										<select id="duration" class="form-control" required>
+											<option value="1">1小时</option>
+											<option value="2">2小时</option>
+											<option value="3">3小时</option>
+											<option value="4">4小时</option>
+											<option value="5">5小时</option>
+											<option value="6">6小时</option>
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="recorded" class="formLabel control-label"><sup>*</sup>是否支持录播:</label>
+									<div class="formInput">
+										<select id="recorded" class="form-control" required>
+											<option value="1">是</option>
+											<option value="0" selected>否</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="inlineGroup clearfix">
+								<div class="form-group">
+									<label for="mediateIdentifier" class="formLabel control-label"><sup>*</sup>调解编号:</label>
+									<div class="formInput">
+										<input type="text" class="form-control"  id="mediateIdentifier" required>
+									</div>
+								</div>							
+								<div class="form-group">
+									<label for="mediatePurpose" class="formLabel control-label">调解目的:</label>
+									<div class="formInput">
+										<input type="text" class="form-control"  id="mediatePurpose">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="mediateReason" class="formLabel control-label">调解原因:</label>
+									<div class="formInput">
+										<input type="text" class="form-control" id="mediateReason">
+									</div>
+								</div>
+							</div>
+							<div class="inlineGroup clearfix">
+								<div class="form-group">
+									<label for="disputeType" class="formLabel control-label"><sup>*</sup>纠纷类型:</label>
+									<div class="formInput">
+										<select id="disputeType" class="form-control" required>
+											<option value="">请选择</option>
+											<option value="1">婚姻家庭纠纷</option>
+											<option value="2">邻里纠纷</option>
+											<option value="3">房屋宅基地纠纷</option>
+											<option value="4">合同纠纷</option>
+											<option value="5">损害赔偿纠纷</option>
+											<option value="6">劳动纠纷</option>
+											<option value="7">村务管理纠纷</option>
+											<option value="8">山林土地纠纷</option>
+											<option value="9">征地拆迁纠纷</option>
+											<option value="10">环境污染纠纷</option>
+											<option value="11">道路交通事故纠纷</option>
+											<option value="12">物业纠纷</option>
+											<option value="13">医疗纠纷</option>
+											<option value="14">其他纠纷</option>
+										</select>
+									</div>
+								</div>
+								<div style="display:none;" id="MediaResultWrap" class="form-group">
+									<label for="MediaResult" class="formLabel control-label">调解结果:</label>
+									<div class="formInput">
+										<input type="text" class="form-control" id="MediaResult">
+									</div>
+								</div>
+							</div>
+							<div style="display:none;" id="overViewWrap" class="form-group">
+								<label for="Overview" class="formLabel control-label">概况信息:</label>
+								<div class="formInput">
+									<textarea style="min-height:60px;resize:vertical;" id="Overview" class="form-control"></textarea>
+								</div>
+							</div>
+							<div id="clerkMediaArea" class="inlineGroup clearfix">
+								<div class="form-group">
+									<label style="width:130px;margin-left:-30px;" class="formLabel control-label"><sup>*</sup>书记员所在调解地:</label>
+									<div class="formInput clearfix" id="allAddress">
+										<div class="input-group">
+											<select id="cityLevel" class="form-control" id="city">
+												<option value="1">淮安市</option>
+											</select>
+											<div class="input-group-addon">市</div>
+										</div>
+										<div class="input-group">
+											<select id="district" class="form-control" >
+												<option value="">请选择</option>
+											</select>
+											<div class="input-group-addon">区/县</div>
+										</div>
+										<div class="input-group">
+											<select id="county" class="form-control">
+												<option value="">请选择</option>
+											</select>
+											<div class="input-group-addon">乡/镇</div>
+										</div>
+										<div class="input-group">
+											<select id="village" class="form-control">
+												<option value="">请选择</option>
+											</select>
+											<div class="input-group-addon">村</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="inlineGroup clearfix">
+								<div class="form-group">
+									<label for="clerkName" class="formLabel control-label"><sup>*</sup>书记员姓名:</label>
+									<div class="formInput">
+										<input type="text" class="form-control"  id="clerkName"  required>
+									</div>
+								</div>							
+								<div class="form-group">
+									<label for="clerkUnit" class="formLabel control-label"><sup>*</sup>书记员单位:</label>
+									<div class="formInput">
+										<input type="text" class="form-control"  id="clerkUnit" required>
+									</div>
+								</div>
+							</div>
+						</div>
+						<input hidden="hidden" name="mediateid" value="" id="mediateid">
+						<input hidden="hidden" id="mediateAddress" value="">
+						<div class="btnWrap">
+							<button type="submit" class="btn btn-primary" id="create">创建调解</button>
+							<a class="btn btn-primary" id="textDownload">调解协议文本下载</a>
+						</div>
+					</form>
+					<form id="downDocxForm" action="../../upload/video/测试文本协议.docx" method="post" style="display:none;">
+								
+					</form>
+				</div>
+			</div>
+		</section>
+		<footer></footer>
+	</div>
+
+	<script type="text/javascript" src="../../scripts/jQuery v2.1.1.min.js"></script>
+	<script type="text/javascript" src="../../scripts/jquery.placeholder.min.js"></script>
+	<script type="text/javascript">
+		$(function(){ $('input, textarea').placeholder(); });
+	</script>
+	<script type="text/javascript" src="../../scripts/MyDatePicker/WdatePicker.js"></script>
+	<script type="text/javascript" src="../../scripts/jquery-html5Validate-min.js"></script>
+	<script type="text/javascript" src="../../scripts/common.js"></script>
+	<script type="text/javascript" src="../../scripts/areaList.js"></script>
+	<script type="text/javascript" src="../../scripts/selectArea.js"></script>
+	<script type="text/javascript" src="../../scripts/aMediation.js"></script>
+</body>
+</html>

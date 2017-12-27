@@ -1,0 +1,130 @@
+@charset "utf-8";
+
+html,body {
+	width: 100%;
+	height: 100%;
+}
+.wrapper {
+	min-width: 800px;
+}
+.homeWrapper {
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+	background: url("../images/index-bg.jpg") no-repeat center top / 100% 100%;
+	transition: background .3s;
+}
+.homeWrapper.bg2 {
+	background: url("../images/index-bg2.jpg") no-repeat center top / 100% 100%;
+	transition: background .3s;
+}
+.title {
+	position: absolute;
+	top: 6%;
+	width: 100%;
+	height: 10%;
+	text-align: center;
+}
+.title img {
+	height: 100%;
+}
+.section {
+	position: absolute;
+	top: 22%;
+	width: 100%;
+}
+.contentWrap {
+	padding: 5% 0;
+	background: rgba(0,0,0,0.1);
+}
+.childPageList {
+	width: 65%;
+	min-width: 300px;
+	margin: 0 auto;
+}
+.childPageList li {
+	float: left;
+	width: 25%;
+	text-align: center;
+}
+.childPageList li.fourGroup {
+	margin-bottom: 4%;
+}
+.childPageList li > a {
+	display: inline-block;
+	width: 60%;
+}
+.childPageList li > a  > img {
+	width: 100%;
+}
+.childPageList .picDes {
+	/*padding-top: 130px;*/
+	font-size: 20px;
+	color: #fff!important;
+	text-align: center;
+}
+.more {
+	color: #fff;
+	font-size: 30px;
+	position: absolute;
+	bottom: 2%;
+	right: 43px;
+}
+.more a {
+	color: #fff!important;
+}
+.moreIcon {
+	display: inline-block;
+	width: 31px;
+	height: 31px;
+	vertical-align: middle;
+	background: url(../images/more-icon.png) no-repeat center center / 100% 100%;
+}
+
+#toCompleteModal .modal-dialog {
+	width: 400px;
+}
+#toCompleteModal .modal-body {
+	padding: 30px;
+}
+
+
+#infoFormDialog .formWrap .form-group {
+	margin-left: 0;
+	margin-right: 0;
+}
+#infoFormDialog .inlineGroup .form-group {
+	width: 33.33%;
+	float: left;
+}
+#infoFormDialog .inputWrapper .form-group {
+	margin-right: 10px;
+}
+#infoFormDialog #district, 
+#infoFormDialog #county {
+	width: 150px;
+}
+#infoFormDialog #village {
+	width: 150px;
+}
+#infoFormDialog .form-horizontal {
+	padding: 20px;
+	padding-left: 0;
+}
+#infoFormDialog .form-horizontal .form-group {
+	margin-left: 0;
+	margin-right: 0;
+}
+#infoFormDialog .modal-dialog {
+	width: 1000px;
+}
+#infoFormDialog .modal-footer {
+	text-align: center;
+}
+#validateRemind {
+	z-index: 9999!important;
+}
+.loginWrapper .dropWrap a:hover {
+	color: #fff;
+}

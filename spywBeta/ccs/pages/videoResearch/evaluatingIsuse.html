@@ -1,0 +1,123 @@
+ <!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../css/main.css">
+    <link rel="stylesheet" type="text/css" href="../../css/evaluatingIsuse.css">
+	<title>发起测评</title>
+	<style type="text/css">
+		html,
+		body,
+		.wrapper {
+			width: 100%;
+			height: 100%;
+		}
+		header {
+			position: fixed;
+			width: 100%;
+			top: 0;
+			z-index: 1000;
+		}
+		footer {
+			position: fixed;
+			width: 100%;
+			bottom: 0;
+			z-index: 1000;
+		}
+		.contentWrap {
+			padding: 80px 0 80px;
+		}
+	</style>
+</head>
+<body>
+	<div class="infoPubWrapper wrapper">
+		<header>
+			<h1><a href="researchNav.html"><img src="../../images/minyidiaocha.png"></a></h1>
+			<div class="loginWrapper pull-right">
+				<span class="welcome">欢迎登录</span>
+				<span class="userName"></span>
+				<div class="userInfo">
+					<img src="../../images/user-icon.png">
+					<div class="dropWrap">
+						<ul>
+							<li><a id="adminLink" href="javascript:;">用户管理</a></li>
+							<li><a href="javascript:;">修改密码</a></li>
+							<li id="logout"><a href="javascript:;">退出</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</header>
+		<section class="contentWrap">
+			<div class="goBack"><a href="javascript:history.back();"><img src="../../images/goback-icon.png"></a></div>
+			<div class="container">
+				<div class="content">
+					<div class="iconTitle">发起测评</div>
+					<form id="html5Form" action="javascript:;" class="form-horizontal">
+						<div class="formWrap">
+							<div class="form-group">
+								<label for="surveyTitle" class="formLabel control-label">调查标题:</label>
+								<div class="formInput">
+									<input type="text" class="form-control" id="surveyTitle" required>
+								</div>
+							</div>
+							<div class="inlineGroup clearfix">
+								<div class="form-group">
+									<label for="dateStart" class="formLabel control-label">开始日期:</label>
+									<div class="formInput">
+										<input type="text" class="form-control" onclick="WdatePicker()" id="dateStart" readonly required>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="dateEnd" class="formLabel control-label">结束日期:</label>
+									<div class="formInput">
+										<input type="text" class="form-control" onclick="WdatePicker()" id="dateEnd" readonly required>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="formLabel control-label">调查问卷:</label>
+								<div class="formInput questionnaire">
+									<ul class="quesnaireList clearfix">
+										<!-- <li class="active"><i>x</i><span>第1题</span></li>
+										<li id="addQuestBtn" class="addQuest"><span>+</span></li> -->
+									</ul>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="questions" class="formLabel control-label">调查试题:</label>
+								<div class="formInput">
+									<input type="text" class="form-control" id="questions">
+									<div class="answerOptions">
+										<ul class="answerList clearfix">
+											<!-- <li><span>地面道路泊车位</span><i>x</i></li>
+											<li><span>地面道路泊车位</span><i>x</i></li>
+											<li><span>地面道路泊车位</span><i>x</i></li>
+											<li><span>地面道路泊车位</span><i>x</i></li> -->
+										</ul>
+										<p id="addAnsBtn" class="addAnsBtn">新建选项</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="btnWrap">
+							<button type="submit" id="evalutlsuse" class="btn btn-primary">确认</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</section>
+		<footer></footer>
+	</div>
+
+	<script src="../../scripts/jQuery v2.1.1.min.js"></script>
+	<script type="text/javascript" src="../../scripts/jquery.placeholder.min.js"></script>
+	<script type="text/javascript" src="../../scripts/jquery-html5Validate-min.js"></script>
+	<script type="text/javascript" src="../../scripts/MyDatePicker/WdatePicker.js"></script>
+	<script type="text/javascript" src="../../scripts/common.js"></script>
+	<script type="text/javascript" src="../../scripts/evaluatingIsuse.js"></script>
+</body>
+</html>

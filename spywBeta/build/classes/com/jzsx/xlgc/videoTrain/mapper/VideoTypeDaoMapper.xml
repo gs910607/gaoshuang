@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd"> 
+<mapper  namespace="com.jzsx.xlgc.videoTrain.Dao.VideoTypeDao">
+
+	<resultMap type="com.jzsx.xlgc.bean.VideoType" id="BaseResultMap">
+	    <id property="videoTypeId" column="t_video_typeId"/>
+	    <result property="videoTypeName" column="t_video_typeName"/>
+    </resultMap>
+    
+  	<!-- 根据多个手机号查询多个会议成员的信息 -->
+  	<select id="queryVideoTypeList" resultMap="BaseResultMap">
+        select * from t_video_type order by t_video_typeId asc
+    </select>
+	<select id="queryVideoTypeById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select * from t_video_type where t_video_typeId=#{videoTypeId}
+	</select>
+	<select id="queryVideoTypeByIdNotEqual" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select * from t_video_type where t_video_typeId !=#{videoTypeId}
+	</select>
+	<insert id="insertActive" parameterType="com.jzsx.xlgc.bean.VideoType">
+		insert into t_video_type (
+		<if test="videoTypeId !=null and videoTypeId !=0">
+			t_video_typeId,
+		</if>
+		<if test="videoTypeName !=null and videoTypeName !=''">
+			t_video_typeName
+		</if>
+		)
+		values(
+			<if test="videoTypeId !=null and videoTypeId !=0">
+			#{videoTypeId},
+		</if>
+		<if test="videoTypeName !=null and videoTypeName !=''">
+			#{videoTypeName}
+		</if>
+		)
+	</insert>
+</mapper>

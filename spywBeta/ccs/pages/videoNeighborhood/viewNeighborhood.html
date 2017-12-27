@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../css/pager.css">
+    <link rel="stylesheet" type="text/css" href="../../css/main.css">
+    <link rel="stylesheet" type="text/css" href="../../css/viewNeighborhood.css">
+	<title>视频接访</title>
+	<style type="text/css">
+		html,
+		body,
+		.wrapper {
+			width: 100%;
+			height: 100%;
+		}
+		header {
+			position: fixed;
+			width: 100%;
+			top: 0;
+			z-index: 1000;
+		}
+		footer {
+			position: fixed;
+			width: 100%;
+			bottom: 0;
+			z-index: 1000;
+		}
+		.contentWrap {
+			padding: 80px 0 80px;
+		}
+		.margin_group{
+			margin-left : 80px
+		}
+		.formlable{
+			width:90px;
+			text-align: right;
+		}
+		.formright{
+			margin-right : 0!important
+		}
+		.inputWrapper input{
+			width :171px !important;
+		}
+	</style>
+</head>
+<body>
+	<div class="viewMediationWrapper wrapper">
+		<header>
+			<h1 class="pull-left"><a href="neighborhoodNav.html"><img src="../../images/shipinjiefang.png"></a></h1>
+			<div class="loginWrapper pull-right">
+				<span class="welcome">欢迎登录</span>
+				<span class="userName"></span>
+				<div class="userInfo">
+					<img src="../../images/user-icon.png">
+					<div class="dropWrap">
+						<ul>
+							<li><a id="adminLink" href="javascript:;">用户管理</a></li>
+							<li><a href="javascript:;">修改密码</a></li>
+							<li id="logout"><a href="javascript:;">退出</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</header>
+		<section class="contentWrap">
+			<div class="goBack"><a href="javascript:history.back();"><img src="../../images/goback-icon.png"></a></div>
+			<div class="container">
+				<div class="content">
+					<div class="iconTitle">查看接访</div>
+					<div class="formWrap">
+						<form id="html5Form" class="form-inline clearfix ">
+							<div class="inputWrapper">
+								<div class="form-group">
+									<label for="mediatePer" class="formlable">信访人姓名:</label>
+									<input type="text" class="form-control" id="mediatePer">
+								</div>
+								<div class="form-group">
+									<label for="department" class="formlable">信访编号:</label>
+									<input type="text" class="form-control" id="department">
+								</div>
+								<div class="form-group">
+									<label class="formlable">信访时间:</label>
+									<input type="text" class="form-control" onclick="WdatePicker()" id="startTime" readonly>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<input type="text" class="form-control" onclick="WdatePicker()" id="endTime" readonly>
+								</div>
+							</div>
+								
+							<div class="inputWrapper">
+								<div class="form-group" id="distvill">
+									<label class = "formlable">信访人所在地:</label>
+									<div class="input-group">
+										<select style="width:150px;" id="district" class="form-control">
+											<option value="">请选择</option>
+										</select>
+										<div class="input-group-addon">区/县</div>
+									</div>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<div class="input-group">
+										<select style="width:150px;" id="county" class="form-control">
+											<option value="">请选择</option>
+										</select>
+										<div class="input-group-addon">乡/镇</div>
+									</div>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<div class="input-group">
+										<select style="width:150px;" id="village" class="form-control">
+											<option value="">请选择</option>
+										</select>
+										<div class="input-group-addon">村</div>
+									</div>
+								</div>
+								<div class="form-group formright">
+									<a id="export" href="javascript:void(0);" style="padding-top:6px;padding-bottom:6px;display:none;float:right;margin-left:20px" class="btn btn-primary" onclick="VideoNeighborhoodlistexport()">导出</a>
+									<a id="searchBtn" href="javascript:;" style="padding-top:6px;padding-bottom:6px;float:right" class="btn btn-primary" onclick="VideoNeighborhoodlistSearch(1)">搜索</a>
+								</div>
+								
+	<!-- 							<div class="form-group"> -->
+	<!-- 								<label for="area">办理方式:</label> -->
+	<!-- 								<input type="text" class="form-control" id="area"> -->
+	<!-- 							</div> -->
+	<!-- 							<div class="form-group"> -->
+	<!-- 								<label for="time">查询码状态:</label> -->
+	<!-- 								<input type="text" class="form-control" id="time"> -->
+	<!-- 							</div> -->
+							</div>
+							<!-- <div class="btnWrapper">
+								<a id="searchBtn" href="javascript:;" style="padding-top:6px;padding-bottom:6px;" class="btn btn-primary" onclick="VideoNeighborhoodlistSearch(1)">搜索</a>
+								<a id="export" href="javascript:void(0);" style="padding-top:6px;padding-bottom:6px;display:none;" class="btn btn-primary" onclick="VideoNeighborhoodlistexport()">导出</a>
+							</div> -->
+						</form>
+						<form id="exportForm" action="/spywBeta/videoNeighborhood/videoNeighborhoodexport.do">
+							<input type="hidden" name="pagesize" id="pagesize"/>
+							<input type="hidden" name="videoneihdName" id="videoneihdName"/>
+							<input type="hidden" name="videoneihdNum" id="videoneihdNum"/>
+							<input type="hidden" name="videoneihdDate" id="videoneihdDate"/>
+							<input type="hidden" name="videoneihdRegistDate" id="videoneihdRegistDate"/>
+							<input type="hidden" name="videoneihdLocationplace" id="videoneihdLocationplace"/>
+							<input type="hidden" name="videoneihdTypeExport" id="videoneihdTypeExport" value="1"/>
+						</form>
+					</div>
+					<div class="infoList">
+						<table class="table table-bordered table-hover">
+							<thead>
+								<tr>
+									<td>信访编号</td>
+									<td width="100">信访日期</td>
+									<td>信访人</td>
+									<td>登记人</td>
+<!-- 									<td>信访目的</td> -->
+<!-- 									<td>信访方式</td> -->
+									<td>问题归集地</td>
+									<td width="160">信访开始时间</td>
+									<td>信访时长</td>
+									<td>信访接入码</td>
+									<td>会控</td>
+									<td>状态</td>
+<!-- 									<td>问题类型</td> -->
+<!-- 									<td>办理方式</td> -->
+<!-- 									<td>状态</td> -->
+<!-- 									<td>查询状态</td> -->
+									<td width="100">操作</td>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+					</div>
+					<div class="paging">
+						<ul class="pagination" id="page2">
+						</ul>
+						<div class="pageJump">
+							<span>跳转到</span>
+							<input type="text"/>
+							<span>页</span>
+							<button type="button" class="button">确定</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<footer></footer>
+	</div>
+
+	<!-- 修改状态 -->
+	<div id="changeStatusModal" class="modal fade" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title">接访结果</h4>
+	      </div>
+	      <div class="modal-footer" style="text-align:center;padding:50px 0;">
+	        <button id="successType" data-type="1" type="button" style="padding:10px 30px;margin:0 30px;" class="btn btn-primary">接访成功</button>
+	        <button id="defeated" data-type="2" type="button" style="padding:10px 30px;margin:0 30px;" class="btn btn-primary">接访失败</button>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
+	<div id="lookCodeModal" class="modal fade" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-body text-center">
+					654123
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+	
+	<script type="text/javascript" src="../../scripts/jQuery v2.1.1.min.js"></script>
+	<script type="text/javascript" src="../../scripts/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../../scripts/MyDatePicker/WdatePicker.js"></script>
+	<script type="text/javascript" src="../../scripts/pager.js"></script>
+	<script type="text/javascript" src="../../scripts/jquery-html5Validate-min.js"></script>
+	<script type="text/javascript" src="../../scripts/common.js"></script>
+	<script type="text/javascript" src="../../scripts/areaList.js"></script>
+	<script type="text/javascript" src="../../scripts/selectArea.js"></script>
+	<script type="text/javascript" src="../../scripts/viewNeighborhood.js"></script>
+</body>
+</html>

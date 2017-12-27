@@ -1,0 +1,36 @@
+@charset 'utf-8';
+
+.content {
+	border-bottom: none;
+}
+.formWrap {
+	padding: 82px 40px 50px;
+}
+.detailTit {
+	font-size: 20px;
+	color: #fff;
+	text-align: center;
+	padding: 10px 0;
+	background: #006980;
+}
+.contWrap {
+	border: 2px solid #000;
+}
+.detailCont {
+	padding: 10px;
+}
+.questionsList li.quesItem {
+	margin-bottom: 5px;
+}
+.questionsList li.quesItem dt {
+	font-size: 16px;
+}
+.questionsList li.quesItem dd {
+	padding-left: 25px;
+	font-size: 16px;
+}
+.questionsList .answerItem {
+	width: 33.33%;
+	float: left;
+	padding: 2px 0;
+}

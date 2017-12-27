@@ -1,0 +1,33 @@
+@charset "utf-8";
+
+.formWrap {
+	padding: 82px 40px 10px;
+}
+.infoList {
+	padding: 0 40px;
+}
+.infoList thead {
+	background: #F4F7FA;
+}
+.artTitle {
+	max-width: 400px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.infoList .operation a {
+	margin: 0 6px;
+}
+.paging {
+	padding: 0 40px 30px;
+	text-align: right;
+}
+.inputWrapper {
+	width: 80%;
+}
+.btnWrapper {
+	width: 20%;
+}
+.inputWrapper .form-group {
+	margin-bottom: 20px;
+}

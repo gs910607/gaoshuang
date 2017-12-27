@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd"> 
+<mapper  namespace="com.jzsx.xlgc.area.Dao.AreaDao">
+
+	<resultMap type="com.jzsx.xlgc.bean.Area" id="BaseResultMap">
+	    <id property="id" column="ID"/>
+	    <result property="code" column="CODE" />
+	    <result property="name" column="NAME" />
+	    <result property="parentId" column="PARENT_ID" />
+	    <result property="alevel" column="ALEVEL" />
+	    <result property="hphone" column="HPHONE" />
+	    <result property="sphone" column="SPHONE" />
+	    <result property="mcu" column="MCU" />
+    </resultMap>
+    
+    <resultMap type="com.jzsx.xlgc.bean.Area" id="CeshiResultMap">
+	    <result property="code" column="CODE" />
+	    <result property="name" column="NAME" />
+    </resultMap>
+    
+    <select id="queryListq" resultMap="CeshiResultMap">
+        select code,name from AREA
+    </select>
+  	<!-- 根据多个手机号查询多个会议成员的信息 -->
+  	<select id="queryList" resultMap="BaseResultMap">
+        select * from AREA
+    </select>
+    <select id="queryByALl" parameterType="com.jzsx.xlgc.bean.Area" resultMap="BaseResultMap">
+	   	 select * from AREA where 1=1
+    </select>
+    <select id="queryById" parameterType="java.lang.String" resultMap="BaseResultMap">
+    	select * from AREA where ID=#{id}
+    </select>
+    <select id="queryByCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+    	select * from AREA where CODE=#{code}
+    </select>
+    <select id="queryByParentId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    	select * from AREA where PARENT_ID=#{parentId}
+    </select>
+    <select id="queryBychilds" parameterType="java.lang.String" resultMap="BaseResultMap">
+    	select * from area start with PARENT_ID=#{parentId} connect by prior code=PARENT_ID
+    </select>
+    <select id="queryByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    	select * from AREA where NAME LIKE  '%'||#{name}||'%'
+    </select>
+    <select id="queryByParents" parameterType="java.lang.String" resultMap="BaseResultMap">
+    	select * from AREA t where code=(select parent_id from AREA t where code =(select parent_id from AREA t where code=#{code}))
+		union all
+		select * from AREA t where code =(select parent_id from AREA t where code=#{code})
+		union all
+		select * from AREA t where code=#{code}
+    </select>
+    <delete id="deleteById" parameterType="java.lang.String">
+    	delete from AREA where ID=#{id}
+    </delete>
+    
+    <select id="selectByCode" parameterType="String" resultType="String">
+    select hphone from area where code in(#{code})    
+    </select>
+	<insert id="insertActive" parameterType="com.jzsx.xlgc.bean.Area">
+	
+	</insert>
+	<update id="updateActive" parameterType="com.jzsx.xlgc.bean.Area">
+
+	</update>
+	
+</mapper>

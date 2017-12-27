@@ -1,0 +1,118 @@
+@charset "utf-8";
+
+.container {
+	width: 1100px;
+}
+.formWrap {
+	padding: 82px 40px 30px;
+}
+textarea.messageContent {
+	width: 100%;
+	min-height: 50px;
+	resize: vertical;
+}
+.videoListWrap {
+	margin-top: 30px;
+}
+.videoName {
+	width: 350px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	text-align: left;
+}
+.videoName > img {
+	float: left;
+	margin-right: 10px;
+} 
+.table > tbody > tr > td,
+.table > tbody > tr > th, 
+.table > tfoot > tr > td, 
+.table > tfoot > tr > th, 
+.table > thead > tr > td, 
+.table > thead > tr > th {
+	text-align: center;
+	vertical-align: middle;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.formWrap .form-group {
+	margin-left: 0;
+	margin-right: 0;
+}
+.inlineGroup .form-group {
+	width: 33.33%;
+	float: left;
+}
+#district, #county {
+	width: 159px;
+}
+#village {
+	width: 179px;
+}
+fieldset {
+    min-width: 0;
+    padding: 0 10px;
+    margin: 10px -10px;
+    border: 1px dashed #ccc;
+}
+legend {
+	display: inline;
+	width: auto;
+	padding: 0;
+	margin-bottom: 10px;
+	font-size: 14px;
+	line-height: inherit;
+	color: #000;
+	font-weight: bold;
+	border: 0;
+}
+.everyWeekDay .weekday,.everyDay .days {/*解决span不支持width属性*/display: -moz-inline-box;display: inline-block;margin: 5px 0 0 20px;text-align: center;width: 20px;border: 1px solid #F7F7F7;cursor: pointer;}		
+.marginTop{margin-top: 5px;}
+.selectStyle{padding-left: 10px;border: none;border-radius: 3px;outline: none;appearance: none;-moz-appearance: none;-webkit-appearance: none;margin: 0 10px 0 10px;width: 60px;border-color: #0FB9EF;color: #0FB9EF;}       
+
+#clerkMediaArea .form-group {
+	width: 100%;
+}
+#clerkMediaArea .input-group {
+	width: 25%;
+	float: left;
+	padding: 0 10px;
+}
+#clerkMediaArea #district,
+#clerkMediaArea #county,
+#clerkMediaArea #village {
+	width: 100%;
+}
+#clerkMediaArea .formInput {
+	margin-left: 110px;
+	margin-right: -10px;
+}
+
+.personList {
+	padding: 10px;
+	background: #EBF4F6;
+	margin-bottom: 10px;
+}
+.personList li {
+	float: left;
+	width: 21%;
+	margin: 5px 2%;
+	background: #fff;
+	height: 40px;
+	line-height: 40px;
+	position: relative;
+	text-align: center;
+	cursor: pointer;
+}
+.personList li i {
+	display: block;
+	width: 40px;
+	height: 40px;
+	text-align: center;
+	background: #e8e8e8;
+	float: right;
+	font-style: normal;
+	cursor: pointer;
+}

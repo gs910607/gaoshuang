@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd"> 
+<mapper  namespace="com.jzsx.xlgc.problempaper.Dao.ProblemPaperQuestOptionDao">
+
+	<resultMap type="com.jzsx.xlgc.bean.ProblemPaperQuestOption" id="BaseResultMap">
+	    <id property="paperquestOptionId" column="t_paperquest_optionId"/>
+	    <result property="paperquestOptionQuestId" column="t_paperquest_option_questId" />
+	    <result property="paperquestOptionName" column="t_paperquest_option_name" />
+<!-- 	    <association property="problemPaperQuestinfo" column="t_paperquest_option_questId" select="com.jzsx.xlgc.problempaper.Dao.ProblemPaperQuestDao.queryById"></association> -->
+    </resultMap>
+    
+  	<!-- 根据多个手机号查询多个会议成员的信息 -->
+  	<select id="querylist" resultMap="BaseResultMap">
+        select * from t_problem_paper_quest_option
+    </select>
+    <select id="queryByAll" parameterType="com.jzsx.xlgc.bean.ProblemPaperQuestOption" resultMap="BaseResultMap">
+	   	 select * from t_problem_paper_quest_option where 1=1
+<!-- 		   	<if test="problempaperName !=null and problempaperName !='' "> -->
+<!-- 		   	 	and  t_problempaper_name like '%${problempaperName}%' -->
+<!-- 		   	 </if> -->
+<!-- 		   	 order by t_problempaper_time desc -->
+    </select>
+    <select id="queryById" parameterType="java.lang.String" resultMap="BaseResultMap">
+    	select * from t_problem_paper_quest_option where t_paperquest_optionId=#{paperquestOptionId}
+    </select>
+    <select id="queryByParentId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    	select * from t_problem_paper_quest_option where t_paperquest_option_questId=#{paperquestOptionQuestId}
+    </select>
+    <delete id="deleteById" parameterType="java.lang.String">
+    	delete from t_problem_paper_quest_option where t_paperquest_optionId=#{paperquestOptionId}
+    </delete>
+    <delete id="deleteByParentId" parameterType="java.lang.String">
+    	delete from t_problem_paper_quest_option where t_paperquest_option_questId=#{paperquestOptionQuestId}
+    </delete>
+	<insert id="insertActive" parameterType="com.jzsx.xlgc.bean.ProblemPaperQuestOption">
+		insert into t_problem_paper_quest_option 
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="paperquestOptionId != null and paperquestOptionId !='' ">
+				t_paperquest_optionId,
+			</if>
+			<if test="paperquestOptionQuestId != null and paperquestOptionQuestId !=''">
+				t_paperquest_option_questId,
+			</if>
+			<if test="paperquestOptionName != null and paperquestOptionName !=''">
+				t_paperquest_option_name,
+			</if>
+		</trim>
+		values
+			<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="paperquestOptionId != null and paperquestOptionId !='' ">
+				#{paperquestOptionId},
+			</if>
+			<if test="paperquestOptionQuestId != null and paperquestOptionQuestId !=''">
+				#{paperquestOptionQuestId},
+			</if>
+			<if test="paperquestOptionName != null and paperquestOptionName !=''">
+				#{paperquestOptionName},
+			</if>
+			</trim>
+	</insert>
+</mapper>

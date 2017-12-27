@@ -1,0 +1,207 @@
+ <!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../css/main.css">
+    <link rel="stylesheet" type="text/css" href="../../css/pager.css">
+    <link rel="stylesheet" type="text/css" href="../../css/trainOnlineCreate.css">
+	<title>创建培训</title>
+	<style type="text/css">
+		html,
+		body,
+		.wrapper {
+			width: 100%;
+			height: 100%;
+		}
+		header {
+			position: fixed;
+			width: 100%;
+			top: 0;
+			z-index: 1000;
+		}
+		footer {
+			position: fixed;
+			width: 100%;
+			bottom: 0;
+			z-index: 1000;
+		}
+		.contentWrap {
+			padding: 80px 0 80px;
+		}
+	</style>
+</head>
+<body>
+	<div class="infoPubWrapper wrapper">
+		<header>
+			<h1><a href="videoTrainNav.html"><img src="../../images/shipinpeixun.png"></a></h1>
+			<div class="loginWrapper pull-right">
+				<span class="welcome">欢迎登录</span>
+				<span class="userName"></span>
+				<div class="userInfo">
+					<img src="../../images/user-icon.png">
+					<div class="dropWrap">
+						<ul>
+							<li><a id="adminLink" href="javascript:;">用户管理</a></li>
+							<li><a href="javascript:;">修改密码</a></li>
+							<li><a href="javascript:;">退出</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</header>
+		<section class="contentWrap">
+			<div class="goBack"><a href="javascript:history.back();"><img src="../../images/goback-icon.png"></a></div>
+			<div class="container">
+				<div class="content">
+					<div class="iconTitle">创建培训</div>
+					<form id="html5Form" action="javascript:;" class="form-horizontal">
+						<div class="formWrap">
+							<div class="form-group">
+								<label for="conferName" class="formLabel control-label">培训名称:</label>
+								<div class="formInput">
+									<input type="text" class="form-control" id="conferName" required maxlength="50">
+								</div>
+							</div>
+							<div class="twoCol clearfix">
+								<div class="form-group">
+									<label for="startTime" class="formLabel control-label">开始时间:</label>
+									<div class="formInput">
+										<input type="text" onclick="WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm:ss'})" class="form-control" id="startTime" required>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="duration" class="formLabel control-label">培训时长:</label>
+									<div class="formInput">
+										<select id="duration" class="form-control" required>
+											<option value="1">1小时</option>
+											<option value="2">2小时</option>
+											<option value="3">3小时</option>
+											<option value="4">4小时</option>
+											<option value="5">5小时</option>
+											<option value="6">6小时</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="twoCol clearfix">
+								<div class="form-group">
+									<label for="conferCode" class="formLabel control-label">培训接入码:</label>
+									<div class="formInput">
+										<input type="text" class="form-control" id="conferCode" required>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for=recorded"" class="formLabel control-label">是否支持录播:</label>
+									<div class="formInput">
+										<select id="recorded" class="form-control" required>
+											<option value="1">是</option>
+											<option value="0" selected>否</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<!-- <div class="form-group">
+								<label for="" class="formLabel control-label">培训发起方:</label>
+								<div class="formInput linkage clearfix">
+									<div class="input-group">
+										<select id="district" class="form-control" required>
+											<option value="">请选择</option>
+										</select>
+										<div class="input-group-addon">区/县</div>
+									</div>
+									<div class="input-group">
+										<select id="county" class="form-control">
+											<option value="">请选择</option>
+										</select>
+										<div class="input-group-addon">乡/镇</div>
+									</div>
+									<div class="input-group">
+										<select id="village" class="form-control">
+											<option value="">请选择</option>
+										</select>
+										<div class="input-group-addon">村</div>
+									</div>
+								</div>
+							</div> -->
+						</div>
+						<div class="btnWrap">
+							<button type="submit" class="btn btn-primary">创建培训</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</section>
+		<footer></footer>
+	</div>
+
+	<!-- 选择开会人员 -->
+	<div class="modal fade" id="assembly" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">会场信息</h4>
+				</div>
+				<div class="modal-body">
+					<div class="bodyContent clearfix">
+						<div style="width:20%" class="innerUl pull-left">
+						</div>
+						<div style="width:55%;" class="infoList pull-left">
+							<div class="infoList">
+								<table class="table table-bordered table-hover">
+									<thead style="background:#dff2f7;">
+										<tr>
+											<td width="37" style="padding:0"><label><input v-model="checkAll" id="checkAll" @change.stop="ischeckAll" type="checkbox"></label></td>
+											<td style="text-align:left;"><label for="checkAll" v-text="allArea"></label></td>
+										</tr>
+									</thead>
+									<tbody>
+										<tr v-for="item in areaItems">
+											<td style="padding:0"><label><input style="margin:0;" type="checkbox" :id="'a'+item.areaCode" @change="selectOne($event)" :value="item" v-model="checkedNames"></td>
+											</label><td><label :for="'a'+item.areaCode"><p v-text="item.areaName"></p></label></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="paging">
+								<ul class="pagination" id="page2">
+								</ul>
+								<div class="pageJump">
+									<span>跳转到</span>
+									<input type="text"/>
+									<span>页</span>
+									<button type="button" class="button">确定</button>
+								</div>
+							</div>
+						</div>
+						<div style="width:25%" class="selectedPerson pull-left">
+							<h4>已选择：<span v-text="selectedCount"></span></h4>
+							<ul>
+								<li @click="removeItem(item)" v-for="item in checkedNames" :id="item.areaCode" :title="item.areaName"><span v-text="item.areaName"></span></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer" style="text-align:center;">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button @click="createSureBtn" type="button" class="btn btn-primary">确定创建</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="../../scripts/jQuery v2.1.1.min.js"></script>
+	<script type="text/javascript" src="../../scripts/Vue v2.5.9.min.js"></script>
+	<script type="text/javascript" src="../../scripts/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../../scripts/jquery-html5Validate-min.js"></script>
+	<script type="text/javascript" src="../../scripts/MyDatePicker/WdatePicker.js"></script>
+	<script type="text/javascript" src="../../scripts/proTree.js"></script>
+	<script type="text/javascript" src="../../scripts/pager.js"></script>
+	<script type="text/javascript" src="../../scripts/common.js"></script>
+	<script type="text/javascript" src="../../scripts/areaObjList.js"></script>
+	<script type="text/javascript" src="../../scripts/trainOnlineCreate.js"></script>
+</body>
+</html>

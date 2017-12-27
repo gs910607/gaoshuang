@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../../css/main.css">
+    <link rel="stylesheet" type="text/css" href="../../css/informationPublish.css">
+	<title>政法新闻</title>
+</head>
+<body>
+	<div class="infoPubWrapper wrapper">
+		<header>
+			<h1 class="pull-left"><a href="javascript:;"><img src="../../images/xinxifabu.png"></a></h1>
+			<div class="loginWrapper pull-right">
+				<span class="welcome">欢迎登录</span>
+				<span class="userName"></span>
+				<div class="userInfo">
+					<img src="../../images/user-icon.png">
+					<div class="dropWrap">
+						<ul>
+							<li><a id="adminLink" href="javascript:;">用户管理</a></li>
+							<li><a href="javascript:;">修改密码</a></li>
+							<li id="logout"><a href="javascript:;">退出</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</header>
+		<section class="contentWrap">
+			<div class="goBack"><a href="javascript:history.back();"><img src="../../images/goback-icon.png"></a></div>
+			<div class="container">
+				<div class="banner">
+					<div id="demo01" class="flexslider">
+						<ul class="slides">
+
+						</ul>
+					</div>
+				</div>
+				<div class="content">
+					<ul class="clearfix">
+						<li class="item pull-left">
+							<div class="itemCont">
+								<h3>
+									<a href="InformationReleaseLList.html?type=2"><img
+										src="../../images/pinganhuaian.png"></a>
+								</h3>
+								<div class="picDes">
+									<div class="picture" id="picture1">
+										<img src="">
+									</div>
+									<div class="describe">
+										<ul id="pingan">
+
+										</ul>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li class="item pull-left">
+							<div class="itemCont">
+								<h3>
+									<a href="InformationReleaseLList.html?type=3"><img
+										src="../../images/zhengfaxinwen.png"></a>
+								</h3>
+								<div class="picDes">
+									<div class="picture" id="picture2">
+										<img src="">
+									</div>
+									<div class="describe">
+										<ul id="zhengfa">
+
+										</ul>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li class="item pull-left">
+							<div class="itemCont">
+								<h3>
+									<a href="InformationReleaseLList.html?type=4"><img
+										src="../../images/shehuizhili.png"></a>
+								</h3>
+								<div class="picDes">
+									<div class="picture" id="picture3">
+										<img src="">
+									</div>
+									<div class="describe">
+										<ul id="shehui">
+
+										</ul>
+									</div>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+		<footer>
+			友情链接：<a href="http://zfw.huaian.gov.cn/">长安淮安网</a>
+		</footer>
+	</div>
+	<script src="../../scripts/jQuery v2.1.1.min.js"></script>
+	<script src="../../js/slider.js"></script>
+	<script type="text/javascript" src="../../scripts/common.js"></script>
+	<script type="text/javascript" src="../../scripts/informationPublish.js"></script>
+	<script>
+	
+		$(function() {
+			$.post("/spywBeta/information/getInfo.do", function(data) {
+				
+				$(data.pingan).each(function(i, n) {
+					$("#pingan").append("<li><a href='particulars.html?type=2&id=" + n.informationid + "'> <i class='picIcon'><img src='../../images/fabu-item-icon.png'></i><p class='paragraphLink'>" + n.title + "</p></a></li>");
+					if (i === 0) {
+						$("#picture1>img").attr('src', n.image);
+					}
+				});
+				$(data.shehui).each(function(i, n) {
+					$("#shehui").append("<li><a href='particulars.html?type=4&id=" + n.informationid + "'> <i class='picIcon'><img src='../../images/fabu-item-icon.png'></i><p class='paragraphLink'>" + n.title + "</p></a></li>");
+					if (i === 0) {
+						$("#picture3>img").attr('src', n.image);
+					}
+				});
+				$(data.zhengfa).each(function(i, n) {
+					$("#zhengfa").append("<li><a href='particulars.html?type=3&id=" + n.informationid + "'> <i class='picIcon'><img src='../../images/fabu-item-icon.png'></i><p class='paragraphLink'>" + n.title + "</p></a></li>");
+					if (i === 0) {
+						$("#picture2>img").attr('src', n.image);
+					}
+				});
+				$(data.top).each(function(i, n) {
+					$(".slides").append("<li><a href='particulars.html?type=1&id=" + n.informationid + "'><div class='img'>" + "<img src=" + n.image + " alt=" + n.title + "><p class='picDes'>" + n.title + "</p></div></a></li>");
+				});
+				
+				//setTimeout(function() {
+					$('#demo01').flexslider({
+						animation : "slide",
+						direction : "horizontal",
+						easing : "swing",
+						slideshowSpeed : 3000,
+						animationSpeed : 500,
+					});
+				//})
+	
+			}, "json");
+	
+	
+		});
+	</script>
+
+</body>
+</html>

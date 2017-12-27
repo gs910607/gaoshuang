@@ -16,7 +16,7 @@
             <li v-if="username=== ''" class="nav-pile">|</li>
             <li @click="aboutClick">关于</li>
           </ul>
-        </div>  
+        </div>
       </div>
     </div>
     <div class="container">

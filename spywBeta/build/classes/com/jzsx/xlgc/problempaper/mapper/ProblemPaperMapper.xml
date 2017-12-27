@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd"> 
+<mapper  namespace="com.jzsx.xlgc.problempaper.Dao.ProblemPaperDao">
+
+	<resultMap type="com.jzsx.xlgc.bean.ProblemPaper" id="BaseResultMap">
+	    <id property="problempaperId" column="t_problempaperId"/>
+	    <result property="problempaperName" column="t_problempaper_name" />
+	    <result property="problempaperUsername" column="t_problempaper_username" />
+	    <result property="problempaperRemark" column="t_problempaper_remark" />
+	    <result property="problempaperTime" column="t_problempaper_time" />
+	    <result property="problempaperStarttime" column="t_problempaper_starttime" />
+	    <result property="problempaperStoptime" column="t_problempaper_stoptime" />
+	    <result property="problempaperCode" column="t_problempaper_code" />
+	    <association property="areainfo" column="t_problempaper_code" select="com.jzsx.xlgc.area.Dao.AreaDao.queryByCode"></association>
+	    <collection property="problemPaperQuestlist" column="t_problempaperId" select="com.jzsx.xlgc.problempaper.Dao.ProblemPaperQuestDao.queryByParentId"></collection>
+<!-- 	    <association property="problemPaperQuestlist" column="t_problempaperId" select="com.jzsx.xlgc.problempaper.Dao.ProblemPaperQuestDao.queryByParentId"></association> -->
+    </resultMap>
+    
+  	<!-- 根据多个手机号查询多个会议成员的信息 -->
+  	<select id="querylist" resultMap="BaseResultMap">
+        select * from t_problem_paper
+    </select>
+    <select id="queryByAll" parameterType="com.jzsx.xlgc.bean.ProblemPaper" resultMap="BaseResultMap">
+	   	 select * from t_problem_paper where 1=1
+		   	<if test="problempaperName !=null and problempaperName !='' ">
+		   	 	and  t_problempaper_name like '%${problempaperName}%'
+		   	 </if>
+		   	 <if test="problempaperStarttime !=null and problempaperStarttime !='' ">
+		   	 <![CDATA[
+			   	 and t_problempaper_time >= #{problempaperStarttime}
+			   	 ]]>
+		   	 </if>
+		   	 <if test="problempaperStoptime !=null and problempaperStoptime !='' ">
+		   	 <![CDATA[
+			   	 and t_problempaper_time <= #{problempaperStoptime}
+			   	 ]]>
+		   	 </if>
+		   	 <if test="problempaperCode !=null and problempaperCode !='' ">
+		   	 	and  (t_problempaper_code like '%${problempaperCode}%'
+		   	 	or t_problempaper_code=substr(#{problempaperCode},0,6)
+         		or t_problempaper_code=substr(#{problempaperCode},0,3)
+         		or t_problempaper_code=substr(#{problempaperCode},0,1))
+		   	 </if>
+		   	 order by t_problempaper_time desc
+    </select>
+    <select id="queryById" parameterType="java.lang.String" resultMap="BaseResultMap">
+    	select * from t_problem_paper where t_problempaperId=#{problempaperId}
+    </select>
+    <delete id="deleteById" parameterType="java.lang.String">
+    	delete from t_problem_paper where t_problempaperId=#{problempaperId}
+    </delete>
+	<insert id="insertActive" parameterType="com.jzsx.xlgc.bean.ProblemPaper">
+		insert into t_problem_paper 
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="problempaperId != null and problempaperId !='' ">
+				t_problempaperId,
+			</if>
+			<if test="problempaperName != null and problempaperName !=''">
+				t_problempaper_name,
+			</if>
+			<if test="problempaperUsername != null and problempaperUsername !=''">
+				t_problempaper_username,
+			</if>
+			<if test="problempaperRemark != null and problempaperRemark !=''">
+				t_problempaper_remark,
+			</if>
+			<if test="problempaperTime != null and problempaperTime !=''">
+				t_problempaper_time,
+			</if>
+			<if test="problempaperStarttime != null and problempaperStarttime !=''">
+				t_problempaper_starttime,
+			</if>
+			<if test="problempaperStoptime != null and problempaperStoptime !=''">
+				t_problempaper_stoptime,
+			</if>
+			<if test="problempaperCode != null and problempaperCode !=''">
+				t_problempaper_code,
+			</if>
+		</trim>
+		values
+			<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="problempaperId != null and problempaperId !='' ">
+				#{problempaperId},
+			</if>
+			<if test="problempaperName != null and problempaperName !=''">
+				#{problempaperName},
+			</if>
+			<if test="problempaperUsername != null and problempaperUsername !=''">
+				#{problempaperUsername},
+			</if>
+			<if test="problempaperRemark != null and problempaperRemark !=''">
+				#{problempaperRemark},
+			</if>
+			<if test="problempaperTime != null and problempaperTime !=''">
+				#{problempaperTime},
+			</if>
+			<if test="problempaperStarttime != null and problempaperStarttime !=''">
+				#{problempaperStarttime},
+			</if>
+			<if test="problempaperStoptime != null and problempaperStoptime !=''">
+				#{problempaperStoptime},
+			</if>
+			<if test="problempaperCode != null and problempaperCode !=''">
+				#{problempaperCode},
+			</if>
+			</trim>
+	</insert>
+</mapper>

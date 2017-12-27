@@ -1,0 +1,49 @@
+@charset "utf-8";
+
+.formWrap {
+	padding: 82px 40px 10px;
+}
+.infoList {
+	padding: 0 40px;
+}
+.infoList thead {
+	background: #F4F7FA;
+}
+.artTitle {
+	max-width: 450px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.infoList .operation a {
+	margin: 0 6px;
+}
+.paging {
+	padding: 0 40px 30px;
+	text-align: right;
+}
+.inputWrapper {
+	width: 80%;
+}
+.inputWrapper .form-group {
+	margin-bottom: 20px;
+}
+.btnWrapper {
+	width: 20%;
+}
+.infoList a {
+	color: #028EC5;
+}
+.infoList a:hover {
+	color: #ff6600;
+}
+#lookCodeModal .modal-dialog {
+	width: 300px;
+}
+#lookCodeModal .modal-body {
+	padding: 30px 0;
+	font-size: 30px;
+}
+#lookCodeModal .modal-footer {
+	text-align: center;
+}

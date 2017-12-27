@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jzsx.xlgc.videoMediate.mapper.TMediatePersonMapper">
+	<resultMap id="BaseResultMap" type="com.jzsx.xlgc.bean.TMediatePerson">
+		<id column="ID" property="id" jdbcType="VARCHAR" />
+		<result column="NAME" property="name" jdbcType="VARCHAR" />
+		<result column="CELL_PHONE" property="cellPhone" jdbcType="VARCHAR" />
+		<result column="TELL_PHONE" property="tellPhone" jdbcType="VARCHAR" />
+		<result column="MEDIATION_ADDRESS" property="mediationAddress"
+			jdbcType="VARCHAR" />
+		<result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+		<result column="IDENTITY" property="identity" jdbcType="VARCHAR" />
+		<result column="UNIT" property="unit" jdbcType="VARCHAR" />
+		<result column="IDENTITY_TYPE" property="identityType"
+			jdbcType="VARCHAR" />
+		<result column="PERSON_TYPE" property="personType" jdbcType="DECIMAL" />
+		<result column="MEDIATEID" property="mediateid" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, NAME, CELL_PHONE, TELL_PHONE, MEDIATION_ADDRESS, ADDRESS, IDENTITY,
+		UNIT, IDENTITY_TYPE,
+		PERSON_TYPE, MEDIATEID
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from T_MEDIATE_PERSON
+		where ID = #{id,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from T_MEDIATE_PERSON
+		where ID = #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.jzsx.xlgc.bean.TMediatePerson">
+		insert into T_MEDIATE_PERSON (ID, NAME, CELL_PHONE,
+		TELL_PHONE, MEDIATION_ADDRESS, ADDRESS,
+		IDENTITY, UNIT, IDENTITY_TYPE,
+		PERSON_TYPE, MEDIATEID)
+		values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+		#{cellPhone,jdbcType=VARCHAR},
+		#{tellPhone,jdbcType=VARCHAR}, #{mediationAddress,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR},
+		#{identity,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR},
+		#{identityType,jdbcType=VARCHAR},
+		#{personType,jdbcType=DECIMAL}, #{mediateid,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.jzsx.xlgc.bean.TMediatePerson">
+		insert into T_MEDIATE_PERSON
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="name != null">
+				NAME,
+			</if>
+			<if test="cellPhone != null">
+				CELL_PHONE,
+			</if>
+			<if test="tellPhone != null">
+				TELL_PHONE,
+			</if>
+			<if test="mediationAddress != null">
+				MEDIATION_ADDRESS,
+			</if>
+			<if test="address != null">
+				ADDRESS,
+			</if>
+			<if test="identity != null">
+				IDENTITY,
+			</if>
+			<if test="unit != null">
+				UNIT,
+			</if>
+			<if test="identityType != null">
+				IDENTITY_TYPE,
+			</if>
+			<if test="personType != null">
+				PERSON_TYPE,
+			</if>
+			<if test="mediateid != null">
+				MEDIATEID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="cellPhone != null">
+				#{cellPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="tellPhone != null">
+				#{tellPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="mediationAddress != null">
+				#{mediationAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				#{address,jdbcType=VARCHAR},
+			</if>
+			<if test="identity != null">
+				#{identity,jdbcType=VARCHAR},
+			</if>
+			<if test="unit != null">
+				#{unit,jdbcType=VARCHAR},
+			</if>
+			<if test="identityType != null">
+				#{identityType,jdbcType=VARCHAR},
+			</if>
+			<if test="personType != null">
+				#{personType,jdbcType=DECIMAL},
+			</if>
+			<if test="mediateid != null">
+				#{mediateid,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.jzsx.xlgc.bean.TMediatePerson">
+		update T_MEDIATE_PERSON
+		<set>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="cellPhone != null">
+				CELL_PHONE = #{cellPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="tellPhone != null">
+				TELL_PHONE = #{tellPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="mediationAddress != null">
+				MEDIATION_ADDRESS = #{mediationAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				ADDRESS = #{address,jdbcType=VARCHAR},
+			</if>
+			<if test="identity != null">
+				IDENTITY = #{identity,jdbcType=VARCHAR},
+			</if>
+			<if test="unit != null">
+				UNIT = #{unit,jdbcType=VARCHAR},
+			</if>
+			<if test="identityType != null">
+				IDENTITY_TYPE = #{identityType,jdbcType=VARCHAR},
+			</if>
+			<if test="personType != null">
+				PERSON_TYPE = #{personType,jdbcType=DECIMAL},
+			</if>
+			<if test="mediateid != null">
+				MEDIATEID = #{mediateid,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.jzsx.xlgc.bean.TMediatePerson">
+		update T_MEDIATE_PERSON
+		set NAME = #{name,jdbcType=VARCHAR},
+		CELL_PHONE = #{cellPhone,jdbcType=VARCHAR},
+		TELL_PHONE = #{tellPhone,jdbcType=VARCHAR},
+		MEDIATION_ADDRESS = #{mediationAddress,jdbcType=VARCHAR},
+		ADDRESS = #{address,jdbcType=VARCHAR},
+		IDENTITY = #{identity,jdbcType=VARCHAR},
+		UNIT = #{unit,jdbcType=VARCHAR},
+		IDENTITY_TYPE = #{identityType,jdbcType=VARCHAR},
+		PERSON_TYPE = #{personType,jdbcType=DECIMAL},
+		MEDIATEID = #{mediateid,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+
+	<insert id="insertPersonList" parameterType="java.util.List">
+		insert all
+		<foreach collection="list" item="item" index="index"
+			separator="">
+			into T_MEDIATE_PERSON (NAME, CELL_PHONE,
+			TELL_PHONE, MEDIATION_ADDRESS, ADDRESS,
+			IDENTITY, UNIT, IDENTITY_TYPE,
+			PERSON_TYPE, MEDIATEID)
+			values (#{item.name,jdbcType=VARCHAR},
+			#{item.cellPhone,jdbcType=VARCHAR},
+			#{item.tellPhone,jdbcType=VARCHAR}, #{item.mediationAddress,jdbcType=VARCHAR}, #{item.address,jdbcType=VARCHAR},
+			#{item.identity,jdbcType=VARCHAR}, #{item.unit,jdbcType=VARCHAR},
+			#{item.identityType,jdbcType=VARCHAR},
+			#{item.personType,jdbcType=DECIMAL}, #{item.mediateid,jdbcType=VARCHAR})
+		</foreach>
+		select 1 from DUAL
+	</insert>
+	
+	<select id="selectByName" resultType="String"
+		parameterType="String">
+		select
+		MEDIATEID
+		from T_MEDIATE_PERSON
+		where NAME = #{name,jdbcType=VARCHAR}
+		and PERSON_TYPE=2
+	</select>
+	
+	<select id="selectByMediateId" resultMap="BaseResultMap" parameterType="map">
+	 select 
+	 <include refid="Base_Column_List" />
+	 from T_MEDIATE_PERSON
+	 where MEDIATEID=#{id}
+	 and PERSON_TYPE=#{type}
+	</select>
+</mapper>

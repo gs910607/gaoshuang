@@ -1,0 +1,23 @@
+.contList {
+	padding: 82px 40px 10px;
+}
+.contList thead {
+	background: #f4f7fb;
+}
+.contList .table-hover tbody tr:hover {
+	background: #def3f1;
+}
+.operation a {
+	margin: 0 5px;
+}
+.contList .table p {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.contList tfoot {
+	background: #f3f3f3;
+}
+.contList .table {
+	margin-bottom: 0;
+}

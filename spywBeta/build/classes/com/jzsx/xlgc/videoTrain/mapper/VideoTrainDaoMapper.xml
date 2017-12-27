@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd"> 
+<mapper  namespace="com.jzsx.xlgc.videoTrain.Dao.VideoTrainDao">
+
+	<resultMap type="com.jzsx.xlgc.bean.VideoTrain" id="BaseResultMap">
+	    <id property="videoId" column="t_videoId"/>
+	    <result property="videoTypeId" column="t_video_typeId" />
+	    <result property="videoName" column="t_video_name" />
+	    <result property="videoPath" column="t_video_path" />
+	    <result property="videoTop" column="t_video_top" />
+	    <result property="videoRemark" column="t_video_remark" />
+	    <result property="videoTime" column="t_video_time" />
+	    <result property="videoVname" column="t_video_vname" />
+	    <result property="videoVsize" column="t_video_vsize" />
+	    <result property="videorealName" column="t_video_realname" />
+	    <result property="videoCode" column="t_video_code" />
+	    <association property="videoTypeinfo" column="t_video_typeId" select="com.jzsx.xlgc.videoTrain.Dao.VideoTypeDao.queryVideoTypeById"></association>
+    	<association property="areainfo" column="t_video_code" select="com.jzsx.xlgc.area.Dao.AreaDao.queryByCode"></association>
+    </resultMap>
+    <resultMap id="BaseResultMapt" type="com.jzsx.xlgc.bean.TVideoConference" >
+    <id column="CONF_ID" property="confId" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="BEGIN_TIME" property="beginTime" jdbcType="TIMESTAMP" />
+    <result column="DURATION" property="duration" jdbcType="VARCHAR" />
+    <result column="ACCESS_CODE" property="accessCode" jdbcType="VARCHAR" />
+    <result column="RECORDER_ADDR" property="recorderAddr" jdbcType="VARCHAR" />
+    <result column="IS_RECORDING" property="isRecording" jdbcType="DECIMAL" />
+    <result column="CHAIRMAN_PASSWORD" property="chairmanPassword" jdbcType="VARCHAR" />
+    <result column="MAIN_MCU_ID" property="mainMcuId" jdbcType="DECIMAL" />
+    <result column="SITES" property="sites" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="DECIMAL" />
+    <result column="CREATE_NAME" property="createName" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="DECIMAL" />
+    <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+  </resultMap>
+  	<!-- 根据多个手机号查询多个会议成员的信息 -->
+  	<select id="queryVideoTrainList" resultMap="BaseResultMap">
+        select * from t_video_train
+        order by t_video_time desc
+    </select>
+    <select id="queryVideoTrainListBytype" parameterType="com.jzsx.xlgc.bean.VideoTrain" resultMap="BaseResultMap">
+	   	 select * from t_video_train where 1=1
+		   	 <if test="videoTypeId !=null and videoTypeId !='' ">
+		   	 	and  t_video_typeId=#{videoTypeId}
+		   	 </if>
+		   	<if test="videoName !=null and videoName !='' ">
+		   	 	and  t_video_name like '%${videoName}%'
+		   	 </if>
+		   	 <if test="videoTime !=null and videoTime !='' ">
+		   	 <![CDATA[
+			   	 and t_video_time >= #{videoTime}
+			   	 ]]>
+		   	 </if>
+		   	 <if test="stopTime !=null and stopTime !='' ">
+		   	 <![CDATA[
+			   	 and t_video_time <= #{stopTime}
+			   	 ]]>
+		   	 </if>
+		   	 <if test="videoCode !=null and videoCode !='' ">
+		   	 	and (t_video_code like '%${videoCode}%'
+		   	 	or t_video_code=substr(#{videoCode},0,6)
+         		or t_video_code=substr(#{videoCode},0,3)
+         		or t_video_code=substr(#{videoCode},0,1))
+		   	 </if>
+		   	 order by t_video_time desc
+    </select>
+    <select id="queyVideoTrainById" parameterType="java.lang.String" resultMap="BaseResultMap">
+    	select * from t_video_train where t_videoId=#{videoId}
+    </select>
+    <select id="queryByCodeOfconfer" parameterType="java.lang.String" resultMap="BaseResultMapt">
+    	select t.* from T_VIDEO_CONFERENCE t
+		where 1=1 and type =5 and status=0
+		<![CDATA[
+		and sysdate<(t.begin_time+numtodsinterval(t.duration,'hour'))
+		]]>
+		and 
+		(instr(t.USER_ID,substr(#{code},0,3),1,1) !=0
+		    or 
+		 t.USER_ID=substr(#{code},0,1)
+		)
+    </select>
+    <select id="queryVideoTrainByTypeId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+   	 select * from t_video_train where t_video_typeId=#{videoTypeId}
+    </select>
+    <select id="queryVideoTrainByChartCode" parameterType="com.jzsx.xlgc.videoNeighborhood.bean.NeighChart" resultType="com.jzsx.xlgc.videoNeighborhood.bean.NeighChart">
+    	select tt.t_videoid as count,tt.tyear as year,tt.tmonth as month,a.name,a.code from(
+	    select count(t.t_videoid) as t_videoid, substr(t.t_video_code,0,3) as t_video_code,to_char(t.t_video_time,'yyyy') as tyear,to_char(t.t_video_time,'MM') as tmonth from t_video_train t
+	    group by substr(t.t_video_code,0,3),to_char(t.t_video_time,'yyyy'),to_char(t.t_video_time,'MM')
+	    having 1=1
+	    <if test="year !=null and year !='' ">
+		   	 and to_char(t.t_video_time,'yyyy')=#{year}
+		 </if>
+		 <if test="month !=null and month !='' ">
+		   	 and to_char(t.t_video_time,'MM')=#{month}
+		 </if>
+	    ) tt 
+	    right join area a on a.code=tt.t_video_code
+	    where a.parent_id=0
+	    
+	    order by a.code
+    </select>
+    <select id="queryVideoTrainByChartType" parameterType="com.jzsx.xlgc.videoNeighborhood.bean.NeighChart" resultType="com.jzsx.xlgc.videoNeighborhood.bean.NeighChart">
+    	select tt.t_videoid as count,tt.tyear as year,tt.tmonth as month,a.t_video_typename as name,a.t_video_typeid as code from(
+	    select count(t.t_videoid) as t_videoid, t.t_video_typeid as t_video_typeid,to_char(t.t_video_time,'yyyy') as tyear,to_char(t.t_video_time,'MM') as tmonth from t_video_train t
+	    group by t.t_video_typeid,to_char(t.t_video_time,'yyyy'),to_char(t.t_video_time,'MM')
+	    having 1=1
+	    <if test="year !=null and year !='' ">
+		   	 and to_char(t.t_video_time,'yyyy')=#{year}
+		 </if>
+		 <if test="month !=null and month !='' ">
+		   	 and to_char(t.t_video_time,'MM')=#{month}
+		 </if>
+	    ) tt 
+	    right join t_video_type a on a.t_video_typeid=tt.t_video_typeid
+	    where a.t_video_typeid !=1
+	    
+	    order by a.t_video_typeid
+    </select>
+    <delete id="deleteVideoTrainById" parameterType="java.lang.String">
+    	delete from t_video_train where t_videoId=#{videoId}
+    </delete>
+	<insert id="insertActive" parameterType="com.jzsx.xlgc.bean.VideoTrain">
+		insert into t_video_train 
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="videoId != null and videoId !='' ">
+				t_videoId,
+			</if>
+			<if test="videoTypeId != null and videoTypeId !=0">
+				t_video_typeId,
+			</if>
+			<if test="videoName != null and videoName !=''">
+				t_video_name,
+			</if>
+			<if test="videoPath != null and videoPath !=''">
+				t_video_path ,
+			</if>
+			<if test="videoTop != null and videoTop !=''">
+				t_video_top ,
+			</if>
+			<if test="videoRemark != null and videoRemark !=''">
+				t_video_remark ,
+			</if>
+			<if test="videoTime != null and videoRemark !=''">
+				t_video_time ,
+			</if>
+			<if test="videoVname != null and videoVname !=''">
+				t_video_vname ,
+			</if>
+			<if test="videoVsize != null and videoVsize !=''">
+				t_video_vsize ,
+			</if>
+			<if test="videorealName != null and videorealName !=''">
+				t_video_realname ,
+			</if>
+			<if test="videoCode != null and videoCode !=''">
+				t_video_code ,
+			</if>
+		</trim>
+		values
+			<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="videoId != null and videoId !=''">
+				#{videoId},
+			</if>
+			<if test="videoTypeId != null and videoTypeId !=0">
+				#{videoTypeId},
+			</if>
+			<if test="videoName != null and videoName !=''">
+				#{videoName},
+			</if>
+			<if test="videoPath != null and videoPath !=''">
+				#{videoPath},
+			</if>
+			<if test="videoTop != null and videoTop !=''">
+				#{videoTop},
+			</if>
+			<if test="videoRemark != null and videoRemark !=''">
+				#{videoRemark} ,
+			</if>
+			<if test="videoTime != null and videoRemark !=''">
+				#{videoTime} ,
+			</if>
+			<if test="videoVname != null and videoVname !=''">
+				#{videoVname} ,
+			</if>
+			<if test="videoVsize != null and videoVsize !=''">
+				#{videoVsize} ,
+			</if>
+			<if test="videorealName != null and videorealName !=''">
+				#{videorealName} ,
+			</if>
+			<if test="videoCode != null and videoCode !=''">
+				#{videoCode} ,
+			</if>
+			</trim>
+	</insert>
+	<update id="updateActive" parameterType="com.jzsx.xlgc.bean.VideoTrain">
+		update t_video_train
+		<set>
+			<if test="videoTypeId != null and videoTypeId !=0">
+				t_video_typeId=#{videoTypeId},
+			</if>
+			<if test="videoName != null and videoName !=''">
+				t_video_name=#{videoName},
+			</if>
+			<if test="videoPath != null and videoPath !=''">
+				t_video_path =#{videoPath},
+			</if>
+			<if test="videoTop != null and videoTop !=''">
+				t_video_top =#{videoTop},
+			</if>
+			<if test="videoRemark != null and videoRemark !=''">
+				t_video_remark =#{videoRemark},
+			</if>
+			<if test="videoTime != null and videoTime !=''">
+				t_video_time =#{videoTime},
+			</if>
+			<if test="videoVname != null and videoVname !=''">
+				t_video_vname =#{videoVname},
+			</if>
+			<if test="videoVsize != null and videoVsize !=''">
+				t_video_vsize =#{videoVsize},
+			</if>
+			<if test="videoCode != null and videoCode !=''">
+				t_video_code =#{videoCode},
+			</if>
+		</set>
+		where t_videoId=#{videoId}
+	</update>
+</mapper>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd"> 
+<mapper  namespace="com.jzsx.xlgc.videoResearch.Dao.VideoResearchActiveDao">
+
+	<resultMap type="com.jzsx.xlgc.bean.VideoResearchActive" id="BaseResultMap">
+	    <id property="videoActiveId" column="t_video_activeId"/>
+	    <result property="videoResearchId" column="t_videoResearch_Id" />
+	    <result property="videoActiveName" column="t_video_activeName" />
+	    <result property="videoActiveCard" column="t_video_activeCard" />
+	    <result property="videoActivephone" column="t_video_activephone" />
+	    <result property="videoActiveAddress" column="t_video_activeAddress" />
+	    <result property="videoActiveVote" column="t_video_activeVote" />
+	    <result property="videoActivePath" column="t_video_activePath" />
+    </resultMap>
+    
+  	<!-- 根据多个手机号查询多个会议成员的信息 -->
+  	<select id="queryVideoResearchActiveList" resultMap="BaseResultMap">
+        select * from t_video_research_active
+    </select>
+    <select id="queryVideoResearchActiveByALl" parameterType="com.jzsx.xlgc.bean.VideoResearchActive" resultMap="BaseResultMap">
+	   	 select * from t_video_research_active where 1=1
+<!-- 		   	<if test="videoneihdName !=null and videoneihdName !='' "> -->
+<!-- 		   	 	and  t_videoneihdName like '%${videoneihdName}%' -->
+<!-- 		   	 </if> -->
+<!-- 		   	 <if test="videoneihdNum !=null and videoneihdNum !='' "> -->
+<!-- 		   	 and t_videoneihdNum=#{videoneihdNum} -->
+<!-- 		   	 </if> -->
+    </select>
+    <select id="queyVideoResearchActiveById" parameterType="java.lang.String" resultMap="BaseResultMap">
+    	select * from t_video_research_active where t_video_activeId=#{videoActiveId}
+    </select>
+    <select id="queyVideoResearchById" parameterType="java.lang.String" resultMap="BaseResultMap">
+    	select * from t_video_research_active where t_videoResearch_Id=#{videoResearchId}
+    </select>
+    <select id="queryVideoVoteByReseachId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    	select t.t_video_activename,t.t_video_activevote from T_VIDEO_RESEARCH_ACTIVE t where t.t_videoresearch_id=#{videoResearchId}
+		order by t.t_video_activevote desc
+    </select>
+    <delete id="deleteByParentId" parameterType="java.lang.String">
+    	delete from t_video_research_active where t_videoResearch_Id=#{videoResearchId}
+    </delete>
+    <delete id="deleteByAll" parameterType="com.jzsx.xlgc.bean.VideoResearchActive">
+    	delete from t_video_research_active where 1=1
+    		<if test="videoResearchId != null and videoResearchId !='' ">
+				and t_videoResearch_Id=#{videoResearchId}
+			</if>
+			<if test="videoActiveName != null and videoActiveName !='' ">
+				and t_video_activeName=#{videoActiveName}
+			</if>
+			<if test="videoActiveCard != null and videoActiveCard !=''">
+				and t_video_activeCard=#{videoActiveCard}
+			</if>
+			<if test="videoActivephone != null and videoActivephone !=''">
+				and t_video_activephone=#{videoActivephone}
+			</if>
+    </delete>
+	<insert id="insertActive" parameterType="com.jzsx.xlgc.bean.VideoResearchActive">
+		insert into t_video_research_active 
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="videoActiveId != null and videoActiveId !='' ">
+				t_video_activeId,
+			</if>
+			<if test="videoResearchId != null and videoResearchId !='' ">
+				t_videoResearch_Id,
+			</if>
+			<if test="videoActiveName != null and videoActiveName !='' ">
+				t_video_activeName,
+			</if>
+			<if test="videoActiveCard != null and videoActiveCard !=''">
+				t_video_activeCard,
+			</if>
+			<if test="videoActivephone != null and videoActivephone !=''">
+				t_video_activephone,
+			</if>
+			<if test="videoActiveAddress != null and videoActiveAddress !=''">
+				t_video_activeAddress,
+			</if>
+			<if test="videoActiveVote != null and videoActiveVote !=''">
+				t_video_activeVote,
+			</if>
+			<if test="videoActivePath != null and videoActivePath !=''">
+				t_video_activePath,
+			</if>
+		</trim>
+		values
+			<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="videoActiveId != null and videoActiveId !='' ">
+				#{videoActiveId},
+			</if>
+			<if test="videoResearchId != null and videoResearchId !='' ">
+				#{videoResearchId},
+			</if>
+			<if test="videoActiveName != null and videoActiveName !=''">
+				#{videoActiveName},
+			</if>
+			<if test="videoActiveCard != null and videoActiveCard !=''">
+				#{videoActiveCard},
+			</if>
+			<if test="videoActivephone != null and videoActivephone !=''">
+				#{videoActivephone},
+			</if>
+			<if test="videoActiveAddress != null and videoActiveAddress !=''">
+				#{videoActiveAddress},
+			</if>
+			<if test="videoActiveVote != null and videoActiveVote !=''">
+				#{videoActiveVote},
+			</if>
+			<if test="videoActivePath != null and videoActivePath !=''">
+				#{videoActivePath},
+			</if>
+			</trim>
+	</insert>
+	<update id="updatevideoResearchById" parameterType="java.lang.String">
+		update t_video_research_active set t_video_activeVote =t_video_activeVote+1 where t_video_activeId=#{videoActiveId}
+	</update>
+</mapper>

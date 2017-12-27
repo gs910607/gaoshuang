@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd"> 
+<mapper  namespace="com.jzsx.xlgc.problempaper.Dao.ProblemPaperRecordDao">
+
+	<resultMap type="com.jzsx.xlgc.bean.ProblemPaperRecord" id="BaseResultMap">
+	    <id property="paperRecordId" column="t_paperRecordId"/>
+	    <result property="paperRecordPaperId" column="t_paperRecord_paperId" />
+	    <result property="paperRecordQuestId" column="t_paperRecord_questId" />
+	    <result property="paperRecordOptionId" column="t_paperRecord_optionId" />
+	    <result property="paperRecordRemark" column="t_paperRecord_remark" />
+	    <result property="paperRecordUserName" column="t_paperRecord_userName" />
+	    <result property="paperRecordCode" column="t_paperRecord_code" />
+	    <result property="paperRecordTime" column="t_paperRecord_time" />
+	    <result property="paperRecordIp" column="t_paperRecord_Ip" />
+    </resultMap>
+    <resultMap type="com.jzsx.xlgc.bean.ProblemPaperRecord" id="BaseResultMap1">
+	    <id property="paperRecordId" column="t_paperRecordId"/>
+	    <result property="paperRecordPaperId" column="t_paperRecord_paperId" />
+	    <result property="paperRecordQuestId" column="t_paperRecord_questId" />
+	    <result property="paperRecordOptionId" column="t_paperRecord_optionId" />
+	    <result property="paperRecordRemark" column="t_paperRecord_remark" />
+	    <result property="paperRecordUserName" column="t_paperRecord_userName" />
+	    <result property="paperRecordCode" column="t_paperRecord_code" />
+	    <result property="paperRecordTime" column="t_paperRecord_time" />
+	    <result property="paperRecordIp" column="t_paperRecord_Ip" />
+    	<association property="areainfo" column="t_paperRecord_code" select="com.jzsx.xlgc.area.Dao.AreaDao.queryByCode"></association>
+    </resultMap>
+  	<!-- 根据多个手机号查询多个会议成员的信息 -->
+  	<select id="querylist" resultMap="BaseResultMap">
+        select * from t_problem_paper_record
+    </select>
+    <select id="queryByAll" parameterType="com.jzsx.xlgc.bean.ProblemPaperRecord" resultMap="BaseResultMap1">
+	   		select r.t_paperrecord_paperid,r.t_paperrecord_username,r.t_paperrecord_code,to_char(r.t_paperrecord_time,'yyyy-MM-dd hh24:mm:ss') as t_paperrecord_time,r.t_paperrecord_ip,p.t_problempaper_name as t_paperRecord_questId from t_problem_paper_record r 
+			left join t_problem_paper p on p.t_problempaperid=r.t_paperrecord_paperid
+	   		 where 1=1
+		   	<if test="paperRecordPaperId !=null and paperRecordPaperId !='' ">
+		   	 	and  t_paperRecord_paperId =#{paperRecordPaperId}
+		   	 </if>
+		   	 <if test="paperRecordQuestId !=null and paperRecordQuestId !='' ">
+		   	 	and  p.t_problempaper_name like '%${paperRecordQuestId}%'
+		   	 </if>
+		   	 <if test="paperRecordUserName !=null and paperRecordUserName !='' ">
+		   	 	and  t_paperRecord_userName =#{paperRecordUserName}
+		   	 </if>
+		   	 <if test="paperRecordCode !=null and paperRecordCode !='' ">
+		   	 	and  t_paperRecord_code =#{paperRecordCode}
+		   	 </if>
+		   	 <if test="paperRecordTime !=null and paperRecordTime !='' ">
+		   	 <![CDATA[
+			   	 and t_paperRecord_time >= #{paperRecordTime}
+			   	 ]]>
+		   	 </if>
+		   	 <if test="paperRecordStoptime !=null and paperRecordStoptime !='' ">
+		   	 <![CDATA[
+			   	 and t_paperRecord_time <= #{paperRecordStoptime}
+			   	 ]]>
+		   	 </if>
+		   	 group by r.t_paperrecord_paperid,r.t_paperrecord_username,r.t_paperrecord_code,r.t_paperrecord_ip,p.t_problempaper_name,to_char(r.t_paperrecord_time,'yyyy-MM-dd hh24:mm:ss')
+		   	 order by t_paperRecord_time desc
+    </select>
+    <select id="queryByCount" parameterType="com.jzsx.xlgc.bean.ProblemPaperRecord" resultType="java.lang.Integer">
+	   	 select count(t_paperRecordId) from t_problem_paper_record where 1=1
+		   	<if test="paperRecordPaperId !=null and paperRecordPaperId !='' ">
+		   	 	and  t_paperRecord_paperId =#{paperRecordPaperId}
+		   	 </if>
+		   	 <if test="paperRecordUserName !=null and paperRecordUserName !='' ">
+		   	 	and  t_paperRecord_userName =#{paperRecordUserName}
+		   	 </if>
+		   	 <if test="paperRecordCode !=null and paperRecordCode !='' ">
+		   	 	and  t_paperRecord_code =#{paperRecordCode}
+		   	 </if>
+    </select>
+    <select id="queryById" parameterType="java.lang.String" resultMap="BaseResultMap">
+    	select * from t_problem_paper_record where t_paperRecordId=#{paperRecordId}
+    </select>
+    <select id="queryByPaperIdOfArea" parameterType="java.lang.String" resultMap="BaseResultMap">
+    	select t_paperrecordid,a.name as t_paperrecord_code  from (
+		select count(t.t_paperrecordid)as t_paperrecordid,substr(t.t_paperrecord_code,0,3)as t_paperrecord_code from T_PROBLEM_PAPER_RECORD t where 1=1
+		 and t.t_paperrecord_paperid=#{t_paperRecord_paperId}
+		group by substr(t.t_paperrecord_code,0,3) )tt
+		right join area a on a.code=tt.t_paperrecord_code
+		where a.parent_id=0
+		order by a.code desc
+    </select>
+    <select id="queryBypaperIdOfname" parameterType="java.lang.String" resultMap="BaseResultMap">
+    	select count(t.t_paperrecordid) as t_paperrecordid,q.t_paperquest_name as t_paperrecord_remark,o.t_paperquest_option_name as t_paperrecord_code,t_problempaper_name as t_paperrecord_username from T_PROBLEM_PAPER_RECORD t 
+		left join t_problem_paper_quest q on q.t_paperquestid=t.t_paperrecord_questid
+		left join t_problem_paper_quest_option o on o.t_paperquest_optionid=t.t_paperrecord_optionid
+		left join t_problem_paper p on p.t_problempaperid=t.t_paperrecord_paperid
+		where t.t_paperrecord_paperid=#{t_paperRecord_paperId}
+		group by t.t_paperrecord_paperid,t.t_paperrecord_questid,t.t_paperrecord_optionid,q.t_paperquest_name,o.t_paperquest_option_name,p.t_problempaper_name
+  		order by t.t_paperrecord_questid desc , t.t_paperrecord_optionid desc
+    </select>
+    <delete id="deleteById" parameterType="java.lang.String">
+    	delete from t_problem_paper_record where t_paperRecordId=#{paperRecordId}
+    </delete>
+	<insert id="insertActive" parameterType="com.jzsx.xlgc.bean.ProblemPaperRecord">
+		insert into t_problem_paper_record 
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="paperRecordId != null and paperRecordId !='' ">
+				t_paperRecordId,
+			</if>
+			<if test="paperRecordPaperId != null and paperRecordPaperId !=''">
+				t_paperRecord_paperId,
+			</if>
+			<if test="paperRecordQuestId != null and paperRecordQuestId !=''">
+				t_paperRecord_questId,
+			</if>
+			<if test="paperRecordOptionId != null and paperRecordOptionId !=''">
+				t_paperRecord_optionId,
+			</if>
+			<if test="paperRecordRemark != null and paperRecordRemark !=''">
+				t_paperRecord_remark,
+			</if>
+			<if test="paperRecordUserName != null and paperRecordUserName !=''">
+				t_paperRecord_userName,
+			</if>
+			<if test="paperRecordCode != null and paperRecordCode !=''">
+				t_paperRecord_code,
+			</if>
+			<if test="paperRecordTime != null and paperRecordTime !=''">
+				t_paperRecord_time,
+			</if>
+			<if test="paperRecordIp != null and paperRecordIp !=''">
+				t_paperRecord_Ip,
+			</if>
+		</trim>
+		values
+			<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="paperRecordId != null and paperRecordId !='' ">
+				#{paperRecordId},
+			</if>
+			<if test="paperRecordPaperId != null and paperRecordPaperId !=''">
+				#{paperRecordPaperId},
+			</if>
+			<if test="paperRecordQuestId != null and paperRecordQuestId !=''">
+				#{paperRecordQuestId},
+			</if>
+			<if test="paperRecordOptionId != null and paperRecordOptionId !=''">
+				#{paperRecordOptionId},
+			</if>
+			<if test="paperRecordRemark != null and paperRecordRemark !=''">
+				#{paperRecordRemark},
+			</if>
+			<if test="paperRecordUserName != null and paperRecordUserName !=''">
+				#{paperRecordUserName},
+			</if>
+			<if test="paperRecordCode != null and paperRecordCode !=''">
+				#{paperRecordCode},
+			</if>
+			<if test="paperRecordTime != null and paperRecordTime !=''">
+				#{paperRecordTime},
+			</if>
+			<if test="paperRecordIp != null and paperRecordIp !=''">
+				#{paperRecordIp},
+			</if>
+			</trim>
+	</insert>
+</mapper>

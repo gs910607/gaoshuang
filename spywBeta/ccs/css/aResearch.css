@@ -1,0 +1,76 @@
+@charset "utf-8";
+
+.container {
+	width: 845px;
+}
+.formWrap {
+	padding: 82px 40px 30px;
+}
+textarea.messageContent {
+	width: 100%;
+	height: 100px;
+	resize: none;
+}
+.videoListWrap {
+	margin-top: 30px;
+}
+.videoName {
+	width: 350px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	text-align: left;
+}
+.videoName > img {
+	float: left;
+	margin-right: 10px;
+} 
+.table > tbody > tr > td,
+.table > tbody > tr > th, 
+.table > tfoot > tr > td, 
+.table > tfoot > tr > th, 
+.table > thead > tr > td, 
+.table > thead > tr > th {
+	text-align: center;
+	vertical-align: middle;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.formWrap .form-group {
+	margin-left: 0;
+	margin-right: 0;
+}
+.inlineGroup .form-group {
+	width: 50%;
+	float: left;
+}
+
+.everyWeekDay .weekday,.everyDay .days {/*解决span不支持width属性*/display: -moz-inline-box;display: inline-block;margin: 5px 0 0 20px;text-align: center;width: 20px;border: 1px solid #F7F7F7;cursor: pointer;}		
+.marginTop{margin-top: 5px;}
+.selectStyle{padding-left: 10px;border: none;border-radius: 3px;outline: none;appearance: none;-moz-appearance: none;-webkit-appearance: none;margin: 0 10px 0 10px;width: 60px;border-color: #0FB9EF;color: #0FB9EF;}       
+
+
+.addPersonWrap {
+	margin-top: 30px;
+}
+.personTitle {
+	font-size: 20px;
+	margin-bottom: 10px;
+}
+.personList a {
+	color: #3F53CC;
+}
+.personList a:hover {
+	text-decoration: underline!important;
+}
+.addPersonWrap .formWrap {
+	padding: 0;
+}
+.addPerson {
+	margin-top: 20px;
+}
+.addPerson h3 {
+	margin-bottom: 10px;
+	font-size: 16px;
+}
