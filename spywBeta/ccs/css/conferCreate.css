@@ -146,3 +146,15 @@ table td p {
 .bodyContent td label {
 	padding: 10px;
 }
+.selectChild {
+	margin-left: 30px;
+}
+.selectChild label {
+	display: block;
+	line-height: 22px;
+}
+.selectChild label input {
+	vertical-align: middle;
+	margin: 0;
+	margin-top: -2px;
+}

@@ -29,8 +29,9 @@ public class VideoTypeController {
 	@RequestMapping("/videoTypejoin.do")
 	public Map<String,Object> test(HttpServletRequest request) {
 		Map<String,Object> map  = new HashMap<String, Object>();
-		map.put("List", videoTypeService.queryVideoTypeList());
-
+		List<VideoType> list = videoTypeService.queryVideoTypeList();
+		map.put("List", list);
+		map.put("status", 1);
 		return map;
 	}
 	/**

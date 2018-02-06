@@ -1,5 +1,14 @@
 $(function(){
 			videoload();
+			//村 进入 goBack直接关闭窗口
+			var infodata = JSON.parse(localStorage.info||null);
+
+			if(infodata && infodata.usergroupid.toString().length == 9) {
+				$(".goBack > a").attr("href","../index.html");
+			} else {
+				$("header h1 > a").attr("href", "videoTrainNav.html");
+				$(".goBack > a").attr("href","javascript:history.back();");
+			}
 		});
 function videoload(){
 			$.ajax({
@@ -16,94 +25,56 @@ function videoload(){
 // 			        	$(".secOneLeft").show();
 			        }
 					var dt2=req.map2;
+					dt2 = dt2.slice(0,4);
 					$(".rightTop .prelection ul li").remove();
 			        for(var i=0;i<dt2.length;i++){
 		        		var tt='';
 		        		tt+='<li>';
 			        	tt+='<a href="javascript:void(0)" onclick="videoTrainDetail(\''+dt2[i].videoId+'\')">';
 			        	tt+='<i class="picIcon"><img src="../../images/fabu-item-icon.png"></i>';
-			        	if(dt2[i].videoName.length>18){
-			        		tt+='<p class="paragraphLink">'+dt2[i].videoName.substr(0,18)+'...</p>';
-			        	}else{
-			        		tt+='<p class="paragraphLink">'+dt2[i].videoName+'</p>';
-			        	}
+		        		tt+='<p class="paragraphLink">'+dt2[i].videoName+'</p>';
 			        	tt+='</a>';
 			        	tt+='</li>';
 			        	$(".rightTop .prelection ul").append(tt);
 			        }
 			        var dt4=req.map3;
+			        dt4 = dt4.slice(0,7);
 			        $(".secTwo2 ul li").remove();
 			        for(var i=0;i<dt4.length;i++){
 			        	var tt='';
 			        	tt+='<li>';
 			        	tt+='<a href="javascript:void(0)" onclick="videoTrainDetail(\''+dt4[i].videoId+'\')">';
 			        	tt+='<i class="picIcon"><img src="../../images/fabu-item-icon.png"></i>';
-			        	if(dt4[i].videoName.length>18){
-			        		tt+='<p class="paragraphLink">'+dt4[i].videoName.substr(0,18)+'...</p>';
-			        	}else{
-			        		tt+='<p class="paragraphLink">'+dt4[i].videoName+'</p>';
-			        	}
+		        		tt+='<p class="paragraphLink">'+dt4[i].videoName+'</p>';
 			        	tt+='</a>';
 			        	tt+='</li>';
 			        	$(".secTwo2 ul").append(tt);
 			        }
 			        var dt5=req.map4;
+			        dt5 = dt5.slice(0,7);
 			        $(".secTwo3  ul li").remove();
 			        for(var i=0;i<dt5.length;i++){
 			        	var tt='';
 			        	tt+='<li>';
 			        	tt+='<a href="javascript:void(0)" onclick="videoTrainDetail(\''+dt5[i].videoId+'\')">';
 			        	tt+='<i class="picIcon"><img src="../../images/fabu-item-icon.png"></i>';
-			        	if(dt5[i].videoName.length>18){
-			        		tt+='<p class="paragraphLink">'+dt5[i].videoName.substr(0,18)+'...</p>';
-			        	}else{
-			        		tt+='<p class="paragraphLink">'+dt5[i].videoName+'</p>';
-			        	}
+		        		tt+='<p class="paragraphLink">'+dt5[i].videoName+'</p>';
 			        	tt+='</a>';
 			        	tt+='</li>';
 			        	$(".secTwo3 ul").append(tt);
 			        }
 			        var dt6=req.map5;
+			        dt6 = dt6.slice(0,7);
 			        $(".secTwoItem3  ul li").remove();
 			        for(var i=0;i<dt6.length;i++){
 			        	var tt='';
 			        	tt+='<li>';
 			        	tt+='<a href="javascript:void(0)" onclick="videoTrainDetail(\''+dt6[i].videoId+'\')">';
 			        	tt+='<i class="picIcon"><img src="../../images/fabu-item-icon.png"></i>';
-			        	if(dt6[i].videoName.length>18){
-			        		tt+='<p class="paragraphLink">'+dt6[i].videoName.substr(0,18)+'...</p>';
-			        	}else{
-			        		tt+='<p class="paragraphLink">'+dt6[i].videoName+'</p>';
-			        	}
+		        		tt+='<p class="paragraphLink">'+dt6[i].videoName+'</p>';
 			        	tt+='</a>';
 			        	tt+='</li>';
 			        	$(".secTwoItem3 ul").append(tt);
-			        }
-			        var dt7=req.list;
-			        $(".secTwoItem1  ul li").remove();
-			        for(var i=0;i<dt7.length;i++){
-			        	var tt='';
-			        	tt+='<li>';
-			        	if(dt7[i].recorderAddr!=null){
-			        		tt+='<a href="'+dt7[i].recorderAddr+'" >';
-			        	}else{
-			        		tt+='<a href="javascript:;" >';
-			        	}
-			        	tt+='<i class="picIcon"><img src="../../images/fabu-item-icon.png"></i>';
-			        	tt+='<p class="paragraphLink">'+dt7[i].name+'</p>';
-			        	var timeb=timeAdd(dt7[i].beginTime, dt7[i].duration);
-			        	if(dt7[i].status!=1){
-			        		if(dt7[i].beginTime>timeb){
-			        			tt+='<span class="trainEnd">已结束</span>';
-				        	}else if(dt7[i].beginTime<timeb){
-				        		tt+='<span class="training">培训中</span>';
-				        	}
-			        	}else{
-			        		tt+='<span class="trainEnd">已结束</span>';
-			        	}
-			        	tt+='</a>';
-			        	tt+='</li>';
-			        	$(".secTwoItem1 ul").append(tt);
 			        }
 			    },
 			    beforeSend: function() {
@@ -131,8 +102,28 @@ function videoTrainDetail(videoId){
 function videoTrainadd(){
 	window.location.href="/spywBeta/pages/videoTraining/postVideos.html";
 }
+
 function timeAdd(createTime, duration) {
 	createTime = new Date(createTime).getTime();
 	duration = new Date(duration*60*60*1000).getTime();
 	return new Date(createTime + duration).getTime();
 }
+
+$(window).scroll(function(){
+	currentScroll();
+});
+
+currentScroll();
+function currentScroll(){
+	if($(this).scrollTop() >= 80) {
+		$(".goBack").css({
+			"position":"fixed",
+			"top":"10px"
+		})
+	} else {
+		$(".goBack").css({
+			"position":"absolute",
+			"top":"90px"
+		})
+	}
+};

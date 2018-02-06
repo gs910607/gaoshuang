@@ -7,6 +7,8 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.Duration;
 
+import org.apache.log4j.Logger;
+
 import com.huawei.esdk.tp.professional.local.bean.AdhocConfTemplateParamEx;
 import com.huawei.esdk.tp.professional.local.bean.RecordParamEx;
 import com.huawei.esdk.tp.professional.local.bean.SiteInfoEx;
@@ -16,12 +18,18 @@ import com.zte.ccs.os.meeting.util.RandomUtil;
 
 public class ConferenceTemplate {
 	
+	private static Logger log=Logger.getLogger(ConferenceTemplate.class);
+	
 	public static String addTemplate(List<String> allID,List<String> mcu,TVideoConference conference,String mainUri,String type,resService res){
+		log.info("最终创建模板入参：会议id="+allID+";muc="+mcu);
 		int i=0;
 		AdhocConfTemplateParamEx paramEx=new AdhocConfTemplateParamEx();
-		paramEx.setName(type+":"+RandomUtil.RanInt(8));
+		paramEx.setName(type);
 		paramEx.setAccessCode(conference.getAccessCode());
-		paramEx.setDuration(durationInt2dur(Integer.parseInt(conference.getDuration())*60));
+		//duration为7表示一直持续,而一直持续duration要设置null
+		if( !"7".equals(conference.getDuration()) ) {
+			paramEx.setDuration(durationInt2dur(Integer.parseInt(conference.getDuration())*60));
+		}
 		paramEx.setCpResource(0);
 		paramEx.setMediaEncryptType(0);
 		if(conference.getIsRecording()==1){
@@ -33,7 +41,8 @@ public class ConferenceTemplate {
 			paramEx.setIsLiveBroadcast(conference.getIsRecording());
 			paramEx.setRecordParam(ex);
 		}
-		paramEx.setMainSiteUri(mainUri);
+//		paramEx.setMainSiteUri(mainUri);
+		paramEx.setMainMcuId(Integer.parseInt(mcu.get(0)));
 		List<SiteInfoEx> sites = new ArrayList<SiteInfoEx>();
 		for (String url : allID) {
 			//新建一个SiteInfoEx对象 
@@ -53,7 +62,8 @@ public class ConferenceTemplate {
 		      //会场视频格式为Auto 
 		      siteInfo1.setVideoFormat(0);
 		      //会场视频协议为H.261 
-		      siteInfo1.setVideoProtocol(1);
+		      siteInfo1.setVideoProtocol(0);
+		      siteInfo1.setVideoFormat(0);
 		      siteInfo1.setMcuId(Integer.parseInt(mcu.get(i)));
 		      sites.add(siteInfo1);
 		      i++;
@@ -61,11 +71,12 @@ public class ConferenceTemplate {
 		paramEx.setSites(sites);
 		String addtemplate = res.addtemplate(paramEx);
 		if(addtemplate.startsWith("0")){
+			log.error("模板创建成功，返回值为："+addtemplate);
 			String[] split = addtemplate.split(" ");
 			return split[1].toString();
 		}
 		
-		
+		log.error("模板创建失败，错误码为："+addtemplate);
 		return "error";
 	}
 

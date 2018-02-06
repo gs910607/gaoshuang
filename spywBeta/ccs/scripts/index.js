@@ -18,7 +18,6 @@ $(function(){
 	    	localStorage.setItem("info",JSON.stringify(req)); //存
 	    	var info = JSON.parse(localStorage.getItem("info"));
 	    	if(info.usergroupid.toString().split('').length==9){
-	     		$("#informationNav").attr("data-href","../pages/informationPublish/informationPublish.html");
 	     		$("#videoTrainNav").attr("data-href","../pages/videoTraining/videoTraining.html");
 	    	}
 	    	if(info.usergroupid.toString().split('').length>=6){
@@ -38,35 +37,34 @@ $(function(){
 
 var infoIsTemplete = false;  //用户信息是否完善  true完善  false未完善
 $.ajax({
-	 	type: 'POST',
-	  async: false,
-	 	url: '../area/getInfo.do',
-	 	dataType: 'json',
-	 	success: function(response) {
-			if(response.status == 1) {
-				 	infoIsTemplete = true;
-				 	
-			}else if(response.status==0){
-				alert(response.user);
-			}else{
-				
-				var datas = user.usergroupid;
-				quanxian(datas);
-				$("#infoFormDialog select").attr("disabled",true);
-			 	$("#accountNumber").val(user.username).attr("disabled",true);
-			 	$("#username").val(user.realname);
-			 	$("#userid").val(user.userid);
-			 	$("#idNumber").val(user.identity==null?"":user.identity);
-			 	$("#telephone").val(user.usertel==null?"":user.userTel);
-			 	$("#remark").val(user.remark).attr("disabled",true);
-			}
-		},
-		error: function() {
-			alert("服务繁忙，请稍后再试");
-		},
-		beforeSend: function() {
+	type: 'POST',
+	async: false,
+	url: '../area/getInfo.do',
+	dataType: 'json',
+	success: function(response) {
+
+		if(response.status == 1) {
+			infoIsTemplete = true;
+
+		}else if(response.status==0){
+			alert(response.user);
+		}else{
+			var user=JSON.parse(response.user);
+			var datas = user.usergroupid;
+			quanxian(datas);
+			$("#infoFormDialog select").attr("disabled",true);
+			$("#accountNumber").val(user.username).attr("disabled",true);
+			$("#username").val(user.realname);
+			$("#userid").val(user.userid);
+			$("#idNumber").val(user.identity==null?"":user.identity);
+			$("#telephone").val(user.usertel==null?"":user.userTel);
+			$("#remark").val(user.remark).attr("disabled",true);
 		}
-	});
+	},
+	error: function() {
+		alert("服务繁忙，请稍后再试");
+	},
+});
 
 
 function quanxian(data,isAdd) {
@@ -146,7 +144,7 @@ $(".childPageList a").on("click", function() {
 			})
 		});
 	} else {  //完善
-		window.open(thisHref);
+		location.href = thisHref;
 	}
 });
 
@@ -166,6 +164,9 @@ $("#html5Form").html5Validate(function() {
 	},function(data){
 		if(data.status==1){
 			alert(data.msg);
+			$("#infoFormDialog").modal("hide");
+			infoIsTemplete = true;
+			//location.reload();
 		}
 		
 	});

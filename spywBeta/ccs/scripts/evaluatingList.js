@@ -38,7 +38,7 @@ function problempaperlistSearch(pagesize){
 	}
 	var problempaperName=$("#exampleInputName2").val();
 	var problempaperStarttime=$("#startTime").val();
-	var problempaperStoptime=$("#endTime").val() ? new Date(new Date($("#endTime").val()).setDate(new Date($("#endTime").val()).getDate() + 1)).format("yyyy-MM-dd") : new Date().format("yyyy-MM-dd");
+	var problempaperStoptime=$("#endTime").val() ? new Date(new Date($("#endTime").val()).setDate(new Date($("#endTime").val()).getDate() + 1)).format("yyyy-MM-dd") : '';
 	var data={"pagesize":pagesize,"problempaperCode":problempaperCode,"problempaperName":problempaperName,"problempaperStarttime":problempaperStarttime,"problempaperStoptime":problempaperStoptime};
 	problempaperlistjson(data,pagesize)
 }
@@ -105,21 +105,23 @@ function problempaperlistjson(data,pagesize){
 	})
 }
 function problempaperdelete(problempaperId){
-	$.ajax({
-	    url:"/spywBeta/videoResearch/problemPaperDelete.do",    //请求的url地址
-	    dataType:"json",   //返回格式为json
-	    data:{"problempaperId":problempaperId},    //参数值
-	    type:"post",   //请求方式
-	    success:function(req){
-	    	if(req.status==0){
-	    		alert(req.success);
-		    	var pagesize=$("#pagesize").val();
-		    	problempaperlistSearch(pagesize);
-	    	}else{
-	    		alert(req.success);
-	    	}
-	    }
-	});
+	if(confirm("是否删除？")) {	
+		$.ajax({
+		    url:"/spywBeta/videoResearch/problemPaperDelete.do",    //请求的url地址
+		    dataType:"json",   //返回格式为json
+		    data:{"problempaperId":problempaperId},    //参数值
+		    type:"post",   //请求方式
+		    success:function(req){
+		    	if(req.status==0){
+		    		alert(req.success);
+			    	var pagesize=$("#pagesize").val();
+			    	problempaperlistSearch(pagesize);
+		    	}else{
+		    		alert(req.success);
+		    	}
+		    }
+		});
+	}
 }
 Page({
 	num: 100,				//页码数

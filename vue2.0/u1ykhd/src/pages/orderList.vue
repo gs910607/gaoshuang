@@ -149,6 +149,9 @@ export default {
       this.tableData = _.orderBy(this.tableData, headItem.key, this.currentOrder)
     }
   },
+  created () {
+    document.title = "orderList"
+  },
   mounted () {
     this.getList()
   }

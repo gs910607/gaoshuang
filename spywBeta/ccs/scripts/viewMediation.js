@@ -44,29 +44,6 @@ function init() {
 			code = data.list[0].areas!= undefined ? data.list[0].areas.code : '10';
 			name = data.list[0].areas!= undefined ? data.list[0].areas.name : '';
 		}
-
-		// if(code.length==3){
-		// 	var str = '';
-		// 	str += '<option value="' + code + ' select=selected disebled">' + name + '</option>';
-		// 	$("#district").append(str)
-		// }
-		// else if(code.length==6){
-		// 	var str = '';
-		// 	str += '<option value="' + code + ' select=selected disebled">' + name + '</option>';
-		// 	$("#country").append(str)
-		// 	var sss=code.substr(0, 3);
-		// }
-		// else if(code.length==9){
-		// 	var str = '';
-		// 	str += '<option value="' + code + ' select=selected disebled">' + name + '</option>';
-		// 	$("#village").append(str)
-		// 	var sss=code.substr(0, 3);
-		// }else{
-		// 	new selectArea('#html5Form',{
-		// 		data: '',
-		// 		isSelect: true
-		// 	})
-		// }
 		
 		getMediate(data);
 	});
@@ -93,6 +70,8 @@ function getMediate(data) {
 
 function getSearchMediate(data) {
 	num = data.num;
+	var startTime = $("#startTime").val() ? $("#startTime").val() : '1970-01-01';
+	var endTime = $("#endTime").val() ? new Date(new Date($("#endTime").val()).setDate(new Date($("#endTime").val()).getDate() + 1)).format("yyyy-MM-dd") : new Date().format("yyyy-MM-dd");
 	Page({
 		num : num, //页码数
 		startnum : 1, //指定页码
@@ -100,8 +79,8 @@ function getSearchMediate(data) {
 		callback : function(n) { //回调函数
 			$.post("../../mediate/getSearchPageList.do?pages=" + n, {
 				mediateRegisBranch : $("#department").val(),
-				mediateRegisDate : $("#startTime").val(),
-				stopTime : $("#endTime").val(),
+				mediateRegisDate : startTime,
+				stopTime : endTime,
 				district : $("#district").val(),
 				county : $("#county").val(),
 				village : $("#village").val()
@@ -122,10 +101,10 @@ function setMediate(data,code) {
 	$(data.list).each(function(i, n) {
 		if (i < 10) {
 			var str="<tr><td>"
-				+ n.mediateRegisName + "</td><td>"
-				+ n.mediateRegisBranch + "</td><td>"
+				+ (n.mediateRegisName == null ? '' : n.mediateRegisName) + "</td><td>"
+				+ (n.mediateRegisBranch == null ? '' : n.mediateRegisBranch) + "</td><td>"
 				+ (n.areas?n.areas.name:"") + "</td><td>"
-				+ n.mediateReason + "</td><td>"
+				+ (n.mediateReason?n.mediateReason:"") + "</td><td>"
 				+ format(n.mediateRegisDate / 1) 
 				+ "</td>";
 			if(n.confId==null){
@@ -176,12 +155,12 @@ function setMediate(data,code) {
 	});
 }
 
-
 function timeAdd(createTime, duration) {
 	createTime = new Date(createTime).getTime();
 	duration = new Date(duration*60*60*1000).getTime();
 	return new Date(createTime + duration).getTime();
 }
+
 
 function lookCode(event) {
 	var conoferid = $(event.target).data("conoferid");
@@ -256,7 +235,7 @@ function deleteMediate(id){
 		}, function(respose) {
 			if (respose.status == 1) {
 				alert(respose.msg);
-				window.location.href = "viewMediation.html";
+				init();
 			} else {
 				alert(respose.msg);
 			}
@@ -264,12 +243,12 @@ function deleteMediate(id){
 	}	
 }
 
-
 $("#search").on("click", function() {
 
 	var startTime = $("#startTime").val() ? $("#startTime").val() : '1970-01-01';
-	var endTime = $("#endTime").val() ? new Date(new Date($("#endTime").val()).setDate(new Date($("#endTime").val()).getDate() + 1)).format("yyyy-MM-dd") : new Date().format("yyyy-MM-dd");
-
+	// var endTime = $("#endTime").val() ? new Date(new Date($("#endTime").val()).setDate(new Date($("#endTime").val()).getDate() + 1)).format("yyyy-MM-dd") : new Date().format("yyyy-MM-dd");
+	var endTime = $("#endTime").val() ? $("#endTime").val() : new Date().format("yyyy-MM-dd");
+	
 	if(startTime && endTime && startTime > endTime) {
 		$("#endTime").testRemind("结束时间不得大于开始时间");
 		return;
@@ -305,12 +284,14 @@ function format(timestamp) {
 
 
 $("#export").on("click", function() {
+	var startTime = $("#startTime").val() ? $("#startTime").val() : '1970-01-01';
+	var endTime = $("#endTime").val() ? new Date(new Date($("#endTime").val()).setDate(new Date($("#endTime").val()).getDate() + 1)).format("yyyy-MM-dd") : new Date().format("yyyy-MM-dd");
 	$("#district1").val($("#district").val());
 	$("#county1").val($("#county").val());
 	$("#village1").val($("#village").val());
 	$("#mediateRegisBranch").val($("#department").val());
 	$("#mediateRegisDate1").val($("#startTime").val());
-	$("#stopTime").val($("#endTime").val());
+	$("#stopTime").val(endTime);
 	$("#FormExport").submit();
 });
 

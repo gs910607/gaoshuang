@@ -1,31 +1,115 @@
 package com.jzsx.xlgc.bean;
 
+import java.util.Date;
+
 public class TMediatePerson {
 	
-	private String id;
+	private String id;//id
 	
-	private String name;
+	private String name;//姓名，调解人/被调解人
 	
-	private String cellPhone;
+	private String cellPhone;//手机号码
 	
-	private String tellPhone;
+	private String tellPhone;//电话号码
 	
-	private String mediationAddress;
+	private String mediationAddress;// 调解人/被调解人，所在地址code
 	
-	private String address;
+	private String address;//具体地址，文字展示
 	
-	private String identity;
+	private String identity;//证件号码
 	
-	private String unit;
+	private String unit;//调解人单位
 	
-	private String identityType;
+	private String identityType;//证件类型
 	
-	private Integer personType;
+	private Integer personType;//人物类型（调解人为2/被调解人1）
 	
-	private String mediateid;
+	private Integer partiespeople;//被调解人旁听人数
 	
-	private String mcu;
+	private Integer mediatepeople;//调解员人数
 	
+	private String mediateunit;//调解人所在单位
+	
+	private String mediateid;//对应调解信息主键id
+	
+	private String mcu;//人物所在地mcu
+	
+    private String beforeUrl;//协议文件
+    
+    private String afterUrl;//签字后的协议文本
+    
+    private Date createTime;//创建时间
+	
+    private Date startTime;
+    
+    private Date stopTime;
+    
+    
+    
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	public Date getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
+	}
+
+	public Date getStopTime() {
+		return stopTime;
+	}
+
+	public void setStopTime(Date stopTime) {
+		this.stopTime = stopTime;
+	}
+
+	public String getBeforeUrl() {
+		return beforeUrl;
+	}
+
+	public void setBeforeUrl(String beforeUrl) {
+		this.beforeUrl = beforeUrl;
+	}
+
+	public String getAfterUrl() {
+		return afterUrl;
+	}
+
+	public void setAfterUrl(String afterUrl) {
+		this.afterUrl = afterUrl;
+	}
+
+	public Integer getPartiespeople() {
+		return partiespeople;
+	}
+
+	public void setPartiespeople(Integer partiespeople) {
+		this.partiespeople = partiespeople;
+	}
+
+	public Integer getMediatepeople() {
+		return mediatepeople;
+	}
+
+	public void setMediatepeople(Integer mediatepeople) {
+		this.mediatepeople = mediatepeople;
+	}
+
+	public String getMediateunit() {
+		return mediateunit;
+	}
+
+	public void setMediateunit(String mediateunit) {
+		this.mediateunit = mediateunit;
+	}
 
 	public String getMcu() {
 		return mcu;

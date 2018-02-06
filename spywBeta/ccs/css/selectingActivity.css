@@ -13,6 +13,7 @@
 	line-height: 30px;
 	padding: 0 18px;
 	margin-top: 60px;
+	word-break: break-all;
 }
 .voteSmailTit {
 	font-size: 20px;
@@ -20,6 +21,7 @@
 	margin-top: 20px;
 }
 .voteExplain {
+	word-break: break-all;
 	font-size: 20px;
 	color: #505050;
 	text-indent: 2em;
@@ -37,10 +39,25 @@
 	display: block;
 	cursor: default;
 	border: 1px solid #ff6600;
+	border-radius: 5px;
 	padding: 5px;
 	color: #000;
 	text-align: left;
-	overflow: hidden;
+}
+.presonList li a > div {
+	position: relative;
+}
+.presonList li .selectIcon {
+	position: absolute;
+	right: -15px;
+	bottom: -15px;
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+	background: #fff url(../images/pingxuan-default.png) no-repeat center center / 100% 100%;
+}
+.presonList li.active .selectIcon {
+	background-image: url(../images/pingxuan-active.png);
 }
 .presonList .name {
 	font-size: 12px;

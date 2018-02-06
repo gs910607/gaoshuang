@@ -6,7 +6,7 @@
 		<setting name="lazyLoadingEnabled" value="true" />
 		<setting name="multipleResultSetsEnabled" value="true" />
 		<setting name="useColumnLabel" value="true" />
-		<setting name="defaultExecutorType" value="REUSE" />
+		<setting name="defaultExecutorType" value="SIMPLE" />
 		<setting name="defaultStatementTimeout" value="25000" />
 		<setting name="logImpl" value="SLF4J" />
 		<setting name="proxyFactory" value="JAVASSIST" />

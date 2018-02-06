@@ -43,6 +43,12 @@ public interface VideoResearchActiveDao {
 	 */
 	public void updatevideoResearchById(String videoResearchId);
 	/**
+	 * 根据id字符串拼接修改票数
+	 * @param videoResearchActive
+	 */
+	public void updatevideoResearchByIds(List<String> list);
+	
+	/**
 	 * 根据父类ID删除数据
 	 * @param videoResearchId
 	 */

@@ -10,7 +10,7 @@ $("#upBtn").on("click",function() {
     if(flag == false) {
         return;
     }
-    
+    $("#result").html("");
     var select = $("#select").val();
 
     $("#upForm").ajaxSubmit({
@@ -24,6 +24,7 @@ $("#upBtn").on("click",function() {
 
             ajaxLoading.hide();
             data = JSON.parse(data);
+            
             if(data.status==0){
                 alert("上传成功")
                 setTimeout(function(){
@@ -32,7 +33,14 @@ $("#upBtn").on("click",function() {
 
                 $("#upForm").resetForm();
             } else {
-                alert(data.success);
+                alert("上传失败");
+                if(data.info){
+                	var strresult = "";
+                	for(i = 0 ;data.info.length > i ;i++ ){
+                		strresult += "<p style =" + "\"color:red\""+ ">"+ data.info[i] + "</p>"
+                	}
+                	$("#result").append(strresult);
+                }
             }
         },
         error:function (data) {

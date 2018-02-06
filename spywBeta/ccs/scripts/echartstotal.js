@@ -52,7 +52,7 @@ var echartstotal = function(){
 		}
 		//初始化年并给当前年
 		for(var i=0;i<=10;i++) {
-			var yearnumber = parseInt(yeardata);
+			var yearnumber = new Date().getFullYear();
             var str = '';
             str += '<option value="'+ (yearnumber-i) +'">'+ (yearnumber-i) +'</option>';
             $("#years").append(str);
@@ -94,8 +94,17 @@ var echartstotal = function(){
 	        	var totalnumber = parseInt(data.success[i]) + parseInt(data.defeated[i]) + parseInt(data.unknown[i]);
 	        	data.total.push(totalnumber);
 	        }
-	        legendata = ["总次数","成功次数","失败次数","未确定次数"] ;
-	        seriesdata = [{name:'总次数',type:'bar',data:data.total,barCategoryGap :"40%"},{name:'成功次数',type:'bar',data:data.success,barCategoryGap :"40%"},{name:'失败次数',type:'bar',data:data.defeated,barCategoryGap :"40%"},{name:'未确定次数',type:'bar',data:data.unknown,barCategoryGap :"40%"}];
+	        if(localStorage.echartsdata.split(" ")[0] == "videoChart.html"){
+	        	legendata = ["总次数","成功次数","失败次数","未确定次数","调解时长"];
+        		seriesdata = [{  name: '总次数',type: 'bar',data: data.total,barCategoryGap :"40%"},{name: '成功次数',type: 'bar',data: data.success,barCategoryGap :"40%"},{name: '失败次数',type: 'bar',data: data.defeated,barCategoryGap :"40%"},{name: '未确定次数',type: 'bar',data: data.unknown,barCategoryGap :"40%"},{name: '调解时长',type: 'bar',data: data.duration,barCategoryGap :"40%"}];
+	        }else if(localStorage.echartsdata.split(" ")[0] == "neighChart.html"){
+	        	legendata = ["总次数","已解决次数","未解决次数","未确定次数","信访时长","信访次数"];
+        		seriesdata = [{  name: '总次数',type: 'bar',data: data.total},{name: '已解决次数',type: 'bar',data: data.success},{name: '未解决次数',type: 'bar',data: data.defeated},{name: '未确定次数',type: 'bar',data: data.unknown},{name: '信访时长',type: 'bar',data: data.hover},{name: '信访次数',type: 'bar',data: data.neightcount}];
+        	}else{
+        		legendata = ["总次数","成功次数","失败次数","未确定次数"] ;
+		        seriesdata = [{name:'总次数',type:'bar',data:data.total,barCategoryGap :"40%"},{name:'成功次数',type:'bar',data:data.success,barCategoryGap :"40%"},{name:'失败次数',type:'bar',data:data.defeated,barCategoryGap :"40%"},{name:'未确定次数',type:'bar',data:data.unknown,barCategoryGap :"40%"}];
+	        }
+	        
 		}else{
 			legendata = ["次数"];
 			seriesdata = [{name:'次数',type:'bar',data:data.count,barCategoryGap :"40%"}];

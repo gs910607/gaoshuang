@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd"> 
+<mapper  namespace="com.jzsx.xlha.videoTrain.dao.VideoTrainDao">
+
+	<resultMap type="com.jzsx.xlha.bean.VideoTrain" id="BaseResultMap">
+	    <id property="videoId" column="t_videoId"/>
+	    <result property="videoTypeId" column="t_video_typeId" />
+	    <result property="videoName" column="t_video_name" />
+	    <result property="videoPath" column="t_video_path" />
+	    <result property="videoTop" column="t_video_top" />
+	    <result property="videoRemark" column="t_video_remark" />
+	    <result property="videoTime" column="t_video_time" />
+	    <result property="videoVname" column="t_video_vname" />
+	    <result property="videoVsize" column="t_video_vsize" />
+	    <result property="videorealName" column="t_video_realname" />
+	    <result property="videoCode" column="t_video_code" />
+	    <result property="videoPicTypeId" column="t_video_pic_typeId" />
+	    <result property="videoViewCount" column="t_video_view_count" />
+	    <result property="videoEditUsername" column="t_video_edit_username" />
+	    <association property="videoTypeinfo" column="t_video_typeId" select="com.jzsx.xlha.videoTrain.dao.VideoTypeDao.queryVideoTypeById"></association>
+    	<association property="areainfo" column="t_video_code" select="com.jzsx.xlha.area.dao.AreaDao.queryByCode"></association>
+    </resultMap>
+    <resultMap type="com.jzsx.xlha.bean.TLegalPublicity" id="BaseResultMapleg">
+	    <id property="cLegalId" column="t_videoId"/>
+	    <result property="cLegalTitle" column="t_video_name" />
+	    <result property="cLegalImage" column="t_video_path" />
+	    <result property="cLegalVideo" column="t_video_path" />
+	    <result property="cLegalContent" column="t_video_remark" />
+	    <result property="cLegalCreatetime" column="t_video_time" />
+	    <result property="cLegalCreate" column="t_video_realname" />
+	    <result property="cForeignUserid" column="t_video_code" />
+	    <result property="cLegalType" column="t_video_pic_typeId" />
+	    <result property="cLegalCount" column="t_video_view_count" />
+	    <result property="cLegalEditor" column="t_video_edit_username" />
+    </resultMap>
+  	<!-- 根据多个手机号查询多个会议成员的信息 -->
+  	<select id="queryVideoTrainList" resultMap="BaseResultMap">
+        select * from t_video_train
+        order by t_video_time desc
+    </select>
+    <select id="queryVideoTrainListBytype" parameterType="com.jzsx.xlha.bean.VideoTrain" resultMap="BaseResultMap">
+	   	 select * from t_video_train where 1=1
+		   	 <if test="videoTypeId !=null and videoTypeId !='' ">
+		   	 	and  t_video_typeId=#{videoTypeId}
+		   	 </if>
+		   	<if test="videoName !=null and videoName !='' ">
+		   	 	and  t_video_name like '%${videoName}%'
+		   	 </if>
+		   	 <if test="videoTypeId !=null and videoTypeId !='' ">
+		   	 	and t_video_typeId=#{videoTypeId}
+		   	 </if>
+		   	 <if test="videoTime !=null and videoTime !='' ">
+		   	 <![CDATA[
+			   	 and t_video_time >= #{videoTime}
+			   	 ]]>
+		   	 </if>
+		   	 <if test="stopTime !=null and stopTime !='' ">
+		   	 <![CDATA[
+			   	 and t_video_time <= #{stopTime}
+			   	 ]]>
+		   	 </if>
+		   	 <if test="videoCode !=null and videoCode !='' ">
+		   	 	and (t_video_code like '%${videoCode}%'
+		   	 	or t_video_code=substr(#{videoCode},0,6)
+         		or t_video_code=substr(#{videoCode},0,3)
+         		or t_video_code=substr(#{videoCode},0,1))
+		   	 </if>
+		   	 order by t_video_time desc
+    </select>
+    <select id="queyVideoTrainById" parameterType="java.lang.String" resultMap="BaseResultMap">
+    	select * from t_video_train where t_videoId=#{videoId}
+    </select>
+    <select id="queryVideoTrainByTypeId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+   	 select * from t_video_train where t_video_typeId=#{videoTypeId}
+    </select>
+    <delete id="deleteVideoTrainById" parameterType="java.lang.String">
+    	delete from t_video_train where t_videoId=#{videoId}
+    </delete>
+    <update id="updateVotePlus" parameterType="com.jzsx.xlha.bean.VideoTrain">
+    	update t_video_train set t_video_view_count=t_video_view_count+1 where 1=1
+    	<if test="videoId !=null and videoId !='' ">
+		   	 and t_videoId=#{videoId}
+		</if>
+		<if test="videoTypeId !=null and videoTypeId !='' ">
+		   	 and t_video_typeId=#{videoTypeId}
+		</if>
+    </update>
+    <!-- 法制宣传 ==视频培训-->
+    <select id="queryLegByAll" parameterType="com.jzsx.xlha.bean.TLegalPublicity" resultMap="BaseResultMapleg">
+    	select t_videoId,t_video_name
+    	,t_video_path,
+      t_video_remark,t_video_time,t_video_realname,t_video_code,
+      t_video_pic_typeId,t_video_view_count,t_video_edit_username 
+      from t_video_train
+      where 1=1 and t_video_typeId=7
+      <if test="cLegalTitle !=null and cLegalTitle !=''">
+      	and t_video_name like '%${cLegalTitle}%'
+      </if>
+      <if test="start !=null and start !=''">
+      	<![CDATA[
+			   	 and to_char(t_video_time,'yyyy-MM-dd') >= to_char(#{start},'yyyy-MM-dd')
+		 ]]>
+      </if>
+      <if test="stop !=null and stop !=''">
+      	<![CDATA[
+			   	 and to_char(t_video_time,'yyyy-MM-dd') <= to_char(#{stop},'yyyy-MM-dd')
+		]]>
+      </if>
+      order by t_video_time desc
+    </select>
+    <!-- 法制宣传 ==视频培训-->
+    <select id="queryLegById" parameterType="java.lang.String" resultMap="BaseResultMapleg">
+	    select t_videoId,t_video_name
+	    	,t_video_path,
+	      t_video_remark,t_video_time,t_video_realname,t_video_code,
+	      t_video_pic_typeId,t_video_view_count,t_video_edit_username 
+	      from t_video_train
+	      where 1=1 
+	      and t_video_typeId=7
+	      and t_videoId=#{cLegalId}
+    </select>
+</mapper>

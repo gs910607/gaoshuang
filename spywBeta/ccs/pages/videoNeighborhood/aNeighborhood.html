@@ -37,8 +37,8 @@
 		<header>
 			<h1><a href="neighborhoodNav.html"><img src="../../images/shipinjiefang.png"></a></h1>
 			<div class="loginWrapper pull-right">
-				<span class="welcome">欢迎登录</span>
 				<span class="userName"></span>
+				<span class="welcome">欢迎登录</span>
 				<div class="userInfo">
 					<img src="../../images/user-icon.png">
 					<div class="dropWrap">
@@ -99,9 +99,9 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<label for="serialNumber" class="formLabel control-label"><sup>*</sup>信访编号:</label>
+										<label for="personNumber" class="formLabel control-label">信访人数:</label>
 										<div class="formInput">
-											<input type="text" class="form-control" required id="serialNumber" required>
+											<input type="text" class="form-control" id="personNumber">
 										</div>
 									</div>
 								</div>
@@ -131,7 +131,7 @@
 								</div>
 								<div class="inlineGroup clearfix">
 									<div class="form-group">
-										<label for="title" class="formLabel control-label"><sup>*</sup>标题:</label>
+										<label for="title" class="formLabel control-label"><sup>*</sup>会议标题:</label>
 										<div class="formInput">
 											<input type="text" class="form-control" id="title" required>
 										</div>
@@ -201,27 +201,21 @@
 												<option value="3">山林土地权属纠纷</option>
 												<option value="4">拆迁补偿与住房保障</option>
 												<option value="5">劳动和社会保障</option>
-												<option value="6">安全、生产与环境保护</option>
-												<option value="7">行政执法与行业服务</option>
-												<option value="8">城市建设与管理</option>
-												<option value="9">其他</option>
+<!-- 												<option value="6">安全、生产与环境保护</option> -->
+<!-- 												<option value="7">行政执法与行业服务</option> -->
+<!-- 												<option value="8">城市建设与管理</option> -->
+<!-- 												<option value="9">其他</option> -->
 											</select>
 										</div>
 									</div>
-									<div class="form-group">
-										<label for="personNumber" class="formLabel control-label">信访人数:</label>
-										<div class="formInput">
-											<input type="text" class="form-control" id="personNumber">
-										</div>
-									</div>
-								</div>
-								<div class="inlineGroup clearfix">
 									<div class="form-group">
 										<label for="datePic" class="formLabel control-label"><sup>*</sup>信访日期:</label>
 										<div class="formInput">
 											<input type="text" class="form-control" onclick="WdatePicker()" id="datePic" readonly required>
 										</div>
 									</div>
+								</div>
+								<div class="inlineGroup clearfix">
 									<div class="form-group">
 										<label for="time" class="formLabel control-label"><sup>*</sup>登记日期:</label>
 										<div class="formInput">
@@ -234,15 +228,21 @@
 											<input type="text" class="form-control" id="purpose">
 										</div>
 									</div>
-								</div>
-								<div class="inlineGroup clearfix">
-									
 									<div class="form-group">
 										<label for="reason" class="formLabel control-label">信访原因:</label>
 										<div class="formInput">
 											<input type="text" class="form-control" id="reason">
 										</div>
 									</div>
+								</div>
+								<div class="inlineGroup clearfix">
+									<!-- <div class="form-group">
+										<label for="serialNumber" class="formLabel control-label"><sup>*</sup>信访编号:</label>
+										<div class="formInput">
+											<input type="text" class="form-control" required id="serialNumber" required>
+										</div>
+									</div> -->
+									
 									<div style="display:none;" id="opinionWrap" class="form-group">
 										<label for="opinion" class="formLabel control-label">办理意见:</label>
 										<div class="formInput">
@@ -310,6 +310,29 @@
 								</div>
 								<div class="inlineGroup clearfix">
 									<div class="form-group">
+										<label for="neightJob" class="formLabel control-label">接访人职务:</label>
+										<div class="formInput">
+											<input type="text" class="form-control" id="neightJob">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="neightPhone" class="formLabel control-label">联系方式:</label>
+										<div class="formInput">
+											<input type="text" class="form-control" id="neightPhone">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="" class="formLabel control-label"><sup>*</sup>是否支持录播:</label>
+										<div class="formInput">
+											<select id="recorded" class="form-control" required>
+												<option value="1">是</option>
+												<option value="0" selected>否</option>
+											</select>
+										</div>
+									</div>
+								</div>
+								<div class="inlineGroup clearfix">
+									<div class="form-group">
 										<label for="startTime" class="formLabel control-label"><sup>*</sup>信访开始时间:</label>
 										<div class="formInput">
 											<input type="text" onclick="WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm:ss'})" class="form-control" id="startTime" readonly required>
@@ -325,15 +348,7 @@
 												<option value="4">4小时</option>
 												<option value="5">5小时</option>
 												<option value="6">6小时</option>
-											</select>
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="" class="formLabel control-label"><sup>*</sup>是否支持录播:</label>
-										<div class="formInput">
-											<select id="recorded" class="form-control" required>
-												<option value="1">是</option>
-												<option value="0" selected>否</option>
+												<option value='7'>一直持续</option>
 											</select>
 										</div>
 									</div>
@@ -355,7 +370,7 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<label for="registrationAuthorities" class="formLabel control-label"><sup>*</sup>登记人部门:</label>
+										<label for="registrationAuthorities" class="formLabel control-label"><sup>*</sup>登记科室:</label>
 										<div class="formInput">
 											<input type="text" class="form-control" id="registrationAuthorities" required>
 										</div>

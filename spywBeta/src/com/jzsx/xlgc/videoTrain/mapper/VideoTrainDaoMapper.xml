@@ -16,6 +16,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 	    <result property="videoVsize" column="t_video_vsize" />
 	    <result property="videorealName" column="t_video_realname" />
 	    <result property="videoCode" column="t_video_code" />
+	     <result property="videoEditUsername" column="t_video_edit_username" />
 	    <association property="videoTypeinfo" column="t_video_typeId" select="com.jzsx.xlgc.videoTrain.Dao.VideoTypeDao.queryVideoTypeById"></association>
     	<association property="areainfo" column="t_video_code" select="com.jzsx.xlgc.area.Dao.AreaDao.queryByCode"></association>
     </resultMap>
@@ -55,7 +56,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		   	 </if>
 		   	 <if test="stopTime !=null and stopTime !='' ">
 		   	 <![CDATA[
-			   	 and t_video_time <= #{stopTime}
+			   	 and t_video_time <= #{stopTime}+1
 			   	 ]]>
 		   	 </if>
 		   	 <if test="videoCode !=null and videoCode !='' ">
@@ -71,7 +72,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
     </select>
     <select id="queryByCodeOfconfer" parameterType="java.lang.String" resultMap="BaseResultMapt">
     	select t.* from T_VIDEO_CONFERENCE t
-		where 1=1 and type =5 and status=0
+		where 1=1 and (type =5 or type=1 )and status=0
 		<![CDATA[
 		and sysdate<(t.begin_time+numtodsinterval(t.duration,'hour'))
 		]]>
@@ -142,7 +143,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 			<if test="videoRemark != null and videoRemark !=''">
 				t_video_remark ,
 			</if>
-			<if test="videoTime != null and videoRemark !=''">
+			<if test="videoTime != null and videoTime !=''">
 				t_video_time ,
 			</if>
 			<if test="videoVname != null and videoVname !=''">
@@ -156,6 +157,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 			</if>
 			<if test="videoCode != null and videoCode !=''">
 				t_video_code ,
+			</if>
+			<if test="videoEditUsername != null and videoEditUsername !=''">
+				t_video_edit_username ,
 			</if>
 		</trim>
 		values
@@ -178,7 +182,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 			<if test="videoRemark != null and videoRemark !=''">
 				#{videoRemark} ,
 			</if>
-			<if test="videoTime != null and videoRemark !=''">
+			<if test="videoTime != null and videoTime !=''">
 				#{videoTime} ,
 			</if>
 			<if test="videoVname != null and videoVname !=''">
@@ -192,6 +196,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 			</if>
 			<if test="videoCode != null and videoCode !=''">
 				#{videoCode} ,
+			</if>
+			<if test="videoEditUsername != null and videoEditUsername !=''">
+				#{videoEditUsername} ,
 			</if>
 			</trim>
 	</insert>
@@ -224,6 +231,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 			</if>
 			<if test="videoCode != null and videoCode !=''">
 				t_video_code =#{videoCode},
+			</if>
+			<if test="videoEditUsername != null and videoEditUsername !=''">
+				t_video_edit_username =#{videoEditUsername},
 			</if>
 		</set>
 		where t_videoId=#{videoId}

@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -33,7 +34,7 @@ import com.zte.ccs.os.meeting.util.RandomUtil;
 @Controller
 @RequestMapping("/videoResearch")
 public class ProblemPaperController {
-
+Logger logger=Logger.getLogger(ProblemPaperController.class);
 	@Autowired
 	private ProblemPaperService problemPaperService;
 	@Autowired
@@ -52,8 +53,10 @@ public class ProblemPaperController {
 	@RequestMapping("/problemPaperlistjoin.do")
 	public Map<String,Object> problemPaperlistjoin(ProblemPaper problemPaper,HttpServletRequest request) {
 		Map<String,Object> map  = new HashMap<String, Object>();
+		logger.debug("problemPaperlistjoin.do  问卷调查根据条件加载数据开始");
 		String pagesiz=request.getParameter("pagesize");
-		
+		logger.debug("参数 标题："+problemPaper.getProblempaperName());
+		logger.debug("参数 发布时间——开始："+problemPaper.getProblempaperStarttime()+"--结束："+problemPaper.getProblempaperStoptime());
 //		VideoResearch videoResearch=new VideoResearch();
 		int pagesize=0;
 		if(!"".equals(pagesiz) && pagesiz!=null){
@@ -71,13 +74,15 @@ public class ProblemPaperController {
 //				videoNeighborhood.setVideoneihdLocationplace(appUser.getUserGroupId().toString());
 			}
 		}
+		logger.debug("参数 code:"+problemPaper.getProblempaperCode());
 		map=problemPaperService.queryByAll(problemPaper, pagesize, 8);
-		System.out.println("map:"+map);
+//		System.out.println("map:"+map);
 //		System.out.println("json已进入");
 //		List<ProblemPaper> list = problemPaperService.querylist();
 //		System.out.println("list:"+list);
 //		map.put("list", list);
 //		map.put("total", 2);
+		logger.debug("问卷调查根据条件加载数据  结束");
 		return map;
 	}
 	/**
@@ -90,6 +95,9 @@ public class ProblemPaperController {
 	@RequestMapping("/problemPaperRecordlistjoin.do")
 	public Map<String,Object> problemPaperRecordlistjoin(ProblemPaperRecord problemPaperRecord,HttpServletRequest request) {
 		Map<String,Object> map  = new HashMap<String, Object>();
+		logger.debug("problemPaperRecordlistjoin.do  问卷调查记录根据条件加载数据开始");
+		logger.debug("参数 标题："+problemPaperRecord.getPaperRecordtitle());
+		logger.debug("参数 时间 --开始："+problemPaperRecord.getPaperRecordTime()+"--结束："+problemPaperRecord.getPaperRecordStoptime());
 		String pagesiz=request.getParameter("pagesize");
 //		VideoResearch videoResearch=new VideoResearch();
 		int pagesize=0;
@@ -97,7 +105,8 @@ public class ProblemPaperController {
 			pagesize=Integer.parseInt(pagesiz);
 		}
 		map=problemPaperRecordService.queryByAll(problemPaperRecord, pagesize, 8);
-		System.out.println("map:"+map);
+//		System.out.println("map:"+map);
+		logger.debug("问卷调查记录根据条件加载数据  结束");
 		return map;
 	}
 	@InitBinder
@@ -115,6 +124,7 @@ public class ProblemPaperController {
 	@RequestMapping(value="/problemPaperDelete.do")
 	public Map<String,Object> problemPaperDelete(@RequestParam(value="problempaperId",required=false)String problempaperId, HttpServletRequest request) {
 		Map<String,Object> map  = new HashMap<String, Object>();
+		logger.debug("problemPaperDelete.do  删除数据  开始");
 		try {
 			List<ProblemPaperQuest> list = problemPaperQuestService.queryByParentId(problempaperId);
 			if(list!=null){
@@ -128,10 +138,12 @@ public class ProblemPaperController {
 			 problemPaperService.deleteById(problempaperId);
 			map.put("success", "删除成功！");
 			map.put("status", 0);
+			logger.debug("删除数据   结束");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			map.put("success", "删除失败！");
 			map.put("status", -1);
+			logger.info("删除数据   异常",e);
 			e.printStackTrace();
 		}
 		return map;
@@ -146,13 +158,17 @@ public class ProblemPaperController {
 	@RequestMapping(value="/problemPaperDetial.do")
 	public Map<String,Object> problemPaperDetial(@RequestParam(value="problempaperId",required=false)String problempaperId, HttpServletRequest request) {
 		Map<String,Object> map  = new HashMap<String, Object>();
+		logger.debug("problemPaperDetial.do  根据ID获取数据  开始");
+		logger.debug("参数  problempaperId"+problempaperId);
 		try {
 			ProblemPaper problempaper = problemPaperService.queryById(problempaperId);
 			map.put("problempaper",problempaper);
 			map.put("status", 0);
+			logger.debug(" 根据ID获取数据  结束");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			map.put("status", -1);
+			logger.info(" 根据ID获取数据  异常",e);
 			e.printStackTrace();
 		}
 		return map;
@@ -169,6 +185,8 @@ public class ProblemPaperController {
 		Map<String,Object> map  = new HashMap<String, Object>();
 //		Map<String, Object> areamap=new HashMap<String, Object>();
 //		Map<String, Object> exammap=new HashMap<String, Object>();
+		logger.debug("problemPaperRecord.do  试卷统计  开始");
+		logger.debug("参数  problempaperId"+problempaperId);
 		Map<String, Object> datamap=new HashMap<String, Object>();
 		try {
 //			List<ProblemPaperRecord> ralist = problemPaperRecordService.queryByPaperIdOfArea(problempaperId);
@@ -205,18 +223,20 @@ public class ProblemPaperController {
 						}
 						System.out.println("hashlist1:"+hashlist);
 						int index=(rnlist.lastIndexOf(record))+1;
+						//不等于上一次循环的值
 						if(!record.getPaperRecordRemark().equals(resultremark)){
 							if(!resultremark.equals("")){
-								answermap.put("question", resultremark);
-								answermap.put("answer", hashlist);
+								answermap.put("question", resultremark);//问题
+								answermap.put("answer", hashlist);//回答
 								answerlist.add(answermap);
 								answermap=new HashMap<String, Object>();
 								hashlist=new ArrayList<Map<String,Object>>();
-								System.out.println("hashlist2:"+hashlist);
+//								System.out.println("hashlist2:"+hashlist);
 							}
 						}
 						hashlist.add(hashmap);
 						resultremark=record.getPaperRecordRemark();
+						//最后一次
 						if(index==rnlist.size()){
 							answermap.put("question", resultremark);
 							answermap.put("answer", hashlist);
@@ -227,12 +247,13 @@ public class ProblemPaperController {
 					datamap.put("title", rnlist.get(0).getPaperRecordUserName()) ;
 				}
 			}
-			
+			logger.debug(" 试卷统计  结束");
 			map.put("data",datamap);
 			map.put("status", 0);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			map.put("status", -1);
+			logger.info(" 试卷统计  异常",e);
 			e.printStackTrace();
 		}
 		return map;
@@ -254,8 +275,12 @@ public class ProblemPaperController {
 			@RequestParam(value="dateStart",required=false)Date startDate,
 			@RequestParam(value="dateEnd",required=false)Date stopDate
 			, HttpServletRequest request) {
+		logger.debug("problemPaperSave.do 保存数据 开始 ");
 		Map<String,Object> map  = new HashMap<String, Object>();
-		System.out.println("title:"+title);
+		logger.debug("参数  title: "+title);
+		logger.debug("参数  questionBank: "+questionBank);
+		logger.debug("参数  startDate: "+startDate);
+		logger.debug("参数  stopDate: "+stopDate);
 		List<Map> list = JSON.parseArray(questionBank, Map.class);
 		Map<Object,Object> hashmap=new HashMap<Object, Object>();
 		List<ProblemPaperQuest> questlist=new ArrayList<ProblemPaperQuest>();
@@ -309,10 +334,12 @@ public class ProblemPaperController {
 					}
 				}
 			}
+			logger.debug("保存数据 结束 ");
 			map.put("success", "保存成功！");
 			map.put("status", 0);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
+			logger.info("保存数据 异常 ",e);
 			map.put("success", "保存失败！");
 			map.put("status", -1);
 			e.printStackTrace();
@@ -331,6 +358,9 @@ public class ProblemPaperController {
 	public Map<String,Object> problemPaperrecordSave(@RequestParam(value="ansArr",required=false)String questoptinId,
 			@RequestParam(value="problempaperId",required=false)String problempaperId,HttpServletRequest request) {
 		Map<String,Object> map  = new HashMap<String, Object>();
+		logger.debug("problemPaperrecordSave.do 试卷答题保存   开始 ");
+		logger.debug("参数  questoptinId："+questoptinId);
+		logger.debug("参数  problempaperId： "+problempaperId);
 		List<Map> questoptionlist=JSON.parseArray(questoptinId,Map.class);
 		try {
 			ProblemPaperRecord record=new ProblemPaperRecord();
@@ -369,10 +399,12 @@ public class ProblemPaperController {
 					map.put("success", "答题成功");
 				}
 			}
+			logger.debug(" 试卷答题保存   结束 ");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			map.put("status", -1);
 			map.put("success", "答题失败");
+			logger.info(" 试卷答题保存   异常 ",e);
 			e.printStackTrace();
 		}
 		return map;
@@ -385,6 +417,7 @@ public class ProblemPaperController {
 	@ResponseBody
 	@RequestMapping(value="/problemPaperSavejson.do")
 	public Map<String,Object> problemPaperSavejson( HttpServletRequest request) {
+		logger.debug("problemPaperSavejson.do 保存测试试卷   开始 测试");
 		Map<String,Object> map  = new HashMap<String, Object>();
 		List<ProblemPaper> paperlist=new ArrayList<ProblemPaper>();
 		List<ProblemPaperQuest> questlist=new ArrayList<ProblemPaperQuest>();
@@ -431,10 +464,12 @@ public class ProblemPaperController {
 			}
 			map.put("success", "保存成功！");
 			map.put("status", 0);
+			logger.debug("problemPaperSavejson.do 保存测试试卷   结束 测试");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			map.put("success", "保存失败！");
 			map.put("status", -1);
+			logger.info(" 保存测试试卷   异常 测试",e);
 			e.printStackTrace();
 		}
 		return map;
@@ -448,6 +483,7 @@ public class ProblemPaperController {
 	@RequestMapping(value="/problemPaperrecord1.do")
 	public Map<String,Object> problemPaperrecord(HttpServletRequest request) {
 		Map<String,Object> map  = new HashMap<String, Object>();
+		logger.debug("problemPaperrecord1.do 测试---试卷统计   开始 测试");
 		try {
 			ProblemPaperRecord paperRecord=new ProblemPaperRecord();
 			ProblemPaper paper = problemPaperService.queryById("1G5K1C1P8Y5A7X2L1M3O9W0B1S5N7Q");
@@ -469,9 +505,11 @@ public class ProblemPaperController {
 				}
 			}
 			map.put("status", 0);
+			logger.debug("problemPaperrecord1.do 测试---试卷统计   结束 测试");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			map.put("status", -1);
+			logger.info("problemPaperrecord1.do 测试---试卷统计   异常 测试",e);
 			e.printStackTrace();
 		}
 		return map;

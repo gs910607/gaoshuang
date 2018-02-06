@@ -19,9 +19,25 @@ $(function(){
 		}
 		
 		$(".artTitle").text(data.title);
-		$(".artText").text(data.content);
-		$(".artPic").append("<img src="+data.image+">");
+		$(".artText").html(data.content);
+//		$(".artPic").append("<img src="+data.image+">");
 		
 	});
+	var userinfo = JSON.parse(localStorage.info) ;
+	if(userinfo && userinfo.usergroupid.toString().length > 3){
+		$("#forward").parent().hide();
+	}else{
+		$("#forward").on("click",function(){
+			$.post("/spywBeta/information/reply.do",{id:id},function(data){
+				if(data.status == 1){
+					alert(data.msg);
+				}else{
+					alert(data.msg);
+				}
+			})
+		})
+	}
+	
+	
 	
 });

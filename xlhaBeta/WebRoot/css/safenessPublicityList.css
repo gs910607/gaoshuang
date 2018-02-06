@@ -1,0 +1,10 @@
+@charset 'utf-8';
+
+.contList .table {
+	margin-bottom: 0;
+}
+.contSearch {
+	position: absolute;
+	right: 0;
+	top: 0;
+}

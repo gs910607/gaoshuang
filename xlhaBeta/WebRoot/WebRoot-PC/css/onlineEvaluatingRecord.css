@@ -1,0 +1,25 @@
+@charset "utf-8";
+.contentWrap {
+	margin-bottom: 50px;
+}
+.infoList thead {
+	background: #F4F7FA;
+}
+.artTitle {
+	width: 550px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.infoList .operation a {
+	margin: 0 6px;
+}
+.paging {
+	text-align: right;
+}
+.inputWrapper .form-group {
+	margin-bottom: 20px;
+}
+.inputWrapper .publishTime {
+	/*width: 230px;*/
+}

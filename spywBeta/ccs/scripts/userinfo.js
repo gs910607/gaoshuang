@@ -107,7 +107,7 @@ function checkName(area){
 var limitsList = [];
 
 function deleteAdmin(id){
-	isDelete("是否确定删除该用户？", function() {
+	if(confirm("是否删除？")) {
 		$.post("../../admin/deleteAdmin.do",{id:id},function(respose){
 			if (respose.status == 1) {
 				alert(respose.msg);
@@ -116,7 +116,7 @@ function deleteAdmin(id){
 				alert(respose.msg);
 			}
 		});
-	})
+	}
 	
 }
 
@@ -307,6 +307,8 @@ $("#importSure").on("click", function() {
 				$("#upExcForm").resetForm();
 				$("#importDialog").modal("hide");
 				init();
+			}else{
+				alert(data.msg);
 			}
 		},
 		error : function(data) {
@@ -381,6 +383,8 @@ $("#html5Form").html5Validate(function() {
 				alert(responseStr.msg)
 				init();
 				$("#infoFormDialog").modal("hide");
+			}else{
+				alert(responseStr.msg);
 			}
 		},
 		error : function(responseStr) {
@@ -399,20 +403,20 @@ $("#html5Form").html5Validate(function() {
 			return false;
 		}
 
-		// 身份证号
-		var idNumber = $("#idNumber");
-		if(!/^\d{6}(18|19|20)?\d{2}(0[1-9]|1[12])(0[1-9]|[12]\d|3[01])\d{3}(\d|X)$/i.test(idNumber.val())){
-         idNumber.testRemind("身份证号格式错误");
-         return false;
-     }
+		// // 身份证号
+		// var idNumber = $("#idNumber");
+		// if(!/^\d{6}(18|19|20)?\d{2}(0[1-9]|1[12])(0[1-9]|[12]\d|3[01])\d{3}(\d|X)$/i.test(idNumber.val())){
+  //        idNumber.testRemind("身份证号格式错误");
+  //        return false;
+  //    	}
 
-		// 验证手机号
-		var phone = $("#telephone");
-		if(!(/^1[34578]\d{9}$/.test(phone.val()))){
-			$("html,body").scrollTop(phone.offset().top)
-			phone.testRemind("手机号码有误，请重填");
-			return false; 
-		}
+		// // 验证手机号
+		// var phone = $("#telephone");
+		// if(!(/^1[34578]\d{9}$/.test(phone.val()))){
+		// 	$("html,body").scrollTop(phone.offset().top)
+		// 	phone.testRemind("手机号码有误，请重填");
+		// 	return false; 
+		// }
 
 		return true;
 	}

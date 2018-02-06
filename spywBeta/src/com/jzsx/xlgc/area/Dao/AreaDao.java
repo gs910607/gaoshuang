@@ -76,5 +76,7 @@ public interface AreaDao {
 	 */
 	public List<Area> queryByName(String name);
 	
-	List<String> selectByCode(String code);
+	List<Area> selectByCode(String code);
+	
+	List<Area> selectMcuByCode(String code);
 }

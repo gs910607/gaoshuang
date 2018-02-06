@@ -3,17 +3,17 @@ endTime = '',
 artiTitle = '';
 	
 $(function() {
-
-
-
+	ajaxLoading.show();
 	$.post("../../conference/getPageList.do",{type:1}, function(data) {
+		ajaxLoading.hide();
 		Page({
 			num : data.num, //页码数
 			startnum : 1, //指定页码
 			elem : $('#page2'), //指定的元素
 			callback : function(n) { //回调函数
+				ajaxLoading.show();
 				$.post("../../conference/getPageList.do?pages=" + n,{type:1}, function(data) {
-					
+					ajaxLoading.hide();
 					setConference(data);
 				})
 			}
@@ -41,24 +41,27 @@ $("#searchBtn").on("click", function() {
 });
 
 function init(title, start, end) {
+	ajaxLoading.show();
 	$.post("../../conference/getPageList.do", {
 		name : title,
 		type:1,
 		start: start,
 		stop: end,
 	}, function(data) {
+		ajaxLoading.hide();
 		Page({
 			num : data.num, //页码数
 			startnum : 1, //指定页码
 			elem : $('#page2'), //指定的元素
 			callback : function(n) { //回调函数
-				console.log(n)
+				ajaxLoading.show();
 				$.post("../../conference/getPageList.do?pages=" + n, {
 					name : title,
 					type:1,
 					start: start,
 					stop: end
 				}, function(data) {
+					ajaxLoading.hide();
 					setConference(data);
 				})
 			}
@@ -83,7 +86,7 @@ function setConference(data) {
 			var str="<tr><td></td>" +
 			"<td><p class='artTitle'>"+n.name+"</p></td>" +
 			"<td align='center'>"+n.beginTime+"</td>" +
-			"<td align='center'>"+n.duration+"</td>" +
+			"<td align='center'>"+n.duration+"小时</td>" +
 			"<td align='center'>"+n.createName+"</td>" +
 			"<td align='center'><a data-conoferid='"+n.accessCode+"' href='javascript:;' onclick='lookCode(event)'>查看</a></td>";
 	        
@@ -91,7 +94,9 @@ function setConference(data) {
 				str=str+"<td align='center'><span data-conoferid='"+n.confId+"'>已结束</span></td></tr>";
 			}else if(n.status!=1){
 				var time=timeAdd(n.beginTime,n.duration);
+
 				var nowTime=new Date().getTime();
+
 				if(time<nowTime){
 					str=str+"<td align='center'><span data-conoferid='"+n.confId+"'>已结束</span></td></tr>"
 				}else{
@@ -146,7 +151,7 @@ function endConfer(event) {
 	}
 }
 function timeAdd(createTime, duration) {
-	createTime = new Date(createTime).getTime();
+	createTime = new Date(new Date(Date.parse(createTime.replace(/-/g,"/"))).getTime()).getTime();
 	duration = new Date(duration*60*60*1000).getTime();
 	return new Date(createTime + duration).getTime();
 }

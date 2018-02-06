@@ -115,4 +115,10 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 	<update id="updatevideoResearchById" parameterType="java.lang.String">
 		update t_video_research_active set t_video_activeVote =t_video_activeVote+1 where t_video_activeId=#{videoActiveId}
 	</update>
+	<update id="updatevideoResearchByIds" parameterType="java.lang.String">
+		update t_video_research_active set t_video_activeVote =t_video_activeVote+1 where t_video_activeId in 
+		<foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</update>
 </mapper>

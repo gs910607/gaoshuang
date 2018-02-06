@@ -12,6 +12,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -38,6 +39,7 @@ import com.zte.ccs.os.meeting.util.RandomUtil;
 @Controller
 @RequestMapping("/videoResearch")
 public class VideoResearchController {
+	Logger logger =Logger.getLogger(VideoResearchController.class);
 	@Autowired
 	private VideoResearchService videoResearchService;
 	@Autowired
@@ -52,6 +54,7 @@ public class VideoResearchController {
 	@ResponseBody
 	@RequestMapping("/train.do")
 	public Map<String,Object> test(HttpServletRequest request) {
+//		logger.debug("train.do 加载视频培训首页数据");
 		Map<String,Object> map  = new HashMap<String, Object>();
 		List<VideoResearch> list = videoResearchService.queryVideoResearchList();
 		map.put("map", list);
@@ -76,6 +79,7 @@ public class VideoResearchController {
 	@RequestMapping("/videoResearchlistjoin.do")
 	public Map<String,Object> videotrainlistjoin(VideoResearch videoResearch,HttpServletRequest request) {
 		Map<String,Object> map  = new HashMap<String, Object>();
+		logger.debug("videoResearchlistjoin.do 加载视频调研列表数据 开始");
 		String pagesiz=request.getParameter("pagesize");
 //		VideoResearch videoResearch=new VideoResearch();
 		int pagesize=0;
@@ -94,7 +98,9 @@ public class VideoResearchController {
 //				videoNeighborhood.setVideoneihdLocationplace(appUser.getUserGroupId().toString());
 			}
 		}
+		logger.debug("参数  code:"+videoResearch.getVideoResearcCode());
 		map=videoResearchService.queryVideoResearchByALl(videoResearch, pagesize, 8);
+		logger.debug("加载视频调研列表数据 结束");
 		return map;
 	}
 	@InitBinder
@@ -111,10 +117,12 @@ public class VideoResearchController {
 	@RequestMapping("/videoResearchdetail.do")
 	public Map<String,Object> videoResearchdetail(HttpServletRequest request) {
 		Map<String,Object> map  = new HashMap<String, Object>();
+		logger.debug("videoResearchdetail.do 查看详情数据 开始");
 		String videoResearchId=request.getParameter("videoResearchId");
-		System.out.println("videoResearchId:"+videoResearchId);
+		logger.debug("参数  videoResearchId:"+videoResearchId);
+//		System.out.println("videoResearchId:"+videoResearchId);
 		if(!videoResearchId.equals("null")){
-			System.out.println("已进入");
+//			System.out.println("已进入");
 			VideoResearch videoResearch = videoResearchService.queyVideoResearchById(videoResearchId);
 			List<VideoResearchActive> listResearchActives = videoResearchActiveService.queyVideoResearchById(videoResearchId);
 			map.put("videoResearch", videoResearch);
@@ -123,6 +131,7 @@ public class VideoResearchController {
 		}else{
 			map.put("status", 1);
 		}
+		logger.debug(" 查看详情数据 结束");
 		return map;
 	}
 	/**
@@ -134,16 +143,20 @@ public class VideoResearchController {
 	@RequestMapping("/deletevideoTrain.do")
 	public Map<String,Object> deletevideoTrain(HttpServletRequest request) {
 		Map<String,Object> map  = new HashMap<String, Object>();
+		logger.debug("deletevideoTrain.do 根据视频调研列表数据ID做简单的删除 开始");
 		String videoId=request.getParameter("videoId");
+		logger.debug("参数  videoId:"+videoId);
 		if(!"".equals(videoId) || !videoId.equals(null)){
 			try {
 				videoResearchService.deleteById(videoId);
 				videoResearchActiveService.deleteByParentId(videoId);
 			int count=	videoResearchRecordService.deleteByParentId(videoId);
 				map.put("success", "删除成功");
+				logger.debug(" 根据视频调研列表数据ID做简单的删除 结束");
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				map.put("success", "删除失败");
+				logger.info(" 根据视频调研列表数据ID做简单的删除 异常",e);
 				e.printStackTrace();
 			}
 		}
@@ -159,6 +172,13 @@ public class VideoResearchController {
 	@RequestMapping(value="/videoResearchSave.do",method = RequestMethod.POST)
 	public Map<String,Object> videoResearchSave(UResearch uresearch,@RequestParam(value="votetype",required=false) String videoResearchType, HttpServletRequest request) {
 		Map<String,Object> map  = new HashMap<String, Object>();
+		logger.debug("videoResearchSave.do 保存视频调研和视频调研活动评选数据 开始");
+		logger.debug("参数  videoResearchType："+videoResearchType);
+		logger.debug("参数  title："+uresearch.getActiveTitle());
+		logger.debug("参数 sartDate："+uresearch.getDateStart());
+		logger.debug("参数  stopDate："+uresearch.getDateEnd());
+		logger.debug("参数  remark："+uresearch.getDetailedAddress());
+		logger.debug("参数  CandidateData："+uresearch.getCandidateData());
 //		String videoId=request.getParameter("videoId");
 		String researchId="";
 		VideoResearch videoResearch=new VideoResearch();
@@ -187,6 +207,7 @@ public class VideoResearchController {
 		videoResearch.setVideoResearchStarttime(startdate);
 		videoResearch.setVideoResearchStoptime(stopdate);
 		videoResearch.setVideoResearchTime(new Date());
+		videoResearch.setVideoResearchVoteNumber(uresearch.getVotetypenumber());
 //		videoResearch.setVideoResearchUsername(videoResearchUsername);
 		String activeData=uresearch.getCandidateData();
 		ArrayList<URuser> arraylist = JSON.parseObject(activeData, new TypeReference<ArrayList<URuser>>() {});
@@ -232,15 +253,18 @@ public class VideoResearchController {
 			}
 			map.put("success", "保存成功！");
 			map.put("status", 0);
+			logger.debug("保存视频调研和视频调研活动评选数据 结束");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			map.put("success", "保存失败！");
 			map.put("status", -1);
+			logger.info("保存视频调研和视频调研活动评选数据 异常");
 			e.printStackTrace();
 		}
 		return map;
 	}
 	public void uploadImage(HttpServletRequest request) throws Exception {
+		logger.debug(" 文件上传 开始");
 		String path = request.getSession().getServletContext().getRealPath("/upload/images/research/img");
 		String paths = request.getSession().getServletContext().getRealPath("/upload/images/research/imgs");
 		File file=new File(path);
@@ -252,26 +276,30 @@ public class VideoResearchController {
 					if(filelist.length>0){
 						for(String s:filelist){
 							String sfile=path+"/"+s;
-							System.out.println("String:"+sfile);
+//							System.out.println("String:"+sfile);
 							File files=new File(sfile);
-							System.out.println("Sfiles:"+files);
+//							System.out.println("Sfiles:"+files);
 							if(filepath.exists()){
-								System.out.println("目录存在");
+//								System.out.println("目录存在");
 								if(filepath.isDirectory()){
-									System.out.println("是一个文件夹");
+//									System.out.println("是一个文件夹");
 								}
 							}
 							FileUtils.copyFileToDirectory(files,filepath);
-							System.out.println("删除");
+							logger.debug(" 删除临时文件或目录  开始");
+//							System.out.println("删除");
 							deletefile(files);
+							logger.debug(" 删除临时文件或目录  结束");
 						}
 					}
 				}
 			}
-			System.out.println("exists:"+file);
+//			System.out.println("exists:"+file);
 		}
+		logger.debug(" 文件上传 结束");
 	}
 	public boolean deletefile(File file){
+		logger.debug(" 删除文件或目录  开始");
 		if(file.exists()){
 			if(file.isDirectory()){
 				String[] filelist=file.list();
@@ -287,6 +315,7 @@ public class VideoResearchController {
 				}
 			}
 		}
+		logger.debug(" 删除文件或目录  结束");
 		return file.delete();
 	}
 }

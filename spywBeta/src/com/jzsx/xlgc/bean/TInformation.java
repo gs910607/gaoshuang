@@ -4,25 +4,25 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class TInformation {
-    private String informationid;
+    private String informationid;//id
 
-    private BigDecimal type;
+    private BigDecimal type;//类型
 
-    private String title;
+    private String title;//标题
 
-    private String content;
+    private String content;//信息主体内容
 
-    private String image;
+    private String image;//图片地址
 
-    private Date createtime;
+    private Date createtime;//创建时间
 
-    private Date updatetime;
+    private Date updatetime;//更新时间
 
-    private String groupid;
+    private String groupid;//形式外键，对应user表groupid
     
-    private String createname;
+    private String createname;//创建者
     
-    private Area areas;
+    private Area areas;//创建者所在区域信息
     
     
 
@@ -106,4 +106,13 @@ public class TInformation {
     public void setGroupid(String groupid) {
         this.groupid = groupid == null ? null : groupid.trim();
     }
+
+	@Override
+	public String toString() {
+		return "TInformation [informationid=" + informationid + ", type=" + type + ", title=" + title + ", content="
+				+ content + ", image=" + image + ", createtime=" + createtime + ", updatetime=" + updatetime
+				+ ", groupid=" + groupid + ", createname=" + createname + "]";
+	}
+    
+    
 }

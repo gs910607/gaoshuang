@@ -7,22 +7,14 @@
 	font-size: 36px;
 	text-align: center;
 	color: #505050;
+	word-break: break-all;
 }
 .artText {
-	font-size: 24px;
-	color: #505050;
-	text-indent: 2em;
 	margin-top: 35px;
-	overflow: hidden;
-	text-overflow: ellipsis;
 	word-break: break-all;
-	line-height: 40px;
+	overflow: hidden;
 }
-.artPic {
-	margin-top: 25px;
-	background: #efefef;
-	padding: 0 22px;
-}
-.artPic > img {
-	width: 100%;
+.artText img {
+	max-width: 100%;
+	vertical-align: inherit;
 }

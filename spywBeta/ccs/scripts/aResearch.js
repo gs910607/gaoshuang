@@ -1,5 +1,8 @@
 var candidateData = []; //候选人数组
-
+$("#votetypenumber").html("")
+for(var i=1;i<=50;i++) {
+	$("#votetypenumber").append('<option value="'+ i +'">'+ i +'票</option>')
+};
 //告诉后台这个页面执行了，后台做垃圾图片处理
 $.ajax({
 	type: 'GET',
@@ -54,8 +57,11 @@ $("#html5Form").html5Validate(function() {
 		dateStart = $("#dateStart").val(),
 		dateEnd = $("#dateEnd").val(),
 		votetype = $("#votetype").val(),
-		detailedAddress = $("#detailedAddress").val();
-
+		detailedAddress = $("#detailedAddress").val(),
+		votetypenumber = null;
+	// if(votetype == 3 ){
+		votetypenumber = $("#votetypenumber").val();
+	// }
 	$.ajax({
 		type: 'POST',
 		url: '/spywBeta/videoResearch/videoResearchSave.do',
@@ -66,7 +72,8 @@ $("#html5Form").html5Validate(function() {
 			votetype: votetype,	//投票类型
 			detailedAddress: detailedAddress,  //调研内容
 			videoResearchId:videoResearchId,//调研ID
-			candidateData: JSON.stringify(candidateData) //候选人列表
+			candidateData: JSON.stringify(candidateData), //候选人列表
+			votetypenumber : votetypenumber  //投票次数
 		},
 		dataType: 'json',
 		success: function(response) {
@@ -166,8 +173,13 @@ $("#addPersonBtn").on("click", function() {
 	            	});
 	            	candidateList(candidateData);
 	            	alert("添加成功")
-	            	
     			}
+
+    			$("#userName").val("");
+    			$("#phone").val("");
+    			$("#idNumber").val("");
+    			emptyFile("file", "fileWrap") //清空file的值
+
             }else{
                 alert("新增失败")
             }
@@ -249,3 +261,40 @@ function validPicture(_this) {
 	}
 	return flag;
 } 
+
+//$("#votetypenumber").parent().parent().hide();
+//$("#votetype").on("change",function(){
+//	if($(this).val() == 3){
+//		$("#votetypenumber").parent().parent().show();
+//	}else{
+//		$("#votetypenumber").parent().parent().hide();
+//	}
+//})
+
+// 清空file值
+function emptyFile(name,target){  
+   var f=$("input[name='"+name+"']:file");  
+   f.val("");  
+   var cf=f.clone();  
+   f.remove();  
+   cf.appendTo("#"+target);  
+}  
+
+$(window).scroll(function(){
+	currentScroll();
+});
+
+currentScroll();
+function currentScroll(){
+	if($(this).scrollTop() >= 80) {
+		$(".goBack").css({
+			"position":"fixed",
+			"top":"10px"
+		})
+	} else {
+		$(".goBack").css({
+			"position":"absolute",
+			"top":"90px"
+		})
+	}
+};

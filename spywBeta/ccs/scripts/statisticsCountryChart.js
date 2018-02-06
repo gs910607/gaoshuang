@@ -6,8 +6,15 @@ if(info) {
          usergroupid = info.usergroupid
     }
 };
+//乡/镇显示的判断
+var categorydata = true ;
+var districtsshow = false ;
 var dropbl = false;
 var typebl ;
+var xAxisdata ;
+var htmlname = window.location.href.split("/pages/")[1].split("/")[1];
+//调解类型图点击图标判断类型的
+var videotype ;
 var droplistdata = [];
 var statisticsChart = {
     options: {
@@ -25,6 +32,31 @@ var statisticsChart = {
         pie: false
     },
     init: function(options) {
+    	//调解
+    	if(options.url == "../../mediate/getData.do" || options.url == "/spywBeta/videoNeighborhood/queryNeighCharts.do"){
+        	$("#area").click(function(){
+        		$("#area").hide();
+        		$("#category").parent().hide();
+        		if($("#districts").is(":visible")){
+        			districtsshow = true ;
+        		}
+        		$("#districts").hide();
+        		$("#statistics").show();
+        		statisticsChart.getData();
+        	});
+        	
+        	$("#statistics").click(function(){
+        		$("#area").show();
+        		$("#category").parent().show();
+        		if(districtsshow){
+        			$("#districts").show();
+        		}
+        		$("#statistics").hide();
+        		statisticsChart.getData();
+        	});
+        }
+    	
+    	
         options = $.extend(this.options,options);
 
         var _this = this;
@@ -53,6 +85,7 @@ var statisticsChart = {
             var category = $(this).val();
             if(category == 1) {
                 $("#districts").hide();
+                districtsshow =false ;
                 _this.date.category = '0';
             } else if(category == 2) {
                 $("#districts").show();
@@ -81,6 +114,8 @@ var statisticsChart = {
                 }
                 
             }
+            
+            
             statisticsChart.getData();
         });
 
@@ -112,7 +147,7 @@ var statisticsChart = {
     },
     createContainer: function(success) {
         $("#videoChart").empty();
-        var heights = (window.innerHeight) > 662 ? 750 : 400;
+        var heights = (window.innerHeight) > 662 ? 750 : 385;
         return '<div id="chart" style="width:1200px;height:'+ heights +'px;"></div>'
     },
     districtList: {
@@ -126,8 +161,8 @@ var statisticsChart = {
     },
     //months: ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'],
     getData:function () {
-        
         var _this = this;
+        var urldata = this.options.url ;
         var data = {
             year: _this.date.year,
           //  month: _this.date.month,
@@ -138,9 +173,23 @@ var statisticsChart = {
         if(this.options.data.category) {
             data.category = this.date.category;
         }
+        if(this.options.url == "../../mediate/getData.do"){
+        	if($("#statistics").is(":visible")){
+        		data = {} ;
+        		data.year = _this.date.year;
+        		urldata = "/spywBeta/mediate/queryDisputeType.do";
+        	}
+        }
+        if(this.options.url == "/spywBeta/videoNeighborhood/queryNeighCharts.do"){
+        	if($("#statistics").is(":visible")){
+        		data = {} ;
+        		data.year = _this.date.year;
+            	urldata = "/spywBeta/videoNeighborhood/queryTypeNeighMonth.do";
+        	}
+        }
         $.ajax({
             type: this.options.type,
-            url: this.options.url,
+            url: urldata,
             dataType: 'json',
             data: data,
             success: function(response) {
@@ -153,16 +202,19 @@ var statisticsChart = {
                         defeated: [11,33,4,4,560,66,7],
                         unknown : [1,1,3,1,1,1,2]
                     };*/
-                    droplistdata = [];
-                    for(i = 0 ; data.code.length > i ; i++){
-                    	droplistdata.push({
-                    		key:data.code[i],
-                    		value:data.area[i]
-                    	})
+                    if(data.code && data.code.length > 0 && categorydata == true ){
+                    	categorydata = false ;
+                    	for(i = 0 ; data.code.length > i ; i++){
+                        	droplistdata.push({
+                        		key:data.code[i],
+                        		value:data.area[i]
+                        	})
+                        }
                     }
                     
+                    //不是视频会议
                     typebl = _this.options.url.indexOf("conference");
-                    if(typebl < 0){
+                    if(typebl < 0 ){
                     	data.total = [];
                         for(i = 0 ; data.success.length > i ; i++){
                         	var totalnumber = parseInt(data.success[i]) + parseInt(data.defeated[i]) + parseInt(data.unknown[i]);
@@ -203,12 +255,35 @@ var statisticsChart = {
         if(typebl >= 0){
         	legenddata = ["次数"];
         	seriesdata = [{name: '次数',type: 'bar',data: data.count,barCategoryGap :"40%"}];
+        	xAxisdata = data.area ;
         }else{
-        	legenddata = ["总次数","成功次数","失败次数","未确定次数"];
-        	seriesdata = [{  name: '总次数',type: 'bar',data: data.total},{name: '成功次数',type: 'bar',data: data.success},{name: '失败次数',type: 'bar',data: data.defeated},{name: '未确定次数',type: 'bar',data: data.unknown}]
+        	
+        	if(htmlname == "videoChart.html"){
+        		legenddata = ["总次数","成功次数","失败次数","未确定次数","调解时长"];
+        		seriesdata = [{  name: '总次数',type: 'bar',data: data.total},{name: '成功次数',type: 'bar',data: data.success},{name: '失败次数',type: 'bar',data: data.defeated},{name: '未确定次数',type: 'bar',data: data.unknown},{name: '调解时长',type: 'bar',data: data.duration}];
+        		if($("#statistics").is(":visible")){
+        			legenddata = ["总次数","成功次数","失败次数","未确定次数"];
+            		seriesdata = [{  name: '总次数',type: 'bar',data: data.total},{name: '成功次数',type: 'bar',data: data.success},{name: '失败次数',type: 'bar',data: data.defeated},{name: '未确定次数',type: 'bar',data: data.unknown}];
+        		}
+        	}else if(htmlname == "neighChart.html"){
+        		legenddata = ["总次数","已解决次数","未解决次数","未确定次数","信访时长","信访人数"];
+        		seriesdata = [{  name: '总次数',type: 'bar',data: data.total},{name: '已解决次数',type: 'bar',data: data.success},{name: '未解决次数',type: 'bar',data: data.defeated},{name: '未确定次数',type: 'bar',data: data.unknown},{name: '信访时长',type: 'bar',data: data.hover},{name: '信访人数',type: 'bar',data: data.neightcount}];
+        		if($("#statistics").is(":visible")){
+        			legenddata = ["总次数","已解决次数","未解决次数","未确定次数"];
+            		seriesdata = [{  name: '总次数',type: 'bar',data: data.total},{name: '已解决次数',type: 'bar',data: data.success},{name: '未解决次数',type: 'bar',data: data.defeated},{name: '未确定次数',type: 'bar',data: data.unknown}];
+        		}
+        	}else{
+        		legenddata = ["总次数","成功次数","失败次数","未确定次数"];
+            	seriesdata = [{  name: '总次数',type: 'bar',data: data.total},{name: '成功次数',type: 'bar',data: data.success},{name: '失败次数',type: 'bar',data: data.defeated},{name: '未确定次数',type: 'bar',data: data.unknown}];
+        	}
+        	xAxisdata = data.area ;
+        	if($("#statistics").is(":visible")){
+        		xAxisdata = data.name ;
+        		videotype = data.name ;
+        	}
         }
         option = {
-        	color: ['#3398DB',"#f9084a","#08f9f9","#f9db08"],
+        	color: ['#3398DB',"#f9084a","#08f9f9","#f9db08","#21ea09","#e023d2"],
             title: {
                 text: year + '年' + areaName +'统计表',
                 padding: [0, 35],
@@ -255,7 +330,7 @@ var statisticsChart = {
                         return value.split("").join("\n");  
                     }  
                 },
-            	data :data.area,
+            	data : xAxisdata ,
 	            axisTick: {
 	                alignWithLabel: true
 	            }
@@ -279,7 +354,8 @@ var statisticsChart = {
         myChart.on('click', function (params) {
         	var category = $("#category").val();
         	var areaname = null;
-        	if( category == 1){
+        	//区域图点击事件
+        	if((category == 1 && $("#statistics").is(":hidden"))||(category == 1 && !$("#statistics")[0])){
         		if(data.code && data.code.length > 0 ){
         			for(i = 0 ; data.code.length > i ; i++){
             			if(params.name == data.area[i]){
@@ -288,7 +364,6 @@ var statisticsChart = {
             		}
         		}
             	var hrefdata = "./echartstotal.html";
-            	var htmlname = window.location.href.split("/pages/")[1].split("/")[1];
             	if(htmlname.indexOf("videoChart") >= 0  ){
             		hrefdata = "../videoNeighborhood/echartstotal.html";
             	}
@@ -297,6 +372,26 @@ var statisticsChart = {
             	}
             	localStorage.echartsdata = htmlname +" "+ params.name+","+ areaname + " " + $("#years").val();
             	window.location.href = hrefdata;
+            	//类型图点击事件
+        	}else if($("#statistics").is(":visible")){
+        		var paramtype;
+        		if(htmlname == "videoChart.html"){
+            		for(i = 0 ; videotype.length > i ; i++){
+            			if(videotype[i] == params.name){
+            				paramtype = i+1 ;
+            				break;
+            			}
+            		}
+            	}else if(htmlname == "neighChart.html"){
+            		for(i = 0 ; videotype.length > i ; i++){
+            			if(videotype[i] == params.name){
+            				paramtype = i+1 ;
+            				break;
+            			}
+            		}
+            	}
+        		localStorage.echartsType = htmlname +" "+ paramtype +","+params.name+ " " + $("#years").val();
+        		window.location.href = "../videoNeighborhood/echartsType.html";
         	}
         })
 

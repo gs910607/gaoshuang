@@ -10,7 +10,7 @@
 	background: #F4F7FA;
 }
 .artTitle {
-	width: 550px;
+	width: 300px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;

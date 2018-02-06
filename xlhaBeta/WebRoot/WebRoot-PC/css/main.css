@@ -1,0 +1,288 @@
+@charset "utf-8";
+
+html,
+body,
+div,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+ol,
+li,
+a,
+span,
+em,
+i,
+b,
+strong,
+header,
+nav,
+article,
+aside,
+section,
+footer {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+body {
+	font-family: 'Microsoft Yahei';
+	background: url("../images/body-bg.jpg") no-repeat fixed center top / 100% 100%;
+}
+.clearfix::after,
+.clearfix::before {
+	display: table;
+	content: '';
+}
+.clearfix::after {
+	clear: both;
+}
+.pull-left {
+	float: left;
+}
+.pull-right {
+	float: right;
+}
+img {
+	vertical-align: middle;
+	border: none;
+}
+li {
+	list-style: none;
+}
+a {
+	color: #000;
+	text-decoration: none!important;
+}
+i {
+	font-style: normal;
+}
+textarea {
+	resize: vertical;
+}
+
+div.table table {
+	margin: 0 auto;
+}
+ul li a:hover,
+td a:hover {
+	text-decoration: underline; 
+	color: #F95100;
+}
+td a {
+	font-size: 16px;
+	word-break: break-all;
+}
+.table>tbody>tr>td, 
+.table>tbody>tr>th, 
+.table>tfoot>tr>td, 
+.table>tfoot>tr>th, 
+.table>thead>tr>td, 
+.table>thead>tr>th {
+	border: none;
+	border-bottom: 1px dashed #ddd;
+	vertical-align: baseline;
+}
+.table>tfoot>tr>td {
+	border: none;
+}
+#validateRemind {
+	z-index: 1030!important;
+}
+.wrapper {
+	width: 100%;
+	position: relative;
+	min-width: 1200PX;
+}
+.container {
+	width: 100%;
+	min-width: 1200px;
+	max-width: 1340px;
+	margin: 0 auto;
+	padding: 0 30px;
+}
+header {
+	z-index: 10;
+	height: 100px;
+	background: url(../images/header-bg.jpg) no-repeat center top / 100% 100%;
+}
+header .pull-left > a {
+	display: inline-block;
+	height: 100%;
+}
+/*header .pull-left > a:hover,
+header .pull-left > a:focus {
+	box-shadow: 0 0 10px 3px #1600ff;
+}*/
+header > div {
+	padding: 10px 20px;
+	height: 100%;
+}
+header img {
+	height: 100%;
+}
+header #homeUser {
+	width: 400px;
+	text-align: right;
+}
+header .pindaohao {
+	display: inline-block;
+	width: 100px;
+	height: 100%;
+	padding: 15px 0;
+	margin-right: 5px;
+	vertical-align: middle;
+	text-align: center;
+}
+header > div.pull-right > a {
+	display: inline-block;
+	width: 100px;
+	height: 100%;
+	vertical-align: middle;
+	text-align: center;
+}
+/*header > div.pull-right > a:hover,
+header > div.pull-right > a:focus {
+	box-shadow: 0 0 10px 3px #1600ff;
+}*/
+footer {
+	height: 54px;
+	background: url(../images/footer-bg.jpg) no-repeat center top /100% 100%;
+}
+
+.formLabel {
+	width: 100px;
+	float: left;
+}
+.formInput {
+	position: relative;
+	margin-left: 120px;
+}
+.form-control[disabled], 
+.form-control[readonly], 
+fieldset[disabled] .form-control {
+	background: #fff;
+}
+.btn {
+	padding: 10px 20px;
+}
+/*.btn:focus {
+	box-shadow: 0 0 10px 3px #1600ff;
+}*/
+video {
+	height: 400px;
+}
+.contTitle {
+	line-height: 40px;
+	position: relative;
+}
+.contTitle > a {
+	font-size: 30px;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+/*.contTitle > a:hover,
+.contTitle > a:focus {
+	box-shadow: 0 0 10px 3px #1600ff;
+}*/
+.contTitle > a > i {
+	font-weight: bold;
+	font-style: normal;
+}
+.contTitle > h2 {
+	padding: 0 335px;
+	font-size: 36px;
+	text-align: center;
+	font-weight: normal;
+}
+.contentWrap {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+.content {
+	padding: 10px 28px;
+	background: #fff6ec;
+	border-radius: 10px;
+	margin-top: 20px;
+}
+.btnWrap {
+	padding: 13px 0 18px;
+}
+.form-horizontal .form-group {
+	margin-left: 0;
+	margin-right: 0;
+}
+.table p {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.videoListWrap {
+	padding: 0 40px;
+}
+
+.loginWrapper {
+	padding: 40px 100px;
+	color: #61605B;
+	background: #FFF6EA;
+	border-radius: 10px;
+}
+.loginWrapper h3 {
+	font-size: 24px;
+	margin-bottom: 30px;
+}
+.loginWrapper .btnWrap {
+	margin-top: 40px;
+	padding: 0;
+}
+.loginWrapper .btnWrap a {
+	margin: 0 10px;
+}
+.loginWrapper .form-horizontal .control-label {
+ 	padding-top: 7px;
+    margin-bottom: 0;
+    text-align: right;
+ }
+ .loginWrapper .tip {
+ 	font-size: 16px;
+ 	color: #333;
+ 	margin-top: 20px;
+ 	text-align: center;
+ }
+  .loginWrapper .tip a {
+  	color: #0000dd;
+  	text-decoration: underline!important;
+  }
+ .loginWrapper .formLabel {
+ 	width: 80px;
+ }
+ .loginWrapper .formInput {
+ 	margin-left: 90px;
+ }
+
+#loginModal .close {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+#html5Form .inputWrapper {
+	width: 80%;
+	float: left;
+}
+#html5Form .btnWrapper {
+	width: 20%;
+	float: right;
+	text-align: right;
+}
+.paging {
+	display: none;
+}
+#content img {
+	max-width: 100%;
+	vertical-align: inherit;
+}

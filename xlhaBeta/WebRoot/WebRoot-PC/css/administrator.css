@@ -1,0 +1,109 @@
+@charset "utf-8";
+
+#validateRemind {
+	z-index: 1060!important;
+}
+.content {
+	margin-bottom: 40px;
+}
+.formWrap {
+	padding-top: 20px;
+}
+.infoList {
+	padding: 0 40px;
+}
+.infoList thead {
+	background: #F4F7FA;
+}
+.artTitle {
+	max-width: 700px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.infoList .operation a {
+	margin: 0 6px;
+}
+.paging {
+	padding: 0 40px 30px;
+	text-align: right;
+}
+.inputWrapper {
+	width: 80%;
+}
+.btnWrapper {
+	width: 20%;
+}
+.btnWrapper a {
+	margin-bottom: 10px;
+	margin-left:10px;
+	padding-top:6px;
+	padding-bottom:6px;
+}
+.btnWrapper a:first-child {
+	margin-left: 0;
+}
+.inputWrapper .form-group {
+	margin-bottom: 20px;
+}
+table td {
+	text-align: center;
+	vertical-align: middle;
+}
+.modal-footer {
+	text-align: center;
+}
+
+.formWrap .form-group {
+	margin-left: 0;
+	margin-right: 0;
+}
+.inlineGroup .form-group {
+	width: 33.33%;
+	float: left;
+}
+.inputWrapper .form-group {
+	margin-right: 10px;
+}
+#district, #county {
+	width: 150px;
+}
+#village {
+	width: 150px;
+}
+.form-horizontal {
+	padding: 20px;
+}
+.form-horizontal .form-group {
+	margin-left: 0;
+	margin-right: 0;
+}
+.modal .modal-dialog {
+	width: 1000px;
+}
+
+#importDialog .upWrapper {
+	padding-top: 75px;
+	text-align: center;
+	height: 180px;
+}
+#importDialog.modal .modal-dialog {
+	width: 800px;
+}
+#importDialog .upWrapper .btn {
+	padding: 6px 30px;
+}
+#importDialog .btn-default {
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+}
+#importDialog .btnWrapper {
+	padding: 20px 0;
+	background: #F8F8F7;
+	border: 1px solid #ababab;
+	border-top: 0;
+}
+#importDialog .btnWrapper .btn {
+	margin: 0 10px;
+}

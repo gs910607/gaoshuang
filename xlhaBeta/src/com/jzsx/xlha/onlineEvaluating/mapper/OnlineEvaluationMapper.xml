@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd"> 
+<mapper  namespace="com.jzsx.xlha.onlineEvaluating.dao.OnlineEvaluationDao">
+
+	<resultMap type="com.jzsx.xlha.bean.OnlineEvaluation" id="BaseResultMap">
+	    <id property="videoResearchId" column="t_videoResearchId"/>
+	    <result property="videoResearchName" column="t_videoResearch_name" />
+	    <result property="videoResearchUsername" column="t_videoResearch_username" />
+	    <result property="videoResearchRemark" column="t_videoResearch_remark" />
+	    <result property="videoResearchTime" column="t_videoResearch_time" />
+	    <result property="videoResearchStarttime" column="t_videoResearch_starttime" />
+	    <result property="videoResearchStoptime" column="t_videoResearch_stoptime" />
+	    <result property="videoResearchRealName" column="t_videoResearch_realName" />
+	    <result property="videoResearcCode" column="t_videoResearc_code" />
+	    <result property="videoResearchType" column="T_VIDEORESEARCH_type" />
+	    <result property="videoResearchVoteNumber" column="t_videoResearch_vote_number" />
+	    <association property="videoResearchActiveinfo" column="t_videoResearchId" select="com.jzsx.xlha.onlineEvaluating.dao.OnlineEvaluationActiveDao.queyVideoResearchById"></association>
+	    <association property="areainfo" column="t_videoResearc_code" select="com.jzsx.xlha.area.dao.AreaDao.queryByCode"></association>
+    </resultMap>
+    
+  	<!-- 根据多个手机号查询多个会议成员的信息 -->
+  	<select id="queryVideoResearchList" resultMap="BaseResultMap">
+        select * from t_video_research
+    </select>
+    <select id="queryVideoResearchByALl" parameterType="com.jzsx.xlha.bean.OnlineEvaluation" resultMap="BaseResultMap">
+	   	 select * from t_video_research where 1=1
+	   		  <if test="videoResearchName !=null and videoResearchName !='' ">
+		   	 	and  t_videoResearch_name like '%${videoResearchName}%'
+		   	 </if>
+ 		  	 <if test="videoResearchStarttime !=null and videoResearchStarttime !='' ">
+			   	 <![CDATA[
+			   	 and to_char(t_videoResearch_time,'yyyy-MM-dd') >= to_char(#{videoResearchStarttime},'yyyy-MM-dd') 
+			   	 ]]>
+		   	 </if>
+		   	  <if test="videoResearchStoptime !=null and videoResearchStoptime !='' ">
+		   	   <![CDATA[
+			   	 and to_char(t_videoResearch_time,'yyyy-MM-dd') <= to_char(#{videoResearchStoptime},'yyyy-MM-dd') 
+			   	 ]]>
+		   	 </if>
+		   	 <if test="videoResearcCode !=null and videoResearcCode !='' ">
+		   	 	and   (t_videoResearc_code like '%${videoResearcCode}%'
+		   	 	or t_videoResearc_code=substr(#{videoResearcCode},0,6)
+         		or t_videoResearc_code=substr(#{videoResearcCode},0,3)
+         		or t_videoResearc_code=substr(#{videoResearcCode},0,1))
+		   	 </if>
+		   	 order by t_videoResearch_time desc
+    </select>
+    <select id="queyVideoResearchById" parameterType="java.lang.String" resultMap="BaseResultMap">
+    	select * from t_video_research where t_videoResearchId=#{videoResearchId}
+    </select>
+    <delete id="deleteById" parameterType="java.lang.String">
+    	delete from t_video_research where t_videoResearchId=#{videoResearchId}
+    </delete>
+	<insert id="insertActive" parameterType="com.jzsx.xlha.bean.OnlineEvaluation">
+		insert into t_video_research 
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="videoResearchId != null and videoResearchId !='' ">
+				t_videoResearchId,
+			</if>
+			<if test="videoResearchName != null and videoResearchName !=''">
+				t_videoResearch_name,
+			</if>
+			<if test="videoResearchUsername != null and videoResearchUsername !=''">
+				t_videoResearch_username,
+			</if>
+			<if test="videoResearchRemark != null and videoResearchRemark !=''">
+				t_videoResearch_remark,
+			</if>
+			<if test="videoResearchTime != null and videoResearchTime !=''">
+				t_videoResearch_time,
+			</if>
+			<if test="videoResearchStarttime != null and videoResearchStarttime !=''">
+				t_videoResearch_starttime,
+			</if>
+			<if test="videoResearchStoptime != null and videoResearchStoptime !=''">
+				t_videoResearch_stoptime,
+			</if>
+			<if test="videoResearchRealName != null and videoResearchRealName !=''">
+				t_videoResearch_realName,
+			</if>
+			<if test="videoResearcCode != null and videoResearcCode !=''">
+				t_videoResearc_code,
+			</if>
+			<if test="videoResearchType != null and videoResearchType !=''">
+				T_VIDEORESEARCH_type,
+			</if>
+			<if test="videoResearchVoteNumber != null and videoResearchVoteNumber !=''">
+				t_videoResearch_vote_number,
+			</if>
+		</trim>
+		values
+			<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="videoResearchId != null and videoResearchId !='' ">
+				#{videoResearchId},
+			</if>
+			<if test="videoResearchName != null and videoResearchName !=''">
+				#{videoResearchName},
+			</if>
+			<if test="videoResearchUsername != null and videoResearchUsername !=''">
+				#{videoResearchUsername},
+			</if>
+			<if test="videoResearchRemark != null and videoResearchRemark !=''">
+				#{videoResearchRemark},
+			</if>
+			<if test="videoResearchTime != null and videoResearchTime !=''">
+				#{videoResearchTime},
+			</if>
+			<if test="videoResearchStarttime != null and videoResearchStarttime !=''">
+				#{videoResearchStarttime},
+			</if>
+			<if test="videoResearchStoptime != null and videoResearchStoptime !=''">
+				#{videoResearchStoptime},
+			</if>
+			<if test="videoResearchRealName != null and videoResearchRealName !=''">
+				#{videoResearchRealName},
+			</if>
+			<if test="videoResearcCode != null and videoResearcCode !=''">
+				#{videoResearcCode},
+			</if>
+			<if test="videoResearchType != null and videoResearchType !=''">
+				#{videoResearchType},
+			</if>
+			<if test="videoResearchVoteNumber != null and videoResearchVoteNumber !=''">
+				#{videoResearchVoteNumber},
+			</if>
+			</trim>
+	</insert>
+	<update id="updateActive" parameterType="com.jzsx.xlha.bean.OnlineEvaluation">
+		update t_video_research
+		<set>
+			<if test="videoResearchName != null and videoResearchName !=''">
+				t_videoResearch_name=#{videoResearchName},
+			</if>
+			<if test="videoResearchUsername != null and videoResearchUsername !=''">
+				t_videoResearch_username=#{videoResearchUsername},
+			</if>
+			<if test="videoResearchRemark != null and videoResearchRemark !=''">
+				t_videoResearch_remark=#{videoResearchRemark},
+			</if>
+			<if test="videoResearchTime != null and videoResearchTime !=''">
+				t_videoResearch_time=#{videoResearchTime},
+			</if>
+			<if test="videoResearchStarttime != null and videoResearchStarttime !=''">
+				t_videoResearch_starttime=#{videoResearchStarttime},
+			</if>
+			<if test="videoResearchStoptime != null and videoResearchStoptime !=''">
+				t_videoResearch_stoptime=#{videoResearchStoptime},
+			</if>
+			<if test="videoResearchRealName != null and videoResearchRealName !=''">
+				t_videoResearch_realName=#{videoResearchRealName},
+			</if>
+			<if test="videoResearchRealName != null and videoResearchRealName !=''">
+				t_videoResearch_realName=#{videoResearchRealName},
+			</if>
+		</set>
+		where t_videoResearchId=#{videoResearchId}
+	</update>
+</mapper>

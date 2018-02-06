@@ -1,0 +1,306 @@
+@charset 'utf-8';
+
+html,body {
+	width: 100%;
+	height: 100%;
+	background: none;
+}
+
+.indexWrapper {
+	width: 100%;
+	height: 100%;
+}
+.homeWrapper {
+	width: 100%;
+	height: 100%;
+	position: relative;
+	min-width:1200px;
+	min-height: 500px;
+	overflow: hidden;
+	background: url(../images/home-bg.jpg) no-repeat center top / 100% 100%;
+}
+header {
+	position: absolute;
+	top: 0;
+	left: 2%;
+	right: 2%;
+	height: 16%;
+	background: none;
+}
+header .pindaohao {
+	margin-right: 10px;
+}
+section {
+	position: absolute;
+	top: 17%;
+	left: 2%;
+	right: 2%;
+	height: 51%;
+}
+.contentMiddle {
+	height: 100%;
+}
+.midLeft {
+	width: 17%;
+	height: 100%;
+	margin-right: 3%;
+}
+.midLeft ul {
+	width: 100%;
+	height: 100%;
+	display: table;
+}
+.midLeft li {
+	width: 100%;
+	height: 33.33%;
+	display: table-row;	
+	vertical-align: middle;
+}
+.midLeft li > div {
+	display: table-cell;
+	vertical-align: middle;
+}
+.midLeft li a {
+	display: inline-block;
+	width: 100%;
+	border-radius: 5px;
+}
+/*.midLeft li a:hover,
+.midLeft li a:focus {
+	box-shadow: 0 0 10px 3px #1600ff;
+}*/
+.midLeft li a > img {
+	width: 100%;
+}
+.midCenter {
+	height: 100%;
+	width: 50%;
+	margin-right: 3%;
+	background: #fff6ec;
+	border-radius: 5px;
+	position: relative;
+}
+.centerTitle {
+	width: 100%;
+	position: absolute;
+	top: -10px;
+	text-align: center;
+}
+.centerTitle a {
+	display: inline-block;
+	width: 30%;
+}
+/*.centerTitle a:hover,
+.centerTitle a:focus {
+	box-shadow: 0 0 10px 3px #1600ff;
+}*/
+.centerTitle a > img {
+	width: 100%;
+}
+.centerCont {
+	padding: 2%;
+	height: 100%;
+}
+.contListWrap {
+	height: 78%;
+	position: absolute;
+	top: 18%;
+	left: 2%;
+	right: 2%;
+}
+.contListWrap ul {
+	height: 100%;
+}
+.contListWrap li {
+	padding-top:10px;
+	height: 16.66%;
+}
+.contListWrap li > a {
+	font-size: 20px;
+	color: #333;
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	position: relative;
+}
+.contListWrap .itemtext {
+	width: 58%;
+	display: inline-block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	vertical-align: middle;
+}
+.contListWrap .listInfo {
+	text-align: right;
+	width: 35%;
+	font-size: 14px;
+	line-height: 20px;
+	position: absolute;
+	right: 0;
+	top: 50%;
+	margin-top: -10px;
+}
+.contListWrap .itemPer {
+	margin-right: 20px;
+}
+.contListWrap li > a > img {
+	margin-right: 10px;
+	width: 3%;
+}
+.midRight {
+	height: 100%;
+	width: 27%;
+	background: #fff6ec;
+	border-radius: 5px;
+	position: relative;
+}
+.rightTitle {
+	width: 100%;
+	position: absolute;
+	top: -10px;
+	text-align: center;
+}
+.rightTitle a {
+	display: inline-block;
+	width: 50%;
+}
+/*.rightTitle a:hover,
+.rightTitle a:focus {
+	box-shadow: 0 0 10px 3px #1600ff;
+}*/
+.rightTitle img {
+	width: 100%;
+}
+.rightList {
+	position: absolute;
+	top: 18%;
+	left: 3.5%;
+	right: 3.5%;
+	height: 78%;
+}
+.rightList ul {
+	height: 100%;
+}
+.rightList li {
+	padding-top: 10px;
+	height: 16.66%;
+}
+.rightList li a {
+	font-size: 20px;
+	color: #333;
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.rightList li a > img {
+	width: 5%;
+	margin-right: 10px;
+}
+
+footer {
+	position: absolute;
+	top: 73%;
+	left: 2%;
+	right: 2%;
+	height: 22%;
+	background: none;
+} 
+footer ul {
+	height: 100%;
+	margin: 0 -3.33%;
+}
+footer li {
+	width: 33.33%;
+	height: 100%;
+}
+footer li a {
+	display: block;
+	width: 80%;
+	height: 100%;
+	margin: 0 auto;
+	border-radius: 5px;
+}
+/*footer li a:hover,
+footer li a:focus {
+	box-shadow: 0 0 10px 3px #1600ff;
+}*/
+footer li a img {
+	width: 100%;
+	height: 100%;
+}
+
+#notLoginModal .modal-dialog {
+	width: 400px;
+}
+#notLoginModal .modal-body {
+	font-size: 20px;
+	padding: 20px 0;
+}
+#notLoginModal .modal-footer {
+	text-align: center;
+}
+@media screen and (min-width:1900px){
+.midLeft li a {
+	font-size: 50px;
+}
+.contListWrap li > a {
+	font-size: 30px;
+}
+.rightList li a {
+	font-size: 30px;
+}
+}
+
+.usernameWrap {
+	display: inline-block;
+	width: 80px;
+	padding: 0;
+	vertical-align: middle;
+	margin-right: 10px;
+	position: relative;
+	background: none;
+	border: none;
+	text-align: center;
+}
+/*.usernameWrap:hover,
+.usernameWrap:focus {
+	box-shadow: 0 0 10px 3px #1600ff;
+}*/
+.usernameWrap .droplist {
+	display: none;
+	width: 80px;
+	padding: 10px;
+	position: absolute;
+	top: 81px;
+	z-index: 10;
+	background: #fff;
+	border-radius: 5px;
+}
+.usernameWrap .droplist::before {
+	content: '';
+	display: block;
+	margin: -30px auto 0;
+	width: 0;
+	height: 0;
+	border: 10px solid #fff;
+	border-color: rgba(0,0,0,0);
+	border-bottom-color: #fff;
+}
+/*.usernameWrap:hover .droplist,
+.usernameWrap:focus .droplist {
+	display: block;
+}*/
+.usernameWrap .userName {
+	text-align: center;
+	color: #fff;
+	width: 80px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.usericoncenter{
+	text-align: center;
+}

@@ -45,7 +45,7 @@ function problempaperlistjson(data,pagesize){
 				text+='<tr>';
 				text+='<td></td>';
 				text+='<td align="center">'+list[i].paperRecordUserName+'</td>';
-				text+='<td style="width:550px;"><p class="artTitle">'+list[i].paperRecordQuestId+'</p></td>';
+				text+='<td style="width:300px;"><p class="artTitle">'+list[i].paperRecordQuestId+'</p></td>';
 				text+='<td align="center">'+new Date(list[i].paperRecordTime).format("YYYY-MM-dd hh:mm:ss")+'</td>';
 				text+='<td align="center">'+list[i].paperRecordIp+'</td>';
 				text+='<td align="center">'+list[i].areainfo.name+'</td>';

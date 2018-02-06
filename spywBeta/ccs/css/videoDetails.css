@@ -7,6 +7,7 @@
 	font-size: 32px;
 	text-align: center;
 	color: #86386c;
+	word-break: break-all;
 }
 .artText {
 	margin-top: 35px;
@@ -25,7 +26,6 @@
 	font-size: 24px;
 	color: #3a3a3a;
 	overflow: auto;
-	text-overflow: ellipsis;
 	word-break: break-all;
 	margin-left: 843px;
 }

@@ -94,5 +94,10 @@ public class VideoResearchActiveServiceImpl implements VideoResearchActiveServic
 		// TODO Auto-generated method stub
 		videoResearchActiveDao.deleteByAll(videoResearchActive);
 	}
+	@Override
+	public void updatevideoResearchByIds(List<String> videoResearchId) {
+		// TODO Auto-generated method stub
+		videoResearchActiveDao.updatevideoResearchByIds(videoResearchId);
+	}
 
 }

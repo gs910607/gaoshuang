@@ -3,8 +3,10 @@ package com.jzsx.xlgc.videoMediate.service;
 import java.util.List;
 import java.util.Map;
 
+import com.jzsx.xlgc.bean.Area;
 import com.jzsx.xlgc.bean.DataAnalysis;
 import com.jzsx.xlgc.bean.DataByCode;
+import com.jzsx.xlgc.bean.DisputeData;
 import com.jzsx.xlgc.bean.TMediatePerson;
 import com.jzsx.xlgc.bean.TVideoMediate;
 import com.jzsx.xlgc.utils.Result;
@@ -43,5 +45,19 @@ public interface MediateService {
 	List<DataByCode> selectByCode(String code,String start,String stop);
 	
 	List<TMediatePerson> selectByMediateId(String id,Integer type);
+	
+	int queryIdentityCount(String code);
+	
+	List<DisputeData> queryDisputeType(String year);
+	
+	List<DisputeData> queryDisputeByType(String type,String year);
+	
+	int updateByIds(List<String> list,String url);
+	
+	Result<TMediatePerson> selectProtocol(String area,Integer pages,TMediatePerson person);
+	
+	int updateUrl(String url,String id);
+	
+	List<Area> selectArea(List list);
 	
 }

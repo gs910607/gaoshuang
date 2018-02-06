@@ -42,6 +42,11 @@ public interface VideoResearchActiveService {
 	 */
 	public void updatevideoResearchById(String videoResearchId);
 	/**
+	 * 根据id字符串拼接修改票数
+	 * @param videoResearchActive
+	 */
+	public void updatevideoResearchByIds(List<String> videoResearchId);
+	/**
 	 * 根据父类ID删除数据
 	 * @param videoResearchId
 	 */

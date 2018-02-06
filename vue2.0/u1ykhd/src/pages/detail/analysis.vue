@@ -131,6 +131,9 @@ export default {
     BankChooser,
     CheckOrder
   },
+  created () {
+    document.title = "anaiysis";
+  },
   data () {
     return {
       buyNum: 0,

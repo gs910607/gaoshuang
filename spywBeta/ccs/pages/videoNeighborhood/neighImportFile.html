@@ -37,8 +37,8 @@
 		<header>
 			<h1 class="pull-left"><a href="neighborhoodNav.html"><img src="../../images/shipinjiefang.png"></a></h1>
 			<div class="loginWrapper pull-right">
-				<span class="welcome">欢迎登录</span>
 				<span class="userName"></span>
+				<span class="welcome">欢迎登录</span>
 				<div class="userInfo">
 					<img src="../../images/user-icon.png">
 					<div class="dropWrap">
@@ -57,7 +57,7 @@
 				<div class="content">
 					<div class="iconTitle">导入</div>
 					<div class="chooseWrapper">
-						<div class="upWrapper">
+						<div class="upWrapper" style = "padding-top: 80px;">
 							<div id="chooseFile" class="form-inline">
 								<div class="form-group">
 									<form id="upForm" action="javascript:;" enctype="multipart/form-data">
@@ -68,7 +68,10 @@
 								<a id="chooseBtn" class="btn btn-primary">选择文件</a>
 								<a id="downTemplate" href="javascript:;" class="btn btn-primary">下载模板</a>
 							</div>
+							<div style ="height:160px;margin-top:15px;margin-left: 2%;width:98%;overflow:auto;" id = "result">
+							</div>
 						</div>
+						
 						<div class="btnWrapper text-center">
 							<a id="goBack" class="btn btn-default" href="viewNeighborhood.html">返回</a>
 							<a id="upBtn" class="btn btn-primary" href="javascript:;">确定</a>

@@ -37,8 +37,8 @@
 		<header>
 			<h1><a href="mediationNav.html"><img src="../../images/shipintiaojie.png"></a></h1>
 			<div class="loginWrapper pull-right">
-				<span class="welcome">欢迎登录</span>
 				<span class="userName"></span>
+				<span class="welcome">欢迎登录</span>
 				<div class="userInfo">
 					<img src="../../images/user-icon.png">
 					<div class="dropWrap">
@@ -57,14 +57,19 @@
 				<div class="content">
 					<div class="form-inline text-right" style="margin-right:50px;margin-top:20px;">
 						<div class="form-group">
+							<a id="area" href="javascript:;" class="btn-primary" style="padding: 5px 10px;border-radius: 5px">按调解类型统计</a>
+							<a id="statistics" href="javascript:;" class="btn-primary" style="padding: 5px 10px;border-radius: 5px;display:none">按区域统计</a>
+						</div>
+						
+						<div class="form-group" style = "margin-left :20px">
 							<label>类别:</label>
 							<select class="form-control" id="category">
 								<option value="1">按区/县统计</option>
 								<option value="2">按各区乡/镇统计</option>
 							</select>
 						</div>
-						<div id="districts" style="display:none;" class="form-group">
-							-
+						<div id="districts" style="display:none;margin-left :20px" class="form-group">
+							<label>乡/镇:</label>
 							<select class="form-control" id="districtsSel">
 								<option value="101">淮安区</option>
 								<option value="102">淮阴区</option>
@@ -75,7 +80,8 @@
 								<option value="107">盱眙县</option>
 							</select>
 						</div>
-						<div class="form-group">
+						
+						<div class="form-group" style = "margin-left :20px">
 							<label>年份:</label>
 							<select class="form-control" id="years">
 							</select>

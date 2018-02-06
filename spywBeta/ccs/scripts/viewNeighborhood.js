@@ -189,22 +189,31 @@ function videoNeighborhoodjoin(data,pagesize){
 	    type:"post",   //请求方式
 	    success:function(req){
 	    	ajaxLoading.hide();
+
 	    	var list=req.list;
 	    	var pagetotal=req.total;
 	    	$(".infoList table tbody").empty();
 	        for(var i=0;i<list.length;i++){
 	        	var text='';
 	        	text+='<tr>';
-	        	text+='<td>'+list[i].videoneihdNum+'</td>';
+	        	if(list[i].videoneihdNum!=null){
+	        		text+='<td>'+list[i].videoneihdNum+'</td>';
+	        	}else{
+	        		text+='<td></td>';
+	        	}
 	        	text+='<td>'+new Date(list[i].videoneihdDate).format("YYYY-MM-dd")+'</p></td>';
 	        	text+='<td >'+list[i].videoneihdName+'</td>';
-	        	text+='<td>'+list[i].videoneihdRegistrant+'</td>';
+	        	if(list[i].videoneihdRegistrant!=null){
+	        		text+='<td>'+list[i].videoneihdRegistrant+'</td>';
+	        	}else{
+	        		text+='<td></td>';
+	        	}
 //	        	text+='<td>'+list[i].videoneihdObjective+'</td>';
 //	        	text+='<td>视频</td>';
 	        	if(list[i].videoneihdLocationplace!=null && list[i].areainfo!=null){
 	        		text+='<td>'+list[i].areainfo.name+'</td>';
 	        	}else{
-	        		text+='<td>'+list[i].videoneihdLocationplace+'</td>';
+	        		text+='<td></td>';
 	        	}
 //	        	text+='<td width="100"><p style="width:100px;">劳动和社会</td>';
 //	        	text+='<td>转送</td>';
@@ -212,10 +221,17 @@ function videoNeighborhoodjoin(data,pagesize){
 //	        	text+='<td></td>'; 
 	        	if(list[i].videoConferenceinfo!=null){
 	        		text+='<td>'+new Date(list[i].videoConferenceinfo.beginTime).format("yyyy-MM-dd hh:mm:ss")+'</td>';
-	        		text+='<td>'+list[i].videoConferenceinfo.duration+'小时</td>';
+	        		text+='<td>'+list[i].videoConferenceinfo.name+'</td>';
 	        		text+='<td><a style="color:#028EC5;" data-conoferid="'+list[i].videoConferenceinfo.accessCode+'" href="javascript:;" onclick="lookCode(event)">查看</a></td>';
 	        		if(list[i].videoConferenceinfo.status==0){
-	        			text+='<td><a style="color:#028EC5;" data-conoferid="'+list[i].videoConferenceinfo.confId+'" href="javascript:;" onclick="endConfer(event)">结束会议</a></td>';
+	        			var time=timeAdd(list[i].videoConferenceinfo.beginTime,list[i].videoConferenceinfo.duration);
+	    				var nowTime=new Date().getTime();
+	    				if(time<nowTime){
+	    					text+='<td><span>已结束</span></td>';
+	    				}else{
+	    					text+='<td><a style="color:#028EC5;" data-conoferid="'+list[i].videoConferenceinfo.confId+'" href="javascript:;" onclick="endConfer(event)">结束会议</a></td>';
+	    				}
+	        			
 	        		}else{
 	        			text+='<td><span>已结束</span></td>';
 	        		}
@@ -230,9 +246,9 @@ function videoNeighborhoodjoin(data,pagesize){
 	        		text+='<td><a data-articleid="'+list[i].videoneihdId+'" onclick="changeStatus(event)" style="color:#028EC5;" href="javascript:;">请选择</a></td>';
 	        	}else{
 	        		if(list[i].videoneihdState==1){
-	        			text+='<td >成功</td>';
+	        			text+='<td >已解决</td>';
 	        		}else if(list[i].videoneihdState==2){
-	        			text+='<td >失败</td>';
+	        			text+='<td >未解决</td>';
 	        		}
 	        	}
 	        	text+='<td class="operation">';
@@ -414,4 +430,9 @@ function endConfer(event) {
 		 	}
 		 })
 	}
+}
+function timeAdd(createTime, duration) {
+	createTime = new Date(createTime).getTime();
+	duration = new Date(duration*60*60*1000).getTime();
+	return new Date(createTime + duration).getTime();
 }

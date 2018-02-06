@@ -51,10 +51,10 @@
 <body>
 	<div class="userinfoWrapper wrapper">
 		<header>
-			<h1 class="pull-left"><a href="userinfo.html"><img src="../../images/yonghuguanli.png" alt="用户管理"></a></h1>
+			<h1 class="pull-left"><a><img src="../../images/yonghuguanli.png" alt="用户管理"></a></h1>
 			<div class="loginWrapper pull-right">
-				<span class="welcome">欢迎登录</span>
 				<span class="userName"></span>
+				<span class="welcome">欢迎登录</span>
 				<div class="userInfo">
 					<img src="../../images/user-icon.png">
 					<div class="dropWrap">
@@ -68,7 +68,7 @@
 			</div>
 		</header>
 		<section class="contentWrap">
-			<div class="goBack"><a href="javascript:window.close();"><img src="../../images/goback-icon.png"></a></div>
+			<div class="goBack"><a href="../index.html"><img src="../../images/goback-icon.png"></a></div>
 			<div class="container">
 				<div class="content">
 					<div class="iconTitle">用户信息</div>
@@ -77,17 +77,17 @@
 							<div class="inputWrapper">
 								
 								<div class="form-group">
-									<label for="listName" class= "formlable">用户姓名:</label>
+									<label for="listName" class= "formlable">姓名:</label>
 									<input type="text" class="form-control" id="listName">
 								</div>
 								
 								<div class="form-group">
-									<label for="listCount" class= "formlable">用户账号:</label>
+									<label for="listCount" class= "formlable">账号:</label>
 									<input type="text" class="form-control" id="listCount">
 								</div>
 								
 								<div class="form-group">
-									<label for="listPhone" class= "formlable">用户手机号:</label>
+									<label for="listPhone" class= "formlable">手机号:</label>
 									<input type="text" class="form-control" id="listPhone">
 								</div>
 							
@@ -144,7 +144,7 @@
 									<td width="500" class="text-left">所属地区</td>
 									<td>权限</td>
 									<td>姓名</td>
-									<td>电话</td>
+									<td>手机号</td>
 									<td>操作</td>
 								</tr>
 							</thead>
@@ -182,31 +182,33 @@
 				</div>
 				<div class="modal-body">
 					<form id="html5Form" action="javascript:;" class="form-horizontal">
-					<input hidden="hidden" name="userid" value="" id="userid"/>
+						<input hidden="hidden" name="userid" value="" id="userid"/>
 						<div class="inlineGroup clearfix">
-							<div class="form-group">
-								<label class="formLabel control-label">所属地区:</label>
-								<div class="formInput input-group">
-									<select id="district" class="form-control" required>
-										<option value="">请选择</option>
-									</select>
-									<div class="input-group-addon">区/县</div>
+							<label class="formLabel control-label">所属地区:</label>
+							<div class="formInput clearfix">
+								<div class="form-group" style="padding-right:5%;">
+									<div class="input-group">
+										<select id="district" class="form-control" required>
+											<option value="">请选择</option>
+										</select>
+										<div class="input-group-addon">区/县</div>
+									</div>
 								</div>
-							</div>
-							<div class="form-group">
-								<div class="formInput input-group">
-									<select id="county" class="form-control">
-										<option value="">请选择</option>
-									</select>
-									<div class="input-group-addon">乡/镇</div>
+								<div class="form-group" style="padding-left:2.5%;padding-right:2.5%;">
+									<div class="input-group">
+										<select id="county" class="form-control">
+											<option value="">请选择</option>
+										</select>
+										<div class="input-group-addon">乡/镇</div>
+									</div>
 								</div>
-							</div>
-							<div class="form-group">
-								<div class="formInput input-group">
-									<select id="village" class="form-control">
-										<option value="">请选择</option>
-									</select>
-									<div class="input-group-addon">村</div>
+								<div class="form-group" style="padding-left:5%;">
+									<div class="input-group">
+										<select id="village" class="form-control">
+											<option value="">请选择</option>
+										</select>
+										<div class="input-group-addon">村</div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -238,13 +240,13 @@
 						<div class="form-group">
 							<label for="idNumber" class="formLabel control-label">身份证号:</label>
 							<div class="formInput">
-								<input type="text" class="form-control" id="idNumber" required>
+								<input type="text" class="form-control" id="idNumber">
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="telephone" class="formLabel control-label">手机号:</label>
 							<div class="formInput">
-								<input type="text" class="form-control" id="telephone" required>
+								<input type="text" class="form-control" id="telephone">
 							</div>
 						</div>
 						<div class="form-group">

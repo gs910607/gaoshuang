@@ -42,11 +42,11 @@ public interface VideoTrainService {
 	 */
 	public void updateActive(VideoTrain vtrain);
 	/**
-	 * 根据视频code查询数据
+	 * 根据视频code查询数据  根据n的大小展示数据 的多少
 	 * @param vtrain
 	 * @return
 	 */
-	public List<VideoTrain> queryVideoTrainByCode(VideoTrain vtrain);
+	public List<VideoTrain> queryVideoTrainByCode(VideoTrain vtrain,int n);
 	/**
 	 * 根据视频培训类型获取数据
 	 * @param videoTypeId

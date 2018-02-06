@@ -15,6 +15,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 	    <result property="videoResearchRealName" column="t_videoResearch_realName" />
 	    <result property="videoResearcCode" column="t_videoResearc_code" />
 	    <result property="videoResearchType" column="T_VIDEORESEARCH_type" />
+	    <result property="videoResearchVoteNumber" column="t_videoResearch_vote_number" />
 	    <association property="videoResearchActiveinfo" column="t_videoResearchId" select="com.jzsx.xlgc.videoResearch.Dao.VideoResearchActiveDao.queyVideoResearchById"></association>
     	<association property="areainfo" column="t_videoResearc_code" select="com.jzsx.xlgc.area.Dao.AreaDao.queryByCode"></association>
     </resultMap>
@@ -85,6 +86,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 			<if test="videoResearchType != null and videoResearchType !=''">
 				T_VIDEORESEARCH_type,
 			</if>
+			<if test="videoResearchVoteNumber != null and videoResearchVoteNumber !=''">
+				t_videoResearch_vote_number,
+			</if>
 		</trim>
 		values
 			<trim prefix="(" suffix=")" suffixOverrides="," >
@@ -118,6 +122,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 			<if test="videoResearchType != null and videoResearchType !=''">
 				#{videoResearchType},
 			</if>
+			<if test="videoResearchVoteNumber != null and videoResearchVoteNumber !=''">
+				#{videoResearchVoteNumber},
+			</if>
 			</trim>
 	</insert>
 	<update id="updateActive" parameterType="com.jzsx.xlgc.bean.VideoResearch">
@@ -140,6 +147,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 			</if>
 			<if test="videoResearchStoptime != null and videoResearchStoptime !=''">
 				t_videoResearch_stoptime=#{videoResearchStoptime},
+			</if>
+			<if test="videoResearchRealName != null and videoResearchRealName !=''">
+				t_videoResearch_realName=#{videoResearchRealName},
 			</if>
 			<if test="videoResearchRealName != null and videoResearchRealName !=''">
 				t_videoResearch_realName=#{videoResearchRealName},

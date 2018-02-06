@@ -13,11 +13,14 @@ import org.springframework.stereotype.Service;
 
 
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.jzsx.xlgc.bean.VideoType;
 import com.jzsx.xlgc.videoTrain.Dao.VideoTypeDao;
 import com.jzsx.xlgc.videoTrain.Service.VideoTypeService;
 
 @Service
+@Transactional
 public class VideoTypeServiceImpl implements VideoTypeService{
 
 	@Autowired

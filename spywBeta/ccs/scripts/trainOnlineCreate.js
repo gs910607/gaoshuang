@@ -36,7 +36,9 @@ var vm = new Vue({
 			areaList: areaObjList, //地区列表
 			allCity: false, //选择全市
 			selectedCount: '0个', //选择的个数
-			allArea: '全选'
+			allArea: '全选',
+			isSelectChild: false, //是否选中子集
+			searchId: '1',
 		}
 	},
 	mounted: function() {
@@ -101,7 +103,8 @@ var vm = new Vue({
 				mouIconOpen: "fa fa-folder-open-o",//含多个标题的打开字体图标  不传默认glyphicon-folder-open
 				mouIconClose:"fa fa-folder-o",//含多个标题的关闭的字体图标  不传默认glyphicon-folder-close
 				callback: function(id,name) {
-					_this.searchArea(id)
+					_this.searchArea(id);
+					_this.searchId = id;
 				}
 			});
 
@@ -136,33 +139,78 @@ var vm = new Vue({
 				if(_this.areaList.length >= areaObjList.length - 1) {
 					_this.checkedNames = _this.areaList;
 				} else {
-					_this.areaList.map(function(obj,ind) {
-						if(obj.areaCode != 0) {
-							_this.checkedNames.map(function(o,i){
-								if(obj == o) {
-									_this.checkedNames.splice(i,1);
-								};
+					if(_this.isSelectChild) {
+
+						var deleteArr = [];
+						_this.checkedNames.map(function(o,i){
+							if(o.areaCode.slice(0,Number(_this.searchId.length)) == _this.searchId && o.areaCode.length > _this.searchId.length) {
+								deleteArr.push(o);
+							}
+						});
+
+						deleteArr.map(function(o,i) {
+							_this.checkedNames.map(function(obj,ind){
+								if(o.areaCode == obj.areaCode) {
+									_this.checkedNames.splice(ind,1);
+								}
 							});
-							_this.checkedNames.push(obj);
-						};
-					});
+						});
+
+						areaObjList.map(function(obj,ind) {
+
+							if(obj.areaCode.slice(0,Number(_this.searchId.length)) == _this.searchId && obj.areaCode.length > _this.searchId.length) {
+								_this.checkedNames.push(obj);
+							};
+
+						});
+					} else {
+						_this.areaList.map(function(obj,ind) {
+							if(obj.areaCode != 0) {
+								_this.checkedNames.map(function(o,i){
+									if(obj.areaCode == o.areaCode) {
+										_this.checkedNames.splice(i,1);
+									};
+								});
+								_this.checkedNames.push(obj);
+							};
+						});
+					}
 				};
 			} else {
 				if(_this.areaList.length >= areaObjList.length - 1) {
 					_this.checkedNames = [];
 				} else {
-					_this.areaList.map(function(obj,ind){
+					if(_this.isSelectChild) {
+						var deleteArr = [];
 						_this.checkedNames.map(function(o,i){
-							if(obj == o) {
-								_this.checkedNames.splice(i,1)
+							if(o.areaCode.slice(0,Number(_this.searchId.length)) == _this.searchId && o.areaCode.length > _this.searchId.length) {
+								deleteArr.push(o);
 							}
+						});
+
+						deleteArr.map(function(o,i) {
+							_this.checkedNames.map(function(obj,ind){
+								if(o.areaCode == obj.areaCode) {
+									_this.checkedNames.splice(ind,1);
+								}
+							});
+						});
+
+					} else {
+						_this.areaList.map(function(obj,ind){
+							_this.checkedNames.map(function(o,i){
+								if(obj == o) {
+									_this.checkedNames.splice(i,1)
+								}
+							})
 						})
-					})
+					}
 				}
 			}
 			_this.selectedCount = this.checkedNames.length + '个';
 
 			_this.checkedNamesSort();
+
 		},
 		searchArea: function(areaCode) {  //查询
 			var _this = this;
@@ -235,6 +283,7 @@ var vm = new Vue({
 			} else {
 				_this.checkAll = false;
 			}
+
 		},
 		removeItem: function(item) {
 			this.checkedNames = this.checkedNames.filter(function(obj){
@@ -249,7 +298,7 @@ var vm = new Vue({
 				return a.areaCode - b.areaCode;
 			})
 		},
-		selectOne: function(event) {
+		selectOne: function(event,item) {
 			var _this = this;
 			var selArr = [];
 
@@ -278,8 +327,62 @@ var vm = new Vue({
 			} else {
 				_this.checkAll = false;
 			}
+		
+			if(_this.isSelectChild) {
+
+				if(item.areaCode == 1) {
+					if(event.target.checked) {
+						_this.checkedNames = _this.areaList;
+						_this.checkAll = true;
+					} else {
+						_this.checkedNames = [];
+						_this.checkAll = false;
+					}
+				} else {
+
+					if(event.target.checked) {
+						var addBefore = [];
+						_this.checkedNames.map(function(o,i) {
+							if(o.areaCode.slice(0,Number(item.areaCode.length)) == item.areaCode && o.areaCode.length > item.areaCode.length) {
+								addBefore.push(o)
+							}
+						});
+
+						addBefore.map(function(obj,ind,arr) {
+							_this.checkedNames.map(function(o,i,array) {
+								if(obj.areaCode == o.areaCode) {
+									array.splice(i,1)
+								}
+							})
+						});
+
+						areaObjList.map(function(o,i,arr) {
+
+							if(o.areaCode.slice(0,Number(item.areaCode.length)) == item.areaCode && o.areaCode.length > item.areaCode.length) {
+								_this.checkedNames.push(o)
+							}
+						})
+					} else {
+						var deleteArr = [];
+						_this.checkedNames.map(function(o,i,array) {
+							if((o.areaCode.length > item.areaCode.length) && (o.areaCode.slice(0,Number(item.areaCode.length)) == item.areaCode)) {
+								deleteArr.push(o)
+							}
+						});
+
+						deleteArr.map(function(obj,ind,arr) {
+							_this.checkedNames.map(function(o,i,array) {
+								if(obj.areaCode == o.areaCode) {
+									array.splice(i,1)
+								}
+							})
+						});
+					};
+				}
+			};
 
 			_this.checkedNamesSort();
+
 		},
 		createSureBtn: function() { //确认创建
 			var _this = this;

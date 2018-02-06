@@ -13,7 +13,7 @@ $("#upBtn").on("click",function() {
     if(flag == false) {
         return;
     }
-
+    $("#result").html("");
     $("#upForm").ajaxSubmit({
         url : '../../mediate/import.do',
         type : 'post',
@@ -32,7 +32,14 @@ $("#upBtn").on("click",function() {
                 },500);
 
             } else {
-                alert(data.msg)
+            	alert("上传失败");
+                if(data.info){
+                	var strresult = "";
+                	for(i = 0 ;data.info.length > i ;i++ ){
+                		strresult += "<p style =" + "\"color:red\""+ ">"+ data.info[i] + "</p>"
+                	}
+                	$("#result").append(strresult);
+                }
                 $("#upForm").resetForm();
             }
         },

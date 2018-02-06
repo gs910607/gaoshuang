@@ -1,0 +1,57 @@
+@charset 'utf-8';
+.content {
+	background: inherit;
+}
+.detailTit {
+	font-size: 20px;
+	color: #fff;
+	text-align: center;
+	padding: 10px 0;
+	background: #006980;
+	word-break: break-all;
+}
+.contWrap {
+	border: 2px solid #000;
+	background: #fff;
+}
+.detailCont {
+	padding: 10px;
+}
+.questionsList li.quesItem {
+	margin-bottom: 5px;
+}
+.questionsList li.quesItem dt {
+	font-size: 16px;
+	word-break: break-all;
+}
+.questionsList li.quesItem dd {
+	padding-left: 25px;
+	font-size: 16px;
+}
+.questionsList .answerItem {
+	width: 33.33%;
+	float: left;
+	padding: 2px 0;
+}
+.questionsList .answerItem a {
+	display: inline-block;
+	line-height: 20px;
+}
+.questionsList .answerItem a i {
+	float: left;
+	margin-top: 3px;
+	width: 15px;
+	height: 15px;
+	border-radius: 50%;
+	background: url(../images/radio-default.png) no-repeat center center / 100% 100%;
+	vertical-align: middle;
+	margin-right: 5px;
+}
+.questionsList .answerItem a span {
+	display: block;
+	padding-left: 20px;
+	word-break: break-all;
+}
+.questionsList .answerItem.active a i {
+	background-image: url(../images/radio-active.png);
+}

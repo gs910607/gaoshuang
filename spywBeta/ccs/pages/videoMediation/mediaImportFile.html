@@ -37,8 +37,8 @@
 		<header>
 			<h1 class="pull-left"><a href="mediationNav.html"><img src="../../images/shipintiaojie.png"></a></h1>
 			<div class="loginWrapper pull-right">
-				<span class="welcome">欢迎登录</span>
 				<span class="userName"></span>
+				<span class="welcome">欢迎登录</span>
 				<div class="userInfo">
 					<img src="../../images/user-icon.png">
 					<div class="dropWrap">
@@ -58,14 +58,17 @@
 					<div class="iconTitle">导入</div>
 					<div class="chooseWrapper">
 						<form id="upForm" action="javascript:;" enctype="multipart/form-data">
-							<div class="upWrapper">
-								<div id="chooseFile" class="form-inline">
+							<div class="upWrapper" style="padding-top: 80px;">
+								<div id="chooseFile" class="form-inline" >
 									<div class="form-group">
 										<input style="width:400px;" type="text" class="form-control" id="choose" placeholder="请选择需要上传的文件" readonly>
 										<input type="file" name="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" style="display:none;" id="upExcel">
 									</div>
 									<a id="chooseBtn" class="btn btn-primary">选择文件</a>
 									<a id="downTemplate" href="javascript:;" class="btn btn-primary">下载模板</a>
+								</div>
+								<div style="height:160px;margin-top:15px;margin-left: 2%;width:98%;overflow:auto;" id = "result">
+								
 								</div>
 							</div>
 							<div class="btnWrapper text-center">

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" type="text/css" href="../../css/main.css"> -->
+    <link rel="stylesheet" href="../../scripts/zTree_v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="../../css/pager.css">
+    <link rel="stylesheet" type="text/css" href="../../css/videoMonitoring.css">
+  	<title></title>
+    <style>
+    	 .goBack {
+		    position: fixed;
+		    top: 90px;
+		    left: 15px;
+		    z-index: 1001;
+		 }
+		 .contentleft{
+		 	width : 30% ;
+		 	margin-left : 6%;
+		 	float :left ;
+		 }
+		 .contentright{
+		 	width : 57% ;
+		 	height : 100% ;
+		 	margin-right : 6%;
+		 	margin-left : 1%;
+		 	float :left ;
+		 }
+		 .contentleft .ztree {
+		 	background-color: white;
+		 	overflow: auto;
+		 }
+		 .contentright{
+		 	background-color: white;
+		 }
+		 #tree span{
+    		font-size : 16px !important;
+   		 }
+   		 .margintop10{
+			margin-top :20px;
+			height: 30px;
+    		text-align: right;
+		}
+		table{
+			width : 100% ;
+		}
+		.paging {
+		    padding: 0 40px 30px;
+		    text-align: right;
+		}
+		
+		.videosite{
+			 padding: 5px 10px;
+    		 border-radius: 5px;
+    		 color: #fff;
+    		 background-color: #337ab7;
+    		 border-color: #2e6da4;
+    		 cursor:pointer;
+    		 margin-right: 30px;
+		}
+		.videosite:hover{
+    		background-color: #204d74;
+   			border-color: #122b40;
+		}
+		
+		.tableclass, .tableclass30{
+		    width: 96%;
+		    margin: 2%;
+		    border: none;
+		    border-collapse: collapse;
+		}
+		.tableclass30 tr {
+		    height: 37px;
+		}
+		.tabletr{
+			height: 37px;
+			background-color:#F4F7FA;
+		}
+		.tableclass td, .tableclass30 td, .tableclassnone td, .tableclassnone30 td {
+		    border: 1px solid #ddd;
+		    text-align: center;
+		    font-size: 14px;
+		}
+		/* .tableclass30 tr:nth-child(odd) {
+		    background-color: #eff0f1;
+		} */
+		.tableclass30 tr:hover {
+		    background-color: #f5f5f5
+		}
+    </style>
+</head>
+
+<body>
+    <header>
+		<h1 class="pull-left"><img src=""></h1>	
+	</header>
+    <div class="content">
+    	<div class="goBack">
+    		<a href="javascript:history.back();">
+    			<img src="../../images/goback-icon.png">
+    		</a>
+    	</div>
+    	<div class = "contentleft">
+    		<ul id="tree" class="ztree"></ul>
+    	</div>
+    	
+    	<div class = "contentright">
+    		<div class = "margintop10">
+                		<a class = "videosite" id = "videoresite">同步数据</a>
+                		<a class = "videosite" id = "videosite">视频区域配置</a>
+            </div>
+            
+            <div>
+            	<table class = "tableclass">
+            		<tr class = "tabletr">
+            			<td></td>
+            			<td>摄像机名称</td>
+            			<!-- <td>摄像机区域</td> -->
+            			<!-- <td>摄像机状态</td> -->
+            		</tr>
+            		<tbody id="tbody" class = "tableclass30">
+            		
+            		</tbody>
+            	</table>
+            	
+            	<div class="paging">
+					<ul class="pagination" id="page2">
+					</ul>
+					<div class="pageJump">
+						<span>跳转到</span>
+						<input type="text"/>
+						<span>页</span>
+						<button type="button" class="button">确定</button>
+					</div>
+				</div>
+            </div>
+    	</div>
+    </div>
+    
+    <div class="footer"></div>
+    <script type="text/javascript" src="../../scripts/zTree_v3/js/jquery-1.4.4.min.js"></script>
+    <script type="text/javascript" src="../../scripts/zTree_v3/js/jquery.ztree.core.js"></script>
+    <script type="text/javascript" src="../../scripts/pager.js"></script>
+	<script type="text/javascript" src="../../scripts/videoPointInfo.js"></script>
+</body>
+</html>

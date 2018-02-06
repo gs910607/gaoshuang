@@ -26,8 +26,13 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
         select * from t_video_research_record
     </select>
     <select id="queryByAll" parameterType="com.jzsx.xlgc.bean.VideoResearchRecord" resultMap="BaseResultMap1">
-    	select rd.*,rh.t_videoresearch_name as videoResearchTitle from t_video_research_record rd
+    	select  nvl(nvl(cu.realname,mu.realname),' ') as t_videoresearch_realname,rd.t_videoresearchreid,
+      			 rd.t_videoresearchre_ip,rd.t_videoresearch_time,rd.t_videoresearch_code,
+     			  rd.t_videoresearch_type ,rh.t_videoresearch_name as videoResearchTitle 
+    	from t_video_research_record rd
 		left join t_video_research rh on rh.t_videoresearchid=rd.t_videoresearchreid
+		left join cas_user cu on to_char(cu.userid) || ''=rd.t_videoresearch_realname
+    	left join common_user mu on mu.userid=rd.t_videoresearch_realname
  		where 1=1
 	    	<if test="videoResearchReId != null and videoResearchReId !='' ">
 				and	t_videoResearchReId=#{videoResearchReId}
@@ -63,6 +68,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 			</if>
 			<if test="videoResearchType != null and videoResearchType !=''">
 				and T_VIDEORESEARCH_type=#{videoResearchType}
+			</if>
+			<if test="videoResearchRealName != null and videoResearchRealName !=''">
+				and t_videoResearch_realName=#{videoResearchRealName}
 			</if>
     </select>
     <delete id="deleteByParentId" parameterType="java.lang.String">

@@ -24,4 +24,11 @@ public class Result<T> {
 		this.list = list;
 	}
 
+	@Override
+	public String toString() {
+		return "Result [num=" + num + ", list=" + list + "]";
+	}
+
+	
+	
 }

@@ -71,6 +71,28 @@
     	color: white;
     	cursor:pointer;
     }
+    .videosite{
+    	color: #fff;
+    	background-color: #337ab7;
+   		border-color: #2e6da4;
+   		padding: 0 10px;
+   		border-radius: 5px;
+   		cursor:pointer;
+    }
+    .videosite:hover{
+    	background-color: #286090;
+    	border-color: #204d74;
+    }
+    .margintop10{
+		margin-top :10px;
+		margin-bottom :5px
+	}
+	.goBack{
+		position: fixed;
+		top: 100px;
+		left: 10px;
+		z-index: 1001;
+	}
     </style>
 </head>
 
@@ -80,37 +102,43 @@
 	</header>
     <div class="content">
         <!-- <img src="../../images/gis.png" style="width: 100%" alt=""> -->
-        <a class = "downloadexe" href = "/download/WisInterNetPlayCtrlV2.0.exe">插件下载</a>
+        <a class = "downloadexe" href = "/download/VlcRtspPlay.exe">插件下载</a>
         <div id="contentLeft">
-            <div id="objPlay" style="width: 78%;height: 380pt;position: absolute;z-index: 99; top:10px;left:1%">
+        	<div class="goBack">
+        		<a href="../index.html"><img src="../../images/goback-icon.png"></a>
+        	</div>
+        	
+            <div id="objPlay" style="width: 73%;height: 380pt;position: absolute;z-index: 99; top:30px;left:5%">
                 <div class="videoPlayMonitor row" id="videoPanel">
-                <object id="objPlayctrl" classid="CLSID:CE2BD43B-5231-4762-A4F1-D70FBECB2291"
-            style="height:330pt;width:100%"  class="col-md-12"></object>
-<!--                     <object style="height:330pt;width:100%" id="videoControl" class="col-md-12" classid="clsid:AFBF5262-3FC2-4285-B016-56E7E2454AC2" data="data:application/x-oleobject;base64,YlK/r8I/hUKwFlbn4kVKwgAAAQAVYgAAVTUAAAAAAAA="></object>
- -->                </div>
+                <object id="addX" classid="clsid:FB2BB20A-96AC-484E-834C-10C5B15044D5"  style="height:330pt;width:100%" >
+            	</object>
+    			                </div>
+ 
+ 				 
+ 
                 <div class="videoColumnSet" style="width: 100%;background:#29303f;height:30pt;line-height:53px;margin-top:-10px">
-                    <a href="javascript:SetWindowCount(1);">
+                    <a href="javascript:videoPlayer.SetWindowCount(1);">
                         <img src="../../images/video/3.3.6.jpg" alt="单画面" />
                     </a>
-                    <a href="javascript:SetWindowCount(4);">
+                    <a href="javascript:videoPlayer.SetWindowCount(4);">
                         <img src="../../images/video/3.3.7.jpg" alt="四画面" />
                     </a>
-                    <a href="javascript:SetWindowCount(6);">
+                    <!-- <a href="javascript:videoPlayer.SetWindowCount(6);">
                         <img src="../../images/video/3.3.8.jpg" alt="六画面" />
                     </a>
-                    <a href="javascript:SetWindowCount(8);">
+                    <a href="javascript:videoPlayer.SetWindowCount(8);">
                         <img src="../../images/video/3.3.9.jpg" alt="八画面" />
-                    </a>
-                    <a href="javascript:SetWindowCount(9);">
+                    </a> -->
+                    <a href="javascript:videoPlayer.SetWindowCount(9);">
                         <img src="../../images/video/3.4.0.jpg" alt="九画面" />
                     </a>
-                    <a href="javascript:SetWindowCount(10);">
+                    <!-- <a href="javascript:videoPlayer.SetWindowCount(10);">
                         <img src="../../images/video/3.4.1.jpg" alt="十画面" />
                     </a>
-                    <a href="javascript:SetWindowCount(13);">
+                    <a href="javascript:videoPlayer.SetWindowCount(13);">
                         <img src="../../images/video/3.4.2.jpg" alt="十三画面" />
-                    </a>
-                    <a href="javascript:SetWindowCount(16);">
+                    </a>-->
+                    <a href="javascript:videoPlayer.SetWindowCount(16);"> 
                         <img src="../../images/video/3.4.3.jpg" alt="十六画面" />
                     </a>
                 </div>
@@ -122,6 +150,9 @@
                     <input style="margin-top:15px;border-radius: 14px;height: 20px;width: 80%;background: #edebe9" placeholder="视频搜索" type="text">
                 </div>
                 <div>
+                	<div class = "margintop10">
+                		<a class = "videosite" >视频点位配置</a>
+                	</div>
                     <ul id="treeDemo" class="ztree"></ul>
                 </div>
                 <div class="playBtn-left" style = "display:none">

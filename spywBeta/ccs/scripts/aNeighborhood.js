@@ -22,6 +22,23 @@ $.ajax({
 		}
 	}
 });
+$.ajax({
+	type: 'post',
+	url: '/spywBeta/videoNeighborhood/VideoNeightTypeJson.do',
+	data: {},
+	dataType: 'json',
+	success: function(req) {
+		if(req.status==0){
+			var list=req.list;
+			$("#neightType option:not(:first)").remove();
+			for(var i=0;i<list.length;i++){
+				var txt='';
+				txt='<option value="'+list[i].neightTypeId+'">'+list[i].neightTypeName+'</option>'
+				$("#neightType").append(txt);
+			}
+		}
+	}
+})
 		new selectArea('#petition',{  //信访人地址
 			data: '',
 			isSelect: true
@@ -50,7 +67,7 @@ $(function(){
 		    	var vh=req.videoNeighborhood;
 		    	$("#name").val(vh.videoneihdName);
 		    	$("#voucherType").val(vh.videoneihdCardType);
-		    	var vlp=vh.videoneihdLocationplace.toString();
+		    	var vlp= vh.videoneihdLocationplace ? vh.videoneihdLocationplace.toString() : null ;
 		    	if(vlp!=null){
 		    		if(vlp.length>6){
 			    		var url='/spywBeta/area/arealistByPartends.do';
@@ -77,7 +94,7 @@ $(function(){
 		    	$("#fixedTelephone").val(vh.videoneihdtelephone);
 		    	$("#phoneNumber").val(vh.videoneihdphone);
 		    	$("#detailedAddress").val(vh.videoneihdplace);
-		    	$("#serialNumber").val(vh.videoneihdNum);
+//		    	$("#serialNumber").val(vh.videoneihdNum);
 		    	$("#unitElement").val(vh.videoneihdCompany);
 		    	$("#purpose").val(vh.videoneihdObjective);
 		    	$("#datePic").val(new Date(vh.videoneihdDate).format('yyyy-MM-dd'));
@@ -114,13 +131,13 @@ $(function(){
 			    		selectvalue(url,data,2,"#respondents");
 			    		data={code:vlcode}
 			    		selectvalue(url,data,3,"#respondents");
-			    	}else if(vlvp.length>0){
+			    	}else if(vlvp.length>1){
 			    		var url='/spywBeta/area/arealistByCode.do';
 			    		var data={code: vlvp }
 			    		selectvalue(url,data,3,"#respondents");
 			    	}
 		    	}
-		    	console.log("vlvp:"+vlvp);
+
 //		    	vh.resdistrict;
 		    	$("#title").val(vh.videoneihdTitle);
 		    	$("#anonymity").val(vh.videoneihdAnonymous);
@@ -163,7 +180,10 @@ $(function(){
 			    	$("#recorded").val();
 			    	$("#duration").val();
 		    	}
-		    	
+		    	//视频接访人职务
+		    	$("#neightJob").val(vh.videoneihdPeopleDuty);
+		    	//接访人联系方式
+		    	$("#neightPhone").val(vh.videoneihdPeopleContact);
 		    }
 		});
 	}
@@ -190,6 +210,7 @@ function selectvalue(url,data,odd,vname){
 	 	success: function(response) {
 			var data = response.list;
 			var str = '';
+
 			if(odd==1){
 				if(data && data.length >= 0) {
 //					$("#district option").remove();
@@ -230,7 +251,7 @@ $("#html5Form").html5Validate(function() {
 		// 涉及人数
 		var involveNumber = $("#involveNumber");
 		if(!(/^[0-9]*$/.test(involveNumber.val()))) {
-			$("html,body").scrollTop(involveNumber.offset().top)
+			$("html,body").scrollTop(involveNumber.offset().top - 100)
 			involveNumber.testRemind("人数只能为数字");
 			return false;
 		}
@@ -238,7 +259,7 @@ $("#html5Form").html5Validate(function() {
 		// 验证手机号
 		var phone = $("#phoneNumber");
 		if(!(/^1[34578]\d{9}$/.test(phone.val()))){
-			$("html,body").scrollTop(phone.offset().top)
+			$("html,body").scrollTop(phone.offset().top - 100)
 			phone.testRemind("手机号码有误，请重填");
 			return false; 
 		}
@@ -246,11 +267,17 @@ $("#html5Form").html5Validate(function() {
 		// 验证人数
 		var personNumber = $("#personNumber");
 		if(!(/^[0-9]*$/.test(personNumber.val()))) {
-			$("html,body").scrollTop(personNumber.offset().top)
+			$("html,body").scrollTop(personNumber.offset().top - 100)
 			personNumber.testRemind("人数只能为数字");
 			return false;
 		}
 
+		var voucherNumber = $("#voucherNumber");
+		if($("#voucherType").val() == '身份证' && !(/^[1-9]{1}[0-9]{14}$|^[1-9]{1}[0-9]{16}([0-9]|[xX])$/.test(voucherNumber.val()))){
+			$("html,body").scrollTop(voucherNumber.offset().top - 100);
+			voucherNumber.testRemind("证件号码有误");
+			return false;
+		}
 		return true;
 	}
 });
@@ -277,7 +304,7 @@ function videoNeighborhoodbtn(){
 	var videoneihdtelephone=$("#fixedTelephone").val();
 	var videoneihdphone=$("#phoneNumber").val();
 	var videoneihdplace=$("#detailedAddress").val();
-	var videoneihdNum=$("#serialNumber").val();
+//	var videoneihdNum=$("#serialNumber").val();
 	
 	var videoneihdCompany=$("#unitElement").val();
 	var videoneihdObjective=$("#purpose").val();
@@ -342,9 +369,14 @@ function videoNeighborhoodbtn(){
 	if(Recounty!=null && Recounty!=""){
 		videoneihdRegistratePlace=Recounty;
 	}
+	//接访人职务
+	var videoneihdPeopleDuty=$("#neightJob").val();
+	//接访人联系方式
+	var videoneihdPeopleContact=$("#neightPhone").val();
 	var data={"videoneihdName":videoneihdName,"videoneihdCardType":videoneihdCardType,"videoneihdLocationplace":videoneihdLocationplace
 			,"videoneihdCard":videoneihdCard,"videoneihdtelephone":videoneihdtelephone,"videoneihdphone":videoneihdphone,"videoneihdplace":videoneihdplace
-			,"videoneihdNum":videoneihdNum,"videoneihdCompany":videoneihdCompany,"videoneihdObjective":videoneihdObjective,"videoneihdDate":videoneihdDate
+//			,"videoneihdNum":videoneihdNum
+			,"videoneihdCompany":videoneihdCompany,"videoneihdObjective":videoneihdObjective,"videoneihdDate":videoneihdDate
 			,"videoneihdRegistrant":videoneihdRegistrant,"videoneihdRegistDepartment":videoneihdRegistDepartment,"videoneihdRegistDate":videoneihdRegistDate
 			,"videoneihdNumber":videoneihdNumber,"videoneihdReason":videoneihdReason,"videoneihdRemark":videoneihdRemark
 			,"videoneihdPostCode":videoneihdPostCode,"videoneihdNationality":videoneihdNationality,"videoneihdComplainant":videoneihdComplainant
@@ -352,20 +384,9 @@ function videoNeighborhoodbtn(){
 			,"videoneihdVisitorPlace":videoneihdVisitorPlace,"videoneihdTitle":videoneihdTitle,"videoneihdAnonymous":videoneihdAnonymous
 			,"videoneihdTypeId":videoneihdTypeId,"videoneihdHandleOpinion":videoneihdHandleOpinion,"videoneihdInformProfile":videoneihdInformProfile
 			,"videoneihdLiberateCompany":videoneihdLiberateCompany,"videoneihdRegistratePlace":videoneihdRegistratePlace
+			,"videoneihdPeopleDuty":videoneihdPeopleDuty,"videoneihdPeopleContact":videoneihdPeopleContact
 	};
 	if(videoneihdId!=null){
-		// data={"videoneihdId":videoneihdId,
-		// 		"videoneihdName":videoneihdName,"videoneihdCardType":videoneihdCardType,"videoneihdLocationplace":videoneihdLocationplace
-		// 		,"videoneihdCard":videoneihdCard,"videoneihdtelephone":videoneihdtelephone,"videoneihdphone":videoneihdphone,"videoneihdplace":videoneihdplace
-		// 		,"videoneihdNum":videoneihdNum,"videoneihdCompany":videoneihdCompany,"videoneihdObjective":videoneihdObjective,"videoneihdDate":videoneihdDate
-		// 		,"videoneihdRegistrant":videoneihdRegistrant,"videoneihdRegistDepartment":videoneihdRegistDepartment,"videoneihdRegistDate":videoneihdRegistDate
-		// 		,"videoneihdNumber":videoneihdNumber,"videoneihdReason":videoneihdReason,"videoneihdRemark":videoneihdRemark
-		// 		,"videoneihdPostCode":videoneihdPostCode,"videoneihdNationality":videoneihdNationality,"videoneihdComplainant":videoneihdComplainant
-		// 		,"videoneihdRespondent":videoneihdRespondent,"videoneihdInvolveNumber":videoneihdInvolveNumber,"videoneihdAgreeOpen":videoneihdAgreeOpen
-		// 		,"videoneihdVisitorPlace":videoneihdVisitorPlace,"videoneihdTitle":videoneihdTitle,"videoneihdAnonymous":videoneihdAnonymous
-		// 		,"videoneihdTypeId":videoneihdTypeId,"videoneihdHandleOpinion":videoneihdHandleOpinion,"videoneihdInformProfile":videoneihdInformProfile
-		// 		,"videoneihdLiberateCompany":videoneihdLiberateCompany,"videoneihdRegistratePlace":videoneihdRegistratePlace
-		// };
 		data.videoneihdId = videoneihdId
 	}
 
@@ -375,10 +396,10 @@ function videoNeighborhoodbtn(){
 	    data:data,    //参数值
 	    type:"post",   //请求方式
 	    success:function(req){
-	    	ajaxLoading.hide();
 	    	if(req.status==0){
-	    		var datatt={"videoneihdId":req.videoneihdId,"confstartTime":confstartTime,"duration":confduration,"isRecording":confrecorded,"type":3,"videoneihdLocationplace":videoneihdLocationplace,"videoneihdVisitorPlace":videoneihdVisitorPlace};
+	    		var datatt={"videoneihdId":req.videoneihdId,"confstartTime":confstartTime,"duration":confduration,"isRecording":confrecorded,"type":3,"videoneihdLocationplace":videoneihdLocationplace,"videoneihdVisitorPlace":videoneihdVisitorPlace,"videoneihdTitle":videoneihdTitle};
 	    		if(ifnotedit==1){
+	    			ajaxLoading.hide();
 	    			setTimeout(function() {
 						location.href = "viewNeighborhood.html";
 					}, 1000)
@@ -389,6 +410,7 @@ function videoNeighborhoodbtn(){
 		    		    data:datatt,    //参数值
 		    		    type:"post",   //请求方式
 		    		    success:function(responseStr){
+		    		    	ajaxLoading.hide();
 		    		    	if (responseStr.status == 1) {
 		    					alert(responseStr.msg);
 		    					setTimeout(function() {

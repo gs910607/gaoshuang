@@ -79,7 +79,7 @@ public class LoginFilter implements Filter {
 	        
 	        //String userName = assertion.getPrincipal().getName();
 	        if(assertion==null){
-	        	//((HttpServletResponse) response).sendRedirect("http://localhost:8080/cas/login?service=");
+	        	((HttpServletResponse) response).sendRedirect("http://localhost:8080/spywBeta/pages/index.html");
 	        }else if (session.getAttribute(SEESION_MEMBER) == null) {
 	        	    String userName = assertion.getPrincipal().getName();
 	        	    

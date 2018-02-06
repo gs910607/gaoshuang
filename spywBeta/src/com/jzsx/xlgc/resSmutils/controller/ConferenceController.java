@@ -1,18 +1,15 @@
 package com.jzsx.xlgc.resSmutils.controller;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.crypto.Cipher;
 import javax.servlet.http.HttpServletRequest;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.Duration;
 
-import org.apache.commons.lang.math.RandomUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,22 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Strings;
-import com.google.common.collect.Lists;
-import com.huawei.esdk.platform.professional.local.impl.utils.PropertiesUtils;
-import com.huawei.esdk.tp.professional.local.ServiceFactoryEx;
-import com.huawei.esdk.tp.professional.local.authentication.AuthorizeServiceEx;
-import com.huawei.esdk.tp.professional.local.bean.AdhocConfTemplateParamEx;
 import com.huawei.esdk.tp.professional.local.bean.ConferenceInfoEx;
-import com.huawei.esdk.tp.professional.local.bean.ConferenceNoticeEx;
-import com.huawei.esdk.tp.professional.local.bean.MCUInfoEx;
-import com.huawei.esdk.tp.professional.local.bean.PageParamEx;
-import com.huawei.esdk.tp.professional.local.bean.QueryConfigEx;
-import com.huawei.esdk.tp.professional.local.bean.RecordParamEx;
 import com.huawei.esdk.tp.professional.local.bean.SiteInfoEx;
-import com.huawei.esdk.tp.professional.local.bean.TPSDKResponseEx;
-import com.huawei.esdk.tp.professional.local.bean.TPSDKResponseWithPageEx;
-import com.huawei.esdk.tp.professional.local.conference.ConferenceServiceEx;
-import com.huawei.esdk.tp.professional.local.mcu.MCUServiceEx;
 import com.jzsx.xlgc.bean.CasUser;
 import com.jzsx.xlgc.bean.DataAnalysis;
 import com.jzsx.xlgc.bean.DataByCode;
@@ -47,24 +30,16 @@ import com.jzsx.xlgc.resSmutils.service.ConferenceService;
 import com.jzsx.xlgc.resSmutils.service.resService;
 import com.jzsx.xlgc.utils.Application;
 import com.jzsx.xlgc.utils.ConferenceTemplate;
-import com.jzsx.xlgc.utils.IDUtils;
 import com.jzsx.xlgc.utils.ResultMessage;
 import com.jzsx.xlgc.utils.SessionUtil;
-import com.mysql.jdbc.util.ServerController;
 import com.zte.ccs.os.meeting.util.RandomUtil;
-
-import HTTPClient.ParseException;
 
 @Controller
 @RequestMapping("/conference")
 public class ConferenceController {
 
 	
-	//smc 登陆退出操作的类
-		static AuthorizeServiceEx authorizeService = ServiceFactoryEx.getService(AuthorizeServiceEx.class);
-		//res 登陆退出操作的类
-		//AuthenticateService auth = ServiceFactory.getService(AuthenticateService.class);
-		static Logger logger = Logger.getLogger(ConferenceController.class) ;
+	private static Logger log = Logger.getLogger(ConferenceController.class) ;
 	
 	@Autowired
 	private ConferenceService service;
@@ -72,16 +47,29 @@ public class ConferenceController {
 	@Autowired
 	private resService res;
 	
+	
+	/**
+	 * 添加视频会议
+	 * @param conference 视频会议主体信息pojo类
+	 * @param allId 预约会议所需的设备hphone
+	 * @param mcu 预约会议所需的设备mcu
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping("/addConference")
 	@ResponseBody
 	public ResultMessage addConference(TVideoConference conference,@RequestParam("allId")String[] allId,@RequestParam("mcu")String[] mcu,HttpServletRequest request){
+		log.info("创建会议关键信息:"+conference);
+		int y=0;
 		CasUser session = SessionUtil.getSession(request);
 		List<String> id=new ArrayList<String>();
 		List<String> lmcu=new ArrayList<String>();
 		StringBuilder sb=new StringBuilder();
+		//开启会议的id列表要包含当前账户的id,因此从session获取之后添加进去，lmcu即mcu的列表，也需要获取当前账户的mcu信息
 		id.add(session.getAreas().getHphone());
 		lmcu.add(session.getAreas().getMcu());
 		for (String string : allId) {
+			//前端传递的id列表，考虑到前端选择开启会议的地区 可能包括用户当前所在区域，因此，需要排除
 			if(!string.equals(session.getAreas().getHphone())){
 				id.add(string);
 				sb.append(string).append(",");
@@ -89,10 +77,7 @@ public class ConferenceController {
 			
 		}
 		for (String string : mcu) {
-			if(!string.equals(session.getAreas().getMcu())){
 				lmcu.add(string);
-			}
-			
 		}
 		ConferenceInfoEx cfinfo=new ConferenceInfoEx();
 		conference.setCreateName(session.getRealname());
@@ -100,14 +85,43 @@ public class ConferenceController {
 		cfinfo.setBeginTime(conference.getBeginTime());
 		cfinfo.setAccessCode(conference.getAccessCode());
 		cfinfo.setMediaEncryptType(0);
-		cfinfo.setDuration(durationInt2dur(Integer.parseInt(conference.getDuration())*60));
-		cfinfo.setMainMcuId(16);
-		String addTemplate = ConferenceTemplate.addTemplate(id,lmcu,conference, session.getAreas().getHphone(),"HY",res);
+		//duration为7表示一直持续,而一直持续duration要设置null
+		if(!"7".equals(conference.getDuration())) {
+			cfinfo.setDuration(durationInt2dur(Integer.parseInt(conference.getDuration())*60));
+		}
+		cfinfo.setMainMcuId(Integer.parseInt(session.getAreas().getMcu()));
+		String addTemplate = ConferenceTemplate.addTemplate(id,lmcu,conference, session.getAreas().getHphone(),"HY"+RandomUtil.RanInt(8),res);
 		if("error".equals(addTemplate))
 			return new ResultMessage("模板创建失败", Application.STATUS_ADD_FAIL);
-		Result result2 = res.scheduleConfEx(cfinfo);
+		List<SiteInfoEx> sites = new ArrayList<SiteInfoEx>();
+		for (String url : id) {
+			//新建一个SiteInfoEx对象 
+		      SiteInfoEx siteInfo1 = new SiteInfoEx();
+		      //会场URI为01010086 
+		      siteInfo1.setUri(url);
+		      //会场速率为1920k 
+		      siteInfo1.setRate("1920K");
+		      //会场名称为site1 
+		      siteInfo1.setName("会场"+RandomUtil.RanInt(6));
+		      //呼叫方式为MCU主动呼叫会场 
+		      siteInfo1.setDialingMode(0);
+		      //会场来源为内部会场 
+		      siteInfo1.setFrom(0);
+		      //会场类型为H.323会场类型 
+		      siteInfo1.setType(4);
+		      //会场视频格式为Auto 
+		      siteInfo1.setVideoFormat(0);
+		      //会场视频协议为H.261 
+		      siteInfo1.setVideoProtocol(0);
+		      siteInfo1.setVideoFormat(0);
+		      siteInfo1.setMcuId(Integer.parseInt(lmcu.get(y)));
+		      sites.add(siteInfo1);
+		      y++;
+		}
+		cfinfo.setSites(sites);
+		Result result2 = res.scheduleConfEx(cfinfo,session.getAreas().getHphone());
 		/**
-		 * 视频会议返回result2需要判断返回结果，如果创建会议失败则不保存数据，并返回原因到前台
+		 * 视频会议返回result2需要判断返回结果，result2.getResultCode()为0则创建成功，如果创建会议失败则不保存数据，并返回原因到前台
 		 * 
 		 * 
 		 * */
@@ -124,14 +138,20 @@ public class ConferenceController {
     	   }
     	   return new ResultMessage(Application.MSG_ADD_FAIL, Application.STATUS_ADD_FAIL);
        }
-		
+		log.error("会议创建失败，返回值为----"+result2.getResultCode());
 		return new ResultMessage("会议创建失败", Application.STATUS_ADD_FAIL);
 		
 	}
 	
 	
 	
-	
+	/**
+	 * 
+	 * @param pages 当前页数
+	 * @param conference 会议搜索条件pojo类
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="/getPageList",produces="application/json;charset=utf-8")
 	@ResponseBody
 	public String  getPageList(@RequestParam(defaultValue="1")Integer pages,TVideoConference conference,HttpServletRequest request){
@@ -141,12 +161,18 @@ public class ConferenceController {
 	}
 	
 	
+	/**
+	 * 删除会议
+	 * @param id  会议id
+	 * @return
+	 */
 	@RequestMapping("/delConference")
 	@ResponseBody
 	public ResultMessage delConferenceByConfId(String id){
 		if(Strings.isNullOrEmpty(id))
 			return new ResultMessage(Application.MSG_ERROR, Application.STATUS_ERROR);
 		int i = res.delScheduledConfEx(id);
+		log.info("删除会议返回值-----"+i);
 		if(i==0){
 			Map<String, Object> map=new HashMap<String, Object>();
 			map.put("status", 1);
@@ -161,12 +187,14 @@ public class ConferenceController {
 	@RequestMapping("/getData")
 	@ResponseBody
 	public Map<String, Object> getData(String category, String year) {
+		log.info("获取会议图表数据入参----"+category+"----"+year);
 		if (Strings.isNullOrEmpty(category) || Strings.isNullOrEmpty(year)) {
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("error", "非法参数");
 			return map;
 		} else{
 			List<DataAnalysis> analysis = new ArrayList<DataAnalysis>();
+			//category如果为0 则查询区县数据，为具体的code数值时，则表示查询该code所代表的区县下的所有地区
 			if (Integer.parseInt(category) == 0) {
 				analysis = service.dataAnalysis(year);
 			} else {
@@ -194,6 +222,13 @@ public class ConferenceController {
 		
 	}
 	
+	
+	/**
+	 * 根据地区code获取该地区数据
+	 * @param code 地区code
+	 * @param year 年份
+	 * @return
+	 */
 	@RequestMapping("/getDataByCode")
 	@ResponseBody
 	public Map<String, Object> getDataByCode(String code, String year){
@@ -259,188 +294,6 @@ public class ConferenceController {
 			}
 		}
 		return list;
-	}
-	
-	private synchronized static Result scheduleConfEx(HttpServletRequest req ,List<SiteInfoEx> sites) {
-		Integer loginResult = authorizeService.login(PropertiesUtils.getValue("userName"), PropertiesUtils.getValue("password"));
-		Result rs = new Result();
-		if(loginResult != 0) {
-			rs.setResultCode(loginResult);
-        	rs.setResuiltMsg("登陆失败！");
-        	authorizeService.logout();
-        	logger.info("登陆失败scheduleConfEx" +  loginResult);
-            return rs;
-		}
-		
-        ConferenceServiceEx conferenceService = ServiceFactoryEx.getService(ConferenceServiceEx.class);
-		
-        String confName =  req.getParameter("name");
-        String beginTime = req.getParameter("beginTime");
-        //会议时长  
-        String duration = req.getParameter("duration");
-        //会议号   模板预约必须有
-        String accessCode = req.getParameter("accessCode");
-        //会议主会场
-        String mainSiteUri = req.getParameter("mainSiteUri");
-        //会议密码
-        String password = req.getParameter("password");
-        //多画面资源数   被continuousPresenceMode取代
-        //String cpResource = req.getParameter("cpResource");
-        //会议通知信息的邮箱
-        String email = req.getParameter("email");
-        //会议通知信息的信息
-        String content = req.getParameter("content");
-        //主席密码
-        String chairmanPassword = req.getParameter("chairmanPassword");
-        //会议主MCU的ID   一对一必须要有
-        String mainMcuId = req.getParameter("mainMcuId");
-        //会议通知的电话
-        String telephone = req.getParameter("telephone");
-        ConferenceNoticeEx cfn = new ConferenceNoticeEx();
-        //多画面方式
-        String continuousPresenceMode = req.getParameter("continuousPresenceMode");
-        
-        //是否录播的参数
-        boolean isRecond = Boolean.parseBoolean(req.getParameter("isRecond"));
-        
-        ConferenceInfoEx value = new ConferenceInfoEx();
-        value.setName(confName);
-        //设置自动加密 	（有条件就加密）
-        value.setMediaEncryptType(0);
-        
-        if(isRecond) {
-        	//设置是否录播  0 不支持录播    	1 支持录播
-            value.setIsRecording(1);
-            //录播参数
-            RecordParamEx rp = new RecordParamEx();
-            //true 自动启动录播  		false 不自动启动录播
-            rp.setIsAutoRecord(true);
-            //true 纯语音录制  		false 语音+视频
-            rp.setIsVoiceRecord(false);
-            value.setRecordParam(rp);
-            //录播会议是否支持直播功能。0为不支持   1 h支持
-            value.setIsLiveBroadcast(1);
-        }
-        //查询mcu
-        QueryConfigEx queryConfig = new QueryConfigEx(); 
-    	PageParamEx pp = new PageParamEx();
-    	pp.setNumberPerPage(50);
-    	pp.setCurrentPage(1);
-    	queryConfig.setPageParam(pp);
-    	MCUServiceEx mcuServiceEx = ServiceFactoryEx.getService(MCUServiceEx.class);
-    	TPSDKResponseWithPageEx<List<MCUInfoEx>> result1  =mcuServiceEx.queryMCUInfoEx(queryConfig); 
-        
-        
-        //开启数据会议 
-        //value.setIsDataConference(1);
-        try{
-        	if(null != mainMcuId && !"".equals(mainMcuId)){
-        		value.setMainMcuId(Integer.parseInt(mainMcuId));
-        	}
-        	if(null != chairmanPassword && !"".equals(chairmanPassword)) {
-        		value.setChairmanPassword(chairmanPassword);
-        	}
-        	if( null != password && !"".equals(password) && password.length() < 7) {
-        		value.setPassword(password);
-        	}else {
-        		//设置默认密码
-        		password = "123456" ;
-        		value.setPassword(password);
-        	}
-        	if(null != telephone && !"".equals(telephone) && null != content && !"".equals(content)) {
-        		cfn.setContent(content);
-        		cfn.setTelephone(telephone);
-        	}
-        	if(null != email && !"".equals(email) && null != content && !"".equals(content)){
-        		cfn.setContent(content);
-        		cfn.setEmail(email);
-        	}
-        	value.setConferenceNotice(cfn);
-        	if(null != beginTime && !"".equals(beginTime)){
-        		value.setBeginTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(beginTime));
-            }
-            if(null != duration && !"".equals(duration)){
-                value.setDuration(durationInt2dur(Integer.parseInt(duration)));
-            }
-            if(null != accessCode && !"".equals(accessCode)){
-                value.setAccessCode(accessCode);
-            }
-            if(null != continuousPresenceMode && !"".equals(continuousPresenceMode)){
-                value.setContinuousPresenceMode(Integer.parseInt(continuousPresenceMode));
-            }
-            if(!sites.isEmpty()){
-            	List<SiteInfoEx> sitesInfoEx = new ArrayList<SiteInfoEx>();
-            	for(SiteInfoEx sitesinfo : sites) {
-            		SiteInfoEx sf = new SiteInfoEx();
-            		if(null != sitesinfo.getName() && "".equals(sitesinfo.getName())) {
-            			sf.setName(sitesinfo.getName());
-            		}
-            		if(null != sitesinfo.getUri() && "".equals(sitesinfo.getUri())) {
-            			sf.setUri(sitesinfo.getUri());
-            		}
-            		//会长类型  0 1 4 7 8 9 10 11
-            		if(null != sitesinfo.getType() && "".equals(sitesinfo.getType())) {
-            			sf.setType(sitesinfo.getType());
-            		}else {
-            			sf.setType(1);
-            		}
-            		//会场来源  0 1 2 3 
-            		if(null != sitesinfo.getFrom() && "".equals(sitesinfo.getFrom())) {
-            			sf.setFrom(sitesinfo.getFrom());
-            		}
-            		//呼叫方式 0 会场被呼 1会场自己呼入
-            		if(null != sitesinfo.getDialingMode() && "".equals(sitesinfo.getDialingMode())) {
-            			sf.setDialingMode(sitesinfo.getDialingMode());
-            		}
-            		//是否锁定视屏源
-            		if(null != sitesinfo.getIsLockVideoSource() && "".equals(sitesinfo.getIsLockVideoSource())) {
-            			sf.setIsLockVideoSource(sitesinfo.getIsLockVideoSource());
-            		}
-            		sitesInfoEx.add(sf);
-            	}
-            	value.setSites(sitesInfoEx);
-            	if(null != mainSiteUri && "".equals(mainSiteUri)) {
-            		value.setMainSiteUri(mainSiteUri);
-            	}
-            	
-            }
-        }
-        catch(Exception e){
-        	e.printStackTrace();
-        	authorizeService.logout();
-        	rs.setResuiltMsg("参数格式不对");
-        	logger.info("参数格式不对" + sites);
-            return rs;
-        }
-       
-        try{
-            TPSDKResponseEx<ConferenceInfoEx> result = conferenceService.scheduleConfEx(value);
-            rs.setResultCode(result.getResultCode());
-            if (result.getResultCode() == 0){
-            	rs.setResuiltMsg("成功！");
-            	if(null != password && !"".equals(password)) {
-            		result.getResult().setPassword(password);
-            	}
-            	if(null != chairmanPassword && !"".equals(chairmanPassword)) {
-            		result.getResult().setChairmanPassword(chairmanPassword);
-            	}
-            	rs.setConf(result.getResult());
-            }
-            else{
-                rs.setResuiltMsg(result.getResult().toString());
-            }
-            authorizeService.logout();
-            return rs ;
-        }
-        catch (Exception e){
-        	logger.info("预约会议异常" + e.getMessage());
-            e.printStackTrace();
-            authorizeService.logout();
-            rs.setResultCode(123);
-            rs.setResuiltMsg(e.getMessage());
-            return rs;
-        }
-        
 	}
 	
 	

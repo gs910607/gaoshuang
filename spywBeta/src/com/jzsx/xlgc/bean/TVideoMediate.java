@@ -8,49 +8,51 @@ import javax.persistence.Transient;
 import com.alibaba.fastjson.annotation.JSONField;
 
 public class TVideoMediate {
-    private String mediateid;
+    private String mediateid;//id
 
-    private String mediateName;
+    private String mediateName;//书记员姓名
 
-    private String mediatePid;
+    private String mediatePid;//*
 
-    private String mediateAddress;
+    private String mediateAddress;//书记员所在调解地
 
-    private String mediatePidNumber;
+    private String mediatePidNumber;//*  *代表保留字段 暂时无意义
 
-    private String mediateTelephone;
+    private String mediateTelephone;//*
 
-    private String mediateCellphone;
+    private String mediateCellphone;//*
 
-    private String mediateCompleteAdd;
+    private String mediateCompleteAdd;//书记员单位
 
-    private String mediateIdentifier;
+    private String mediateIdentifier;//调节编号
 
-    private String mediateRegisUnit;
+    private String mediateRegisUnit;//登记单位
 
-    private String mediatePurpose;
-
-    @JSONField(format="yyyy-MM-dd")
-    private String mediateDate;
-
-    private String mediateRegisName;
-
-    private String mediateRegisBranch;
+    private String mediatePurpose;//调节目的
 
     @JSONField(format="yyyy-MM-dd")
-    private String mediateRegisDate;
+    private String mediateDate;//调节时间
 
-    private String mediateReason;
+    private String mediateRegisName;//登记人
 
-    private String mediateContent;
+    private String mediateRegisBranch;//登记科室
 
-    private String mediateProtocol;
+    @JSONField(format="yyyy-MM-dd")
+    private String mediateRegisDate;//登记时间
 
-    private BigDecimal mediaterStatus;
+    private String mediateReason;//调节原因
 
-    private String mediateNumber;
+    private String mediateContent;//调解概况
+
+    private String mediateProtocol;//调节类型
+
+    private BigDecimal mediaterStatus;//状态
+
+    private String mediateNumber;//人数
     
-    private String mediateCode;
+    private String mediateCode;//创建者区域code，
+    
+    private String title ;//会议标题
     
     @Transient
     @JSONField(serialize=false)
@@ -74,8 +76,29 @@ public class TVideoMediate {
     
     private Area areas;
     
+    //作为导出时的状态
+    private String staus;
+    
     private TVideoConference conference;
     
+
+    
+    
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getStaus() {
+		return staus;
+	}
+
+	public void setStaus(String staus) {
+		this.staus = staus;
+	}
 
 	public String getConfId() {
 		return confId;

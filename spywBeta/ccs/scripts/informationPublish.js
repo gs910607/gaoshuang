@@ -9,7 +9,7 @@ $(function() {
 			ajaxLoading.hide();
 			if (response != null || response != "") {
 				code = response.usergroupid;
-				if (code.toString().split('').length== 9) {
+				if (code.toString().length== 9) {
 					$("#postMessage").attr("href", "javascript:;");
 					$("#postMessage").css("display","none");
 				}
@@ -30,3 +30,22 @@ $(function() {
 
 
 });
+
+$(window).scroll(function(){
+	currentScroll();
+});
+
+currentScroll();
+function currentScroll(){
+	if($(this).scrollTop() >= 80) {
+		$(".goBack").css({
+			"position":"fixed",
+			"top":"10px"
+		})
+	} else {
+		$(".goBack").css({
+			"position":"absolute",
+			"top":"90px"
+		})
+	}
+};

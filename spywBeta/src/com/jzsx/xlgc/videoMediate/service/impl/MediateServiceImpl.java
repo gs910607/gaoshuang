@@ -12,8 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.common.base.Strings;
+import com.jzsx.xlgc.bean.Area;
 import com.jzsx.xlgc.bean.DataAnalysis;
 import com.jzsx.xlgc.bean.DataByCode;
+import com.jzsx.xlgc.bean.DisputeData;
 import com.jzsx.xlgc.bean.TMediatePerson;
 import com.jzsx.xlgc.bean.TVideoMediate;
 import com.jzsx.xlgc.bean.TVideoMediateExample;
@@ -186,6 +188,53 @@ public class MediateServiceImpl implements MediateService {
 	public List<TMediatePerson> selectByMediateId(String id, Integer type) {
 		List<TMediatePerson> list = person.selectByMediateId(id, type);
 		return list;
+	}
+
+	@Override
+	public int queryIdentityCount(String code) {
+		int i = mapper.queryIdentityCount(code);
+		return i;
+	}
+
+	@Override
+	public List<DisputeData> queryDisputeType(String year) {
+		List<DisputeData> disputeData = mapper.queryDisputeType(year);
+		return disputeData;
+	}
+
+	@Override
+	public List<DisputeData> queryDisputeByType(String type, String year) {
+		List<DisputeData> disputeData = mapper.queryDisputeByType(type, year);
+		return disputeData;
+	}
+
+	@Override
+	public int updateByIds(List<String> list, String url) {
+		int i = person.updateByIds(list, url);
+		return i;
+	}
+
+	@Override
+	public Result<TMediatePerson> selectProtocol(String area,Integer pages,TMediatePerson per) {
+		PageHelper.startPage(pages, 10);
+        List<TMediatePerson> list = person.selectProtocol(area,per);
+        PageInfo<TMediatePerson> info=new PageInfo<TMediatePerson>(list);
+        Result<TMediatePerson> result=new Result<TMediatePerson>();
+        result.setNum(info.getPages());
+        result.setList(info.getList());
+		return result;
+	}
+
+	@Override
+	public int updateUrl(String url, String id) {
+		int i = person.updateUrl(url, id);
+		return i;
+	}
+
+	@Override
+	public List<Area> selectArea(List list) {
+		List<Area> listarea = mapper.selectArea(list);
+		return listarea ;
 	}
 
 }

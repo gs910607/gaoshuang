@@ -50,9 +50,13 @@ public class VideoResearch {
 	private String videoResearcCode;
 	/**
 	 * 视频调研类型
-	 * 1整场投一票，2一天投一票，3一天投五票
+	 * 1整场投一次，2一天投一次，3一天投五次
 	 */
 	private String videoResearchType;
+	/**
+	 * 单次投票允许投票数
+	 */
+	private int videoResearchVoteNumber;
 	/**
 	 * 关联地区表
 	 */
@@ -135,6 +139,12 @@ public class VideoResearch {
 	}
 	public void setVideoResearchType(String videoResearchType) {
 		this.videoResearchType = videoResearchType;
+	}
+	public int getVideoResearchVoteNumber() {
+		return videoResearchVoteNumber;
+	}
+	public void setVideoResearchVoteNumber(int videoResearchVoteNumber) {
+		this.videoResearchVoteNumber = videoResearchVoteNumber;
 	}
 	
 	

@@ -1,11 +1,13 @@
 package com.jzsx.xlgc.videoTrain.Service.Impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -20,6 +22,7 @@ import com.jzsx.xlgc.videoTrain.Service.VideoTrainService;
 
 
 @Service
+@Transactional
 public class VideoTrainServiceImpl implements VideoTrainService{
 
 	@Autowired
@@ -71,9 +74,21 @@ public class VideoTrainServiceImpl implements VideoTrainService{
 		videoTrainDao.updateActive(vtrain);
 	}
 	@Override
-	public List<VideoTrain> queryVideoTrainByCode(VideoTrain vtrain) {
+	public List<VideoTrain> queryVideoTrainByCode(VideoTrain vtrain,int n) {
 		// TODO Auto-generated method stub
-		return videoTrainDao.queryVideoTrainListBytype(vtrain);
+		List<VideoTrain> list=new ArrayList<VideoTrain>();
+		List<VideoTrain> listinfo=new ArrayList<VideoTrain>();
+		list=videoTrainDao.queryVideoTrainListBytype(vtrain);
+		if(list!=null){
+			if(list.size()>0){
+				for(VideoTrain v:list){
+					if(listinfo.size()<n){
+						listinfo.add(v);
+					}
+				}
+			}
+		}
+		return listinfo;
 	}
 	@Override
 	public List<VideoTrain> queryVideoTrainByTypeId(int videoTypeId) {

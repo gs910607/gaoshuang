@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../../css/main.css">
+    <link rel="stylesheet" href="../../scripts/zTree_v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
+    <title>视频监控</title>
+    <style type="text/css">
+    	html,
+    	body,
+    	.wrapper {
+    		width: 100%;
+    		height: 100%;
+    	}
+    	header {
+    		position: fixed;
+    		width: 100%;
+    		top: 0;
+			z-index: 1000;
+    	}
+    	footer {
+    		position: fixed;
+    		bottom: 0;
+    		width: 100%;
+			z-index: 1000;
+    	}
+    	section {
+    		width: 100%;
+		    height: auto;
+		    position: absolute;
+		    top: 100px;
+		    bottom: 54px;
+    	}
+    	#treeDemo span{
+    		font-size : 14px !important;
+    	}
+    	.videosite {
+		    color: #fff;
+		    background-color: #337ab7;
+		    border-color: #2e6da4;
+		    padding: 0 10px;
+		    border-radius: 5px;
+		    cursor: pointer;
+		}
+		.margintop10 {
+		    margin-top: 10px;
+		    margin-bottom: 5px;
+		    text-align:center
+		}
+		 #treeDemo{
+	    	overflow: auto;
+    	}
+    	.videoinfo{
+    		position: absolute;
+    		top: -60px;
+    		right: 450px;
+   		 	z-index: 999999;
+    		font-size: 20px;
+    		color: white;
+    	}
+    </style>
+</head>
+<body>
+	<div class="wrapper">
+		<header class="clearfix">
+			<div class="pull-left">
+				<a href="../../index.html"><img src="../../images/logo.png"></a>
+			</div>
+			<div class="pull-right">
+				<i class="pindaohao"><img src="../../images/pindaohao.png"></i>
+				<a href="javascript:;"><img src="../../images/onekey.png"></a>
+			</div>
+		</header>
+		<section>
+			<div class = "videoinfo">
+				<span>
+					观看视频前请先安装插件,安装方法在下载插件的使用说明里
+				</span>
+			</div>
+			<div class="contentWrap container">
+	            <div id="objPlay" style="width: 78%;height: 380pt;position: absolute;z-index: 99; top:10px;left:1%">
+	                <div class="videoPlayMonitor row" id="videoPanel">
+	                	<object id="addX" classid="clsid:FB2BB20A-96AC-484E-834C-10C5B15044D5"  style="height:330pt;width:100%" >
+	            		</object>
+	    			</div>
+	 
+	                <div class="videoColumnSet" style="width: 100%;background:#29303f;height:30pt;line-height:40px;margin-top:-10px;text-align:center">
+	                    <a href="javascript:videoPlayer.SetWindowCount(1);">
+	                        <img src="../../images/video/3.3.6.jpg" alt="单画面" />
+	                    </a>
+	                    <a href="javascript:videoPlayer.SetWindowCount(4);">
+	                        <img src="../../images/video/3.3.7.jpg" alt="四画面" />
+	                    </a>
+	                    <a href="javascript:videoPlayer.SetWindowCount(9);">
+	                        <img src="../../images/video/3.4.0.jpg" alt="九画面" />
+	                    </a>
+	                    <a href="javascript:videoPlayer.SetWindowCount(16);"> 
+	                        <img src="../../images/video/3.4.3.jpg" alt="十六画面" />
+	                    </a>
+	                </div>
+	            </div>
+	            <div style="position: absolute;top:0;right: 0px;width:20%;height: 100%;border-left: 1px solid black;box-sizing: border-box;background:white">
+	                <div style="border-bottom: 1px solid gray;height: 55px;display:none" >
+	                    <input style="margin-top:15px;border-radius: 14px;height: 20px;width: 80%;background: #edebe9" placeholder="视频搜索" type="text">
+	                </div>
+	                <div>
+	                	<div class = "margintop10">
+	                		<a class = "videosite" href="/download/VlcRtspPlay.exe">插件下载</a>
+	                	</div>
+	                    <ul id="treeDemo" class="ztree"></ul>
+	                </div>
+	                <div style="clear: both;"></div>
+	            </div>
+	            <div style="clear: both;"></div>
+			</div>
+		</section>
+		<footer></footer>
+	</div>
+
+	<script type="text/javascript" src="../../scripts/jQuery v2.1.1.min.js"></script>
+	<script type="text/javascript" src="../../scripts/zTree_v3/js/jquery.ztree.core.js"></script>
+	<script type="text/javascript" src="../../scripts/videoMonitoring.js"></script>
+</body>
+</html>

@@ -1,12 +1,15 @@
 @charset "utf-8";
-
+.secTop {
+  width: 100%;
+  height: 420px;
+  margin-top: 26px;
+}
 .banner {
 	width: 100%;
-	height: 420px;
+	height: 100%;
 	padding: 14px;
 	border: 1px solid #ababab;
 	background: #fff;
-	margin-top: 26px;
 }
 /*轮播图start*/
 .flexslider {
@@ -36,6 +39,7 @@
   display: block;
   width: 100%;
   height: 100%;
+  position: relative;
 }
 .flexslider .slides > li img {
   width: 100%;
@@ -44,14 +48,15 @@
 
 .flexslider .slides .picDes {
   position: absolute;
+  padding: 10px 150px 10px 20px;
   bottom: 0;
   width: 100%;
-  height: 65px;
-  line-height: 65px;
   background: rgba(0,0,0,0.2);
   color: #fff;
-  font-size: 30px;
-  padding-left: 22px;s
+  font-size: 26px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .flexslider .slides .img > img {
   width: 100%;
@@ -125,57 +130,55 @@
 .content > ul {
   margin: 0 -19px;
 }
-/*.content .item {
-	width: 25%;
-  padding: 0 20px;
-}*/
 .content .item {
-  width: 33.33%;
-  padding: 0 20px;
+  width: 25%;
+  padding: 0 10px;
 }
-.content .itemCont {
+.contentWrap .itemCont {
 	width: 100%;
-	/*height: 330px;*/
-  height: 400px;
+  height: 380px;
 	margin: 0 auto;
+  position: relative;
 	background: url("../images/fabu-item-bg.png") no-repeat center top / 100% 100%;
 }
-.content .itemCont > h3 {
+.contentWrap .itemCont > h3 {
 	height: 50px;
 	text-align: center;
 	line-height: 50px;
-	font-size: 0;
+	font-size: 30px;
 	background: #53679c;
+  color: #fff;
+  font-family: '宋体';
 }
-.content .picDes {
+.contentWrap .picDes {
 	padding: 16px;
 }
-.content .picture {
+.contentWrap .picture {
 	/*height: 100px;*/
-  height: 135px;
+  height: 110px;
 	text-align: center;
 	line-height: 100px;
 	font-size: 0;
 }
-.content .picture img {
+.contentWrap .picture img {
   width: 100%;
   height: 100%;
 }
-.content .describe {
+.contentWrap .describe {
 	margin-top: 18px;
 }
-.content .describe li {
+.contentWrap .describe li {
 	/*margin-top: 18px;*/
   margin-top: 20px;
 }
-.content .describe li:first-child {
+.contentWrap .describe li:first-child {
 	margin-top: 0;
 }
-.content .describe a {
+.contentWrap .describe a {
 	font-size: 18px;
 	display: block;
 }
-.content .picIcon {
+.contentWrap .picIcon {
 	display: inline-block;
 	width: 16px;
 	height: 20px;
@@ -185,11 +188,35 @@
 	vertical-align: middle;
 	float: left;
 }
-.content .paragraphLink {
+.contentWrap .paragraphLink {
 	line-height: 20px;
 	margin-left: 20px;
   overflow: hidden;
   text-overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+section .goBack {
+  position: absolute;
+}
+.lookMore {
+  position: absolute;
+  bottom: 40px;
+  right: 10px;
+}
+.photography {
+  height: 100%;
+  padding: 0 10px;
+}
+.photography .itemCont {
+  height: 100%;
+  background: #fff;
+}
+.photography .itemCont > h3 {
+  font-size: 30px;
+  color: #fff;
+  font-family: '宋体';
+}
+.photography .lookMore {
+  bottom: 12px;
 }

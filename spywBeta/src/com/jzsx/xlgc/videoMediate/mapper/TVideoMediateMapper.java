@@ -1,7 +1,9 @@
 package com.jzsx.xlgc.videoMediate.mapper;
 
+import com.jzsx.xlgc.bean.Area;
 import com.jzsx.xlgc.bean.DataAnalysis;
 import com.jzsx.xlgc.bean.DataByCode;
+import com.jzsx.xlgc.bean.DisputeData;
 import com.jzsx.xlgc.bean.TVideoMediate;
 import com.jzsx.xlgc.bean.TVideoMediateExample;
 import java.util.List;
@@ -49,4 +51,12 @@ public interface TVideoMediateMapper {
     List<TVideoMediate> selectByExampleJoinTable(TVideoMediateExample example);
     
     List<DataByCode> selectByCode(@Param("code")String code,@Param("start")String start,@Param("stop")String stop);
-}
+    
+    int queryIdentityCount(String code);
+    
+    List<DisputeData> queryDisputeType(String year);
+    
+    List<DisputeData> queryDisputeByType(@Param("type")String type,@Param("year")String year);
+    
+    List<Area> selectArea(List list);
+ }

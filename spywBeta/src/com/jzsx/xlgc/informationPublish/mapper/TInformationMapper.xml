@@ -5,7 +5,7 @@
     <id column="INFORMATIONID" property="informationid" jdbcType="VARCHAR" />
     <result column="TYPE" property="type" jdbcType="DECIMAL" />
     <result column="TITLE" property="title" jdbcType="VARCHAR" />
-    <result column="CONTENT" property="content" jdbcType="VARCHAR" />
+    <result column="CONTENT" property="content" jdbcType="CLOB" />
     <result column="IMAGE" property="image" jdbcType="VARCHAR" />
     <result column="CREATETIME" property="createtime" jdbcType="TIMESTAMP" />
     <result column="UPDATETIME" property="updatetime" jdbcType="TIMESTAMP" />

@@ -6,11 +6,30 @@ import java.util.Map;
 
 public class UResearch {
 
+	/**
+	 * //标题
+	 */
 	private String activeTitle;
+	/**
+	 * //开始日期
+	 */
 	private String dateStart;
+	/**
+	 * 结束日期
+	 */
 	private String dateEnd;
+	/**
+	 * 调研内容
+	 */
 	private String detailedAddress;
+	/**
+	 * 候选人列表
+	 */
 	private String candidateData;
+	/**
+	 * 投票次数
+	 */
+	private int votetypenumber;
 	public String getActiveTitle() {
 		return activeTitle;
 	}
@@ -40,6 +59,12 @@ public class UResearch {
 	}
 	public void setCandidateData(String candidateData) {
 		this.candidateData = candidateData;
+	}
+	public int getVotetypenumber() {
+		return votetypenumber;
+	}
+	public void setVotetypenumber(int votetypenumber) {
+		this.votetypenumber = votetypenumber;
 	}
 	
 }

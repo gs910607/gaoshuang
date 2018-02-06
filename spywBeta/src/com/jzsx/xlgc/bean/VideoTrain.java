@@ -54,6 +54,10 @@ public class VideoTrain {
 	 */
 	private String videoCode;
 	/**
+	 * 修改人姓名
+	 */
+	private String videoEditUsername;
+	/**
 	 * 条件结束时间
 	 */
 	private Date stopTime;
@@ -148,6 +152,12 @@ public class VideoTrain {
 	}
 	public void setAreainfo(Area areainfo) {
 		this.areainfo = areainfo;
+	}
+	public String getVideoEditUsername() {
+		return videoEditUsername;
+	}
+	public void setVideoEditUsername(String videoEditUsername) {
+		this.videoEditUsername = videoEditUsername;
 	}
 	
 	

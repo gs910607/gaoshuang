@@ -20,16 +20,19 @@ var partiesList = []; //当事人列表
 init();
 function init() {
 	drowPartiesList();  //初始化渲染当事人列表
-
 	$("#addPartiesBtn").on("click", function() {  //添加候选人按钮
-		
 		var partiesName = $("#partiesName");
 		var partiesPhone = $("#partiesPhone");
 		var partiesAddress = $("#partiesAddress");
 		var district = $("#partiesWrapper #district");
 		var partiesIdNumber = $("#partiesIdNumber");
 		var partiesUnit = $("#partiesUnit");
-
+		var partiespeople = $("#partiespeople");
+		/*if(partiespeople.val() == '') {
+			partiespeople.focus().testRemind('请输入旁听人数');
+			return;
+		};*/
+		
 		if(partiesName.val() == '') {
 			partiesName.focus().testRemind('请输入姓名');
 			return;
@@ -45,11 +48,6 @@ function init() {
 			return;
 		};
 
-		if(district.val() == '') {
-			district.focus().testRemind('请选择所在调解地');
-			return;
-		};
-
 		if(partiesIdNumber.val() == '') {
 			partiesIdNumber.focus().testRemind('请输入身份证号');
 			return;
@@ -60,10 +58,22 @@ function init() {
 			return;
 		};
 
+		if(district.val() == '') {
+			district.focus().testRemind('请选择所在调解地');
+			return;
+		};
+
+		
+
 		if(!(/^1[34578]\d{9}$/.test(partiesPhone.val()))){
 			partiesPhone.focus().testRemind('手机号码有误，请重填');
 			return; 
-		} 
+		};
+
+		if(!(/^[1-9]{1}[0-9]{14}$|^[1-9]{1}[0-9]{16}([0-9]|[xX])$/.test(partiesIdNumber.val()))){
+			partiesIdNumber.testRemind("身份证号码有误");
+			return;
+		}
 
 		var isRepeat = true;
 		var repeatIndex = false;
@@ -82,7 +92,8 @@ function init() {
 					address: $("#partiesAddress").val(),
 					mediationAddress: areaCodes(),
 					identity: $("#partiesIdNumber").val(),
-					unit: $("#partiesUnit").val()
+					unit: $("#partiesUnit").val(),
+					partiespeople:$("#partiespeople").val()
 				};
 				drowPartiesList();
 				$("#partiesWrapper input, #partiesWrapper select").val('');
@@ -103,7 +114,8 @@ function init() {
 				address: $("#partiesAddress").val(),
 				mediationAddress: areaCode,
 				identity: $("#partiesIdNumber").val(),
-				unit: $("#partiesUnit").val()
+				unit: $("#partiesUnit").val(),
+				partiespeople:$("#partiespeople").val()
 			});
 			drowPartiesList();
 
@@ -141,6 +153,15 @@ function drowPartiesList() { //渲染当事人列表
 
 function drowPartiesInfo(index) {  //渲染当事人详情
 	var obj = partiesList[index];
+	$("#download").attr({"href" : null});
+	$(".mediationcnter").hide();
+	if(look){
+		if(obj.afterUrl){
+			$("#download").attr({"href" : obj.afterUrl});
+			$(".mediationcnter").show();
+		}
+	}
+	
 	$("#partiesName").val(obj.name);
 	$("#partiesPhone").val(obj.tellPhone);
 	$("#partiesAddress").val(obj.address);
@@ -148,6 +169,7 @@ function drowPartiesInfo(index) {  //渲染当事人详情
 	$("#partiesMediaArea #district, #partiesMediaArea #county, #partiesMediaArea #village").attr("disabled",isLookOrUpdate);
 	$("#partiesIdNumber").val(obj.identity);
 	$("#partiesUnit").val(obj.unit);
+	$("#partiespeople").val(obj.partiespeople);
 	new selectArea('#partiesMediaArea',{
 		isSelect: true
 	});
@@ -216,25 +238,11 @@ function init2() {
 		var district = $("#mediateWrapper #district");
 		var mediatePidNumber = $("#mediatePidNumber");
 		var mediatePid = $("#mediatePid");
-
-
+		//var mediatepeople = $("#mediatepeople");
+		var mediateunit = $("#mediateunit");
+		
 		if(mediateName.val() == '') {
 			mediateName.focus().testRemind('请输入姓名');
-			return;
-		};
-
-		if(mediatePid.val() == '') {
-			mediatePid.focus().testRemind('请选择证件类型');
-			return;
-		};
-
-		if(mediatePidNumber.val() == '') {
-			mediatePidNumber.focus().testRemind('请输入证件号码');
-			return;
-		};
-
-		if(district.val() == '') {
-			district.focus().testRemind('请选择所在调解地');
 			return;
 		};
 
@@ -243,10 +251,47 @@ function init2() {
 			return;
 		};
 
+		if(mediateunit.val() == '') {
+			mediateunit.focus().testRemind('请输入调解员单位');
+			return;
+		};
+		
+		/*if(mediatepeople.val() == '') {
+			mediatepeople.focus().testRemind('请输入调解员人数');
+			return;
+		};*/
+		
+		
+		
+
+		/*if(mediatePid.val() == '') {
+			mediatePid.focus().testRemind('请选择证件类型');
+			return;
+		};
+
+		if(mediatePidNumber.val() == '') {
+			mediatePidNumber.focus().testRemind('请输入证件号码');
+			return;
+		};*/
+
+
+
+		if(district.val() == '') {
+			district.focus().testRemind('请选择所在调解地');
+			return;
+		};
+
+		
+
 		if(!(/^1[34578]\d{9}$/.test(mediateCellphone.val()))){
 			mediateCellphone.focus().testRemind('手机号码有误，请重填');
 			return; 
 		} 
+
+		if(mediatePid.val() == '身份证' && mediatePidNumber.val() != '' && !(/^[1-9]{1}[0-9]{14}$|^[1-9]{1}[0-9]{16}([0-9]|[xX])$/.test(mediatePidNumber.val()))){
+			mediatePidNumber.testRemind("身份证号码有误");
+			return;
+		}
 
 		var isRepeat = true;
 		var repeatIndex = false;
@@ -267,6 +312,8 @@ function init2() {
 					tellPhone: $("#mediateTelephone").val(),
 					mediationAddress: areaCodes2(),
 					cellPhone: $("#mediateCellphone").val(),
+					//mediatepeople:$("#mediatepeople").val(),
+					mediateunit : $("#mediateunit").val()
 				};
 				drowPartiesList2();
 				$("#mediateWrapper input, #mediateWrapper select").val('');
@@ -289,6 +336,8 @@ function init2() {
 				tellPhone: $("#mediateTelephone").val(),
 				mediationAddress: areaCode,
 				cellPhone: $("#mediateCellphone").val(),
+				//mediatepeople:$("#mediatepeople").val(),
+				mediateunit : $("#mediateunit").val()
 			});
 			drowPartiesList2();
 
@@ -333,6 +382,8 @@ function drowPartiesInfo2(index) {  //渲染当事人详情
 	$("#mediateCompleteAdd").val(obj.address);
 	$("#mediateTelephone").val(obj.tellPhone);
 	$("#mediateCellphone").val(obj.cellPhone);
+	//$("#mediatepeople").val(obj.mediatepeople);
+	$("#mediateunit").val(obj.mediateunit);
 	new selectArea('#mediatorArea',{
 		isSelect: true
 	});
@@ -391,7 +442,8 @@ function removeParItem2(index, event) {
 
 $("#mediateDate,#mediateRegisDate").val(new Date().format('yyyy-MM-dd'));
 $("#startTime").val(new Date().format('yyyy-MM-dd hh:mm:ss'));
-$("#mediateIdentifier").val('TJ'+ new Date().getTime());
+
+/*$("#mediateIdentifier").val('TJ'+ new Date().getTime());*/
 
 
 var look = GetQueryString("look");
@@ -408,6 +460,18 @@ function clearVillage() {
 
 
 $("#html5Form").html5Validate(function() {
+	if(partiesList.length <=0 ) {
+		$("html,body").scrollTop($("#addPartiesBtn").offset().top-100);
+		$("#addPartiesBtn").testRemind("请添加当事人");
+		return;
+	};
+
+	if(partiesList2.length <=0 ) {
+		$("html,body").scrollTop($("#addMediateBtn").offset().top-100);
+		$("#addMediateBtn").testRemind("请添加调解人");
+		return;
+	};
+
 	partiesList.map(function(o,i){
 		o.personType=1
 	});
@@ -415,7 +479,6 @@ $("#html5Form").html5Validate(function() {
 		o.personType=2
 	})
 	var fixedTelephone = $("#mediateTelephone");
-
 	var params = {
 		mediateName:$("#clerkName").val(),
 		mediateCompleteAdd:$("#clerkUnit").val(),
@@ -428,11 +491,16 @@ $("#html5Form").html5Validate(function() {
 		mediateRegisDate:$("#mediateRegisDate").val(),
 		mediateReason:$("#mediateReason").val(),
 		mediateNumber:$("#mediateNumber").val(),
-		district:$("#allAddress #district").val(),
+		/*district:$("#allAddress #district").val(),
 		county:$("#allAddress #county").val(),
-		village:$("#allAddress #village").val(),
+		village:$("#allAddress #village").val(),*/
 		mediateProtocol:$("#disputeType").val(),
+		title : $("#title").val(),
 		information:JSON.stringify(partiesList.concat(partiesList2)),
+	}
+
+	if(update != null) {
+		params.mediateContent = $("#Overview").val();
 	}
 
 	var begintime=formatDate($("#startTime").val());
@@ -453,26 +521,21 @@ $("#html5Form").html5Validate(function() {
 		type : "post", //请求方式
 		beforeSend : function() {
 			ajaxLoading.show();
-			$("#upStatus").text("添加中,请稍后...").css("color", "#ff6600");
 		},
 		success : function(responseStr) {
 			ajaxLoading.hide();
 			if (responseStr.status > 0) {
 				alert(responseStr.msg)
-				$("#upStatus").text(responseStr.msg).css("color", "green");
 				var type = GetQueryString("type");
 				$("#html5Form input, #html5Form select, #html5Form textarea").val('');
 				setTimeout(function() {
 					location.href = "viewMediation.html";
 				}, 500)
-			} else {
-				$("#upStatus").text(responseStr.msg).css("color", "red");
 			}
 		},
 		error : function(responseStr) {
 			alert("服务繁忙，请稍后再试")
 			ajaxLoading.hide();
-			$("#upStatus").text("添加失败").css("color", "red");
 		},
 		completed : function() {
 			ajaxLoading.hide();
@@ -504,6 +567,7 @@ function formatDate(fDate){
 if (look != null || update != null) {
 	if (look != null) {
 		getMediateById(look);
+		$("#textupload").hide();
         $("input, select, textarea").attr("disabled",true)
         $("#create").css("display","none");
 		$("#MediaResultWrap").show();
@@ -515,6 +579,7 @@ if (look != null || update != null) {
 	if(update!=null){
 		getMediateById(update);
 		$("#overViewWrap").show();
+		$("#textupload").show();
 		$(".groupBtnWrap").remove();
 		$("#partiesWrapper input, #partiesWrapper select").attr("disabled",true);
 		$("#mediateWrapper input, #mediateWrapper select").attr("disabled",true);
@@ -524,7 +589,8 @@ if (look != null || update != null) {
 		$("#create").text("更新调解");
 	}
 }else{
-	$("#textDownload").css("display","none");
+	//$("#textDownload").css("display","none");
+	$("#textupload").css("display","none");
 	new selectArea('#html5Form',{
 		data: '',
 		isSelect: true
@@ -539,6 +605,7 @@ function getMediateById(id) {
 		drowPartiesList();
 		partiesList2 = data.mediation;
 		drowPartiesList2();
+		$("#title").val(data.conference.name);
 		$("#clerkName").val(data.mediate.mediateName);
 		$("#clerkUnit").val(data.mediate.mediateCompleteAdd);
 		$("#mediateIdentifier").val(data.mediate.mediateIdentifier);
@@ -549,7 +616,8 @@ function getMediateById(id) {
 		$("#mediateRegisBranch").val(data.mediate.mediateRegisBranch);
 		$("#mediateRegisDate").val(data.mediate.mediateRegisDate);
 		$("#mediateReason").val(data.mediate.mediateReason);
-		$("#Overview").text(data.mediate.mediateContent);
+		look != null && data.mediate.mediateContent != null ? $("#overViewWrap").show() : '';
+		$("#Overview").val(data.mediate.mediateContent);
 		$("#mediateNumber").val(data.mediate.mediateNumber);
 		$("#mediateid").val(data.mediate.mediateid);
 		$("#disputeType").val(data.mediate.mediateProtocol);
@@ -558,16 +626,70 @@ function getMediateById(id) {
 		$("#recorded").val(data.conference.isRecording);
 		$("#MediaResult").val(data.mediate.mediaterStatus==1?"调解成功":(data.mediate.mediaterStatus==2?"调解中":"调解失败"));
 		$("#mediateAddress").val(data.mediate.mediateAddress)
-			new selectArea('#allAddress',{
-				data: data.mediate.areas.code
-			})
-
+		
 	});
 }
+$("#uploadModal").modal({
+	keyboard: false,
+	backdrop : "static",
+	show :false
+})
+
 $("#textDownload").on("click",function(){
 	$("#downDocxForm").submit();
 	
 });
+//上传窗口的显示
+$("#textupload").click(function(){
+	$("#uploadModal").modal("show");
+});
+//调用上传文件窗口
+$("#chooseBtn").click(function(){
+	$("#upExcel").click();
+});
+//调用上传文件窗口 把文件名称显示
+$("#upExcel").on("change", function() {
+    var filepath=$(this).val();
+    $("#choose").val(filepath)
+});
+//上传文件
+$("#uploadBtn").click(function(){
+	if($("#upExcel").val() == null || $("#upExcel").val() == ""){
+		alert("请先选择一个文件再上传!")
+		return ;
+	}
+	
+	ajaxLoading.show();
+	var ids = "" ;
+	for(i = 0 ; partiesList.length > i ; i++){
+		ids += partiesList[i].id
+		if((partiesList.length -1) != i){
+			ids += "," ;
+		}
+	}
+	$("#ids").val(ids);
+	
+	$("#upForm").ajaxSubmit({
+        url : '/spywBeta/mediate/importProtocol.do',
+        type : 'post',
+        beforeSubmit:function (data) {
+        },
+        success:function(data){
+            ajaxLoading.hide();
+            if(data.status == 1){
+                alert("上传成功");
+                $("#uploadModal").modal("hide");
+            } else {
+                alert("上传失败")
+            }
+        },
+        error:function (data) {
+            ajaxLoading.hide();
+            alert("服务繁忙，请稍后再试")
+        }
+    });
+});
+
 function formatDateTime(inputTime) {    
     var date = new Date(inputTime);  
     var y = date.getFullYear();    

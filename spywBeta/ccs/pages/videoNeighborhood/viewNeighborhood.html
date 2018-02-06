@@ -51,8 +51,8 @@
 		<header>
 			<h1 class="pull-left"><a href="neighborhoodNav.html"><img src="../../images/shipinjiefang.png"></a></h1>
 			<div class="loginWrapper pull-right">
-				<span class="welcome">欢迎登录</span>
 				<span class="userName"></span>
+				<span class="welcome">欢迎登录</span>
 				<div class="userInfo">
 					<img src="../../images/user-icon.png">
 					<div class="dropWrap">
@@ -82,7 +82,7 @@
 									<input type="text" class="form-control" id="department">
 								</div>
 								<div class="form-group">
-									<label class="formlable">信访时间:</label>
+									<label class="formlable">信访日期:</label>
 									<input type="text" class="form-control" onclick="WdatePicker()" id="startTime" readonly>
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 									<input type="text" class="form-control" onclick="WdatePicker()" id="endTime" readonly>
@@ -133,7 +133,7 @@
 							</div> -->
 						</form>
 						<form id="exportForm" action="/spywBeta/videoNeighborhood/videoNeighborhoodexport.do">
-							<input type="hidden" name="pagesize" id="pagesize"/>
+							<input type="hidden" name="pagesize" id="pagesize" value = "1"/>
 							<input type="hidden" name="videoneihdName" id="videoneihdName"/>
 							<input type="hidden" name="videoneihdNum" id="videoneihdNum"/>
 							<input type="hidden" name="videoneihdDate" id="videoneihdDate"/>
@@ -154,10 +154,10 @@
 <!-- 									<td>信访方式</td> -->
 									<td>问题归集地</td>
 									<td width="160">信访开始时间</td>
-									<td>信访时长</td>
+									<td>会议标题</td>
 									<td>信访接入码</td>
 									<td>会控</td>
-									<td>状态</td>
+									<td>结果</td>
 <!-- 									<td>问题类型</td> -->
 <!-- 									<td>办理方式</td> -->
 <!-- 									<td>状态</td> -->
@@ -194,8 +194,8 @@
 	        <h4 class="modal-title">接访结果</h4>
 	      </div>
 	      <div class="modal-footer" style="text-align:center;padding:50px 0;">
-	        <button id="successType" data-type="1" type="button" style="padding:10px 30px;margin:0 30px;" class="btn btn-primary">接访成功</button>
-	        <button id="defeated" data-type="2" type="button" style="padding:10px 30px;margin:0 30px;" class="btn btn-primary">接访失败</button>
+	        <button id="successType" data-type="1" type="button" style="padding:10px 30px;margin:0 30px;" class="btn btn-primary">已解决</button>
+	        <button id="defeated" data-type="2" type="button" style="padding:10px 30px;margin:0 30px;" class="btn btn-primary">未解决</button>
 	      </div>
 	    </div><!-- /.modal-content -->
 	  </div><!-- /.modal-dialog -->

@@ -1,4 +1,4 @@
-var areaObjList = [
+﻿var areaObjList = [
     {
         "areaName": "淮安市",
         "areaCode": "1",
@@ -2261,6 +2261,20 @@ var areaObjList = [
     //     "mcu": "null",
     //     "areaId": "null"
     // },
+
+     {
+         "areaName": "淮阴区",
+         "areaCode": "102",
+         "mcu": "16",
+         "areaId": "05170999"
+     },
+
+    {
+         "areaName": "淮阴区",
+         "areaCode": "102",
+         "mcu": "16",
+         "areaId": "05170999"
+    },
     {
         "areaName": "棉花庄镇",
         "areaCode": "102001",
@@ -9337,7 +9351,7 @@ var areaObjList = [
     },
     {
         "areaName": "麻垛居委会",
-        "areaCode": "106021001",
+        "areaCode": "106022001",
         "mcu": "15",
         "areaId": "05176072"
     },
@@ -9349,7 +9363,7 @@ var areaObjList = [
     },
     {
         "areaName": "王码村",
-        "areaCode": "106021002",
+        "areaCode": "106022002",
         "mcu": "15",
         "areaId": "05176073"
     },
@@ -9361,7 +9375,7 @@ var areaObjList = [
     },
     {
         "areaName": "孙湾村",
-        "areaCode": "106021003",
+        "areaCode": "106022003",
         "mcu": "15",
         "areaId": "05176074"
     },
@@ -9373,7 +9387,7 @@ var areaObjList = [
     },
     {
         "areaName": "埝庄村",
-        "areaCode": "106021004",
+        "areaCode": "106022004",
         "mcu": "15",
         "areaId": "05176075"
     },
@@ -9385,7 +9399,7 @@ var areaObjList = [
     },
     {
         "areaName": "兴哨村",
-        "areaCode": "106021005",
+        "areaCode": "106022005",
         "mcu": "15",
         "areaId": "05176076"
     },
@@ -9397,7 +9411,7 @@ var areaObjList = [
     },
     {
         "areaName": "春华村",
-        "areaCode": "106021006",
+        "areaCode": "106022006",
         "mcu": "15",
         "areaId": "05176077"
     },
@@ -9409,7 +9423,7 @@ var areaObjList = [
     },
     {
         "areaName": "街南村",
-        "areaCode": "106021007",
+        "areaCode": "106022007",
         "mcu": "15",
         "areaId": "05176078"
     },
@@ -9421,7 +9435,7 @@ var areaObjList = [
     },
     {
         "areaName": "黄庄村",
-        "areaCode": "106021008",
+        "areaCode": "106022008",
         "mcu": "15",
         "areaId": "05176079"
     },
@@ -9433,13 +9447,13 @@ var areaObjList = [
     },
     {
         "areaName": "街东村",
-        "areaCode": "106021009",
+        "areaCode": "106022009",
         "mcu": "15",
         "areaId": "05176080"
     },
     {
         "areaName": "陶码居委会",
-        "areaCode": "106021010",
+        "areaCode": "106021045",
         "mcu": "15",
         "areaId": "05176212"
     },
@@ -9451,7 +9465,7 @@ var areaObjList = [
     },
     {
         "areaName": "金港路办事处",
-        "areaCode": "106021011",
+        "areaCode": "106021046",
         "mcu": "15",
         "areaId": "05176213"
     },
@@ -9469,7 +9483,7 @@ var areaObjList = [
     },
     {
         "areaName": "官荡村",
-        "areaCode": "106021012",
+        "areaCode": "106021047",
         "mcu": "15",
         "areaId": "05176083"
     },
@@ -9481,13 +9495,13 @@ var areaObjList = [
     },
     {
         "areaName": "同心村",
-        "areaCode": "106021013",
+        "areaCode": "106021048",
         "mcu": "15",
         "areaId": "05176084"
     },
     {
         "areaName": "符庄村",
-        "areaCode": "106021014",
+        "areaCode": "106021049",
         "mcu": "15",
         "areaId": "05176216"
     },

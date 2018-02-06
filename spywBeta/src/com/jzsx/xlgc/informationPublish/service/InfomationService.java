@@ -6,7 +6,9 @@ import java.util.Map;
 
 import com.jzsx.xlgc.bean.CasInformationSearch;
 import com.jzsx.xlgc.bean.DataAnalysis;
+import com.jzsx.xlgc.bean.InforType;
 import com.jzsx.xlgc.bean.TInformation;
+import com.jzsx.xlgc.utils.AppResult;
 import com.jzsx.xlgc.utils.Result;
 
 public interface InfomationService {
@@ -24,7 +26,7 @@ public interface InfomationService {
 	
 	public Integer updateInformation(TInformation casInformation);
 	
-	public void deleteInformation(String id);
+	public int deleteInformation(String id);
 	
 	public List<DataAnalysis> getDataAnalysis(Map<String, Object> map);
 	
@@ -32,5 +34,9 @@ public interface InfomationService {
 	public List<DataAnalysis> getTypeAnalysis(Map<String, Object> map);
 	
 	Result<TInformation> appListInformation(Integer type,String code,Integer pages,Integer sizes);
+	
+	AppResult reply(String id,String code);
+	
+    List<InforType> getType();
 
 }

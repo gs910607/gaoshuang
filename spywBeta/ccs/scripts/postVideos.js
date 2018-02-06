@@ -22,7 +22,7 @@ $("#selectFile").on("change", function() {
         });
 
         $("#videoVname").val(video.name ? video.name : video.slice(video.lastIndexOf("\\")+1))
-        $("#videoVsize").val(video.size ? video.size : '---')
+        $("#videoVsize").val(video.size ? ((video.size/1024/1024).toFixed(2))+'MB' : '---')
 
         
         $("#videoList").html('<tr><td width="350"><div class="videoName clearfix"><img src="../../images/video-icon.png"><span id="vName">'+ (video.name ? video.name : video.slice(video.lastIndexOf("\\")+1)) +'</span></div></td><td><span id="vSize">'+ (video.size ? ((video.size/1024/1024).toFixed(2))+'MB' : '---') +'</span></td><td id="upStatus">待上传</td></tr>')

@@ -24,4 +24,10 @@ public interface TMediatePersonMapper {
     List<String> selectByName(String name);
     
     List<TMediatePerson> selectByMediateId(@Param("id")String id,@Param("type")Integer type);
+    
+    int updateByIds(@Param("list")List<String> list,@Param("url")String url);
+    
+    List<TMediatePerson> selectProtocol(@Param("area")String area,@Param("person")TMediatePerson person);
+    
+    int updateUrl(@Param("url")String url,@Param("id")String id);
 }

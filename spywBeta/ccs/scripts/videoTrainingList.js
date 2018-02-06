@@ -1,16 +1,32 @@
+var type=GetQueryString("type");
 
 $(function(){
-	var type=GetQueryString("type");
+	
 	var data={"type":type,"pagesize":1,"firstVisit":"1"};
 	videotraintype(data,1);
 });
+$.ajax({
+    url:"/spywBeta/videoTraining/videoTypejoin.do",    //请求的url地址
+    dataType:"json",   //返回格式为json
+    data:{},    //参数值
+    type:"post",   //请求方式
+    success:function(req){
+    	var listvt=req.List;
+    	if(req.status==1){
+//    		$("#type :not(:first)").remove();
+    		for(var i=0; i<listvt.length;i++){
+    			var txt='<option value="'+listvt[i].videoTypeId+'" >'+listvt[i].videoTypeName+'</option>';
+    			$("#type").append(txt);
+    		}
+    		$("#type").val(type);
+    	}
+    }
+});
 
-function getArticleId(articleID) {
-
-}
 $("#searchBtn").on("click", function() {
 	var startTime = $("#startTime").val();
 	var endTime = $("#endTime").val();
+	type = $("#type").val();
 
 	if(endTime && startTime > endTime) {
 		$("#endTime").testRemind("结束时间不得小于开始时间");
@@ -21,8 +37,6 @@ $("#searchBtn").on("click", function() {
 })
 
 function VideolistSearch(pagesize){
-	var type=GetQueryString("type");
-	//var type=/<%=request.getParameter("type")%>/;
 	var videoCode='';
 	var district=$("#district").val();
 	if(district!=null && district!=""){
@@ -61,7 +75,11 @@ function videotraintype(data,pagesize){
 	        	text+='<tr>';
 	        	text+='<td></td>';
 	        	text+='<td><p class="artTitle"><a href="/spywBeta/pages/videoTraining/videoDetails.html?videoId='+list[i].videoId+'">'+list[i].videoName+'</a></p></td>';
-	        	text+='<td align="center">'+list[i].videorealName+'</td>';
+	        	if(list[i].videorealName!=null){
+	        		text+='<td align="center">'+list[i].videorealName+'</td>';
+	        	}else{
+	        		text+='<td align="center"></td>';
+	        	}
 	        	if(list[i].videoCode==1){
 	        		text+='<td align="center">淮安市</td>';
 	        	}else{
@@ -74,10 +92,10 @@ function videotraintype(data,pagesize){
 	        	text+='<td align="center">'+new Date(list[i].videoTime).format("YYYY-MM-dd")+'</td>';
 	        	if (info.usergroupid.toString().length <9) {
 		        	text+='<td align="center" class="operation">';
-		        	if(info.usergroupid.toString()==list[i].videoCode && info.usergroupid.toString()!=1){
-		        		text+='<a class="modification" href="/spywBeta/pages/videoTraining/postVideos.html?articleId='+list[i].videoId+'&type='+GetQueryString("type")+'"><img src="../../images/modification.png"></a>';
+		        	/*if(info.usergroupid.toString()==list[i].videoCode && info.usergroupid.toString()!=1){
+		        		text+='<a class="modification" href="/spywBeta/pages/videoTraining/postVideos.html?articleId='+list[i].videoId+'&type='+type+'"><img src="../../images/modification.png"></a>';
 		        	}else{
-		        		text+='<a class="modification" href="/spywBeta/pages/videoTraining/postVideos.html?articleId='+list[i].videoId+'&type='+GetQueryString("type")+'"><img src="../../images/modification.png"></a>';
+		        		text+='<a class="modification" href="/spywBeta/pages/videoTraining/postVideos.html?articleId='+list[i].videoId+'&type='+type+'"><img src="../../images/modification.png"></a>';
 		        	}
 		        	if (info.usergroupid.toString().length <=6) {
 		        		if(info.usergroupid.toString()==list[i].videoCode  && info.usergroupid.toString()!=1){
@@ -85,6 +103,10 @@ function videotraintype(data,pagesize){
 		        		}else{
 		        			text+='<a class="delete" href="javascript:;" onclick="videoTraindelete(\''+list[i].videoId+'\')"><img src="../../images/delete.png"></a>';
 		        		}
+		        	}*/
+		        	if(info.usergroupid.toString().length <=list[i].videoCode.length || info.usergroupid.toString() == 1){
+		        		text+='<a class="modification" href="/spywBeta/pages/videoTraining/postVideos.html?articleId='+list[i].videoId+'&type='+type+'"><img src="../../images/modification.png"></a>';
+		        		text+='<a class="delete" href="javascript:;" onclick="videoTraindelete(\''+list[i].videoId+'\')"><img src="../../images/delete.png"></a>';
 		        	}
 		        	text+='</td>';
 	        	}

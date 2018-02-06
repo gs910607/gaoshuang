@@ -3,27 +3,28 @@ var number = 1;
 
 var type = GetQueryString("type");
 
+var artiTitle = '';
+var startTime = '1970-01-01';
+var endTime = new Date(new Date().setDate(new Date().getDate() + 1)).format("yyyy-MM-dd");
+
 var authCode=null;
 $(function() {
-
+	
 	if (type != null) {
 		$.post("../../information/getPageList.do?type=" + type, function(data) {
 
-			if (type == 1) {
-				$(".iconTitle").text("热点新闻");
-			}
-			if (type == 2) {
-				$(".iconTitle").text("平安淮安");
-			}
-			if (type == 3) {
-				$(".iconTitle").text("政法新闻");
-			}
-			if (type == 4) {
-				$(".iconTitle").text("社会治理");
-			}
-			if (type == 5) {
-				$(".iconTitle").text("书画摄影");
-			}
+			$.ajax({
+				type: 'GET',
+				url: '../../information/getType.do',
+				success: function(response) {
+					var typeList = response.type
+					typeList.map(function(o,i){
+						$("#listType").append('<option value="'+ o.type +'">'+ o.name +'</option>')
+					});
+					$("#listType").val(type)
+				}
+			});
+			
 			getInformation(data);
 
 		}, "json");
@@ -89,9 +90,9 @@ function getSearchInformation(data) {
 		elem : $('#page2'), //指定的元素
 		callback : function(n) { //回调函数
 			$.post("../../information/getSearchPageList.do?pages=" + n + "&type=" + type, {
-				title : $("#exampleInputName2").val(),
-				start : $("#startTime").val(),
-				end : $("#endTime").val(),
+				title : startTime,
+				start : startTime,
+				end : endTime,
 				type : type,
 				district : $("#district").val(),
 				county : $("#county").val(),
@@ -108,9 +109,10 @@ function getSearchInformation(data) {
 
 
 $("#search").on("click", function() {
-	var artiTitle = $("#exampleInputName2").val();
-	var startTime = $("#startTime").val() ? $("#startTime").val() : '1970-01-01';
-	var endTime = $("#endTime").val() ? new Date(new Date($("#endTime").val()).setDate(new Date($("#endTime").val()).getDate() + 1)).format("yyyy-MM-dd") : new Date().format("yyyy-MM-dd");
+	artiTitle = $("#exampleInputName2").val();
+	$("#startTime").val() ? startTime = $("#startTime").val() : '';
+	$("#endTime").val() ? endTime = new Date(new Date($("#endTime").val()).setDate(new Date($("#endTime").val()).getDate() + 1)).format("yyyy-MM-dd") : '';
+	type = $("#listType").val();
 
 	if(startTime && endTime && startTime > endTime) {
 		$("#endTime").testRemind("结束时间不得大于开始时间");
@@ -136,16 +138,16 @@ function setInformation(data,code) {
 	$(data.list).each(function(i, n) {
 		if (i < 10) {
 			if(code.length<9){
-				var str="<tr><td></td><td><p class='artTitle'><a href='particulars.html?type="+type+"&id="+n.informationid+"'>"
-				+ n.title + "</a></p></td><td>"+n.createname+"</td><td>"+n.areas.name+"</td><td align='center'>"
+				var str="<tr><td></td><td width='500'><p class='artTitle' style='width:500px;'><a href='particulars.html?type="+type+"&id="+n.informationid+"'>"
+				+ n.title + "</a></p></td><td align='center'>"+n.createname+"</td><td align='center'>"+n.areas.name+"</td><td align='center'>"
 				+ format(n.createtime) + "</td>";
-				if(n.areas.alevel==3){
-					str=str+"<td align='center' class='operation'></td></tr>";
-					$("#content").append(str);
-				}else{
+				if(code.length == 1 || n.groupid.length >= code.length){
 					str=str+"<td align='center' class='operation'><a class='modification' href='postMessage.html?Id="
-				+ n.informationid + "'data-articleid="
-				+ n.informationid + "><img src='../../images/modification.png'></a> <a class='delete' onclick='deleteMediate("+n.informationid+")' href='javascript:;'><img src='../../images/delete.png'></a></td></tr>";
+					+ n.informationid + "'data-articleid="
+					+ n.informationid + "><img src='../../images/modification.png'></a> <a class='delete' onclick='deleteMediate("+n.informationid+")' href='javascript:;'><img src='../../images/delete.png'></a></td></tr>";
+						$("#content").append(str);
+				}else{
+					str=str+"<td align='center' class='operation'></td></tr>";
 					$("#content").append(str);
 				}
 //				$("#content").append("<tr><td></td><td><p class='artTitle'><a href='particulars.html?type="+type+"&id="+n.informationid+"'>"
@@ -155,8 +157,8 @@ function setInformation(data,code) {
 //						+ n.informationid + "><img src='../../images/modification.png'></a> <a class='delete' href='../../information/delete.do?id="
 //						+ n.informationid + "&type=" + type + "'><img src='../../images/delete.png'></a></td></tr>");
 			}else{
-				$("#content").append("<tr><td></td><td><p class='artTitle'><a href='particulars.html?type="+type+"&id="+n.informationid+"'>"
-						+ n.title + "</a></p></td><td>"+n.createname+"</td><td>"+n.areas.name+"</td><td align='center'>"
+				$("#content").append("<tr><td></td><td width='500'><p class='artTitle' style='width:500px;'><a href='particulars.html?type="+type+"&id="+n.informationid+"'>"
+						+ n.title + "</a></p></td><td align='center'>"+n.createname+"</td><td align='center'>"+n.areas.name+"</td><td align='center'>"
 						+ format(n.createtime) + "</td></tr>");
 			}
 		}
@@ -171,10 +173,9 @@ function deleteMediate(id){
 			id : id,
 			type:type
 		}, function(respose) {
-			alert(respose)
 			if (respose.status == 1) {
 				alert(respose.msg);
-				window.location.href = "viewMediation.html";
+				window.location.href = "InformationReleaseLList.html?type=" + type;
 			} else {
 				alert(respose.msg);
 			}

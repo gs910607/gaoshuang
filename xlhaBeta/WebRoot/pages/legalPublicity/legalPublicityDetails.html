@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../css/main.css">
+    <link rel="stylesheet" type="text/css" href="../../css/legalPublicityDetails.css">
+    <title>法制宣传</title>
+    <!-- 法制宣传详情页 -->
+    <style type="text/css">
+    	html,
+    	body,
+    	.wrapper {
+    		width: 100%;
+    		height: 100%;
+    	}
+    	header {
+    		position: fixed;
+    		width: 100%;
+    		top: 0;
+			z-index: 1000;
+    	}
+    	footer {
+    		position: fixed;
+    		bottom: 0;
+    		width: 100%;
+			z-index: 1000;
+    	}
+    	section {
+    		padding: 100px 0 54px;
+    	}
+    </style>
+</head>
+<body>
+	<div class="wrapper">
+		<header class="clearfix">
+			<div class="pull-left">
+				<a href="../../index.html"><img src="../../images/logo.png"></a>
+			</div>
+			<div class="pull-right">
+				<i class="pindaohao"><img src="../../images/pindaohao.png"></i>
+				<a href="javascript:;"><img src="../../images/onekey.png"></a>
+			</div>
+		</header>
+		<section>
+			<div class="contentWrap container">
+				<div class="contTitle">
+					<a href="javascript:history.back();"><i>&lt;</i>返回</a>
+					<h2 id="videoTitle"></h2>
+				</div>
+				<div style="display:none;" id="pictureWrap" class="content pictureWrap">
+					<h3 id="picTitle"></h3>
+					<p id="picContent"></p>
+					<div class="picWrap" id="pic">
+						<img src="">
+					</div>
+					<div class="contentFooter">
+						<ul class="clearfix">
+							<li style="width:15%" class="pull-left">作者:<span id="author"></span></li>
+							<li style="width:30%" class="pull-left">发布时间:<span id="publishTime"></span></li>
+							<li style="width:20%" class="pull-left">编辑:<span id="compile"></span></li>
+							<li style="width:20%" class="pull-left">录入:<span id="entering"></span></li>
+							<li style="width:15%" class="pull-left">浏览次数:<span id="numberCount"></span></li>
+						</ul>
+					</div>
+				</div>
+				<div style="display:none;" id="videoWrap" class="content videoWrap clearfix">
+					<div class="pull-left videoLeft">
+						<div class="videoPic">
+							<img src="../../images/videoplay.png">
+						</div>
+						<div class="playWrap">
+							<a id="playBtn" href="javascript:;" class="btn btn-default">播放</a>
+						</div>
+					</div>
+					<div class="videoRight">
+						<p id="videoContent"></p>
+					</div>
+					<div class="contentFooter">
+						<ul class="clearfix">
+							<li style="width:15%" class="pull-left">作者:<span id="author2"></span></li>
+							<li style="width:30%" class="pull-left">发布时间:<span id="publishTime2"></span></li>
+							<li style="width:20%" class="pull-left">编辑:<span id="compile2"></span></li>
+							<li style="width:20%" class="pull-left">录入:<span id="entering2"></span></li>
+							<li style="width:15%" class="pull-left">浏览次数:<span id="numberCount2"></span></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+		<footer></footer>
+	</div>
+	<script type="text/javascript" src="../../scripts/jQuery v2.1.1.min.js"></script>
+	<script type="text/javascript" src="../../scripts/common.js"></script>
+	<script type="text/javascript" src="../../scripts/legalPublicityDetails.js"></script>
+</body>
+</html>

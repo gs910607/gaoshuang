@@ -63,10 +63,10 @@ table td {
 	margin-right: 10px;
 }
 #district, #county {
-	width: 150px;
+	/*width: 150px;*/
 }
 #village {
-	width: 150px;
+	/*width: 160px;*/
 }
 .form-horizontal {
 	padding: 20px;

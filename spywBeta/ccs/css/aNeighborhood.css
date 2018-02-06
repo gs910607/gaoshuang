@@ -46,13 +46,13 @@ textarea.messageContent {
 	float: left;
 }
 #cityLevel {
-	width: 182px;
+	width: 190px;
 }
 #district, #county {
-	width: 162px;
+	width: 172px;
 }
 #village {
-	width: 182px;
+	width: 192px;
 }
 .typeTitle {
 	font-size: 16px;

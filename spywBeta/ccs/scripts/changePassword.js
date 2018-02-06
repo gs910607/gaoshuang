@@ -32,7 +32,7 @@ $("#changePassForm").html5Validate(function() {
 			if (responseStr.status == 1) {
 				alert("密码修改成功")
 				setTimeout(function() {
-					location.href = "../index.html";
+					window.location.href =responseStr.msg;
 				}, 500)
 			} else {
 				alert(responseStr.msg);

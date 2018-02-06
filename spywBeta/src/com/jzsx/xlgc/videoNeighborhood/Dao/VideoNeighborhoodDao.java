@@ -62,6 +62,18 @@ public interface VideoNeighborhoodDao {
 	 */
 	public List<NeighChart> queryneighmonth(NeighChart neighChart);
 	/**
+	 * 根据类型年份code统计视频接访
+	 * @param neighChart
+	 * @return
+	 */
+	public List<NeighChart> queryTypeneighmonth(NeighChart neighChart);
+	/**
+	 * 根据类型月份统计视频接访
+	 * @param neighChart
+	 * @return
+	 */
+	public List<NeighChart> queryTypeneighmonths(NeighChart neighChart);
+	/**
 	 * 根据ID修改状态
 	 * @param videoNeighborhood
 	 */
@@ -71,4 +83,10 @@ public interface VideoNeighborhoodDao {
 	 * @param videoNeighborhood
 	 */
 	public void updateActiveByIdOfConfId(VideoNeighborhood videoNeighborhood);
+	/**
+	 * 根据code查询当前总条数
+	 * @param videoneihdLocationplace
+	 * @return
+	 */
+	public int queryByCodeofcount(String videoneihdLocationplace);
 }

@@ -230,6 +230,14 @@ public class CasUser {
 		this.hpwd2 = hpwd2;
 	}
 
+	@Override
+	public String toString() {
+		return "CasUser [userid=" + userid + ", usergroupid=" + usergroupid + ", username=" + username + ", password="
+				+ password + ", userkind=" + userkind + ", userlevel=" + userlevel + ", realname=" + realname
+				+ ", usertel=" + usertel + ", remark=" + remark + ", identity=" + identity + ", Village=" + Village
+				+ ", District=" + District + ", County=" + County + ", auth=" + auth + ", areas=" + areas + "]";
+	}
+
 
 
 

@@ -1,0 +1,83 @@
+@charset "utf-8";
+.container {
+	width: 1024px;
+}
+.infoList {
+	padding: 0 40px;
+}
+.infoList thead {
+	background: #F4F7FA;
+}
+.artTitle {
+	max-width: 700px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.infoList .operation a {
+	margin: 0 6px;
+}
+.paging {
+	padding: 0 40px 30px;
+	text-align: right;
+}
+.inputWrapper {
+	width: 80%;
+}
+.btnWrapper {
+	width: 20%;
+}
+.btnWrapper a {
+	margin-bottom: 10px;
+	margin-left:10px;
+	padding-top:6px;
+	padding-bottom:6px;
+}
+.btnWrapper a:first-child {
+	margin-left: 0;
+}
+.inputWrapper .form-group {
+	margin-bottom: 20px;
+}
+.formWrap .form-group {
+	margin-left: 0;
+	margin-right: 0;
+}
+.inlineGroup .form-group {
+	width: 33.33%;
+	float: left;
+}
+#district, #county {
+	/*width: 150px;*/
+}
+#village {
+	/*width: 150px;*/
+}
+.form-horizontal {
+	padding: 20px;
+}
+.form-horizontal .form-group {
+	margin-left: 0;
+	margin-right: 0;
+}
+.formWrap .form-group {
+	border-bottom: 1px solid #ccc;
+}
+.inlineGroup  .form-group {
+	border-bottom: none;
+}
+.formWrap .form-control {
+	border: none;
+	box-shadow: 0 0;
+	background: inherit;
+}
+.inlineGroup .form-control {
+	border: 1px solid #ccc;
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+}
+.areaGroup {
+	padding-left: 120px;
+}
+.areaGroup .input-group {
+	width: 200px;
+}

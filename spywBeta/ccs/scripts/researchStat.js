@@ -15,7 +15,8 @@ function researchVoteLoad(data){
 				var list=req.list;
 				var allPoll = 0;
 				for(var i=0;i<list.length;i++){
-					allPoll += list[i].videoActiveVote
+					
+					allPoll += Number(list[i].videoActiveVote);
 				};
 				for(var i=0;i<list.length;i++){
 					var count=list[i].videoActiveVote;
@@ -30,7 +31,11 @@ function researchVoteLoad(data){
 					tt+='</div>';
 					tt+='</div>';
 					tt+='</td>';
-					tt+='<td>'+(count/allPoll*100).toFixed(2)+'%</td>';
+					if(allPoll!=0){
+						tt+='<td>'+(count/allPoll*100).toFixed(2)+'%</td>';
+					}else{
+						tt+='<td>0%</td>';
+					}
 					tt+='<td>'+count+'</td>';
 					tt+='</tr>';
 					$(".content .contList table tbody").append(tt);

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd"> 
+<mapper  namespace="com.jzsx.xlha.videoTrain.dao.VideoTypeDao">
+
+	<resultMap type="com.jzsx.xlha.bean.VideoType" id="BaseResultMap">
+	    <id property="videoTypeId" column="t_video_typeId"/>
+	    <result property="videoTypeName" column="t_video_typeName"/>
+    </resultMap>
+    
+  	<!-- 根据多个手机号查询多个会议成员的信息 -->
+  	<select id="queryVideoTypeList" resultMap="BaseResultMap">
+        select * from t_video_type
+    </select>
+	<select id="queryVideoTypeById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select * from t_video_type where t_video_typeId=#{videoTypeId}
+	</select>
+	<select id="queryVideoTypeByIdNotEqual" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select * from t_video_type where t_video_typeId !=#{videoTypeId}
+	</select>
+</mapper>

@@ -3,6 +3,7 @@ package com.jzsx.xlgc.resSmutils.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
@@ -26,9 +27,11 @@ import com.jzsx.xlgc.resSmutils.Result;
 import com.jzsx.xlgc.resSmutils.service.resService;
 @Service
 public class resServiceImpl implements resService{
-
+	
+	Logger logger = Logger.getLogger(resServiceImpl.class);
+	
 	@Override
-	public Result scheduleConfEx(ConferenceInfoEx cfinfo) {
+	public Result scheduleConfEx(ConferenceInfoEx cfinfo,String uri) {
 		AuthorizeServiceEx authorizeService = ServiceFactoryEx.getService(AuthorizeServiceEx.class);
 		Integer loginResult = authorizeService.login(PropertiesUtils.getValue("userName"), PropertiesUtils.getValue("password"));
 		Result rs = new Result();
@@ -37,13 +40,34 @@ public class resServiceImpl implements resService{
         	rs.setResuiltMsg("登陆失败！");
             return rs;
 		}
+		int presenceMode = 11;
+		if(cfinfo.getSites().size() <=9 && cfinfo.getSites().size() > 4) {
+			presenceMode = 35 ;
+		}else if(cfinfo.getSites().size() > 9) {
+			presenceMode = 47 ;
+		}
+		cfinfo.setContinuousPresenceMode(presenceMode);
+		cfinfo.setChairmanPassword("123456");
+		logger.debug("scheduleConfEx:" + new Gson().toJson(cfinfo) + "uri:" + uri);
 		ConferenceServiceEx conferenceService = ServiceFactoryEx.getService(ConferenceServiceEx.class);
 		try{
             TPSDKResponseEx<ConferenceInfoEx> result = conferenceService.scheduleConfEx(cfinfo);
+            logger.debug("scheduleConfEx result" + new Gson().toJson(result));
             rs.setResultCode(result.getResultCode());
+          
             if (result.getResultCode() == 0){
             	rs.setResuiltMsg("成功！");
             	rs.setConf(result.getResult());
+            	ConferenceServiceEx conferenceServiceEx = ServiceFactoryEx.getService(ConferenceServiceEx.class);
+            	// 子画面会场标识顺序列表
+            	List<String> subPics = new ArrayList<String>();
+            	subPics.add(uri);
+            	for(SiteInfoEx siteinfo : cfinfo.getSites()) {
+            		subPics.add(siteinfo.getUri());
+            	}
+            	logger.debug("setContinuousPresenceEx param="+presenceMode + "    " + subPics);
+            	Integer resultCode = conferenceServiceEx.setContinuousPresenceEx(result.getResult().getConfId(), "", presenceMode, subPics);
+                logger.debug("setContinuousPresenceEx resultCode="+resultCode);
             }
             else{
                 rs.setConf(result.getResult());
@@ -196,7 +220,7 @@ public class resServiceImpl implements resService{
         if (0 != loginResult && loginResult != 570462213){
             return loginResult+" ";
         }
-        
+        logger.debug("addAdhocConfTemplateEx:" + new Gson().toJson(adhocConfTemplate));
         //获取会议相关服务实例
         ConferenceServiceEx conferenceServiceEx = ServiceFactoryEx.getService(ConferenceServiceEx.class);
         //调用会议服务的addAdhocConfTemplateEx方法添加会议模板，返回TPSDKResponseEx<String>对象 

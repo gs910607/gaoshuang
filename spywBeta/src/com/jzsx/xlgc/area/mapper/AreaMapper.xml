@@ -44,6 +44,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
     </select>
     <select id="queryByName" parameterType="java.lang.String" resultMap="BaseResultMap">
     	select * from AREA where NAME LIKE  '%'||#{name}||'%'
+    	order by code asc
     </select>
     <select id="queryByParents" parameterType="java.lang.String" resultMap="BaseResultMap">
     	select * from AREA t where code=(select parent_id from AREA t where code =(select parent_id from AREA t where code=#{code}))
@@ -56,9 +57,14 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
     	delete from AREA where ID=#{id}
     </delete>
     
-    <select id="selectByCode" parameterType="String" resultType="String">
+    <select id="selectByCode" parameterType="String" resultMap="BaseResultMap">
     select hphone from area where code in(#{code})    
     </select>
+    
+    <select id="selectMcuByCode" parameterType="String" resultMap="BaseResultMap">
+    select mcu from area where code in(#{code})    
+    </select>
+    
 	<insert id="insertActive" parameterType="com.jzsx.xlgc.bean.Area">
 	
 	</insert>

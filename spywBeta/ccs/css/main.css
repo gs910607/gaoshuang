@@ -135,15 +135,18 @@ header h1 {
 .loginWrapper .userName {
 	color: #fff!important;
 	font-size: 16px;
-	margin-left: 10px;
+	display: inline-block;
+	vertical-align: middle;
 }
 .loginWrapper .userInfo {
 	position: relative;
 	display: inline-block;
+	margin-left: 10px;
 }
-.loginWrapper .userName {
+.loginWrapper .userName span {
+	text-align: right;
 	display: inline-block;
-	width: 60px;
+	max-width: 150px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -220,7 +223,7 @@ footer a:hover {
 }
 .formInput {
 	position: relative;
-	margin-left: 120px;
+	margin-left: 110px;
 }
 .iconTitle {
 	width: 199px;

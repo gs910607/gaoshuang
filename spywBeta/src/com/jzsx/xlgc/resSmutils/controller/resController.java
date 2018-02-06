@@ -24,7 +24,7 @@ public class resController {
 		ConferenceInfoEx cfinfo = new ConferenceInfoEx();
 		
 		Map<String,Object> map = new HashMap<String, Object>();
-		map.put("map", resservice.scheduleConfEx(cfinfo));		
+		map.put("map", resservice.scheduleConfEx(cfinfo,"cc"));		
 		return map;
 	}
 }

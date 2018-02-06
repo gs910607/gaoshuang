@@ -41,6 +41,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 	    <result property="videoneihdInformProfile" column="t_videoneihdInformProfile" />
 	    <result property="videoneihdLiberateCompany" column="t_videoneihdLiberateCompany" />
 	    <result property="videoneihdRegistratePlace" column="t_videoneihdRegistratePlace" />
+	    <result property="videoneihdPeopleDuty" column="t_videoneihdPeopleDuty" />
+	    <result property="videoneihdPeopleContact" column="t_videoneihdPeopleContact" />
+	    <result property="videoneihdCreateCode" column="t_videoneihdCreateCode" />
 	    <association property="videoConferenceinfo" column="t_videoneihdConfId" select="com.jzsx.xlgc.resSmutils.mapper.TVideoConferenceMapper.selectByPrimaryKey"></association>
 	    <association property="areainfo" column="t_videoneihdLocationplace" select="com.jzsx.xlgc.area.Dao.AreaDao.queryByCode"></association>
     </resultMap>
@@ -48,6 +51,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
   	<!-- 根据多个手机号查询多个会议成员的信息 -->
   	<select id="queryVideoNeighborhoodList" resultMap="BaseResultMap">
         select * from t_video_neighborhood
+    </select>
+    <select id="queryByCodeofcount" resultType="java.lang.Integer" parameterType="java.lang.String">
+        select count(t_videoneihdId) from t_video_neighborhood where t_videoneihdCreateCode=#{videoneihdLocationplace}
     </select>
     <select id="queryVideoNeighborhoodByALl" parameterType="com.jzsx.xlgc.bean.VideoNeighborhood" resultMap="BaseResultMap">
 	   	 select t.* from t_video_neighborhood t
@@ -86,55 +92,67 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
     	select * from t_video_neighborhood where t_videoneihdId=#{videoneihdId}
     </select>
     <select id="queyneighChart" parameterType="com.jzsx.xlgc.videoNeighborhood.bean.NeighChart" resultType="com.jzsx.xlgc.videoNeighborhood.bean.NeighChart">
-    	 select tt.tid1 as count,tt.tid2 as count1,tt.tid3 as count2,tt.tyear as year,tt.tmonth as month,a.name,a.code,state1 as state,state2 as state1,state3 as state2 from 
+    	 select tt.tid1 as count,tt.tid2 as count1,tt.tid3 as count2,tt.tid4 as count3,tt.tid5 as count4,tt.tyear as year,a.name,a.code,state1 as state,state2 as state1,state3 as state2 from 
   ( 
-   select count(t.tid1) as tid1,count(t.tid2) as tid2,count(t.tid3) as tid3,substr(t.t_videoneihdlocationplace,0,3)as t_videoneihdlocationplace,to_char(t.t_videoneihddate,'yyyy') as tyear,to_char(t.t_videoneihddate,'MM') as tmonth,'1' as state1,'2' as state2,'0' as state3  from
+   select count(t.tid1) as tid1,count(t.tid2) as tid2,count(t.tid3) as tid3,
+          sum(t.tid4) as tid4,sum(t.tid5) as tid5,
+          substr(t.t_videoneihdlocationplace,0,3)as t_videoneihdlocationplace,
+          to_char(t.t_videoneihddate,'yyyy') as tyear,
+          '1' as state1,'2' as state2,'0' as state3  from
       (
-        select t_videoneihdid tid1,'' tid2,'' tid3,t_videoneihdlocationplace,t_videoneihddate from T_VIDEO_NEIGHBORHOOD
+        select t_videoneihdid tid1,'' tid2,'' tid3,'' tid4,0 tid5,t_videoneihdlocationplace,t_videoneihddate from T_VIDEO_NEIGHBORHOOD
         where t_videoneihdstate=1
         union all
-        select '' tid1,t_videoneihdid tid2,'' tid3,t_videoneihdlocationplace,t_videoneihddate from T_VIDEO_NEIGHBORHOOD
+        select '' tid1,t_videoneihdid tid2,'' tid3,'' tid4,0 tid5,t_videoneihdlocationplace,t_videoneihddate from T_VIDEO_NEIGHBORHOOD
         where t_videoneihdstate=2
         union all
-        select '' tid1,'' tid2,t_videoneihdid tid3,t_videoneihdlocationplace,t_videoneihddate from T_VIDEO_NEIGHBORHOOD
+        select '' tid1,'' tid2,t_videoneihdid tid3,'' tid4,0 tid5,t_videoneihdlocationplace,t_videoneihddate from T_VIDEO_NEIGHBORHOOD
         where t_videoneihdstate=0
+        union all
+        select '' tid1,'' tid2,'' tid3,tc.duration tid4,0 tid5,t_videoneihdlocationplace,t_videoneihddate from T_VIDEO_NEIGHBORHOOD tv
+        left join T_VIDEO_CONFERENCE tc on tc.conf_id=tv.t_videoneihdconfid
+        where tc.type=3
+        union all
+        select '' tid1,'' tid2,'' tid3,'' tid4,t_videoneihdnumber tid5,t_videoneihdlocationplace,t_videoneihddate from T_VIDEO_NEIGHBORHOOD
+        
         ) t
-      group by substr(t.t_videoneihdlocationplace,0,3),to_char(t.t_videoneihddate,'yyyy'),to_char(t.t_videoneihddate,'MM')
+      group by substr(t.t_videoneihdlocationplace,0,3),to_char(t.t_videoneihddate,'yyyy')
       having 1=1
-		<if test="year !=null and year !='' ">
-		   	 and to_char(t.t_videoneihddate,'yyyy')=#{year}
-		 </if>
-		 <if test="month !=null and month !='' ">
-		   	 and to_char(t.t_videoneihddate,'MM')=#{month}
-		 </if>
-		) tt 
-		right join area a on a.code=tt.t_videoneihdlocationplace
-		where a.parent_id=0
-		
-		order by a.code
+    <if test="year !=null and year !='' ">
+         and to_char(t.t_videoneihddate,'yyyy')=#{year}
+     </if>
+    ) tt 
+    right join area a on a.code=tt.t_videoneihdlocationplace
+    where a.parent_id=0
+    
+    order by a.code
     </select>
     <select id="queyneighCharts" parameterType="com.jzsx.xlgc.videoNeighborhood.bean.NeighChart" resultType="com.jzsx.xlgc.videoNeighborhood.bean.NeighChart">
-    	select tt.tid1 as count,tt.tid2 as count1,tt.tid3 as count2,tt.tyear as year,tt.tmonth as month,a.name,a.code,state1 as state,state2 as state1,state3 as state2 from 
+    	select tt.tid1 as count,tt.tid2 as count1,tt.tid3 as count2,tt.tid4 as count3,tt.tid5 as count4,tt.tyear as year,a.name,a.code,state1 as state,state2 as state1,state3 as state2 from 
   ( 
-   select count(t.tid1) as tid1,count(t.tid2) as tid2,count(t.tid3) as tid3,substr(t.t_videoneihdlocationplace,0,6)as t_videoneihdlocationplace,to_char(t.t_videoneihddate,'yyyy') as tyear,to_char(t.t_videoneihddate,'MM') as tmonth,'1' as state1,'2' as state2,'0' as state3  from
+   select count(t.tid1) as tid1,count(t.tid2) as tid2,count(t.tid3) as tid3,sum(t.tid4) as tid4,sum(t.tid5) as tid5,substr(t.t_videoneihdlocationplace,0,6)as t_videoneihdlocationplace,to_char(t.t_videoneihddate,'yyyy') as tyear,'1' as state1,'2' as state2,'0' as state3  from
       (
-        select t_videoneihdid tid1,'' tid2,'' tid3,t_videoneihdlocationplace,t_videoneihddate from T_VIDEO_NEIGHBORHOOD
+       select t_videoneihdid tid1,'' tid2,'' tid3,'' tid4,0 tid5,t_videoneihdlocationplace,t_videoneihddate from T_VIDEO_NEIGHBORHOOD
         where t_videoneihdstate=1
         union all
-        select '' tid1,t_videoneihdid tid2,'' tid3,t_videoneihdlocationplace,t_videoneihddate from T_VIDEO_NEIGHBORHOOD
+        select '' tid1,t_videoneihdid tid2,'' tid3,'' tid4,0 tid5,t_videoneihdlocationplace,t_videoneihddate from T_VIDEO_NEIGHBORHOOD
         where t_videoneihdstate=2
         union all
-        select '' tid1,'' tid2,t_videoneihdid tid3,t_videoneihdlocationplace,t_videoneihddate from T_VIDEO_NEIGHBORHOOD
+        select '' tid1,'' tid2,t_videoneihdid tid3,'' tid4,0 tid5,t_videoneihdlocationplace,t_videoneihddate from T_VIDEO_NEIGHBORHOOD
         where t_videoneihdstate=0
+        union all
+        select '' tid1,'' tid2,'' tid3,tc.duration tid4,0 tid5,t_videoneihdlocationplace,t_videoneihddate from T_VIDEO_NEIGHBORHOOD tv
+        left join T_VIDEO_CONFERENCE tc on tc.conf_id=tv.t_videoneihdconfid
+        where tc.type=3
+        union all
+        select '' tid1,'' tid2,'' tid3,'' tid4,t_videoneihdnumber tid5,t_videoneihdlocationplace,t_videoneihddate from T_VIDEO_NEIGHBORHOOD
+        
         ) t
-      group by substr(t.t_videoneihdlocationplace,0,6),to_char(t.t_videoneihddate,'yyyy'),to_char(t.t_videoneihddate,'MM')
+      group by substr(t.t_videoneihdlocationplace,0,6),to_char(t.t_videoneihddate,'yyyy')
       having 1=1
-   		<if test="year !=null and year !='' ">
-		   	 and to_char(t.t_videoneihddate,'yyyy')=#{year}
-		 </if>
-		 <if test="month !=null and month !='' ">
-		   	 and to_char(t.t_videoneihddate,'MM')=#{month}
-		 </if>
+      <if test="year !=null and year !='' ">
+         and to_char(t.t_videoneihddate,'yyyy')=#{year}
+     </if>
     ) tt 
     right join area a on a.code=tt.t_videoneihdlocationplace
      where 1=1
@@ -144,23 +162,84 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
     order by a.code
     </select>
     <select id="queryneighmonth" parameterType="com.jzsx.xlgc.videoNeighborhood.bean.NeighChart" resultType="com.jzsx.xlgc.videoNeighborhood.bean.NeighChart">
-    	select nvl(th.count,0) count,nvl(th.count1,0) count1,nvl(th.count2,0) count2,tt.current_month as month from(
-			select sum(CASE when t_videoneihdstate=1 then 1 else 0 end)count,
-			       sum(CASE when t_videoneihdstate=2 then 1 else 0 end)count1,
-			       sum(CASE when t_videoneihdstate=0 then 1 else 0 end)count2,
-			       TO_CHAR(T_VIDEONEIHDDATE, 'MM') month
-			        from T_VIDEO_NEIGHBORHOOD t
-			where 1=1 
-			<if test="year !=null and year !='' ">
-		   	 and to_char(t.T_VIDEONEIHDDATE,'yyyy')=#{year}
-			 </if>
-			 <if test="code !=null and code !='' ">
-		   	 and subStr(t.t_videoneihdlocationplace,0,3)=#{code}
-			 </if>
-			group by TO_CHAR(T_VIDEONEIHDDATE, 'MM')
-			)th
-			right join t_time tt on month=tt.current_month
-			order by tt.current_month asc 
+    	select nvl(th.count,0) count,nvl(th.count1,0) count1,nvl(th.count2,0) count2,count3,count4,tt.current_month as month from(
+     select sum(count) count,sum(count1) count1,sum(count2) count2,sum(count3) count3,sum(count4) count4,month from( 
+       select sum(CASE when t_videoneihdstate=1 then 1 else 0 end)count,
+             sum(CASE when t_videoneihdstate=2 then 1 else 0 end)count1,
+             sum(CASE when t_videoneihdstate=0 then 1 else 0 end)count2,
+             '' count3,0 count4,
+             TO_CHAR(T_VIDEONEIHDDATE, 'MM') month
+              from T_VIDEO_NEIGHBORHOOD t
+      where 1=1 
+      <if test="year !=null and year !='' ">
+         and to_char(t.T_VIDEONEIHDDATE,'yyyy')=#{year}
+       </if>
+       <if test="code !=null and code !='' ">
+          and subStr(t.t_videoneihdlocationplace,0,3)=#{code}
+       </if>
+      group by TO_CHAR(T_VIDEONEIHDDATE, 'MM')
+      union all
+      select 0 count,0 count1,0 count2,tc.duration count3,0 count4,TO_CHAR(T_VIDEONEIHDDATE, 'MM') month from T_VIDEO_NEIGHBORHOOD tv
+      left join T_VIDEO_CONFERENCE tc on tc.conf_id=tv.t_videoneihdconfid
+      where tc.type=3
+      <if test="year !=null and year !='' ">
+         and to_char(T_VIDEONEIHDDATE,'yyyy')=#{year}
+       </if>
+       <if test="code !=null and code !='' ">
+          and subStr(t_videoneihdlocationplace,0,3)=#{code}
+       </if>
+      union all
+      select 0 count,0 count1,0 count2,'' count3,t_videoneihdnumber count4,TO_CHAR(T_VIDEONEIHDDATE, 'MM') month from T_VIDEO_NEIGHBORHOOD
+          where 1=1
+      <if test="year !=null and year !='' ">
+         and to_char(T_VIDEONEIHDDATE,'yyyy')=#{year}
+       </if>
+       <if test="code !=null and code !='' ">
+          and subStr(t_videoneihdlocationplace,0,3)=#{code}
+       </if>
+        )tb
+      group by month
+      )th
+      right join t_time tt on month=tt.current_month
+      order by tt.current_month asc 
+    </select>
+    <!-- 根据接访类型统计 按年份 -->
+    <select id="queryTypeneighmonth" parameterType="com.jzsx.xlgc.videoNeighborhood.bean.NeighChart" resultType="com.jzsx.xlgc.videoNeighborhood.bean.NeighChart">
+	    select count,count1,count2,th.t_neight_typename name,th.t_neight_typeid code from (
+    	select 
+   			 sum(CASE when t_videoneihdstate=1 then 1 else 0 end)count,
+             sum(CASE when t_videoneihdstate=2 then 1 else 0 end)count1,
+             sum(CASE when t_videoneihdstate=0 then 1 else 0 end)count2,tt.t_neight_typename,tt.t_neight_typeid from t_video_neighttype tt
+		left join T_VIDEO_NEIGHBORHOOD th on tt.t_neight_typeid=th.t_videoneihdtypeid
+		where 1=1 
+		<if test="year !=null and year !='' ">
+		   	  and to_char(th.t_videoneihddate,'yyyy')=#{year}
+		</if>
+		 group by tt.t_neight_typeid,tt.t_neight_typename
+		order by tt.t_neight_typeid asc
+		)tf
+		right join t_video_neighttype th on tf.t_neight_typeid=th.t_neight_typeid
+    </select>
+    <!-- 根据接访类型统计 按月份 -->
+    <select id="queryTypeneighmonths" parameterType="com.jzsx.xlgc.videoNeighborhood.bean.NeighChart" resultType="com.jzsx.xlgc.videoNeighborhood.bean.NeighChart">
+	    select count,count1,count2,tm.current_month name,0 code from (
+   		 select 
+    		sum(CASE when t_videoneihdstate=1 then 1 else 0 end)count,
+             sum(CASE when t_videoneihdstate=2 then 1 else 0 end)count1,
+             sum(CASE when t_videoneihdstate=0 then 1 else 0 end)count2,to_char(th.t_videoneihddate,'mm') month from t_video_neighttype tt
+		left join T_VIDEO_NEIGHBORHOOD th on tt.t_neight_typeid=th.t_videoneihdtypeid
+		left join t_time tm on tm.current_month =to_char(th.t_videoneihddate,'mm')
+		where 1=1 
+		<if test="code !=null and code !='' ">
+		   	  and tt.t_neight_typeid=#{code}
+		</if>
+		<if test="year !=null and year !='' ">
+		   	  and to_char(th.t_videoneihddate,'yyyy')=#{year}
+		</if>     
+		 group by to_char(th.t_videoneihddate,'mm')
+		)tf
+		right join t_time tm on tm.current_month =month
+		order by tm.current_month asc
     </select>
     <delete id="deleteById" parameterType="java.lang.String">
     	delete from t_video_neighborhood where t_videoneihdId=#{videoneihdId}
@@ -276,6 +355,15 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 			<if test="videoneihdRegistratePlace != null and videoneihdRegistratePlace !=''">
 				t_videoneihdRegistratePlace ,
 			</if>
+			<if test="videoneihdPeopleDuty != null and videoneihdPeopleDuty !=''">
+				t_videoneihdPeopleDuty ,
+			</if>
+			<if test="videoneihdPeopleContact != null and videoneihdPeopleContact !=''">
+				t_videoneihdPeopleContact ,
+			</if>
+			<if test="videoneihdCreateCode != null and videoneihdCreateCode !=''">
+				t_videoneihdCreateCode ,
+			</if>
 		</trim>
 		values
 			<trim prefix="(" suffix=")" suffixOverrides="," >
@@ -388,6 +476,15 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 			<if test="videoneihdRegistratePlace != null and videoneihdRegistratePlace !=''">
 				#{videoneihdRegistratePlace},
 			</if>
+			<if test="videoneihdPeopleDuty != null and videoneihdPeopleDuty !=''">
+				#{videoneihdPeopleDuty},
+			</if>
+			<if test="videoneihdPeopleContact != null and videoneihdPeopleContact !=''">
+				#{videoneihdPeopleContact},
+			</if>
+			<if test="videoneihdCreateCode != null and videoneihdCreateCode !=''">
+				#{videoneihdCreateCode},
+			</if>
 			</trim>
 	</insert>
 	<update id="updateActive" parameterType="com.jzsx.xlgc.bean.VideoNeighborhood">
@@ -492,6 +589,12 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 			</if>
 			<if test="videoneihdRegistratePlace != null and videoneihdRegistratePlace !=''">
 				t_videoneihdRegistratePlace=#{videoneihdRegistratePlace} ,
+			</if>
+			<if test="videoneihdPeopleDuty != null and videoneihdPeopleDuty !=''">
+				t_videoneihdPeopleDuty=#{videoneihdPeopleDuty} ,
+			</if>
+			<if test="videoneihdPeopleContact != null and videoneihdPeopleContact !=''">
+				t_videoneihdPeopleContact=#{videoneihdPeopleContact} ,
 			</if>
 <!-- 			<if test="videoneihdConfId != null and videoneihdConfId !=''"> -->
 <!-- 				t_videoneihdConfId=#{videoneihdConfId} , -->

@@ -46,10 +46,10 @@ textarea.messageContent {
 	float: left;
 }
 #district, #county {
-	width: 159px;
+	width: 170px;
 }
 #village {
-	width: 179px;
+	width: 190px;
 }
 fieldset {
     min-width: 0;

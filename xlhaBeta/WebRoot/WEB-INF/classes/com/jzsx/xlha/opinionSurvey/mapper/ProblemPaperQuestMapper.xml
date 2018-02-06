@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd"> 
+<mapper  namespace="com.jzsx.xlha.opinionSurvey.dao.ProblemPaperQuestDao">
+
+	<resultMap type="com.jzsx.xlha.bean.ProblemPaperQuest" id="BaseResultMap">
+	    <id property="paperquestId" column="t_paperquestId"/>
+	    <result property="paperquestProblemId" column="t_paperquest_problemId" />
+	    <result property="paperquestName" column="t_paperquest_name" />
+	    <result property="paperquestRemark" column="t_paperquest_remark" />
+<!-- 	    <association property="problemPaperinfo" column="t_paperquest_problemId" select="com.jzsx.xlgc.problempaper.Dao.ProblemPaperDao.queryById"></association> -->
+	    <collection property="problemPaperQuestOptionlist" column="t_paperquestId" select="com.jzsx.xlha.opinionSurvey.dao.ProblemPaperQuestOptionDao.queryByParentId"></collection>
+<!-- 	    <association property="problemPaperQuestOptionlist" column="t_paperquestId" select="com.jzsx.xlgc.problempaper.Dao.ProblemPaperQuestOptionDao.queryByParentId"></association> -->
+    </resultMap>
+    
+  	<!-- 根据多个手机号查询多个会议成员的信息 -->
+  	<select id="querylist" resultMap="BaseResultMap">
+        select * from t_problem_paper_quest
+    </select>
+    <select id="queryByAll" parameterType="com.jzsx.xlha.bean.ProblemPaperQuest" resultMap="BaseResultMap">
+	   	 select * from t_problem_paper_quest where 1=1
+<!-- 		   	<if test="problempaperName !=null and problempaperName !='' "> -->
+<!-- 		   	 	and  t_problempaper_name like '%${problempaperName}%' -->
+<!-- 		   	 </if> -->
+<!-- 		   	 order by t_problempaper_time desc -->
+    </select>
+    <select id="queryById" parameterType="java.lang.String" resultMap="BaseResultMap">
+    	select * from t_problem_paper_quest where t_paperquestId=#{paperquestId}
+    </select>
+    <select id="queryByParentId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    	select * from t_problem_paper_quest where t_paperquest_problemId=#{paperquestProblemId}
+    </select>
+    <delete id="deleteById" parameterType="java.lang.String">
+    	delete from t_problem_paper_quest where t_paperquestId=#{paperquestId}
+    </delete>
+    <delete id="deleteByParentId" parameterType="java.lang.String">
+    	delete from t_problem_paper_quest where t_paperquest_problemId=#{paperquestProblemId}
+    </delete>
+	<insert id="insertActive" parameterType="com.jzsx.xlha.bean.ProblemPaperQuest">
+		insert into t_problem_paper_quest 
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="paperquestId != null and paperquestId !='' ">
+				t_paperquestId,
+			</if>
+			<if test="paperquestProblemId != null and paperquestProblemId !=''">
+				t_paperquest_problemId,
+			</if>
+			<if test="paperquestName != null and paperquestName !=''">
+				t_paperquest_name,
+			</if>
+			<if test="paperquestRemark != null and paperquestRemark !=''">
+				t_paperquest_remark,
+			</if>
+		</trim>
+		values
+			<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="paperquestId != null and paperquestId !='' ">
+				#{paperquestId},
+			</if>
+			<if test="paperquestProblemId != null and paperquestProblemId !=''">
+				#{paperquestProblemId},
+			</if>
+			<if test="paperquestName != null and paperquestName !=''">
+				#{paperquestName},
+			</if>
+			<if test="paperquestRemark != null and paperquestRemark !=''">
+				#{paperquestRemark},
+			</if>
+			</trim>
+	</insert>
+</mapper>

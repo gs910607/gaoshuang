@@ -5,8 +5,9 @@ $(".contNav li > a").on("click", function() {
 });
 
 $("#searchBtn").click(function(){
-	var startTime = $("#startTime").val() ? $("#startTime").val() : '1970-01-01';
-	var endTime = $("#endTime").val() ? new Date(new Date($("#endTime").val()).setDate(new Date($("#endTime").val()).getDate() + 1)).format("yyyy-MM-dd") : new Date().format("yyyy-MM-dd");
+	var startTime = $("#startTime").val()  ? $("#startTime").val() : '1970-01-01';
+	var endTime = $("#endTime").val()  ? new Date(new Date($("#endTime").val()).setDate(new Date($("#endTime").val()).getDate() + 1)).format("yyyy-MM-dd") : new Date().format("yyyy-MM-dd");
+	var endTime = $("#endTime").val()  ? $("#endTime").val()  : new Date().format("yyyy-MM-dd");
 
 	if(startTime && endTime && startTime > endTime) {
 		$("#endTime").testRemind("结束时间不得大于开始时间");
@@ -32,7 +33,7 @@ function VideoResearchlistSearch(pagesize){
 	}
 	var videoResearchName=$("#exampleInputName2").val();
 	var videoResearchStarttime=$("#startTime").val();
-	var videoResearchStoptime=$("#endTime").val() ? new Date(new Date($("#endTime").val()).setDate(new Date($("#endTime").val()).getDate() + 1)).format("yyyy-MM-dd") : new Date().format("yyyy-MM-dd");
+	var videoResearchStoptime=$("#endTime").val() ? new Date(new Date($("#endTime").val()).setDate(new Date($("#endTime").val()).getDate() + 1)).format("yyyy-MM-dd") : '';
 	var data={"pagesize":pagesize,"videoResearchName":videoResearchName,"videoResearchStarttime":videoResearchStarttime,"videoResearcCode":videoResearcCode,"videoResearchStoptime":videoResearchStoptime};
 	$(".container .content .infoList table tbody tr").remove();
 	videoResearchlistjson(data,pagesize);
@@ -65,9 +66,9 @@ function videoResearchlistjson(data,pagesize){
 				text+='<tr>';
 				text+='<td></td>';
 				if(nowTime > ds) {
-					text+='<td><p class="artTitle"><a href="selectingActivity.html?type=1&videoResearchId='+list[i].videoResearchId+'">'+list[i].videoResearchName+'</a></p></td>';
+					text+='<td width="500"><a class="artTitle" style="width:500px;" href="selectingActivity.html?type=1&videoResearchId='+list[i].videoResearchId+'">'+list[i].videoResearchName+'</a></td>';
 				}else {
-					text+='<td><p class="artTitle"><a href="selectingActivity.html?type=-1&videoResearchId='+list[i].videoResearchId+'">'+list[i].videoResearchName+'</a></p></td>';
+					text+='<td width="500"><a class="artTitle" style="width:500px;" href="selectingActivity.html?type=-1&videoResearchId='+list[i].videoResearchId+'">'+list[i].videoResearchName+'</a></td>';
 				}
 				text+='<td align="center">'+list[i].videoResearchRealName+'</td>';
 				if(list[i].videoCode==1){
@@ -114,15 +115,17 @@ function videoResearchlistjson(data,pagesize){
 	})
 }
 function videoResearchdelete(videoId){
-	$.ajax({
-	    url:"/spywBeta/videoResearch/deletevideoTrain.do",    //请求的url地址
-	    dataType:"json",   //返回格式为json
-	    data:{"videoId":videoId},    //参数值
-	    type:"post",   //请求方式
-	    success:function(req){
-	    	alert(req.success);
-	    	var pagesize=$("#pagesize").val();
-	    	 VideoResearchlistSearch(pagesize);
-	    }
-	});
+	if(confirm("是否删除？")) {
+		$.ajax({
+		    url:"/spywBeta/videoResearch/deletevideoTrain.do",    //请求的url地址
+		    dataType:"json",   //返回格式为json
+		    data:{"videoId":videoId},    //参数值
+		    type:"post",   //请求方式
+		    success:function(req){
+		    	alert(req.success);
+		    	var pagesize=$("#pagesize").val();
+		    	 VideoResearchlistSearch(pagesize);
+		    }
+		});
+	}
 }

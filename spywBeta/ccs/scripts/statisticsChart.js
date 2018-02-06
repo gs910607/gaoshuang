@@ -19,9 +19,9 @@ var statisticsChart = {
 
         var _this = this;
         // 年份
-        for(var i=0;i<=50;i++) {
+        for(var i=0;i<=10;i++) {
             var str = '';
-            str += '<option value="'+ (2000+i) +'">'+ (2000+i) +'</option>';
+            str += '<option value="'+ (_this.date.year-i) +'">'+ (_this.date.year-i) +'</option>';
             $("#years").append(str);
         };
         $("#years").val(_this.date.year);
@@ -32,7 +32,7 @@ var statisticsChart = {
             monthstr += '<option value="'+ this.formatMonth(i+1) +'">'+ statisticsChart.months[i] +'</option>';
         };
         $("#month").html(monthstr);
-        $("#month").val(_this.date.month);
+        $("#month").val(this.formatMonth(new Date().getMonth()+1));
 
         // 初始化渲染图标
         statisticsChart.getData();

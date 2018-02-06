@@ -14,12 +14,21 @@
 		<result column="IDENTITY_TYPE" property="identityType"
 			jdbcType="VARCHAR" />
 		<result column="PERSON_TYPE" property="personType" jdbcType="DECIMAL" />
+		<result column="AUDIT_NUMBER" property="partiespeople"
+			jdbcType="DECIMAL" />
+		<result column="MEDIATE_NUMBER" property="mediatepeople"
+			jdbcType="DECIMAL" />
+		<result column="MEDIATE_UNIT" property="mediateunit" jdbcType="VARCHAR" />
 		<result column="MEDIATEID" property="mediateid" jdbcType="VARCHAR" />
+		<result column="BEFORE_URL" property="beforeUrl" jdbcType="VARCHAR" />
+		<result column="AFTER_URL" property="afterUrl" jdbcType="VARCHAR" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		ID, NAME, CELL_PHONE, TELL_PHONE, MEDIATION_ADDRESS, ADDRESS, IDENTITY,
+		ID, NAME, CELL_PHONE, TELL_PHONE, MEDIATION_ADDRESS,
+		ADDRESS, IDENTITY,
 		UNIT, IDENTITY_TYPE,
-		PERSON_TYPE, MEDIATEID
+		PERSON_TYPE,AUDIT_NUMBER,MEDIATE_NUMBER,MEDIATE_UNIT,MEDIATEID,BEFORE_URL,AFTER_URL,CREATE_TIME
 	</sql>
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
 		parameterType="java.lang.String">
@@ -29,20 +38,29 @@
 		where ID = #{id,jdbcType=VARCHAR}
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-		delete from T_MEDIATE_PERSON
+		delete from
+		T_MEDIATE_PERSON
 		where ID = #{id,jdbcType=VARCHAR}
 	</delete>
 	<insert id="insert" parameterType="com.jzsx.xlgc.bean.TMediatePerson">
-		insert into T_MEDIATE_PERSON (ID, NAME, CELL_PHONE,
+		insert into T_MEDIATE_PERSON
+		(ID, NAME, CELL_PHONE,
 		TELL_PHONE, MEDIATION_ADDRESS, ADDRESS,
 		IDENTITY, UNIT, IDENTITY_TYPE,
-		PERSON_TYPE, MEDIATEID)
-		values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+		PERSON_TYPE,AUDIT_NUMBER,MEDIATE_NUMBER,MEDIATE_UNIT,MEDIATEID,CREATE_TIME)
+		values
+		(#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
 		#{cellPhone,jdbcType=VARCHAR},
-		#{tellPhone,jdbcType=VARCHAR}, #{mediationAddress,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR},
+		#{tellPhone,jdbcType=VARCHAR},
+		#{mediationAddress,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR},
 		#{identity,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR},
 		#{identityType,jdbcType=VARCHAR},
-		#{personType,jdbcType=DECIMAL}, #{mediateid,jdbcType=VARCHAR})
+		#{personType,jdbcType=DECIMAL},
+		#{partiespeople,jdbcType=DECIMAL},
+		#{mediatepeople,jdbcType=DECIMAL},
+		#{mediateunit,jdbcType=VARCHAR},
+		#{mediateid,jdbcType=VARCHAR}),
+		#{createTime,jdbcType=TIMESTAMP})
 	</insert>
 	<insert id="insertSelective" parameterType="com.jzsx.xlgc.bean.TMediatePerson">
 		insert into T_MEDIATE_PERSON
@@ -76,6 +94,15 @@
 			</if>
 			<if test="personType != null">
 				PERSON_TYPE,
+			</if>
+			<if test="partiespeople != null">
+				AUDIT_NUMBER,
+			</if>
+			<if test="mediatepeople != null">
+				MEDIATE_NUMBER,
+			</if>
+			<if test="mediateunit != null">
+				MEDIATE_UNIT,
 			</if>
 			<if test="mediateid != null">
 				MEDIATEID,
@@ -112,6 +139,15 @@
 			<if test="personType != null">
 				#{personType,jdbcType=DECIMAL},
 			</if>
+			<if test="partiespeople != null">
+				#{partiespeople,jdbcType=DECIMAL},
+			</if>
+			<if test="mediatepeople != null">
+				#{mediatepeople,jdbcType=DECIMAL},
+			</if>
+			<if test="mediateunit != null">
+				#{mediateunit,jdbcType=VARCHAR},
+			</if>
 			<if test="mediateid != null">
 				#{mediateid,jdbcType=VARCHAR},
 			</if>
@@ -147,24 +183,53 @@
 			<if test="personType != null">
 				PERSON_TYPE = #{personType,jdbcType=DECIMAL},
 			</if>
+			<if test="partiespeople != null">
+				AUDIT_NUMBER = #{partiespeople,jdbcType=DECIMAL},
+			</if>
+			<if test="mediatepeople != null">
+				MEDIATE_NUMBER = #{mediatepeople,jdbcType=DECIMAL},
+			</if>
+			<if test="mediateunit != null">
+				MEDIATE_UNIT = #{mediateunit,jdbcType=VARCHAR},
+			</if>
 			<if test="mediateid != null">
 				MEDIATEID = #{mediateid,jdbcType=VARCHAR},
+			</if>
+			<if test="beforeUrl != null">
+				BEFORE_URL = #{beforeUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="afterUrl != null">
+				AFTER_URL = #{afterUrl,jdbcType=VARCHAR},
 			</if>
 		</set>
 		where ID = #{id,jdbcType=VARCHAR}
 	</update>
 	<update id="updateByPrimaryKey" parameterType="com.jzsx.xlgc.bean.TMediatePerson">
-		update T_MEDIATE_PERSON
+		update
+		T_MEDIATE_PERSON
 		set NAME = #{name,jdbcType=VARCHAR},
-		CELL_PHONE = #{cellPhone,jdbcType=VARCHAR},
-		TELL_PHONE = #{tellPhone,jdbcType=VARCHAR},
-		MEDIATION_ADDRESS = #{mediationAddress,jdbcType=VARCHAR},
-		ADDRESS = #{address,jdbcType=VARCHAR},
+		CELL_PHONE =
+		#{cellPhone,jdbcType=VARCHAR},
+		TELL_PHONE =
+		#{tellPhone,jdbcType=VARCHAR},
+		MEDIATION_ADDRESS =
+		#{mediationAddress,jdbcType=VARCHAR},
+		ADDRESS =
+		#{address,jdbcType=VARCHAR},
 		IDENTITY = #{identity,jdbcType=VARCHAR},
 		UNIT = #{unit,jdbcType=VARCHAR},
-		IDENTITY_TYPE = #{identityType,jdbcType=VARCHAR},
-		PERSON_TYPE = #{personType,jdbcType=DECIMAL},
-		MEDIATEID = #{mediateid,jdbcType=VARCHAR}
+		IDENTITY_TYPE =
+		#{identityType,jdbcType=VARCHAR},
+		PERSON_TYPE =
+		#{personType,jdbcType=DECIMAL},
+		AUDIT_NUMBER =
+		#{partiespeople,jdbcType=DECIMAL},
+		MEDIATE_NUMBER =
+		#{mediatepeople,jdbcType=DECIMAL},
+		MEDIATE_UNIT =
+		#{mediateunit,jdbcType=VARCHAR},
+		MEDIATEID =
+		#{mediateid,jdbcType=VARCHAR}
 		where ID = #{id,jdbcType=VARCHAR}
 	</update>
 
@@ -173,33 +238,76 @@
 		<foreach collection="list" item="item" index="index"
 			separator="">
 			into T_MEDIATE_PERSON (NAME, CELL_PHONE,
-			TELL_PHONE, MEDIATION_ADDRESS, ADDRESS,
+			TELL_PHONE,
+			MEDIATION_ADDRESS, ADDRESS,
 			IDENTITY, UNIT, IDENTITY_TYPE,
-			PERSON_TYPE, MEDIATEID)
+			PERSON_TYPE,AUDIT_NUMBER,MEDIATE_NUMBER,MEDIATE_UNIT,CREATE_TIME,MEDIATEID)
 			values (#{item.name,jdbcType=VARCHAR},
 			#{item.cellPhone,jdbcType=VARCHAR},
-			#{item.tellPhone,jdbcType=VARCHAR}, #{item.mediationAddress,jdbcType=VARCHAR}, #{item.address,jdbcType=VARCHAR},
-			#{item.identity,jdbcType=VARCHAR}, #{item.unit,jdbcType=VARCHAR},
+			#{item.tellPhone,jdbcType=VARCHAR},
+			#{item.mediationAddress,jdbcType=VARCHAR},
+			#{item.address,jdbcType=VARCHAR},
+			#{item.identity,jdbcType=VARCHAR},
+			#{item.unit,jdbcType=VARCHAR},
 			#{item.identityType,jdbcType=VARCHAR},
-			#{item.personType,jdbcType=DECIMAL}, #{item.mediateid,jdbcType=VARCHAR})
+			#{item.personType,jdbcType=DECIMAL},
+			#{item.partiespeople,jdbcType=DECIMAL},
+			#{item.mediatepeople,jdbcType=DECIMAL},
+			#{item.mediateunit,jdbcType=VARCHAR},
+			#{item.createTime,jdbcType=TIMESTAMP},
+			#{item.mediateid,jdbcType=VARCHAR})
 		</foreach>
 		select 1 from DUAL
 	</insert>
-	
-	<select id="selectByName" resultType="String"
-		parameterType="String">
+
+	<select id="selectByName" resultType="String" parameterType="String">
 		select
 		MEDIATEID
 		from T_MEDIATE_PERSON
-		where NAME = #{name,jdbcType=VARCHAR}
+		where NAME =
+		#{name,jdbcType=VARCHAR}
 		and PERSON_TYPE=2
 	</select>
-	
-	<select id="selectByMediateId" resultMap="BaseResultMap" parameterType="map">
-	 select 
-	 <include refid="Base_Column_List" />
-	 from T_MEDIATE_PERSON
-	 where MEDIATEID=#{id}
-	 and PERSON_TYPE=#{type}
+
+	<select id="selectByMediateId" resultMap="BaseResultMap"
+		parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from T_MEDIATE_PERSON
+		where MEDIATEID=#{id}
+		and PERSON_TYPE=#{type}
 	</select>
+
+	<update id="updateByIds" parameterType="map">
+		<foreach collection="list" item="item" index="index" open="begin"
+			close=";end;" separator=";">
+			update T_MEDIATE_PERSON
+			set before_url=#{url}
+			where id=#{item}
+		</foreach>
+	</update>
+
+	<select id="selectProtocol" resultMap="BaseResultMap"
+		parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from T_MEDIATE_PERSON
+		<where>
+			MEDIATION_ADDRESS like '${area}%'
+			<if test="person.name!=null">
+				and name like #{person.name}
+			</if>
+			<if test="person.startTime!=null">
+				and create_time between #{person.startTime} and
+				#{person.stopTime}
+			</if>
+		</where>
+		and PERSON_TYPE=1
+		order by create_time desc
+	</select>
+
+	<update id="updateUrl" parameterType="map">
+		update T_MEDIATE_PERSON set
+		after_url=#{url} where id=#{id}
+	</update>
 </mapper>

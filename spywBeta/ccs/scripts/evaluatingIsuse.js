@@ -102,32 +102,37 @@ function changeQues(_this) {
 
 
 $("#html5Form").html5Validate(function() {
-		var title=$("#surveyTitle").val();
-		var dateStart=$("#dateStart").val();
-		var dateEnd=$("#dateEnd").val();
-		
-		var dt=JSON.stringify(questionBank);
-		$.ajax({
-		    url:"/spywBeta/videoResearch/problemPaperSave.do",    //请求的url地址
-		    dataType:"json",   //返回格式为json
-		    data:{"title":title,"questionBank":JSON.stringify(questionBank),"dateStart":dateStart,"dateEnd":dateEnd},    //参数值
-		    type:"post",   //请求方式
-		    success:function(req){
-		    	ajaxLoading.hide();
-		    	alert(req.success);
-		    	setTimeout(function() {
-	     			location.href = "/spywBeta/pages/videoResearch/evaluatingList.html"
-	     		},500)
-		    },
-		    beforeSend: function() {
-		    	ajaxLoading.show();
-		    },
-		    error: function() {
-		    	ajaxLoading.hide();
-		    	alert("服务繁忙,请稍后再试")
-		    }
-		});
-//	})
+	var title=$("#surveyTitle").val();
+	var dateStart=$("#dateStart").val();
+	var dateEnd=$("#dateEnd").val();
+
+	questionBank.map(function(o,i){
+		o.answer = o.answer.filter(function(value) {
+			return $.trim(value) != '';
+		})
+	});
+	console.log(questionBank)
+	var dt=JSON.stringify(questionBank);
+	$.ajax({
+	    url:"/spywBeta/videoResearch/problemPaperSave.do",    //请求的url地址
+	    dataType:"json",   //返回格式为json
+	    data:{"title":title,"questionBank":JSON.stringify(questionBank),"dateStart":dateStart,"dateEnd":dateEnd},    //参数值
+	    type:"post",   //请求方式
+	    success:function(req){
+	    	ajaxLoading.hide();
+	    	alert(req.success);
+	    	setTimeout(function() {
+     			location.href = "/spywBeta/pages/videoResearch/evaluatingList.html"
+     		},500)
+	    },
+	    beforeSend: function() {
+	    	ajaxLoading.show();
+	    },
+	    error: function() {
+	    	ajaxLoading.hide();
+	    	alert("服务繁忙,请稍后再试")
+	    }
+	});
 },{
 	validate: function() {
 		var isError = false;
@@ -139,6 +144,9 @@ $("#html5Form").html5Validate(function() {
 				
 				isError = true;
 			};
+			obj.answer = obj.answer.filter(function(value){
+				return $.trim(value) != '';
+			});
 			var ansLen =  obj.answer.length;
 			if(ansLen < 2) {
 				ansLenArr.push(ind)

@@ -54,8 +54,9 @@ function videotraintype(pagesize){
 	        		text+='<td><p class="artTitle"><a href="javascript:;">'+list[i].name+'</a></p></td>';
 	        	}
 	        	var timeb=timeAdd(list[i].beginTime, list[i].duration);
+	        	var nowdata = new Date().getTime();
 	        	if(list[i].status!=1){
-	        		if(list[i].beginTime>timeb){
+	        		if(nowdata>timeb){
 	        			text+='<td align="center" style="color:#666;">已结束</td>';
 		        	}else if(list[i].beginTime<timeb){
 		        		text+='<td align="center" style="color:#ff6600;">培训中</td>';
@@ -78,14 +79,14 @@ function videotraintype(pagesize){
 	            startnum:pagesize,
 	            callback: function(pagesize) {
 	                $("#pagesize").val(pagesize);
-	                VideolistSearch(pagesize)
+	                videotraintype(pagesize)
 	            }
 	        });
 	    }
 	});
 }
 function timeAdd(createTime, duration) {
-	createTime = new Date(createTime).getTime();
+	//createTime = new Date(new Date(Date.parse(createTime.replace(/-/g,"/"))).getTime()).getTime();
 	duration = new Date(duration*60*60*1000).getTime();
 	return new Date(createTime + duration).getTime();
 }

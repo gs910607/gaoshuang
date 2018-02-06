@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jzsx.xlha.legalPublicity.mapper.TLegalPublicityMapper" >
+  <resultMap id="BaseResultMap" type="com.jzsx.xlha.bean.TLegalPublicity" >
+    <id column="C_LEGAL_ID" property="cLegalId" jdbcType="VARCHAR" />
+    <result column="C_LEGAL_TYPE" property="cLegalType" jdbcType="DECIMAL" />
+    <result column="C_LEGAL_TITLE" property="cLegalTitle" jdbcType="VARCHAR" />
+    <result column="C_LEGAL_CONTENT" property="cLegalContent" jdbcType="VARCHAR" />
+    <result column="C_LEGAL_IMAGE" property="cLegalImage" jdbcType="VARCHAR" />
+    <result column="C_LEGAL_VIDEO" property="cLegalVideo" jdbcType="VARCHAR" />
+    <result column="C_LEGAL_STARTTIME" property="cLegalStarttime" jdbcType="VARCHAR" />
+    <result column="C_LEGAL_STOPTIME" property="cLegalStoptime" jdbcType="VARCHAR" />
+    <result column="C_FOREIGN_USERID" property="cForeignUserid" jdbcType="VARCHAR" />
+    <result column="C_LEGAL_CREATETIME" property="cLegalCreatetime" jdbcType="TIMESTAMP" />
+    <result column="C_LEGAL_CREATE" property="cLegalCreate" jdbcType="VARCHAR" />
+    <result column="C_LEGAL_EDITOR" property="cLegalEditor" jdbcType="VARCHAR" />
+    <result column="C_LEGAL_COUNT" property="cLegalCount" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    C_LEGAL_ID, C_LEGAL_TYPE, C_LEGAL_TITLE, C_LEGAL_CONTENT, C_LEGAL_IMAGE, C_LEGAL_VIDEO, 
+    C_LEGAL_STARTTIME, C_LEGAL_STOPTIME, C_FOREIGN_USERID, C_LEGAL_CREATETIME, C_LEGAL_CREATE, 
+    C_LEGAL_EDITOR, C_LEGAL_COUNT
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jzsx.xlha.bean.TLegalPublicityExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_LEGAL_PUBLICITY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_LEGAL_PUBLICITY
+    where C_LEGAL_ID = #{cLegalId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from T_LEGAL_PUBLICITY
+    where C_LEGAL_ID = #{cLegalId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jzsx.xlha.bean.TLegalPublicityExample" >
+    delete from T_LEGAL_PUBLICITY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jzsx.xlha.bean.TLegalPublicity" >
+    insert into T_LEGAL_PUBLICITY (C_LEGAL_ID, C_LEGAL_TYPE, C_LEGAL_TITLE, 
+      C_LEGAL_CONTENT, C_LEGAL_IMAGE, C_LEGAL_VIDEO, 
+      C_LEGAL_STARTTIME, C_LEGAL_STOPTIME, C_FOREIGN_USERID, 
+      C_LEGAL_CREATETIME, C_LEGAL_CREATE, C_LEGAL_EDITOR, 
+      C_LEGAL_COUNT)
+    values (#{cLegalId,jdbcType=VARCHAR}, #{cLegalType,jdbcType=DECIMAL}, #{cLegalTitle,jdbcType=VARCHAR}, 
+      #{cLegalContent,jdbcType=VARCHAR}, #{cLegalImage,jdbcType=VARCHAR}, #{cLegalVideo,jdbcType=VARCHAR}, 
+      #{cLegalStarttime,jdbcType=VARCHAR}, #{cLegalStoptime,jdbcType=VARCHAR}, #{cForeignUserid,jdbcType=VARCHAR}, 
+      #{cLegalCreatetime,jdbcType=TIMESTAMP}, #{cLegalCreate,jdbcType=VARCHAR}, #{cLegalEditor,jdbcType=VARCHAR}, 
+      #{cLegalCount,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jzsx.xlha.bean.TLegalPublicity" >
+    insert into T_LEGAL_PUBLICITY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cLegalId != null" >
+        C_LEGAL_ID,
+      </if>
+      <if test="cLegalType != null" >
+        C_LEGAL_TYPE,
+      </if>
+      <if test="cLegalTitle != null" >
+        C_LEGAL_TITLE,
+      </if>
+      <if test="cLegalContent != null" >
+        C_LEGAL_CONTENT,
+      </if>
+      <if test="cLegalImage != null" >
+        C_LEGAL_IMAGE,
+      </if>
+      <if test="cLegalVideo != null" >
+        C_LEGAL_VIDEO,
+      </if>
+      <if test="cLegalStarttime != null" >
+        C_LEGAL_STARTTIME,
+      </if>
+      <if test="cLegalStoptime != null" >
+        C_LEGAL_STOPTIME,
+      </if>
+      <if test="cForeignUserid != null" >
+        C_FOREIGN_USERID,
+      </if>
+      <if test="cLegalCreatetime != null" >
+        C_LEGAL_CREATETIME,
+      </if>
+      <if test="cLegalCreate != null" >
+        C_LEGAL_CREATE,
+      </if>
+      <if test="cLegalEditor != null" >
+        C_LEGAL_EDITOR,
+      </if>
+      <if test="cLegalCount != null" >
+        C_LEGAL_COUNT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cLegalId != null" >
+        #{cLegalId,jdbcType=VARCHAR},
+      </if>
+      <if test="cLegalType != null" >
+        #{cLegalType,jdbcType=DECIMAL},
+      </if>
+      <if test="cLegalTitle != null" >
+        #{cLegalTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="cLegalContent != null" >
+        #{cLegalContent,jdbcType=VARCHAR},
+      </if>
+      <if test="cLegalImage != null" >
+        #{cLegalImage,jdbcType=VARCHAR},
+      </if>
+      <if test="cLegalVideo != null" >
+        #{cLegalVideo,jdbcType=VARCHAR},
+      </if>
+      <if test="cLegalStarttime != null" >
+        #{cLegalStarttime,jdbcType=VARCHAR},
+      </if>
+      <if test="cLegalStoptime != null" >
+        #{cLegalStoptime,jdbcType=VARCHAR},
+      </if>
+      <if test="cForeignUserid != null" >
+        #{cForeignUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="cLegalCreatetime != null" >
+        #{cLegalCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cLegalCreate != null" >
+        #{cLegalCreate,jdbcType=VARCHAR},
+      </if>
+      <if test="cLegalEditor != null" >
+        #{cLegalEditor,jdbcType=VARCHAR},
+      </if>
+      <if test="cLegalCount != null" >
+        #{cLegalCount,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jzsx.xlha.bean.TLegalPublicityExample" resultType="java.lang.Integer" >
+    select count(*) from T_LEGAL_PUBLICITY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update T_LEGAL_PUBLICITY
+    <set >
+      <if test="record.cLegalId != null" >
+        C_LEGAL_ID = #{record.cLegalId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cLegalType != null" >
+        C_LEGAL_TYPE = #{record.cLegalType,jdbcType=DECIMAL},
+      </if>
+      <if test="record.cLegalTitle != null" >
+        C_LEGAL_TITLE = #{record.cLegalTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cLegalContent != null" >
+        C_LEGAL_CONTENT = #{record.cLegalContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cLegalImage != null" >
+        C_LEGAL_IMAGE = #{record.cLegalImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cLegalVideo != null" >
+        C_LEGAL_VIDEO = #{record.cLegalVideo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cLegalStarttime != null" >
+        C_LEGAL_STARTTIME = #{record.cLegalStarttime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cLegalStoptime != null" >
+        C_LEGAL_STOPTIME = #{record.cLegalStoptime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cForeignUserid != null" >
+        C_FOREIGN_USERID = #{record.cForeignUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cLegalCreatetime != null" >
+        C_LEGAL_CREATETIME = #{record.cLegalCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.cLegalCreate != null" >
+        C_LEGAL_CREATE = #{record.cLegalCreate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cLegalEditor != null" >
+        C_LEGAL_EDITOR = #{record.cLegalEditor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cLegalCount != null" >
+        C_LEGAL_COUNT = #{record.cLegalCount,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update T_LEGAL_PUBLICITY
+    set C_LEGAL_ID = #{record.cLegalId,jdbcType=VARCHAR},
+      C_LEGAL_TYPE = #{record.cLegalType,jdbcType=DECIMAL},
+      C_LEGAL_TITLE = #{record.cLegalTitle,jdbcType=VARCHAR},
+      C_LEGAL_CONTENT = #{record.cLegalContent,jdbcType=VARCHAR},
+      C_LEGAL_IMAGE = #{record.cLegalImage,jdbcType=VARCHAR},
+      C_LEGAL_VIDEO = #{record.cLegalVideo,jdbcType=VARCHAR},
+      C_LEGAL_STARTTIME = #{record.cLegalStarttime,jdbcType=VARCHAR},
+      C_LEGAL_STOPTIME = #{record.cLegalStoptime,jdbcType=VARCHAR},
+      C_FOREIGN_USERID = #{record.cForeignUserid,jdbcType=VARCHAR},
+      C_LEGAL_CREATETIME = #{record.cLegalCreatetime,jdbcType=TIMESTAMP},
+      C_LEGAL_CREATE = #{record.cLegalCreate,jdbcType=VARCHAR},
+      C_LEGAL_EDITOR = #{record.cLegalEditor,jdbcType=VARCHAR},
+      C_LEGAL_COUNT = #{record.cLegalCount,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jzsx.xlha.bean.TLegalPublicity" >
+    update T_LEGAL_PUBLICITY
+    <set >
+      <if test="cLegalType != null" >
+        C_LEGAL_TYPE = #{cLegalType,jdbcType=DECIMAL},
+      </if>
+      <if test="cLegalTitle != null" >
+        C_LEGAL_TITLE = #{cLegalTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="cLegalContent != null" >
+        C_LEGAL_CONTENT = #{cLegalContent,jdbcType=VARCHAR},
+      </if>
+      <if test="cLegalImage != null" >
+        C_LEGAL_IMAGE = #{cLegalImage,jdbcType=VARCHAR},
+      </if>
+      <if test="cLegalVideo != null" >
+        C_LEGAL_VIDEO = #{cLegalVideo,jdbcType=VARCHAR},
+      </if>
+      <if test="cLegalStarttime != null" >
+        C_LEGAL_STARTTIME = #{cLegalStarttime,jdbcType=VARCHAR},
+      </if>
+      <if test="cLegalStoptime != null" >
+        C_LEGAL_STOPTIME = #{cLegalStoptime,jdbcType=VARCHAR},
+      </if>
+      <if test="cForeignUserid != null" >
+        C_FOREIGN_USERID = #{cForeignUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="cLegalCreatetime != null" >
+        C_LEGAL_CREATETIME = #{cLegalCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cLegalCreate != null" >
+        C_LEGAL_CREATE = #{cLegalCreate,jdbcType=VARCHAR},
+      </if>
+      <if test="cLegalEditor != null" >
+        C_LEGAL_EDITOR = #{cLegalEditor,jdbcType=VARCHAR},
+      </if>
+      <if test="cLegalCount != null" >
+        C_LEGAL_COUNT = #{cLegalCount,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where C_LEGAL_ID = #{cLegalId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jzsx.xlha.bean.TLegalPublicity" >
+    update T_LEGAL_PUBLICITY
+    set C_LEGAL_TYPE = #{cLegalType,jdbcType=DECIMAL},
+      C_LEGAL_TITLE = #{cLegalTitle,jdbcType=VARCHAR},
+      C_LEGAL_CONTENT = #{cLegalContent,jdbcType=VARCHAR},
+      C_LEGAL_IMAGE = #{cLegalImage,jdbcType=VARCHAR},
+      C_LEGAL_VIDEO = #{cLegalVideo,jdbcType=VARCHAR},
+      C_LEGAL_STARTTIME = #{cLegalStarttime,jdbcType=VARCHAR},
+      C_LEGAL_STOPTIME = #{cLegalStoptime,jdbcType=VARCHAR},
+      C_FOREIGN_USERID = #{cForeignUserid,jdbcType=VARCHAR},
+      C_LEGAL_CREATETIME = #{cLegalCreatetime,jdbcType=TIMESTAMP},
+      C_LEGAL_CREATE = #{cLegalCreate,jdbcType=VARCHAR},
+      C_LEGAL_EDITOR = #{cLegalEditor,jdbcType=VARCHAR},
+      C_LEGAL_COUNT = #{cLegalCount,jdbcType=DECIMAL}
+    where C_LEGAL_ID = #{cLegalId,jdbcType=VARCHAR}
+  </update>
+</mapper>

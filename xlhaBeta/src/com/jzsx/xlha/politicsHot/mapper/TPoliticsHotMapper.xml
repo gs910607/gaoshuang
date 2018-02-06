@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jzsx.xlha.politicsHot.mapper.TPoliticsHotMapper" >
+  <resultMap id="BaseResultMap" type="com.jzsx.xlha.bean.TPoliticsHot" >
+    <result column="C_POLITICS_ID" property="cPoliticsId" jdbcType="VARCHAR" />
+    <result column="C_POLITICS_TYPE" property="cPoliticsType" jdbcType="DECIMAL" />
+    <result column="C_POLITICS_TITLE" property="cPoliticsTitle" jdbcType="VARCHAR" />
+    <result column="C_POLITICS_IMAGE" property="cPoliticsImage" jdbcType="VARCHAR" />
+    <result column="C_POLITICS_VIDEO" property="cPoliticsVideo" jdbcType="VARCHAR" />
+    <result column="C_POLITICS_STARTTIME" property="cPoliticsStarttime" jdbcType="VARCHAR" />
+    <result column="C_POLITICS_STOPTIME" property="cPoliticsStoptime" jdbcType="VARCHAR" />
+    <result column="C_FOREIGN_USERID" property="cForeignUserid" jdbcType="VARCHAR" />
+    <result column="C_POLITICS_CREATETIME" property="cPoliticsCreatetime" jdbcType="TIMESTAMP" />
+    <result column="C_POLITICS_CREATE" property="cPoliticsCreate" jdbcType="VARCHAR" />
+    <result column="C_POLITICS_EDITOR" property="cPoliticsEditor" jdbcType="VARCHAR" />
+    <result column="C_POLITICS_COUNT" property="cPoliticsCount" jdbcType="DECIMAL" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.jzsx.xlha.bean.TPoliticsHot" extends="BaseResultMap" >
+    <result column="C_POLITICS_CONTENT" property="cPoliticsContent" jdbcType="CLOB" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    C_POLITICS_ID, C_POLITICS_TYPE, C_POLITICS_TITLE, C_POLITICS_IMAGE, C_POLITICS_VIDEO, 
+    C_POLITICS_STARTTIME, C_POLITICS_STOPTIME, C_FOREIGN_USERID, C_POLITICS_CREATETIME, 
+    C_POLITICS_CREATE, C_POLITICS_EDITOR, C_POLITICS_COUNT
+  </sql>
+  <sql id="Blob_Column_List" >
+    C_POLITICS_CONTENT
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.jzsx.xlha.bean.TPoliticsHotExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from T_POLITICS_HOT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jzsx.xlha.bean.TPoliticsHotExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_POLITICS_HOT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.jzsx.xlha.bean.TPoliticsHotExample" >
+    delete from T_POLITICS_HOT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jzsx.xlha.bean.TPoliticsHot" >
+    insert into T_POLITICS_HOT (C_POLITICS_ID, C_POLITICS_TYPE, C_POLITICS_TITLE, 
+      C_POLITICS_IMAGE, C_POLITICS_VIDEO, C_POLITICS_STARTTIME, 
+      C_POLITICS_STOPTIME, C_FOREIGN_USERID, C_POLITICS_CREATETIME, 
+      C_POLITICS_CREATE, C_POLITICS_EDITOR, C_POLITICS_COUNT, 
+      C_POLITICS_CONTENT)
+    values (#{cPoliticsId,jdbcType=VARCHAR}, #{cPoliticsType,jdbcType=DECIMAL}, #{cPoliticsTitle,jdbcType=VARCHAR}, 
+      #{cPoliticsImage,jdbcType=VARCHAR}, #{cPoliticsVideo,jdbcType=VARCHAR}, #{cPoliticsStarttime,jdbcType=VARCHAR}, 
+      #{cPoliticsStoptime,jdbcType=VARCHAR}, #{cForeignUserid,jdbcType=VARCHAR}, #{cPoliticsCreatetime,jdbcType=TIMESTAMP}, 
+      #{cPoliticsCreate,jdbcType=VARCHAR}, #{cPoliticsEditor,jdbcType=VARCHAR}, #{cPoliticsCount,jdbcType=DECIMAL}, 
+      #{cPoliticsContent,jdbcType=CLOB})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jzsx.xlha.bean.TPoliticsHot" >
+    insert into T_POLITICS_HOT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cPoliticsId != null" >
+        C_POLITICS_ID,
+      </if>
+      <if test="cPoliticsType != null" >
+        C_POLITICS_TYPE,
+      </if>
+      <if test="cPoliticsTitle != null" >
+        C_POLITICS_TITLE,
+      </if>
+      <if test="cPoliticsImage != null" >
+        C_POLITICS_IMAGE,
+      </if>
+      <if test="cPoliticsVideo != null" >
+        C_POLITICS_VIDEO,
+      </if>
+      <if test="cPoliticsStarttime != null" >
+        C_POLITICS_STARTTIME,
+      </if>
+      <if test="cPoliticsStoptime != null" >
+        C_POLITICS_STOPTIME,
+      </if>
+      <if test="cForeignUserid != null" >
+        C_FOREIGN_USERID,
+      </if>
+      <if test="cPoliticsCreatetime != null" >
+        C_POLITICS_CREATETIME,
+      </if>
+      <if test="cPoliticsCreate != null" >
+        C_POLITICS_CREATE,
+      </if>
+      <if test="cPoliticsEditor != null" >
+        C_POLITICS_EDITOR,
+      </if>
+      <if test="cPoliticsCount != null" >
+        C_POLITICS_COUNT,
+      </if>
+      <if test="cPoliticsContent != null" >
+        C_POLITICS_CONTENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cPoliticsId != null" >
+        #{cPoliticsId,jdbcType=VARCHAR},
+      </if>
+      <if test="cPoliticsType != null" >
+        #{cPoliticsType,jdbcType=DECIMAL},
+      </if>
+      <if test="cPoliticsTitle != null" >
+        #{cPoliticsTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="cPoliticsImage != null" >
+        #{cPoliticsImage,jdbcType=VARCHAR},
+      </if>
+      <if test="cPoliticsVideo != null" >
+        #{cPoliticsVideo,jdbcType=VARCHAR},
+      </if>
+      <if test="cPoliticsStarttime != null" >
+        #{cPoliticsStarttime,jdbcType=VARCHAR},
+      </if>
+      <if test="cPoliticsStoptime != null" >
+        #{cPoliticsStoptime,jdbcType=VARCHAR},
+      </if>
+      <if test="cForeignUserid != null" >
+        #{cForeignUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="cPoliticsCreatetime != null" >
+        #{cPoliticsCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cPoliticsCreate != null" >
+        #{cPoliticsCreate,jdbcType=VARCHAR},
+      </if>
+      <if test="cPoliticsEditor != null" >
+        #{cPoliticsEditor,jdbcType=VARCHAR},
+      </if>
+      <if test="cPoliticsCount != null" >
+        #{cPoliticsCount,jdbcType=DECIMAL},
+      </if>
+      <if test="cPoliticsContent != null" >
+        #{cPoliticsContent,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jzsx.xlha.bean.TPoliticsHotExample" resultType="java.lang.Integer" >
+    select count(*) from T_POLITICS_HOT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update T_POLITICS_HOT
+    <set >
+      <if test="record.cPoliticsId != null" >
+        C_POLITICS_ID = #{record.cPoliticsId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cPoliticsType != null" >
+        C_POLITICS_TYPE = #{record.cPoliticsType,jdbcType=DECIMAL},
+      </if>
+      <if test="record.cPoliticsTitle != null" >
+        C_POLITICS_TITLE = #{record.cPoliticsTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cPoliticsImage != null" >
+        C_POLITICS_IMAGE = #{record.cPoliticsImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cPoliticsVideo != null" >
+        C_POLITICS_VIDEO = #{record.cPoliticsVideo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cPoliticsStarttime != null" >
+        C_POLITICS_STARTTIME = #{record.cPoliticsStarttime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cPoliticsStoptime != null" >
+        C_POLITICS_STOPTIME = #{record.cPoliticsStoptime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cForeignUserid != null" >
+        C_FOREIGN_USERID = #{record.cForeignUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cPoliticsCreatetime != null" >
+        C_POLITICS_CREATETIME = #{record.cPoliticsCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.cPoliticsCreate != null" >
+        C_POLITICS_CREATE = #{record.cPoliticsCreate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cPoliticsEditor != null" >
+        C_POLITICS_EDITOR = #{record.cPoliticsEditor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cPoliticsCount != null" >
+        C_POLITICS_COUNT = #{record.cPoliticsCount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.cPoliticsContent != null" >
+        C_POLITICS_CONTENT = #{record.cPoliticsContent,jdbcType=CLOB},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update T_POLITICS_HOT
+    set C_POLITICS_ID = #{record.cPoliticsId,jdbcType=VARCHAR},
+      C_POLITICS_TYPE = #{record.cPoliticsType,jdbcType=DECIMAL},
+      C_POLITICS_TITLE = #{record.cPoliticsTitle,jdbcType=VARCHAR},
+      C_POLITICS_IMAGE = #{record.cPoliticsImage,jdbcType=VARCHAR},
+      C_POLITICS_VIDEO = #{record.cPoliticsVideo,jdbcType=VARCHAR},
+      C_POLITICS_STARTTIME = #{record.cPoliticsStarttime,jdbcType=VARCHAR},
+      C_POLITICS_STOPTIME = #{record.cPoliticsStoptime,jdbcType=VARCHAR},
+      C_FOREIGN_USERID = #{record.cForeignUserid,jdbcType=VARCHAR},
+      C_POLITICS_CREATETIME = #{record.cPoliticsCreatetime,jdbcType=TIMESTAMP},
+      C_POLITICS_CREATE = #{record.cPoliticsCreate,jdbcType=VARCHAR},
+      C_POLITICS_EDITOR = #{record.cPoliticsEditor,jdbcType=VARCHAR},
+      C_POLITICS_COUNT = #{record.cPoliticsCount,jdbcType=DECIMAL},
+      C_POLITICS_CONTENT = #{record.cPoliticsContent,jdbcType=CLOB}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update T_POLITICS_HOT
+    set C_POLITICS_ID = #{record.cPoliticsId,jdbcType=VARCHAR},
+      C_POLITICS_TYPE = #{record.cPoliticsType,jdbcType=DECIMAL},
+      C_POLITICS_TITLE = #{record.cPoliticsTitle,jdbcType=VARCHAR},
+      C_POLITICS_IMAGE = #{record.cPoliticsImage,jdbcType=VARCHAR},
+      C_POLITICS_VIDEO = #{record.cPoliticsVideo,jdbcType=VARCHAR},
+      C_POLITICS_STARTTIME = #{record.cPoliticsStarttime,jdbcType=VARCHAR},
+      C_POLITICS_STOPTIME = #{record.cPoliticsStoptime,jdbcType=VARCHAR},
+      C_FOREIGN_USERID = #{record.cForeignUserid,jdbcType=VARCHAR},
+      C_POLITICS_CREATETIME = #{record.cPoliticsCreatetime,jdbcType=TIMESTAMP},
+      C_POLITICS_CREATE = #{record.cPoliticsCreate,jdbcType=VARCHAR},
+      C_POLITICS_EDITOR = #{record.cPoliticsEditor,jdbcType=VARCHAR},
+      C_POLITICS_COUNT = #{record.cPoliticsCount,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <!-- 添加 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.jzsx.xlha.bean.TPoliticsHot" >
+    update T_POLITICS_HOT
+    <set >
+      <if test="cPoliticsTitle != null" >
+        C_POLITICS_TITLE = #{cPoliticsTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="cPoliticsCreatetime != null" >
+        C_POLITICS_CREATETIME = #{cPoliticsCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cForeignUserid != null" >
+        C_FOREIGN_USERID = #{cForeignUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="cPoliticsEditor != null" >
+        C_POLITICS_EDITOR = #{cPoliticsEditor,jdbcType=VARCHAR},
+      </if>
+      <if test="cPoliticsCreate != null" >
+        C_POLITICS_CREATE = #{cPoliticsCreate,jdbcType=VARCHAR},
+      </if>
+      <if test="cPoliticsCount != null" >
+        C_POLITICS_COUNT = #{cPoliticsCount,jdbcType=DECIMAL},
+      </if>
+      <if test="cPoliticsContent != null" >
+        C_POLITICS_CONTENT = #{cPoliticsContent,jdbcType=CLOB},
+      </if>
+      <if test="cPoliticsType != null" >
+        C_POLITICS_TYPE = #{cPoliticsType,jdbcType=DECIMAL},
+      </if>
+      <if test="cPoliticsImage != null" >
+        C_POLITICS_IMAGE = #{cPoliticsImage,jdbcType=VARCHAR},
+      </if>
+      <if test="cPoliticsVideo != null" >
+        C_POLITICS_VIDEO = #{cPoliticsVideo,jdbcType=VARCHAR},
+      </if>
+      <if test="cPoliticsStarttime != null" >
+        C_POLITICS_STARTTIME = #{cPoliticsStarttime,jdbcType=VARCHAR},
+      </if>
+       <if test="cPoliticsStoptime != null" >
+        C_POLITICS_STOPTIME = #{cPoliticsStoptime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where C_POLITICS_ID = #{cPoliticsId,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from T_POLITICS_HOT
+    where C_POLITICS_ID = #{cPoliticsId,jdbcType=VARCHAR}
+  </select>
+  
+   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from T_POLITICS_HOT
+    where C_POLITICS_ID = #{cPoliticsId,jdbcType=VARCHAR}
+  </delete>
+</mapper>

@@ -45,7 +45,7 @@ public interface resService {
 	 *		continuousPresenceMode		Integer	多画面模式	  0-55 其中 4 与9 不支持  
 	 * @return	ConferenceInfoEx
 	 */
-	public Result scheduleConfEx(ConferenceInfoEx cfinfo);
+	public Result scheduleConfEx(ConferenceInfoEx cfinfo,String uri);
 		
 	
 	/*获取mcu

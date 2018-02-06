@@ -11,7 +11,13 @@ var videoPlayer = function() {
 	var ztreecodedata = null ;
 	// 用户登录后的tokenId值
 	var _tokenId = null;
-
+	
+	//分屏初始化参控制
+	var videocount = document.getElementById("addX") ;
+	//分屏的大小及分屏的个数
+	var setCountsize = 1;
+	var setCountnum = 0;
+	
 	var PlayPoints = [ 16 ];
 	var _zTreeObj = null;
 
@@ -23,10 +29,35 @@ var videoPlayer = function() {
 
 	// region 登录及检查
 	var _initPlayer = function() {
-		//ztree 高
-		var ztreeheight = $("#treeDemo").parent().parent().height()-2-10 ; 
-		$("#treeDemo").css({height:ztreeheight+"px"});
+		var ztreeheight ;
+		try{
+			var userdata = JSON.parse(localStorage.info||null) ;
+			if(userdata && userdata.usergroupid.toString().length < 3){
+				ztreeheight = $("#treeDemo").parent().parent().height()-2-10 -36 ;
+				$(".videosite").click(function(){
+					window.location.href = "./videoPointInfo.html?type=1" 
+				});
+			}else{
+				$(".videosite").parent().hide();
+				ztreeheight = $("#treeDemo").parent().parent().height()-2-10 ;
+			}
+			//ztree 高
+			$("#treeDemo").css({height:ztreeheight+"px"});
+			//初始化视频控件
+			if(userdata && userdata.username){
+				var userinit = userdata.username + "/" + userdata.realname ;
+				var initdata = videocount.Init(userinit,1); 
+			}
+			videocount.SetWndCount(1);
+		}catch(e){
+			alert("视屏控件初始化失败,请选择ie浏览器并安装插件");
+		}
+		
 		_loginServer();
+		
+		window.onbeforeunload = function(){
+			videocount.StopAllPlay();
+		};
 	};
 
 	var _loginServer = function() {
@@ -37,7 +68,7 @@ var videoPlayer = function() {
 					_tokenId = data.data.token;
 					_loadDeviceTree();
 				} else {
-					alert(data.message);
+					alert(data.message||"登陆失败!");
 				}
 			})
 		} else {
@@ -52,7 +83,7 @@ var videoPlayer = function() {
 		eplayctrl.APPOpenRealPlay(wndIndex, videoUrl);
 		PlayPoints[wndIndex] = treeId;
 	};
-
+	
 	var _loadDeviceTree = function() {
 
 		/*$.post(_urlTopGroup, {
@@ -149,6 +180,7 @@ var videoPlayer = function() {
 					_zTreeObj = $.fn.zTree
 							.init($(_treeObject), setting, zTreeNodes);
 			}
+			
 		})
 	};
 
@@ -156,97 +188,132 @@ var videoPlayer = function() {
 		if(treeNode.code.length < 9){
 			$.post("/spywBeta/area/arealistByChildrens.do", {parentId:treeNode.code}, function(data) {
 				if(data.status == 1){
-					if(data.list.length > 0){
-						var groupNodeList = [];
-						if(ztreecodedata && data.list[0].code.length == 6 && ztreecodedata.length >= 6){
-							for(i =0 ; data.list.length > i ; i++){
-								if(ztreecodedata.substr(0,6) == data.list[i].code){
-									groupNodeList.push({
-										id : data.list[i].id,
-										name : data.list[i].name,
-										open : false,
-										isParent : true,
-										type : "group",
-										parentId:data.list[i].parentId,
-										code:data.list[i].code
-									});
+					$.post("/spywBeta/monitoring/selectInfo.do",{videoinfoType:1,videoinfoCode:treeNode.code},function(dataInfo){
+						if(dataInfo.status == 1){      
+							var groupNodeList = [];
+							if(ztreecodedata && data.list[0].code.length == 6 && ztreecodedata.length >= 6 && data.list.length > 0){
+								for(i =0 ; data.list.length > i ; i++){
+									if(ztreecodedata.substr(0,6) == data.list[i].code){
+										groupNodeList.push({
+											id : data.list[i].id,
+											name : data.list[i].name,
+											open : false,
+											isParent : true,
+											type : "group",
+											parentId:data.list[i].parentId,
+											code:data.list[i].code
+										});
+									}
+								}
+								if(dataInfo.status == 1 && dataInfo.list.length > 0 && ( !ztreecodedata || ztreecodedata.length < 6)){
+									for(i =0 ; dataInfo.list.length > i ; i++){
+										groupNodeList.push({
+											id : dataInfo.list[i].videoinfovideoId,
+											name : dataInfo.list[i].videoinfoName,
+											open : false,
+											isParent : false,
+											type : "group",
+										});
+									}
+								}
+							}else if(ztreecodedata && data.list[0].code.length == 9 && ztreecodedata.length == 9 && data.list.length > 0){
+								for(i =0 ; data.list.length > i ; i++){
+									if(ztreecodedata == data.list[i].code){
+										groupNodeList.push({
+											id : data.list[i].id,
+											name : data.list[i].name,
+											open : false,
+											isParent : true,
+											type : "group",
+											parentId:data.list[i].parentId,
+											code:data.list[i].code
+										});
+									}
+								}
+								if(dataInfo.status == 1 && dataInfo.list.length > 0 && ( !ztreecodedata || ztreecodedata.length < 9)){
+									for(i =0 ; dataInfo.list.length > i ; i++){
+										groupNodeList.push({
+											id : dataInfo.list[i].videoinfovideoId,
+											name : dataInfo.list[i].videoinfoName,
+											open : false,
+											isParent : false,
+											type : "group",
+										});
+									}
+								}
+							}else{ 
+								//市级单位 区县
+								if(data.list.length > 0){
+									for(i =0 ; data.list.length > i ; i++){
+										groupNodeList.push({
+											id : data.list[i].id,
+											name : data.list[i].name,
+											open : false,
+											isParent : true,
+											type : "group",
+											parentId:data.list[i].parentId,
+											code:data.list[i].code
+										});
+									}
+								}
+								
+								if(dataInfo.status == 1 && dataInfo.list.length > 0){
+									for(i =0 ; dataInfo.list.length > i ; i++){
+										groupNodeList.push({
+											id : dataInfo.list[i].videoinfovideoId,
+											name : dataInfo.list[i].videoinfoName,
+											open : false,
+											isParent : false,
+											type : "group",
+										});
+									}
+								}
+								
+							}
+							var openb = false ;
+							if(ztreegroup.length > 0){
+								for( i = 0 ; ztreegroup.length > i ; i++){
+									if(data.parentId == ztreegroup[i]){
+										openb = true ;
+										break ;
+									}
 								}
 							}
-						}else if(ztreecodedata && data.list[0].code.length == 9 && ztreecodedata.length == 9){
-							for(i =0 ; data.list.length > i ; i++){
-								if(ztreecodedata == data.list[i].code){
-									groupNodeList.push({
-										id : data.list[i].id,
-										name : data.list[i].name,
-										open : false,
-										isParent : true,
-										type : "group",
-										parentId:data.list[i].parentId,
-										code:data.list[i].code
-									});
-								}
-							}
-						}else{
-							for(i =0 ; data.list.length > i ; i++){
-								groupNodeList.push({
-									id : data.list[i].id,
-									name : data.list[i].name,
-									open : false,
-									isParent : true,
-									type : "group",
-									parentId:data.list[i].parentId,
-									code:data.list[i].code
-								});
+							if(openb == false){
+								ztreegroup.push(data.parentId);
+								_zTreeObj.addNodes(treeNode, groupNodeList);
 							}
 						}
-						var openb = false ;
-						if(ztreegroup.length > 0){
-							for( i = 0 ; ztreegroup.length > i ; i++){
-								if(data.parentId == ztreegroup[i]){
-									openb = true ;
-									break ;
-								}
-							}
-						}
-						if(openb == false){
-							ztreegroup.push(data.parentId);
-							_zTreeObj.addNodes(treeNode, groupNodeList);
-						}
-					}
+					});
 				}
 			})
 		}else{
-			$.post("/spywBeta/videoTraining/videotrainCameraAppjoin.do", {code:treeNode.code}, function(data) {
+			$.post("/spywBeta/monitoring/selectInfo.do", {videoinfoType:1,videoinfoCode:treeNode.code}, function(data) {
 				if(data.status == 1){
 					if(data.list.length > 0){
 						var groupNodeList = [];
 						for(i =0 ; data.list.length > i ; i++){
 							groupNodeList.push({
-								id : data.list[i].camera_id,
-								name : data.list[i].camera_name,
+								id : data.list[i].videoinfovideoId,
+								name : data.list[i].videoinfoName,
 								open : false,
 								isParent : false,
-								camera_type : data.list[i].camera_type,
-								ip_addr : data.list[i].ip_addr,
-								latitude : data.list[i].latitude,
-								longitude : data.list[i].longitude,
-								object_id : data.list[i].object_id,
-								org_code : data.list[i].org_code,
-								place_code : data.list[i].place_code,
-								plat_code : data.list[i].plat_code
+								videoinfoType : data.list[i].videoinfoType,
+								videoinfoCode : data.list[i].videoinfoCode,
+								videoinfoStatus : data.list[i].videoinfoStatus
 							});
 						}
 						var openb = false ;
 						if(ztreepoint.length > 0){
-							for( i = 0 ; ztreegroup.length > i ; i++){
-								if(data.code == ztreepoint[i]){
+							for( i = 0 ; ztreepoint.length > i ; i++){
+								if(treeNode.code == ztreepoint[i]){
 									openb = true ;
 									break ;
 								}
 							}
 						}
 						if(openb == false){
-							ztreepoint.push(data.code);
+							ztreepoint.push(treeNode.code);
 							_zTreeObj.addNodes(treeNode, groupNodeList);
 						}
 					}
@@ -335,11 +402,23 @@ var videoPlayer = function() {
 		if (!treeNode.isParent) {
 			$.post(_urlRealPlay, {
 				pointId : treeNode.id,
-				articulation : 1,
+				articulation : 2,
 				token : _tokenId
 			}, function(data) {
 				if (data && data.code && data.code == 1) {
-					_startPlay(data.data.url, treeId);
+					//_startPlay(data.data.url, treeId);
+					try{
+						if(setCountnum > (setCountsize -1 )){
+				    		videocount.StopPlay(setCountsize -1);
+				    		videocount.StartPlay(data.data.url,setCountsize -1);
+				    	}else{
+				    		videocount.StartPlay(data.data.url,setCountnum);
+				    	}
+					}catch(e){
+						console.log("插件初始化失败")
+					}
+			    	
+			        setCountnum+= 1 ;
 				} else {
 					alert(data.message);
 				}
@@ -353,11 +432,11 @@ var videoPlayer = function() {
 		} else {
 			$(_videoControlBar).hide();
 		}*/
-		if (!treeNode.isParent) {
+		/*if (!treeNode.isParent) {
 			$(_videoControlBar).show();
 		} else {
 			$(_videoControlBar).hide();
-		}
+		}*/
 	};
 
 	/**
@@ -386,10 +465,27 @@ var videoPlayer = function() {
 		}
 	};
 	// endregion
-
+	
+	//摄像头分屏
+	var _SetWindowCount = function(count){
+		try{
+			videocount.StopAllPlay();
+	        var sum2=videocount.SetWndCount(count); 
+	        setCountsize = count;
+	    	setCountnum = 0;
+		}catch(e){  
+	        alert(e);  
+	    }
+	};
+	
+				
+	
 	return {
 		initPlayer : function() {
 			_initPlayer()
+		},
+		SetWindowCount: function(count){
+			_SetWindowCount(count);
 		},
 		videoUpStart : function() {
 			_videoControl(2, 2);

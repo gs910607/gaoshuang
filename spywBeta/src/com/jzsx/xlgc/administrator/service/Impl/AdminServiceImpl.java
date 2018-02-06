@@ -53,9 +53,12 @@ public class AdminServiceImpl implements AdminService {
 		if (!Strings.isNullOrEmpty(user.getUsername())) {
 			criteria.andUsernameLike("%"+user.getUsername()+"%");
 		}
-		//这边后面确认是否有影响
 		if (!Strings.isNullOrEmpty(user.getUsergroupid().toString())) {
-			criteria.andUsergroupidLike(user.getUsergroupid().toString()+"" + "%");
+			if(user.getUsergroupid().toString().length()>1){
+				criteria.andUsergroupidLike(user.getUsergroupid().toString()+"0" + "%");
+			}else{
+				criteria.andUsergroupidNotEqualTo(BigDecimal.valueOf(Long.valueOf("1")));
+			}
 		}else{
 			criteria.andUsergroupidLike(code+"0"+ "%");
 		}

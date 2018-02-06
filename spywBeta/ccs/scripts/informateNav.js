@@ -8,13 +8,14 @@ $(function() {
 		dataType : 'json',
 		success : function(response) {
 			ajaxLoading.hide();
+			console.log(response)
 			if (response != null || response != "") {
 				code = response.usergroupid;
 				if(code.toString().split('').length > 3){
 					$("#informationPub li:nth-child(3)").remove();
 				}
 				if (code.toString().split('').length== 9) {
-					$("#informationPub").find("#addPub").remove();
+					// $("#informationPub").find("#addPub").remove();
 				}
 			}
 		},
@@ -34,13 +35,13 @@ $(function() {
 
 });
 
-$("#postMessage").on("click", function() {
+// $("#postMessage").on("click", function() {
 
-	if(code.toString().split('').length==9){
+// 	if(code.toString().split('').length==9){
 		
-		isDelete("您没有信息发布的权限！", function() {});
-	}
+// 		isDelete("您没有信息发布的权限！", function() {});
+// 	}
 
 
 
-});
+// });

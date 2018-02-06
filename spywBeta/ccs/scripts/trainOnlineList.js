@@ -131,7 +131,7 @@ function endConfer(event) {
 	}
 }
 function timeAdd(createTime, duration) {
-	createTime = new Date(createTime).getTime();
+	createTime = new Date(new Date(Date.parse(createTime.replace(/-/g,"/"))).getTime()).getTime();
 	duration = new Date(duration*60*60*1000).getTime();
 	return new Date(createTime + duration).getTime();
 }

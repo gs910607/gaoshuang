@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.serializer.SimplePropertyPreFilter;
 import com.google.common.base.Strings;
 import com.jzsx.xlgc.area.Service.AreaService;
@@ -26,7 +28,7 @@ import com.jzsx.xlgc.utils.SessionUtil;
 @Controller
 @RequestMapping("/area")
 public class AreaController {
-
+static Logger logger=Logger.getLogger(AreaController.class);
 	@Autowired
 	private AreaService areaService;
 
@@ -40,13 +42,16 @@ public class AreaController {
 	@ResponseBody
 	@RequestMapping("/arealist.do")
 	public Map<String, Object> arealist(HttpServletRequest request) {
+		logger.debug("arealist.do 查询所有数据 开始");
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<Area> list = areaService.queryList();
 		CasUser appUser = (CasUser) request.getSession().getAttribute("appUser");
 		if (appUser != null) {
 			map.put("code", appUser.getUsergroupid());
+			logger.debug("code:"+appUser.getUsergroupid());
 		}
 		map.put("list", list);
+		logger.debug("查询所有数据结束");
 		return map;
 	}
 
@@ -60,13 +65,16 @@ public class AreaController {
 	@ResponseBody
 	@RequestMapping("/arealistByAll.do")
 	public Map<String, Object> arealistByAll(Area area, HttpServletRequest request) {
+		logger.debug("arealistByAll.do 根据条件查询-暂不支持条件查询 开始");
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<Area> list = areaService.queryByALl(area);
 		CasUser appUser = (CasUser) request.getSession().getAttribute("appUser");
 		if (appUser != null) {
 			map.put("code", appUser.getUsergroupid());
+			logger.debug("code:"+appUser.getUsergroupid());
 		}
 		map.put("list", list);
+		logger.debug("根据条件查询结束");
 		return map;
 	}
 
@@ -81,13 +89,16 @@ public class AreaController {
 	@RequestMapping("/arealistByCode.do")
 	public Map<String, Object> arealistByCode(@RequestParam(value = "code", required = false) String code,
 			HttpServletRequest request) {
+		logger.debug("arealistByCode.do 根据code查询地区数据 开始");
 		Map<String, Object> map = new HashMap<String, Object>();
 		Area area = areaService.queryByCode(code);
 		CasUser appUser = (CasUser) request.getSession().getAttribute("appUser");
 		if (appUser != null) {
 			map.put("code", appUser.getUsergroupid());
+			logger.debug("code:"+appUser.getUsergroupid());
 		}
 		map.put("list", area);
+		logger.debug("根据code查询地区数据结束");
 		return map;
 	}
 
@@ -102,13 +113,16 @@ public class AreaController {
 	@RequestMapping("/arealistById.do")
 	public Map<String, Object> arealistById(@RequestParam(value = "id", required = false) String id,
 			HttpServletRequest request) {
+		logger.debug("arealistById.do 根据ID查询地区数据 开始");
 		Map<String, Object> map = new HashMap<String, Object>();
 		Area area = areaService.queryById(id);
 		CasUser appUser = (CasUser) request.getSession().getAttribute("appUser");
 		if (appUser != null) {
 			map.put("code", appUser.getUsergroupid());
+			logger.debug("code:"+appUser.getUsergroupid());
 		}
 		map.put("list", area);
+		logger.debug("根据ID查询地区数据结束");
 		return map;
 	}
 
@@ -123,13 +137,16 @@ public class AreaController {
 	@RequestMapping("/arealistByPartendId.do")
 	public Map<String, Object> arealistByPartendId(@RequestParam(value = "parentId", required = false) String parentId,
 			HttpServletRequest request) {
+		logger.debug("arealistByPartendId.do 根据父code查找数据 开始");
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<Area> list = areaService.queryByParentId(parentId);
 		CasUser appUser = (CasUser) request.getSession().getAttribute("appUser");
 		if (appUser != null) {
 			map.put("code", appUser.getUsergroupid());
+			logger.debug("code:"+appUser.getUsergroupid());
 		}
 		map.put("list", list);
+		logger.debug(" 根据父code查找数据结束");
 		return map;
 	}
 	/**
@@ -143,6 +160,7 @@ public class AreaController {
 	@RequestMapping(value="/arealistByChildrens.do",method=RequestMethod.POST)
 	public Map<String, Object> arealistByChildrens( String parentId,@RequestParam(required=false,value="type")String type,
 			HttpServletRequest request) {
+		logger.debug("arealistByChildrens.do 根据父code查找子类数据app接口 开始");
 		Map<String, Object> map = new HashMap<String, Object>();
 		Calendar calendar=Calendar.getInstance();
 		long b=calendar.getTimeInMillis();
@@ -167,13 +185,18 @@ public class AreaController {
 						}
 					}
 				}
+				logger.debug("参数——parentId："+parentId+"——type："+type+"执行递归对地区分层  开始");
 				list=queryareajson(list,parentId);
+				logger.debug("执行递归对地区分层  结束");
 				Calendar calenda=Calendar.getInstance();
 				long c=calenda.getTimeInMillis();
-				System.out.println("开始："+b);
-				System.out.println("结束："+c);
-				System.out.println("耗时："+(c-b));
-				System.out.println("list:"+list);
+				logger.debug("开始："+b);
+				logger.debug("结束："+c);
+				logger.debug("耗时："+(c-b));
+//				System.out.println("开始："+b);
+//				System.out.println("结束："+c);
+//				System.out.println("耗时："+(c-b));
+//				System.out.println("list:"+list);
 				map.put("parentId", parentId);
 				map.put("status", 1);
 				map.put("list", list);
@@ -183,9 +206,11 @@ public class AreaController {
 				map.put("status", -1);
 				map.put("msg", "传参方式不对！");
 			}
+			logger.debug("根据父code查找子类数据app接口 结束");
 		} catch (Exception e) {
 			map.put("status", -2);
 			map.put("msg", "操作异常");
+			logger.info("arealistByChildrens.do 根据父code查找子类数据app接口 异常 status：-2",e);
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -198,6 +223,7 @@ public class AreaController {
 	 * @return
 	 */
 	public static List<Area> queryareajson(List<Area> list,String parentId){
+		logger.debug("对所属地区进行分层级：传参parentId："+parentId);
 		List<Area> arealist = new ArrayList<Area>();
 		if(list!=null){
 			if(list.size()>0){
@@ -213,6 +239,7 @@ public class AreaController {
 				}
 			}
 		}
+		logger.debug("对所属地区进行分层级结束");
 		return arealist;
 	}
 	/**
@@ -280,13 +307,16 @@ public class AreaController {
 	@RequestMapping("/arealistByPartends.do")
 	public Map<String, Object> arealistByPartends(@RequestParam(value = "code", required = false) String code,
 			HttpServletRequest request) {
+		logger.debug("arealistByPartends.do 根据村镇的code查找市区县乡镇村数据 开始");
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<Area> list = areaService.queryByParents(code);
 		CasUser appUser = (CasUser) request.getSession().getAttribute("appUser");
 		if (appUser != null) {
 			map.put("code", appUser.getUsergroupid());
+			logger.debug("code:"+appUser.getUsergroupid());
 		}
 		map.put("list", list);
+		logger.debug("根据村镇的code查找市区县乡镇村数据 结束");
 		return map;
 	}
 
@@ -296,6 +326,7 @@ public class AreaController {
 		CasUser user = SessionUtil.getSession(request);
 		if(user==null){
 			Map<String, String> map=new HashMap<String, String>();
+			request.getSession().invalidate();
 			map.put("msg", "未登录");
 			map.put("ststus", "0");
 			return JSON.toJSONString(map);
@@ -338,5 +369,68 @@ public class AreaController {
 		List<Area> list = areaService.queryListq();
 		return JSON.toJSONString(list);
 		
+	}
+	/**
+	 * 获取地区json
+	 * @param type 1获取地区code和地区名称   2获取名称、mcu、code、phone
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/arealistgetJson.do")
+	public Map<String, Object> arealistgetJson(@RequestParam(value = "type", required = false) String type,
+			HttpServletRequest request) {
+		logger.debug("arealistgetJson.do 获取地区json数据 开始");
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(type!=null){
+			List<Area> list = areaService.queryBychilds("0");
+			Area area = areaService.queryByCode("1");
+			List<Map<String, Object>> arrylist=new ArrayList<Map<String,Object>>();
+			if(type.equals("1")){
+				Map<String, Object> hashmap=new HashMap<String, Object>();
+				if(area!=null){
+					hashmap.put(area.getCode(), area.getName());
+				}
+				arrylist.add(hashmap);
+				if(list!=null){
+					if(list.size()>0){
+						for(Area a:list){
+							hashmap=new HashMap<String, Object>();
+							hashmap.put(a.getCode(), a.getName());
+							arrylist.add(hashmap);
+						}
+					}
+				}
+			}else if(type.equals("2")){
+				Map<String, Object> hashmap=new HashMap<String, Object>();
+				if(area!=null){
+					hashmap.put("areaCode", area.getCode());
+					hashmap.put("areaName", area.getName());
+					hashmap.put("mcu", area.getMcu());
+					hashmap.put("areaId", area.getHphone());
+				}
+				arrylist.add(hashmap);
+				if(list!=null){
+					if(list.size()>0){
+						for(Area a:list){
+							hashmap=new HashMap<String, Object>();
+							hashmap.put("areaCode", a.getCode());
+							hashmap.put("areaName", a.getName());
+							hashmap.put("mcu", a.getMcu());
+							hashmap.put("areaId", a.getHphone());
+							arrylist.add(hashmap);
+						}
+					}
+				}
+			}
+			map.put("status", 1);
+			map.put("msg","成功");
+			map.put("list", arrylist);
+		}else{
+			map.put("status", -1);
+			map.put("msg","参数不正确");
+		}
+		logger.debug("获取地区json数据结束");
+		return map;
 	}
 }

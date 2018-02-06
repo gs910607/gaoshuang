@@ -7,37 +7,37 @@ import org.springframework.context.annotation.ComponentScan.Filter;
 import com.alibaba.fastjson.annotation.JSONField;
 
 public class TVideoConference {
-    private String confId;
+    private String confId;//会议id
 
-    private String name;
+    private String name;//会议名称
 
-    private Date beginTime;
+    private Date beginTime;//会议开始时间
 
-    private String duration;
+    private String duration;//会议时长
 
-    private String accessCode;
+    private String accessCode;//会议标识码
 
-    private String recorderAddr;
+    private String recorderAddr;//直播地址
 
-    private Integer isRecording;
+    private Integer isRecording;//是否支持录播
 
-    private String chairmanPassword;
+    private String chairmanPassword;//主席密码
 
-    private Integer mainMcuId;
+    private Integer mainMcuId;//主mcu
 
-    private String sites;
+    private String sites;//会场信息
 
-    private Integer type;
+    private Integer type;//类型
 
-    private String createName;
+    private String createName;//创建者
     
-    private Integer status;
+    private Integer status;//状态
     
-    private String userId;
+    private String userId;//创建者的地区表code,对应user表的groupid字段
     
-    private Date start;
+    private Date start;//开始时间（用作搜索条件）
     
-    private Date stop;
+    private Date stop;//结束时间（用作搜索条件）
     
     
 
@@ -169,4 +169,12 @@ public class TVideoConference {
     public void setCreateName(String createName) {
         this.createName = createName == null ? null : createName.trim();
     }
+
+	@Override
+	public String toString() {
+		return "TVideoConference [name=" + name + ", beginTime=" + beginTime + ", duration=" + duration
+				+ ", accessCode=" + accessCode + ", isRecording=" + isRecording + "]";
+	}
+    
+    
 }

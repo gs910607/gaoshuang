@@ -106,5 +106,23 @@ public class VideoNeighborhoodServiceImpl implements VideoNeighborhoodService{
 		return videoNeighborhoodDao.queryneighmonth(neighChart);
 	}
 
+	@Override
+	public int queryByCodeofcount(String videoneihdLocationplace) {
+		// TODO Auto-generated method stub
+		return videoNeighborhoodDao.queryByCodeofcount(videoneihdLocationplace);
+	}
+
+	@Override
+	public List<NeighChart> queryTypeneighmonth(NeighChart neighChart) {
+		// TODO Auto-generated method stub
+		return videoNeighborhoodDao.queryTypeneighmonth(neighChart);
+	}
+
+	@Override
+	public List<NeighChart> queryTypeneighmonths(NeighChart neighChart) {
+		// TODO Auto-generated method stub
+		return videoNeighborhoodDao.queryTypeneighmonths(neighChart);
+	}
+
 
 }

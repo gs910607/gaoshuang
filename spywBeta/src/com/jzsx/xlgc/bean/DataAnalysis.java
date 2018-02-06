@@ -3,19 +3,31 @@ package com.jzsx.xlgc.bean;
 public class DataAnalysis {
 	
 	
-	private int count;
+	private int count;//总数
 	
-	private String code;
+	private String code;//区域code
 	
-	private String name;
+	private String name;//区域名称
 
-	private int fail;
+	private int fail;//失败次数
 	
-	private int success;
+	private int success;//成功次数
 	
-	private int middle;
+	private int middle;//解决中次数
+	
+	private int duration;//调节时长
 	
 	
+	
+	
+
+	public int getDuration() {
+		return duration;
+	}
+
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
 
 	public int getMiddle() {
 		return middle;

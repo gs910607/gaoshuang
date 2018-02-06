@@ -1,4 +1,52 @@
-// 全局js
+// 获取用户名
+;(function(){
+	$.ajax({
+	    url:"/spywBeta/area/getCode.do",    //请求的url地址
+	    dataType:"json",   //返回格式为json
+	    type:"post",   //请求方式
+	    success:function(req){
+
+	    	if(req.status==0){
+	    		return;
+	    	}
+	    	info=req;
+	    	userAppUserName=req.realname;
+
+	    	if(typeof(userAppUserName) == 'undefined' ){
+	    		userAppUserName="";
+	    		if($(".loginWrapper .dropWrap ul").attr("id") == 'indexDrop') {
+					location.href = "index.html";
+				} else {
+					location.href = "../index.html";
+				}
+	    	}
+
+	    	if(info.usergroupid.toString().length>6){
+				$(".dropWrap").find($("#adminLink")).remove();
+			}
+
+    		$(".userName").html('<span>'+userAppUserName+'</span>，');
+	    	
+	    },
+	    error: function() {
+	    	alert("登录超时，请刷新页面并重新登录!");
+	    }
+	});
+})();
+
+// 获取字符长度,包含英文数字汉字
+function getStringLength(str) {
+	var len = 0;
+	for(var i=0;i<str.length;i++) {
+		if(str.charCodeAt(i) >= 0 && str.charCodeAt(i) <= 256) {
+			len += 1;
+		} else {
+			len += 2;
+		}
+	};
+
+	return len;
+};
 
 //获取url参数
 function GetQueryString(name) {
@@ -109,24 +157,24 @@ $(".loginWrapper").mouseleave(function() {
 });
 
 if($(".loginWrapper .dropWrap ul").attr("id") == 'indexDrop') {
-	$(".loginWrapper .dropWrap ul").prepend('<li class="personDetail"><a href="./personalDetails/personalDetails.html" target="_blank">个人信息</a></li>')
+	$(".loginWrapper .dropWrap ul").prepend('<li class="personDetail"><a href="./personalDetails/personalDetails.html">个人信息</a></li>')
 } else {
-	$(".loginWrapper .dropWrap ul").prepend('<li class="personDetail"><a href="../personalDetails/personalDetails.html" target="_blank">个人信息</a></li>')
+	$(".loginWrapper .dropWrap ul").prepend('<li class="personDetail"><a href="../personalDetails/personalDetails.html">个人信息</a></li>')
 }
 
 $(".loginWrapper #adminLink").on("click", function() {
 	if($(".loginWrapper .dropWrap ul").attr("id") == 'indexDrop') {
-		window.open("./administrator/userinfo.html");
+		location.href = "./administrator/userinfo.html";
 	} else {
-		window.open("../administrator/userinfo.html");
+		location.href = "../administrator/userinfo.html";
 	}
 });
 
 $(".loginWrapper .dropWrap li").eq(2).find('a').on("click", function() {
 	if($(this).attr("id") == 'changePass') {
-		window.open("changePassword/changePassword.html");
+		location.href = "changePassword/changePassword.html";
 	} else {
-		window.open("../changePassword/changePassword.html");
+		location.href = "../changePassword/changePassword.html";
 	}
 });
 
@@ -138,38 +186,3 @@ $(".loginWrapper .dropWrap li:last").find('a').on("click", function() {
 	}
 });
 
-var userAppUserName=localStorage.getItem("userAppUserName");
-$(function(){
-	$(".userName").text(userAppUserName);
-})
-function userNameJson(){
-	$.ajax({
-	    url:"/spywBeta/area/getCode.do",    //请求的url地址
-	    dataType:"json",   //返回格式为json
-	    type:"post",   //请求方式
-	    success:function(req){
-	    	if(req.status==0){
-	    		return;
-	    	}
-	    	info=req;
-	    	userAppUserName=req.realname;
-	    	if(typeof(userAppUserName) == 'undefined' ){
-	    		userAppUserName="";
-	    	}
-	    	$(".userName").text(userAppUserName);
-	    	localStorage.removeItem("userAppUserName");
-	    	localStorage.setItem("userAppUserName",userAppUserName); //存
-	    	localStorage.setItem("info",JSON.stringify(req)); //存
-	    	var aaa = localStorage.getItem("userAppUserName"); //取
-	    	
-	    }
-	});
-}
-
-$(function(){
-	userNameJson();
-	var info = JSON.parse(localStorage.getItem("info"));
-	if(info.usergroupid.toString().split('').length>=6){
-		$(".dropWrap").find($("#adminLink")).remove();
-	}
-})

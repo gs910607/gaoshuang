@@ -14,6 +14,8 @@ public class NeighChart {
 	private int count;
 	private int count1;
 	private int count2;
+	private int count3;
+	private int count4;
 	/**
 	 * 名称
 	 */
@@ -116,6 +118,18 @@ public class NeighChart {
 	}
 	public void setState2(String state2) {
 		this.state2 = state2;
+	}
+	public int getCount3() {
+		return count3;
+	}
+	public void setCount3(int count3) {
+		this.count3 = count3;
+	}
+	public int getCount4() {
+		return count4;
+	}
+	public void setCount4(int count4) {
+		this.count4 = count4;
 	}
 	
 	

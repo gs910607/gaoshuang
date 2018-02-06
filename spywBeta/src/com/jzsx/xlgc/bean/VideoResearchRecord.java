@@ -21,7 +21,7 @@ public class VideoResearchRecord {
 	 */
 	private String videoResearchTime;
 	/**
-	 * 视频调研记录创建人名称
+	 * 视频调研记录创建人名称---》存入用户id
 	 */
 	private String videoResearchRealName;
 	/**
@@ -30,7 +30,7 @@ public class VideoResearchRecord {
 	private String videoResearchCode;
 	/**
 	 * 视频调研类型
-	 * 1整场投一票，2一天投一票，3一天投五票
+	 * 1整场投一次，2一天投一次，3一天投五次
 	 */
 	private String videoResearchType;
 	/**

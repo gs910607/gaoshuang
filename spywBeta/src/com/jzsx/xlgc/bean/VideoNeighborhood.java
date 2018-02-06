@@ -166,6 +166,24 @@ public class VideoNeighborhood {
 	 */
 	private String videoneihdRegistratePlace;
 	/**
+	 * 接访人职务
+	 */
+	private String videoneihdPeopleDuty;
+	/**
+	 * 接访人联系方式
+	 */
+	private String videoneihdPeopleContact;
+	/**
+	 * 创建人code
+	 */
+	private String videoneihdCreateCode;
+	public String getVideoneihdCreateCode() {
+		return videoneihdCreateCode;
+	}
+	public void setVideoneihdCreateCode(String videoneihdCreateCode) {
+		this.videoneihdCreateCode = videoneihdCreateCode;
+	}
+	/**
 	 * 关联视频会议表
 	 */
 	private TVideoConference videoConferenceinfo;
@@ -400,6 +418,18 @@ public class VideoNeighborhood {
 	}
 	public void setVideoneihdRegistratePlace(String videoneihdRegistratePlace) {
 		this.videoneihdRegistratePlace = videoneihdRegistratePlace;
+	}
+	public String getVideoneihdPeopleDuty() {
+		return videoneihdPeopleDuty;
+	}
+	public void setVideoneihdPeopleDuty(String videoneihdPeopleDuty) {
+		this.videoneihdPeopleDuty = videoneihdPeopleDuty;
+	}
+	public String getVideoneihdPeopleContact() {
+		return videoneihdPeopleContact;
+	}
+	public void setVideoneihdPeopleContact(String videoneihdPeopleContact) {
+		this.videoneihdPeopleContact = videoneihdPeopleContact;
 	}
 	
 	
