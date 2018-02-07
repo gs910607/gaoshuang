@@ -128,7 +128,7 @@
   border: none;
 }
 .content > ul {
-  margin: 0 -19px;
+  margin: 0 -10px;
 }
 .content .item {
   width: 25%;
@@ -206,7 +206,7 @@ section .goBack {
 }
 .photography {
   height: 100%;
-  padding: 0 10px;
+  padding-left: 15px;
 }
 .photography .itemCont {
   height: 100%;

@@ -41,6 +41,16 @@ function videoResearchload(){
 		},
 		success: function(req) {
 			var list=req.list;
+
+			if(list == undefined) {
+				alert(config.errorArticleMsg);
+	    		setTimeout(function(){
+	    			location.href = 'researchNav.html';
+	    		},1000);
+
+	    		return;
+			}
+
 			var rlist=req.Rlist;
 			var research=req.videoResearch;
 			videoResearchType = research.videoResearchType;

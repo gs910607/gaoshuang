@@ -15,7 +15,6 @@ $("#selectFile").on("change", function() {
                         video = obj.value;
                     }
                 });
-                console.log(data)
 
                 return false;
             }
@@ -143,6 +142,16 @@ function videoTrainload(videoId){
 	    data:{"videoId":videoId},    //参数值
 	    type:"post",   //请求方式
 	    success:function(req){
+
+            if(req.videoTrain == null) {
+                alert(config.errorArticleMsg);
+                setTimeout(function(){
+                    location.href = 'videoTrainNav.html';
+                },1000);
+
+                return;
+            };
+
 	    	$("#messageHeader").val(req.videoTrain.videoName);
 	    	$("#messageContent").val(req.videoTrain.videoRemark);
 	    	$("#messageDigest").val(req.videoTrain.videoTypeId);

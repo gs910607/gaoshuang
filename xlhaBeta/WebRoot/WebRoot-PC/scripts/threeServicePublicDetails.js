@@ -9,12 +9,18 @@ $.ajax({
 	dataType: 'json',
 	success: function(response) {
 		ajaxLoading.hide();
-//		if(response.status != 0) {
-			$(".pictureWrap").html(response.content)
-//	        uParse('.pictureWrap', {
-//	            rootPath: '../'
-//	        })
-//		}
+		
+		if(response == null) {
+			alert(config.errorArticleMsg);
+
+			setTimeout(function(){
+				location.href = "../../index.html"
+			},1000);
+
+			return;
+		}
+
+		$(".pictureWrap").html(response.content)
 	},
 	error: function() {
 		ajaxLoading.hide();

@@ -43,6 +43,17 @@ function videoResearchload(){
 		dataType: 'json',
 		success: function(req) {
 			var list=req.list;
+
+			if(list == undefined) {
+				alert(config.errorArticleMsg);
+
+				setTimeout(function(){
+					location.href = "../../index.html"
+				},1000);
+
+				return;
+			};
+
 			var rlist=req.Rlist;
 			var onlineEvaluation=req.onlineEvaluation;
 			videoResearchType = onlineEvaluation.videoResearchType;

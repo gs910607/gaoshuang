@@ -110,8 +110,8 @@ function getSearchInformation(data) {
 
 $("#search").on("click", function() {
 	artiTitle = $("#exampleInputName2").val();
-	$("#startTime").val() ? startTime = $("#startTime").val() : '';
-	$("#endTime").val() ? endTime = new Date(new Date($("#endTime").val()).setDate(new Date($("#endTime").val()).getDate() + 1)).format("yyyy-MM-dd") : '';
+	startTime = $("#startTime").val() ? $("#startTime").val() : '1970-01-01';
+	endTime = $("#endTime").val() ? new Date(new Date($("#endTime").val()).setDate(new Date($("#endTime").val()).getDate() + 1)).format("yyyy-MM-dd") : new Date(new Date().setDate(new Date().getDate() + 1)).format("yyyy-MM-dd");
 	type = $("#listType").val();
 
 	if(startTime && endTime && startTime > endTime) {

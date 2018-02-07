@@ -1,6 +1,7 @@
 // 全局js
 var config = {
-	sizePage: 10
+	sizePage: 10,
+	errorArticleMsg: '数据不存在!'
 };
 
 $("header > .pull-left > a").focus();

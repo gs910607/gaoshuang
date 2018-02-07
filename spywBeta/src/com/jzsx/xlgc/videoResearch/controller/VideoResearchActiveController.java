@@ -27,6 +27,7 @@ import com.jzsx.xlgc.bean.ProblemPaperRecord;
 import com.jzsx.xlgc.bean.VideoResearch;
 import com.jzsx.xlgc.bean.VideoResearchActive;
 import com.jzsx.xlgc.bean.VideoResearchRecord;
+import com.jzsx.xlgc.videoMonitoring.service.VideoMonitoringConfig;
 import com.jzsx.xlgc.videoResearch.Service.VideoResearchActiveService;
 import com.jzsx.xlgc.videoResearch.Service.VideoResearchRecordService;
 import com.jzsx.xlgc.videoResearch.Service.VideoResearchService;
@@ -81,46 +82,49 @@ public class VideoResearchActiveController {
 		if(!"".equals(pagesiz) && pagesiz!=null){
 			pagesize=Integer.parseInt(pagesiz);
 		}
-		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-		String ResearchType=videoResearch.getVideoResearchType();
-	//	request.getRemoteHost());request.getRemoteAddr();
-		VideoResearchRecord researchRecord=new VideoResearchRecord();
-		researchRecord.setVideoResearchReId(videoResearchId);
-		CasUser appUser = (CasUser) request.getSession().getAttribute("appUser");
-		if(appUser!=null){
-			researchRecord.setVideoResearchRealName(appUser.getUserid());
-		}
-//		researchRecord.setVideoResearchReIp(request.getRemoteHost());
-		if(!ResearchType.equals("1")){
-			researchRecord.setVideoResearchTime(sdf.format(new Date()));
-		}
-		researchRecord.setVideoResearchType(videoResearch.getVideoResearchType());
-		List<VideoResearchRecord> Rlist = videoResearchRecordService.queyVideoResearchRecordById(researchRecord);
-		int restype=1;//可以投票
-		Date tdate=new Date();
-		if(Rlist!=null){
-			if(ResearchType.equals("1")){
-				if(Rlist.size()>=1){
-					restype=3;//整场只能投一次
-				}
-			}else if(ResearchType.equals("2")){
-				if(Rlist.size()>=1){
-					restype=4;//一天投一次
-				}
-			}else if(ResearchType.equals("3")){
-				if(Rlist.size()>=5){
-					restype=5;//一天投五次
+		if(videoResearch != null) {
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+			String ResearchType=videoResearch.getVideoResearchType();
+		//	request.getRemoteHost());request.getRemoteAddr();
+			VideoResearchRecord researchRecord=new VideoResearchRecord();
+			researchRecord.setVideoResearchReId(videoResearchId);
+			CasUser appUser = (CasUser) request.getSession().getAttribute("appUser");
+			if(appUser!=null){
+				researchRecord.setVideoResearchRealName(appUser.getUserid());
+			}
+//			researchRecord.setVideoResearchReIp(request.getRemoteHost());
+			if(!ResearchType.equals("1")){
+				researchRecord.setVideoResearchTime(sdf.format(new Date()));
+			}
+			researchRecord.setVideoResearchType(videoResearch.getVideoResearchType());
+			List<VideoResearchRecord> Rlist = videoResearchRecordService.queyVideoResearchRecordById(researchRecord);
+			int restype=1;//可以投票
+			Date tdate=new Date();
+			if(Rlist!=null){
+				if(ResearchType.equals("1")){
+					if(Rlist.size()>=1){
+						restype=3;//整场只能投一次
+					}
+				}else if(ResearchType.equals("2")){
+					if(Rlist.size()>=1){
+						restype=4;//一天投一次
+					}
+				}else if(ResearchType.equals("3")){
+					if(Rlist.size()>=5){
+						restype=5;//一天投五次
+					}
 				}
 			}
+			if(videoResearch.getVideoResearchStoptime().getTime() < tdate.getTime()){
+				restype=2;
+			}
+			logger.debug(" 加载视频调研活动评选列表数据  结束");
+			map.put("Rlist", restype);
+//			map.put("votecount", votecount);
+			map.put("list", list);
+			map.put("videoResearch", videoResearch);
 		}
-		if(videoResearch.getVideoResearchStoptime().getTime() < tdate.getTime()){
-			restype=2;
-		}
-		logger.debug(" 加载视频调研活动评选列表数据  结束");
-		map.put("Rlist", restype);
-//		map.put("votecount", votecount);
-		map.put("list", list);
-		map.put("videoResearch", videoResearch);
+		
 		return map;
 	}
 	/**
@@ -258,12 +262,17 @@ public class VideoResearchActiveController {
 		logger.debug("videoResearchActivefileupload.do 上传临时目录  开始");
 		String filename = file.getOriginalFilename();
 		String name = RandomUtil.RanIntAndString(30) + "." + filename.substring(filename.lastIndexOf(".") + 1);
-		String path = request.getSession().getServletContext().getRealPath("/upload/images/research/img");
-		String url = "http://" + request.getServerName() //服务器地址    
-		        + ":"     
-		        + request.getServerPort()+request.getContextPath() + "/upload/images/research/imgs/" + name;
-		System.out.println("path:"+path);
-		System.out.println("url:"+url); 
+		String path = path = request.getSession().getServletContext().getRealPath("/upload/images/research/img");;
+		String url = null;
+		if(request.getRequestURL().indexOf("10.10.10") >= 0) {
+			url = VideoMonitoringConfig.getValue("uploadurl", "http://10.10.10.2:")+ request.getServerPort()+request.getContextPath() + "/upload/images/research/imgs/" + name;
+		}else {
+			url = "http://" + request.getServerName() //服务器地址    
+			        + ":"     
+			        + request.getServerPort()+request.getContextPath() + "/upload/images/research/imgs/" + name;
+		}
+		logger.debug("path:"+path);
+		logger.debug("url:"+url); 
 		path = path + "\\" + name;
 		File file2 = new File(path);
 		file.transferTo(file2);

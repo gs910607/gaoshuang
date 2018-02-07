@@ -68,6 +68,15 @@ $(function() {
 								id : id
 							}, function(data) {
 								ajaxLoading.hide();
+
+								if(data == null) {
+									alert(config.errorArticleMsg);
+									setTimeout(function(){
+										location.href = 'informateNav.html';
+									},1000)
+									return;
+								};
+
 								$("#title").val(data.title);
 								$("#select").val(data.type);
 								$("#informationid").val(id);

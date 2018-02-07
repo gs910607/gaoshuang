@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SimplePropertyPreFilter;
 import com.google.common.base.Strings;
+import com.google.gson.Gson;
 import com.jzsx.xlgc.administrator.service.AdminService;
 import com.jzsx.xlgc.area.Dao.AreaDao;
 import com.jzsx.xlgc.bean.CasUser;
@@ -212,6 +213,7 @@ public class AdminController {
 			CasUser user = SessionUtil.getSession(request);
 			try {
 				List<List<Object>> list = ReadExcel.readExcel(file);
+				log.debug("params adminimport: " + new Gson().toJson(list));
 				List<CasUser> list3 = new ArrayList<CasUser>();
 				for (int j = 0; j < list.size(); j++) {
 					if (j > 0) {
@@ -243,14 +245,18 @@ public class AdminController {
 						casUser.setRemark(list2.get(4).toString());
 						casUser.setIdentity(list2.get(5).toString());
 						casUser.setUserid(String.valueOf(IDUtils.genItemId()));
-						list3.add(casUser);
+						//list3.add(casUser);
+						log.debug("casUser params:" + new Gson().toJson(casUser));
+						service.insertAdmin(casUser);
 					}
 				}
-				int i = service.insertAdminList(list3);
-				msg = i > 0 ? Application.MSG_ADD_SUCCESS : Application.MSG_ADD_FAIL;
-				status = i > 0 ? Application.STATUS_ADD_SUCCESS : Application.STATUS_ADD_FAIL;
+				//int i = service.insertAdminList(list3);
+				msg =  Application.MSG_ADD_SUCCESS ;
+				status = Application.STATUS_ADD_SUCCESS ;
 			} catch (Exception e) {
 				log.error("导入发生错误，错误信息为----" + e);
+				msg = Application.MSG_ADD_FAIL;
+				status =  Application.STATUS_ADD_FAIL;
 			}
 			return JSON.toJSONString(new ResultMessage(msg, status));
 		} else {

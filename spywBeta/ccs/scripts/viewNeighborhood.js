@@ -278,7 +278,6 @@ function videoNeighborhoodjoin(data,pagesize){
 	    },
 	    beforeSend: function() {
 	    	ajaxLoading.show();
-	    	userNameJson();
 		 },
 		 error: function() {
 		 	ajaxLoading.hide();

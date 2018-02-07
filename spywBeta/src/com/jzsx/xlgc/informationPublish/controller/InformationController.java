@@ -40,6 +40,7 @@ import com.jzsx.xlgc.utils.IDUtils;
 import com.jzsx.xlgc.utils.Result;
 import com.jzsx.xlgc.utils.ResultMessage;
 import com.jzsx.xlgc.utils.SessionUtil;
+import com.jzsx.xlgc.videoMonitoring.service.VideoMonitoringConfig;
 
 @Controller
 @RequestMapping("/information")
@@ -104,7 +105,15 @@ public class InformationController {
 		try {
 			if (file!=null) {
 				String url = uploadImage(file, request);
-				casInformation.setImage("http://"+request.getServerName()+":"+request.getLocalPort()+url);
+				String imageurl = null;
+				log.debug("addInformation url" + url);
+				if(request.getRequestURL().indexOf("10.10.10") >= 0) {
+					imageurl = VideoMonitoringConfig.getValue("uploadurl", "http://10.10.10.2:")+request.getLocalPort()+url;
+				}else {
+					imageurl = "http://"+request.getServerName()+":"+request.getLocalPort()+url;
+				}
+				log.debug("addInformation imageurl" + imageurl);
+				casInformation.setImage(imageurl);
 			}
 			casInformation.setCreatetime(new Date());
 			casInformation.setGroupid(user.getUsergroupid().toString());
@@ -202,7 +211,15 @@ public class InformationController {
 			// 如果文件不为空 则表示更新了图片，需要重新上传图片并返回地址
 			if (file != null) {
 				String url = uploadImage(file, request);
-				casInformation.setImage(url);
+				String imageurl = null;
+				log.debug("updateInformation url" + url);
+				if(request.getRequestURL().indexOf("10.10.10") >= 0) {
+					imageurl = VideoMonitoringConfig.getValue("uploadurl", "http://10.10.10.2:")+request.getLocalPort()+url;
+				}else {
+					imageurl = "http://"+request.getServerName()+":"+request.getLocalPort()+url;
+				}
+				log.debug("updateInformation imageurl" + imageurl);
+				casInformation.setImage(imageurl);
 			}
 			casInformation.setCreatetime(new Date());
 			Integer i = service.updateInformation(casInformation);
@@ -326,8 +343,16 @@ public class InformationController {
 		Map<String, Object> map = Maps.newHashMap();
 		try {
 			String url = uploadImage(uploadFile, request);
+			String imageurl = null;
+			log.debug("imgUpload url" +url);
+			if(request.getRequestURL().indexOf("10.10.10") >= 0) {
+				imageurl = VideoMonitoringConfig.getValue("uploadurl", "http://10.10.10.2:")+request.getLocalPort()+url;
+			}else {
+				imageurl = "http://" + request.getServerName() + ":" + request.getLocalPort() + url;
+			}
+			log.debug("imgUpload imageurl" +imageurl);
 			map.put("error", 0);
-			map.put("url", "http://" + request.getServerName() + ":" + request.getLocalPort() + url);
+			map.put("url", imageurl);
 			return JSON.toJSONString(map);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -349,9 +374,9 @@ public class InformationController {
 	public String uploadImage(MultipartFile file, HttpServletRequest request) throws Exception {
 		String filename = file.getOriginalFilename();
 		String name = UUID.randomUUID() + "." + filename.substring(filename.lastIndexOf(".") + 1);
-		String path = request.getSession().getServletContext().getRealPath(Application.imgPath);
+		String path = request.getSession().getServletContext().getRealPath("/upload/images");
 		String url = request.getContextPath() + Application.imgUrl + name;
-		path = path + name;
+		path = path +"\\"+ name;
 		File file2 = new File(path);
 		file.transferTo(file2);
 		return url;

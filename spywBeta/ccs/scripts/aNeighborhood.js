@@ -65,6 +65,16 @@ $(function(){
 		    type:"post",   //请求方式
 		    success:function(req){
 		    	var vh=req.videoNeighborhood;
+
+		    	if(vh == undefined) {
+		    		alert(config.errorArticleMsg);
+		    		setTimeout(function(){
+		    			location.href = 'neighborhoodNav.html';
+		    		},1000);
+
+		    		return;
+		    	}
+
 		    	$("#name").val(vh.videoneihdName);
 		    	$("#voucherType").val(vh.videoneihdCardType);
 		    	var vlp= vh.videoneihdLocationplace ? vh.videoneihdLocationplace.toString() : null ;

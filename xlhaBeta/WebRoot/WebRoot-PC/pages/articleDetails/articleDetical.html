@@ -48,7 +48,7 @@
 		    return format;
 		}
 
-		$.post("../../information/getInformationById.do",{id:id},function(data){
+		$.post("/xlhaBeta/information/getInformationById.do",{id:id},function(data){
 			$(".createName").text(data.createname);
 			$(".createTime").text(new Date(data.createtime).format("yyyy-MM-dd"));
 			$(".artTitle").text(data.title);

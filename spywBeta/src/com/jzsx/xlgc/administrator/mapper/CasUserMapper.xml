@@ -351,6 +351,22 @@
 		select 1 from DUAL
 	</insert>
   
+  <insert id = "insertAdmin" parameterType= "com.jzsx.xlgc.bean.CasUser">
+  	insert into CAS_USER(USERID, USERGROUPID, USERNAME,
+			PASSWORD, USERKIND, USERLEVEL,
+			IPLIMIT, MUTILLIMIT, REALNAME,
+			USERTEL, REMARK,IDENTITY)
+	 values(
+  			#{userid,jdbcType=VARCHAR}, #{usergroupid,jdbcType=DECIMAL},
+			#{username,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR},
+			#{userkind,jdbcType=DECIMAL}, #{userlevel,jdbcType=DECIMAL},
+			#{iplimit,jdbcType=VARCHAR}, #{mutillimit,jdbcType=DECIMAL},
+			#{realname,jdbcType=VARCHAR},#{usertel,jdbcType=VARCHAR}, 
+			#{remark,jdbcType=VARCHAR},#{identity,jdbcType=VARCHAR}
+  	
+  	)
+  </insert>
+  
   <update id="updatePasswordByPrimaryKey" parameterType="java.util.Map">
   update CAS_USER set PASSWORD=#{password,jdbcType=VARCHAR} where USERID = #{userid,jdbcType=VARCHAR}
   </update>

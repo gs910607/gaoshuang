@@ -191,6 +191,7 @@ video {
 	height: 400px;
 }
 .contTitle {
+	min-height: 40px;
 	line-height: 40px;
 	position: relative;
 }

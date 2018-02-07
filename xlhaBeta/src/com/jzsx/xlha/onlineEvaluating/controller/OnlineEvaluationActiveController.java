@@ -80,56 +80,58 @@ public class OnlineEvaluationActiveController {
 		if(!"".equals(pagesiz) && pagesiz!=null){
 			pagesize=Integer.parseInt(pagesiz);
 		}
-		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-		String ResearchType=onlineEvaluation.getVideoResearchType();
-	//	request.getRemoteHost());request.getRemoteAddr();
-		OnlineEvaluationRecord researchRecord=new OnlineEvaluationRecord();
-		researchRecord.setVideoResearchReId(videoResearchId);
-		CasUser appUser =  (CasUser) request.getSession().getAttribute("user");
-		if(appUser!=null){
-			researchRecord.setVideoResearchRealName(appUser.getUserid());
-		    researchRecord.setVideoResearchCode(appUser.getUsergroupid().toString());
-		}
-		if(!ResearchType.equals("1")){
-			researchRecord.setVideoResearchTime(sdf.format(new Date()));
-		}
-	//	researchRecord.setVideoResearchTime(sdf.format(new Date()));
-		researchRecord.setVideoResearchType(onlineEvaluation.getVideoResearchType());
-		List<OnlineEvaluationRecord> Rlist = videoResearchRecordService.queyVideoResearchRecordById(researchRecord);
-	//	Properties prop=new Properties();
-///		try {
-	//		prop.load(this.getClass().getResourceAsStream("/safenessPublicity.properties"));
-	//		String publictyurl=prop.getProperty("safe_Publicity_path");
-	//		map.put("path", publictyurl);
-	//	} catch (IOException e) {
-			// TODO Auto-generated catch block
-	//		e.printStackTrace();
-	//	}
-	//	List<VideoResearchRecord> Rlist = videoResearchRecordService.queyVideoResearchRecordById(researchRecord);
-		int restype=1;//可以投票
-		Date tdate=new Date();
-		if(Rlist!=null){
-			if(ResearchType.equals("1")){
-				if(Rlist.size()>=1){
-					restype=3;//整场只能投一次
-				}
-			}else if(ResearchType.equals("2")){
-				if(Rlist.size()>=1){
-					restype=4;//一天投一次
-				}
-			}else if(ResearchType.equals("3")){
-				if(Rlist.size()>=5){
-					restype=5;//一天投五次
+		if(onlineEvaluation != null) {
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+			String ResearchType=onlineEvaluation.getVideoResearchType();
+		//	request.getRemoteHost());request.getRemoteAddr();
+			OnlineEvaluationRecord researchRecord=new OnlineEvaluationRecord();
+			researchRecord.setVideoResearchReId(videoResearchId);
+			CasUser appUser =  (CasUser) request.getSession().getAttribute("user");
+			if(appUser!=null){
+				researchRecord.setVideoResearchRealName(appUser.getUserid());
+			    researchRecord.setVideoResearchCode(appUser.getUsergroupid().toString());
+			}
+			if(!ResearchType.equals("1")){
+				researchRecord.setVideoResearchTime(sdf.format(new Date()));
+			}
+		//	researchRecord.setVideoResearchTime(sdf.format(new Date()));
+			researchRecord.setVideoResearchType(onlineEvaluation.getVideoResearchType());
+			List<OnlineEvaluationRecord> Rlist = videoResearchRecordService.queyVideoResearchRecordById(researchRecord);
+		//	Properties prop=new Properties();
+	///		try {
+		//		prop.load(this.getClass().getResourceAsStream("/safenessPublicity.properties"));
+		//		String publictyurl=prop.getProperty("safe_Publicity_path");
+		//		map.put("path", publictyurl);
+		//	} catch (IOException e) {
+				// TODO Auto-generated catch block
+		//		e.printStackTrace();
+		//	}
+		//	List<VideoResearchRecord> Rlist = videoResearchRecordService.queyVideoResearchRecordById(researchRecord);
+			int restype=1;//可以投票
+			Date tdate=new Date();
+			if(Rlist!=null){
+				if(ResearchType.equals("1")){
+					if(Rlist.size()>=1){
+						restype=3;//整场只能投一次
+					}
+				}else if(ResearchType.equals("2")){
+					if(Rlist.size()>=1){
+						restype=4;//一天投一次
+					}
+				}else if(ResearchType.equals("3")){
+					if(Rlist.size()>=5){
+						restype=5;//一天投五次
+					}
 				}
 			}
+			if(onlineEvaluation.getVideoResearchStoptime().getTime() < tdate.getTime()){
+				restype=2;
+			}
+			logger.debug(" 加载视频调研活动评选列表数据  结束");
+			map.put("Rlist", restype);
+			map.put("list", list);
+			map.put("onlineEvaluation", onlineEvaluation);
 		}
-		if(onlineEvaluation.getVideoResearchStoptime().getTime() < tdate.getTime()){
-			restype=2;
-		}
-		logger.debug(" 加载视频调研活动评选列表数据  结束");
-		map.put("Rlist", restype);
-		map.put("list", list);
-		map.put("onlineEvaluation", onlineEvaluation);
 		return map;
 	}
 	/**

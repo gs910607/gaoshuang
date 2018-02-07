@@ -55,7 +55,12 @@ public class AdminServiceImpl implements AdminService {
 		}
 		if (!Strings.isNullOrEmpty(user.getUsergroupid().toString())) {
 			if(user.getUsergroupid().toString().length()>1){
-				criteria.andUsergroupidLike(user.getUsergroupid().toString()+"0" + "%");
+				if(user.getUsergroupid().toString().length() > 6) {
+					criteria.andUsergroupidLike(user.getUsergroupid().toString() + "%");
+				}else {
+					criteria.andUsergroupidLike(user.getUsergroupid().toString() + "0%");
+				}
+				
 			}else{
 				criteria.andUsergroupidNotEqualTo(BigDecimal.valueOf(Long.valueOf("1")));
 			}
@@ -101,6 +106,12 @@ public class AdminServiceImpl implements AdminService {
 	public int updatePassword(Map<String, String> map) {
 		int i = mapper.updatePasswordByPrimaryKey(map);
 		return i;
+	}
+
+	@Override
+	public void insertAdmin(CasUser user) {
+		mapper.insertAdmin(user);
+		
 	}
 
 }

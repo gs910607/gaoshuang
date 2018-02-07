@@ -35,4 +35,6 @@ public interface CasUserMapper {
     CasUser selectByUsername(String username);
     
     int updatePasswordByPrimaryKey(Map<String, String> map);
+    
+    void insertAdmin(CasUser user);
 }

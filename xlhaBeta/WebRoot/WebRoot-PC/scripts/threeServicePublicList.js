@@ -92,7 +92,6 @@ function init() {
 function setThreeService(data) {
 	$("#content").text("");
 	$(data.list).each(function(i, n) {
-		 console.log(n)
 		var htmldata = "" ;
 			htmldata += "<tr>" ;
 			htmldata += "<td class='text-left'>" ;

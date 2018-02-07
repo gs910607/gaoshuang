@@ -30,6 +30,16 @@ $.ajax({
 	dataType: 'json',
 	success: function(response) {
 		ajaxLoading.hide();
+		if(response == null) {
+			alert(config.errorArticleMsg);
+
+			setTimeout(function(){
+				location.href = "../../index.html"
+			},1000);
+
+			return;
+		};
+
 		if(response.CLegalId != 0) {
 			$("#author,#author2").text(response.create);
 			$("#publishTime,#publishTime2").text(response.CLegalCreatetime);

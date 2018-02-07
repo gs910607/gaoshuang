@@ -602,6 +602,16 @@ function getMediateById(id) {
 		id : id
 	}, function(data) {
 		partiesList = data.mediated;
+
+		if(partiesList == undefined) {
+			alert(config.errorArticleMsg);
+    		setTimeout(function(){
+    			location.href = 'mediationNav.html';
+    		},1000);
+
+    		return;
+		};
+
 		drowPartiesList();
 		partiesList2 = data.mediation;
 		drowPartiesList2();

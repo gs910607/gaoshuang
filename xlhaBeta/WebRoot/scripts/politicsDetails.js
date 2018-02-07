@@ -12,7 +12,17 @@ $.ajax({
 	},
 	dataType: 'json',
 	success: function(response) {
+
 		ajaxLoading.hide();
+
+		if(response == null) {
+			alert(config.errorArticleMsg);
+			setTimeout(function(){
+				location.href = '../../index.html';
+			},1000);
+			return;
+		}
+
 		$("#title").text(response.title);
 		$("#content").html(response.content);
 		$("#author").text(response.createname);

@@ -6,6 +6,17 @@ var problempaperId=GetQueryString("problempaperId");
  	dataType: 'json',
  	success: function(response) {
  		ajaxLoading.hide();
+
+ 		if(response.problempaper == null) {
+			alert(config.errorArticleMsg);
+
+			setTimeout(function(){
+				location.href = "../../index.html"
+			},1000);
+
+			return;
+		};
+
 		if(response.status == 0) {
 			$(".detailTit").text(response.problempaper.problempaperName);
 			var str = '';

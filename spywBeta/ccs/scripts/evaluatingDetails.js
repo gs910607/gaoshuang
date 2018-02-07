@@ -7,7 +7,16 @@ $(function(){
 	    data:{"problempaperId":problempaperId},    //参数值
 	    type:"post",   //请求方式
 	    success:function(req){
+
 	    	if(req.status==0){
+	    		if(req.problempaper == null) {
+	    			alert(config.errorArticleMsg)
+	    			setTimeout(function(){
+	    				location.href = 'researchNav.html';
+	    			},1000);
+	    			return;
+	    		}
+
 	    		var paper=req.problempaper;
 	    		var tt='';
 	    		tt+='<div class="contWrap">';

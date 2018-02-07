@@ -392,6 +392,9 @@ public class MediateController {
 		try {
 			List<List<Object>> list = ReadExcel.readExcel(file);
 			log.debug("import params :" + new Gson().toJson(list));
+			if(list.size() <= 1) {
+				info.add("上传模板为空,请输入数据");
+			}
 			List<TVideoMediate> list3 = new ArrayList<TVideoMediate>();
 			for (int j = 0; j < list.size(); j++) {
 				if (j > 0) {
@@ -504,23 +507,32 @@ public class MediateController {
 	@RequestMapping("/getMediateById")
 	@ResponseBody
 	public Map<String, Object> getMediateById(String id) {
-		TVideoMediate mediate = service.getMediateById(id);
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		String string = dateFormat.format(Long.parseLong(mediate.getMediateDate()));
-		String string2 = dateFormat.format(Long.parseLong(mediate.getMediateRegisDate()));
-		mediate.setMediateDate(string);
-		mediate.setMediateRegisDate(string2);
-		// 获取被调解人
-		List<TMediatePerson> mediated = service.selectByMediateId(id, 1);
-		// 获取调解人
-		List<TMediatePerson> mediation = service.selectByMediateId(id, 2);
-
-		TVideoConference conference = con.selectByPrimaryKey(mediate.getConfId());
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("mediate", mediate);
-		map.put("mediated", mediated);
-		map.put("mediation", mediation);
-		map.put("conference", conference);
+		log.debug("getMediateById:"+id);
+		if(id != null && !"".equals(id) ) {
+			TVideoMediate mediate = service.getMediateById(id);
+			if(mediate != null) {
+				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+				String string = dateFormat.format(Long.parseLong(mediate.getMediateDate()));
+				String string2 = dateFormat.format(Long.parseLong(mediate.getMediateRegisDate()));
+				mediate.setMediateDate(string);
+				mediate.setMediateRegisDate(string2);
+				// 获取被调解人
+				List<TMediatePerson> mediated = service.selectByMediateId(id, 1);
+				// 获取调解人
+				List<TMediatePerson> mediation = service.selectByMediateId(id, 2);
+
+				TVideoConference conference = con.selectByPrimaryKey(mediate.getConfId());
+				
+				map.put("mediate", mediate);
+				map.put("mediated", mediated);
+				map.put("mediation", mediation);
+				map.put("conference", conference);
+			}
+		}else {
+			map.put("msg","id参数未传，请传参数");
+		}
+		
 		return map;
 	}
 

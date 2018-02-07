@@ -24,6 +24,17 @@ $.ajax({
 	success: function(response) {
 		ajaxLoading.hide();
 		if(response.status == 0) {
+
+			if(response.SafetyPublicity == null) {
+				alert(config.errorArticleMsg);
+
+				setTimeout(function(){
+					location.href = "../../index.html"
+				},1000);
+
+				return;
+			};
+
 			if(response.SafetyPublicity.safetyPyType == 0) {
 				$("#pictureWrap").show();
 				// 内容渲染 response.path+"/"+

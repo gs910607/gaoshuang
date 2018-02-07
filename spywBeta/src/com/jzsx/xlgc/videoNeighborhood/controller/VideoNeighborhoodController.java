@@ -160,20 +160,23 @@ public class VideoNeighborhoodController {
 		logger.debug("videoNeighborhoodDetail.do 根据视频接访ID查找数据   开始 ");
 		String videoneihdId=request.getParameter("videoneihdId");
 		logger.debug("参数  videoneihdId： "+videoneihdId);
-		if(!"".equals(videoneihdId) || !videoneihdId.equals(null)){
+		if(!"".equals(videoneihdId) && videoneihdId != null){
 			 VideoNeighborhood videoNeighborhood = videoNeighborhoodService.queyVideoTrainById(videoneihdId);
 			 
 //			System.out.println("videoNeighborhood:"+videoNeighborhood);
-			map.put("videoNeighborhood", videoNeighborhood);
-			String confId=videoNeighborhood.getVideoneihdConfId();
-			logger.debug("取值  confId： "+confId);
-//			System.out.println("confid:"+confId);
-			if(confId!=null && !"".equals(confId)){
-				TVideoConference conference = service.queryById(confId);
-//				System.out.println("conferce:"+conference);
-				map.put("conference", conference);
+			if(videoNeighborhood != null) {
+				map.put("videoNeighborhood", videoNeighborhood);
+				String confId=videoNeighborhood.getVideoneihdConfId();
+				logger.debug("取值  confId： "+confId);
+//				System.out.println("confid:"+confId);
+				if(confId!=null && !"".equals(confId)){
+					TVideoConference conference = service.queryById(confId);
+//					System.out.println("conferce:"+conference);
+					map.put("conference", conference);
+				}
 			}
-			
+		}else {
+			map.put("msg","videoneihdId参数未传，请传参数");
 		}
 		logger.debug("根据视频接访ID查找数据  结束");
 //		System.out.println("videoneihdId:"+videoneihdId+"map:"+map);
@@ -209,6 +212,9 @@ public class VideoNeighborhoodController {
 				logger.debug("开始执行读取excel文件");
 				List<List<Object>> list = read.readExcel(file);
 				logger.debug("执行读取excel文件结束" + new Gson().toJson(list));
+				if(list.size() <= 1) {
+					json.add("上传模板为空,请输入数据");
+				}
 				for(int j=1;j<list.size();j++){
 					List<Object> lis = list.get(j);
 					//判断是否有错误参数的

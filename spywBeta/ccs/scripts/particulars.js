@@ -5,6 +5,15 @@ var type = GetQueryString("type");
 $(function(){
 	
 	$.post("../../information/getInformationById.do",{id:id},function(data){
+		if(data == null) {
+			alert(config.errorArticleMsg);
+    		setTimeout(function(){
+    			location.href = 'informateNav.html';
+    		},1000);
+
+    		return;
+		}
+
 		if(type==1){
 			$(".iconTitle").text("热点新闻");
 		}

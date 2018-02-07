@@ -21,4 +21,6 @@ public interface AdminService {
 	CasUser selectByUsername(String username);
 	
 	public int  updatePassword(Map<String, String> map);
+	
+	public void insertAdmin(CasUser user);
 }

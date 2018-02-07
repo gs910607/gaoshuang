@@ -1,3 +1,8 @@
+// 全局变量
+var config = {
+	errorArticleMsg: '数据不存在!'
+}
+
 // 获取用户名
 ;(function(){
 	$.ajax({
