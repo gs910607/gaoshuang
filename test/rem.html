@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name ="viewport" content ="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+	<title>rem</title>
+	<script>
+		;(function (doc, win, undefined) {
+          var docEl = doc.documentElement,
+            resizeEvt = 'orientationchange' in win? 'orientationchange' : 'resize',
+            recalc = function () {
+              var clientWidth = docEl.clientWidth;
+              if (clientWidth === undefined) return;
+              docEl.style.fontSize = 100 * (clientWidth / 320) + 'px';
+            };
+          if (doc.addEventListener === undefined) return;
+          win.addEventListener(resizeEvt, recalc, false);
+          doc.addEventListener('DOMContentLoaded', recalc, false)
+        })(document, window);
+	</script>
+
+	<style>
+		div {
+			width: 80%;
+			height: 1rem;
+			border: 1px solid #ccc;
+			margin: 0 auto;
+			text-align: center;
+			line-height: 1rem;
+			font-size: .16rem;
+		}
+	</style>
+</head>
+<body>
+	<div>你好</div>
+</body>
+</html>
