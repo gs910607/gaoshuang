@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>jquery手风琴图片</title>
+    <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+
+<body>
+    <div class="pic">
+        <ul>
+            <li class="pic1">
+                <a href="javascript:;">
+                    <div class="txt">
+                        <p class="p1">雨红了枫叶 ，枫叶红了山头 ，山头红了整个秋</p>
+                    </div>
+                </a>
+            </li>
+
+            <li class="pic2">
+                    <a href="javascript:;">
+                        <div class="txt">
+                            <p class="p1">莫愁前路无知己 ,天下谁人不识君 。</p>
+                        </div>
+                    </a>
+            </li>
+
+            <li class="pic3">
+                    <a href="javascript:;">
+                        <div class="txt">
+                            <p class="p1">你能看到多远的过去 ，就能看到多远的未来。</p>
+                        </div>
+                    </a>
+            </li>
+
+            <li class="pic4">
+                    <a href="javascript:;">
+                        <div class="txt">
+                            <p class="p1">编不下去了 。 。 。 。  。</p>
+                        </div>
+                    </a>
+            </li>
+
+        </ul>
+    </div>
+</body>
+
+<script>
+$(".pic ul li").hover(function(){
+	$(this).stop(true).animate({width:"600px"},1000).siblings().stop(true).animate({width:"100px"},1000);
+});
+
+</script>
+
+
+
+</html>

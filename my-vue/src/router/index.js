@@ -1,11 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import HelloWorld from '@/pages/HelloWorld'
 import Index from "@/pages/index"
 import Tab from '@/pages/tab'
 import PageOne from '@/pages/pageOne'
 import PageTwo from '@/pages/pageTwo'
 import PageThree from '@/pages/pageThree'
+import NewsCenter from '@/pages/newsCenter'
+import PageFour from '@/pages/PageFour'
 Vue.use(Router)
 
 export default new Router({
@@ -14,11 +16,6 @@ export default new Router({
       path: '/',
       name: 'index',
       component: Index
-    },
-    {
-    	path: '/helloWorld',
-    	name: 'helloWorld',
-    	component: HelloWorld
     },
     {
     	path: '/tab',
@@ -40,8 +37,23 @@ export default new Router({
     			path: 'pageThree',
     			name: 'pageThree',
     			component: PageThree
-    		}
+    		},
+            {
+                path: 'pageFour',
+                name: 'pageFour',
+                component: PageFour
+            }
     	]
-    }
+    },
+    {
+        path: '/newsCenter',
+        name: 'newsCenter',
+        component: NewsCenter
+    },
+    {
+        path: '/HelloWorld',
+        name: 'HelloWorld',
+        component: HelloWorld
+    },
   ]
 })

@@ -2,7 +2,7 @@
 	<div>
 		<div class="block">
 			<el-carousel trigger="click" height="500px">
-				<el-carousel-item v-for="item in items" :key="item.index" :style="{background: item.background}">
+				<el-carousel-item v-for="item in items" :key="item.index" :style="item.cauouseStyle">
 					<h3>{{ item.index }}</h3>
 				</el-carousel-item>
 			</el-carousel>
@@ -18,19 +18,27 @@
 				items: [
 					{
 						index: 1,
-						background: 'red'
+						cauouseStyle: {
+							background: 'url('+ require("../assets/images/bg-1.jpg") +') no-repeat center center / 100% 100%'
+						}
 					},
 					{
 						index: 2,
-						background: 'yellow'
+						cauouseStyle: {
+							background: 'url('+ require("../assets/images/bg-2.jpg") +') no-repeat center center / 100% 100%'
+						}
 					},
 					{
 						index: 3,
-						background: 'blue'
+						cauouseStyle: {
+							background: 'url('+ require("../assets/images/bg-3.jpg") +') no-repeat center center / 100% 100%'
+						}
 					},
 					{
 						index: 4,
-						background: 'green'
+						cauouseStyle: {
+							background: 'url('+ require("../assets/images/bg-4.jpg") +') no-repeat center center / 100% 100%'
+						}
 					},
 				]
 			}

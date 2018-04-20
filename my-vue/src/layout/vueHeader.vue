@@ -1,72 +1,97 @@
 <template>
 	<div>
-		<el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-		  <el-menu-item index="1">处理中心</el-menu-item>
-		  <el-submenu index="2">
-		    <template slot="title">我的工作台</template>
-
-		    <el-menu-item index="2-1">选项1</el-menu-item>
-		    <el-menu-item index="2-2">选项2</el-menu-item>
-		    <el-menu-item index="2-3">选项3</el-menu-item>
-		    <el-menu-item index="2-4" disabled>选项4</el-menu-item>
-		    <!-- <el-submenu index="2-4">
-		      <template slot="title">选项4</template>
-		      <el-menu-item index="2-4-1">选项1</el-menu-item>
-		      <el-menu-item index="2-4-2">选项2</el-menu-item>
-		      <el-menu-item index="2-4-3">选项3</el-menu-item>
-		    </el-submenu> -->
-		  </el-submenu>
-		  <el-menu-item index="3">消息中心</el-menu-item>
-		  <el-menu-item index="4" disabled>订单管理</el-menu-item>
+		<el-menu :default-active="$route.path" class="el-menu-demo" mode="horizontal" @select="handleSelect" router>
+			<template v-for="(item,index) in navTop">
+				<template v-if="!item.children">
+					<el-menu-item :index="item.path">
+						{{item.name}}
+					</el-menu-item>
+				</template>
+				<template v-else>
+					<el-submenu :index="item.path">
+						<template slot="title">{{item.name}}</template>
+						<template v-for="(n, i) in item.children">
+							<el-menu-item v-if="!n.children" :index="n.path">{{n.name}}</el-menu-item>
+							<el-submenu v-else :index="n.path">
+								<template slot="title">{{n.name}}</template>
+								<el-menu-item v-for="(a,ind) in n.children" :disabled="!a.path" :index="a.path">
+									{{a.name}}
+								</el-menu-item>
+							</el-submenu>
+						</template>
+					</el-submenu>
+				</template>
+			</template>
 		</el-menu>
 		<div class="line"></div>
 	</div>
 </template>
 
 <script>
-	export default {
-		name: "vueHeader",
-		data() {
-	      return {
-	        activeIndex: '1',
-	        activeIndex2: '1'
-	      };
-	    },
-	    methods: {
-	      handleSelect(key, keyPath) {
-	        switch(key){
-	        	case '1':
-	        		this.$router.push('/');
-	        		break;
-	        	case '2-1':
-	        		this.$router.push({
-	        			name: 'pageOne',
-	        			params: {
-	        				id: '2-1'
-	        			}
-	        		});
-	        		break;
-	        	case '2-2':
-	        		this.$router.push({
-	        			name: 'pageTwo',
-	        			params: {
-	        				id: '2-2'
-	        			}
-	        		});
-	        		break;
-	        	case '2-3':
-	        		this.$router.push({
-	        			name: 'pageThree',
-	        			params: {
-	        				id: '2-3'
-	        			}
-	        		})
-	        		break;
-	        	case '3':
-	        		this.$router.push("/helloWorld");
-	        }
-	        
-	      }
+export default {
+	name: "vueHeader",
+	data() {
+		return {
+			activeIndex: '/',
+	        navTop: [
+		        {
+		        	name: '首页',
+		        	path: '/'
+		        },
+		        {
+		        	name: '我的工作台',
+		        	path: '/tab/pageOne',
+		        	children: [
+		        		{
+		        			name: '选项一',
+		        			path: '/tab/pageOne'
+		        		},
+		        		{
+		        			name: '选项二',
+		        			path: '/tab/pageTwo'
+		        		},
+		        		{
+		        			name: '选项333',
+		        			path: '/tab/pageThree',
+		        			children: [
+		        				{
+		        					name: '选项333',
+		        					path: '/tab/pageThree'
+		        				},
+		        				{
+		        					name: '选项444',
+		        					path: '/tab/pageFour'
+		        				},
+		        				{
+		        					name: '选项3-3',
+		        					path: ''
+		        				}
+		        			]
+		        		}
+		        	]
+		        },
+		        {
+		        	name: '消息中心',
+		        	path: '/newsCenter'
+		        },
+		        {
+		        	name: '手风琴',
+		        	path: '/HelloWorld'
+		        }
+	        ]
+	    };
+	},
+	methods: {
+		handleSelect(key, keyPath) {
+	       
 	    }
-	}
+	},
+	beforeUpdate(newData, oldData) {
+		this.activeIndex = this.$route.path
+	},
+}
 </script>
+
+<style>
+
+</style>

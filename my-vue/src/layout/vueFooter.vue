@@ -16,5 +16,8 @@
 		background: #ccc;
 		height: 50px;
 		line-height: 50px;
+		position: fixed;
+		bottom: 0;
+		width: 100%;
 	}
 </style>

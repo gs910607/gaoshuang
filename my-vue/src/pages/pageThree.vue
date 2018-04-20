@@ -94,6 +94,7 @@ export default {
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
+            this.$store.dispatch('saveForm')
             alert('submit!');
           } else {
             console.log('error submit!!');

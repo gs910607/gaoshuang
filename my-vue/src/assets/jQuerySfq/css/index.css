@@ -1,0 +1,70 @@
+@charset "utf-8";
+/* CSS Document */
+    body{ background-color:#2A2A2A}
+    *{
+        margin: 0px;
+        padding: 0px;
+        font-family: "微软雅黑";
+        list-style: none;
+    }
+    a{
+        text-decoration: none;
+    }
+    .pic{
+        overflow: hidden;/*隐藏溢出*/
+        width: 1100px;
+        height: 420;
+        margin: 0 auto;
+        padding-top: 70px;
+       
+    }
+    .pic ul li{
+        float: left;
+        height: 420px;
+        width: 100px;
+    }
+   
+
+    .pic ul .pic1{
+        background-image: url(../Images/a1.png) ;
+        background-position: center center;  /*图片居中  等比例*/
+        background-repeat: no-repeat;  /*图片不平铺*/
+    }
+    .pic ul .pic2{
+        background-image: url(../Images/a2.png) ;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
+    .pic ul .pic3{
+        background-image: url(../Images/a3.png)  ;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
+    .pic ul .pic4{
+        background-image: url(../Images/a4.png)  ;
+        background-position: center center;
+        background-repeat: no-repeat;
+        width: 600px;
+        
+    }
+   
+	
+    .txt{
+      
+        background-color: #000;
+        background: rgba(0, 0, 0, .5);
+        height: 420px;
+        width: 100px;
+
+    }
+    .txt p{
+       
+        float: left;
+        color: #fff;
+    }
+    .txt .p1{
+        
+        font-size: 13px;
+        width: 13px;
+        padding: 25px 25px 0px 20px;
+    }

@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <vue-header></vue-header>
-    <router-view/>
+    <section class="homneContainer"> 
+      <router-view/>
+    </section>
     <vue-footer></vue-footer>
   </div>
 </template>
@@ -20,9 +22,6 @@ export default {
     return {
 
     }
-  },
-  created(){
-    this.$router.push("/")
   },
   
 }
@@ -60,6 +59,9 @@ footer
  {
   padding: 0;
   margin: 0;
+}
+.homneContainer {
+  padding-bottom: 50px;
 }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
